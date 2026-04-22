@@ -580,6 +580,108 @@ h3 {
   font-size: clamp(0.95rem, 2vw, 1.15rem);
 }
 
+.payment-section {
+  padding-top: clamp(2rem, 5vw, 3.5rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.payment-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.62fr) minmax(20rem, 1fr);
+  gap: 1.2rem;
+  align-items: center;
+  border: 1px solid rgba(182, 138, 40, 0.24);
+  border-radius: 8px;
+  padding: clamp(1rem, 3vw, 1.6rem);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 16px 45px rgba(17, 24, 39, 0.07);
+}
+
+.payment-copy h2 {
+  margin-bottom: 0.45rem;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+}
+
+.payment-copy p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.payment-methods {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.pay-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4.1rem;
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #fff, #f7f7f7);
+  color: #101827;
+  font-size: clamp(1.05rem, 2vw, 1.55rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.08);
+}
+
+.pay-brand.mastercard {
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.58rem;
+  text-transform: lowercase;
+}
+
+.pay-brand.mastercard i {
+  position: relative;
+  display: block;
+  width: 2.1rem;
+  height: 1.35rem;
+}
+
+.pay-brand.mastercard i::before,
+.pay-brand.mastercard i::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+}
+
+.pay-brand.mastercard i::before {
+  left: 0;
+  background: #eb001b;
+}
+
+.pay-brand.mastercard i::after {
+  right: 0;
+  background: rgba(247, 158, 27, 0.9);
+  mix-blend-mode: multiply;
+}
+
+.pay-brand.visa {
+  color: #1a1f71;
+  font-style: italic;
+}
+
+.pay-brand.apple-pay span {
+  width: 1rem;
+  overflow: hidden;
+  color: #111827;
+  font-size: 0.95rem;
+}
+
+.pay-brand.google-pay span {
+  margin-right: 0.25rem;
+  color: #4285f4;
+  font-weight: 900;
+}
+
 .verification-section {
   border-bottom: 1px solid var(--line);
 }
@@ -847,6 +949,172 @@ h3 {
 .section-heading {
   max-width: 43rem;
   margin-bottom: 1.4rem;
+}
+
+.membership-board {
+  margin-bottom: clamp(1.6rem, 4vw, 3rem);
+}
+
+.online-form-title {
+  width: fit-content;
+  margin: 0 auto 2rem;
+  padding: 0.75rem 2.8rem;
+  background: #fff;
+  color: var(--ink);
+  font-size: 1.28rem;
+  font-style: italic;
+  font-weight: 900;
+  box-shadow: 0 10px 28px rgba(17, 24, 39, 0.06);
+}
+
+.membership-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: start;
+}
+
+.membership-card {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #222;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: 0 16px 34px rgba(17, 24, 39, 0.1);
+}
+
+.membership-card::after {
+  content: "SAMPLE";
+  position: absolute;
+  inset: auto -2rem 2.2rem auto;
+  color: rgba(189, 31, 45, 0.09);
+  font-size: 3.3rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
+
+.sample-ribbon {
+  position: absolute;
+  right: 0.45rem;
+  top: 0.45rem;
+  z-index: 3;
+  padding: 0.24rem 0.42rem;
+  border-radius: 4px;
+  background: #bd1f2d;
+  color: #fff;
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.member-top {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.55rem;
+  align-items: center;
+  padding: 0.45rem 0.65rem;
+  background: #050505;
+  color: #fff;
+}
+
+.thai-flag {
+  display: block;
+  width: 3.7rem;
+  height: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background:
+    linear-gradient(
+      to bottom,
+      #bd1f2d 0 16%,
+      #fff 16% 32%,
+      #1f2f75 32% 68%,
+      #fff 68% 84%,
+      #bd1f2d 84% 100%
+    );
+}
+
+.member-top strong,
+.member-top small {
+  display: block;
+}
+
+.member-top strong {
+  font-size: 0.78rem;
+}
+
+.member-top small {
+  font-size: 0.56rem;
+  opacity: 0.86;
+}
+
+.member-top b {
+  max-width: 8.3rem;
+  font-size: 0.7rem;
+  line-height: 1.15;
+  text-align: right;
+}
+
+.member-body {
+  display: grid;
+  grid-template-columns: 5.2rem minmax(0, 1fr) auto;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.65rem;
+}
+
+.member-photo {
+  display: grid;
+  width: 5.2rem;
+  aspect-ratio: 1 / 1.12;
+  place-items: center;
+  background:
+    radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.6), transparent 1.5rem),
+    linear-gradient(135deg, #d9eefb, #5a8fc8);
+  color: #0d2858;
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.member-data h3 {
+  margin-bottom: 0.35rem;
+  color: #111827;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.member-data p {
+  margin: 0.18rem 0;
+  color: #111827;
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.member-data span {
+  display: inline-block;
+  min-width: 3.2rem;
+  color: #111827;
+  font-weight: 800;
+}
+
+.member-value {
+  align-self: end;
+  padding: 0.16rem 0.45rem;
+  background: #050505;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.member-note {
+  padding: 0.42rem 0.7rem;
+  background: #050505;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-align: center;
 }
 
 .asset-grid {
@@ -1226,6 +1494,8 @@ h3 {
   .split-section,
   .asset-grid,
   .verification-grid,
+  .membership-grid,
+  .payment-card,
   .game-hero {
     grid-template-columns: 1fr;
   }
@@ -1416,6 +1686,52 @@ h3 {
 
   .intro-strip div {
     padding: 0.95rem;
+  }
+
+  .payment-card {
+    gap: 1rem;
+  }
+
+  .payment-copy {
+    text-align: center;
+  }
+
+  .payment-methods {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+  }
+
+  .online-form-title {
+    margin-bottom: 1.1rem;
+    padding: 0.62rem 1.7rem;
+    font-size: 1rem;
+  }
+
+  .membership-grid {
+    gap: 0.85rem;
+  }
+
+  .member-top {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .member-top b {
+    grid-column: 1 / -1;
+    max-width: none;
+    text-align: left;
+  }
+
+  .member-body {
+    grid-template-columns: 4.7rem minmax(0, 1fr) auto;
+    gap: 0.55rem;
+  }
+
+  .member-photo {
+    width: 4.7rem;
+  }
+
+  .pay-brand {
+    min-height: 3.5rem;
   }
 
   .verification-grid {
