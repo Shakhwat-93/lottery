@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="outer" x1="14" y1="8" x2="50" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9be84d"/>
+      <stop offset=".48" stop-color="#5fbd24"/>
+      <stop offset="1" stop-color="#2f8619"/>
+    </linearGradient>
+    <linearGradient id="inner" x1="21" y1="12" x2="44" y2="50" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#aef35a"/>
+      <stop offset=".5" stop-color="#72cf2d"/>
+      <stop offset="1" stop-color="#3e9c20"/>
+    </linearGradient>
+    <linearGradient id="check" x1="20" y1="26" x2="47" y2="43" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e8e8e8"/>
+    </linearGradient>
+    <filter id="shadow" x="6" y="5" width="52" height="57" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#245f16" flood-opacity=".38"/>
+    </filter>
+    <filter id="checkShadow" x="15" y="18" width="36" height="34" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#1e5e12" flood-opacity=".35"/>
+    </filter>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#f7fff0"/>
+  <g filter="url(#shadow)">
+    <path d="M32 5.5 52 14v16.4c0 14.7-8.4 23.4-20 28.1-11.6-4.7-20-13.4-20-28.1V14L32 5.5Z" fill="url(#outer)"/>
+    <path d="M32 10.7 47.3 17v13.1c0 11-6.1 17.7-15.3 21.7-9.2-4-15.3-10.7-15.3-21.7V17L32 10.7Z" fill="url(#inner)"/>
+    <path d="M21.2 18.9 32 14.5l10.9 4.4c-5.9 1.2-12.7 4.7-20.9 13.5-.5-3.9-.8-8.3-.8-13.5Z" fill="#c8ff83" opacity=".34"/>
+    <path d="M44.5 19.4v10.1c0 9-4.5 14.7-11.9 18.3 4-8.1 6.6-17.1 11.9-28.4Z" fill="#226d14" opacity=".14"/>
+    <path d="M19.8 29.9V18.8L32 13.8l12.2 5" fill="none" stroke="#bfff75" stroke-width="1.8" opacity=".55"/>
+  </g>
+  <path d="m27 37.5-7-7 4.4-4.4 6.9 6.9 14-14 4.5 4.5-18.5 18.5-4.3-4.5Z" fill="url(#check)" filter="url(#checkShadow)"/>
+</svg>
