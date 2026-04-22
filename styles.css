@@ -756,9 +756,19 @@ h3 {
 .video-card iframe {
   display: block;
   width: 100%;
-  height: clamp(19rem, 52vw, 34rem);
+  aspect-ratio: 560 / 314;
+  height: auto;
   border: 0;
   background: #101827;
+}
+
+.video-only {
+  background: #101827;
+}
+
+.video-only iframe {
+  aspect-ratio: 560 / 314;
+  height: auto;
 }
 
 .split-section {
@@ -1531,7 +1541,7 @@ h3 {
   }
 
   .video-card iframe {
-    height: 20rem;
+    height: auto;
   }
 
   .game-hero-copy h1 {
