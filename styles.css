@@ -1080,7 +1080,10 @@ h3 {
   .split-section,
   .asset-grid,
   .verification-grid,
-  .game-hero,
+  .game-hero {
+    grid-template-columns: 1fr;
+  }
+
   .game-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1171,6 +1174,21 @@ h3 {
 
   .hero {
     padding-top: 1.15rem;
+    text-align: center;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .hero-content,
+  .game-hero-copy {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+  }
+
+  .hero-content > * {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   h1 {
@@ -1208,6 +1226,7 @@ h3 {
     grid-template-columns: 1fr;
     gap: 0.45rem;
     margin-top: 1rem;
+    justify-items: center;
   }
 
   .trust-list span {
@@ -1219,6 +1238,7 @@ h3 {
   }
 
   .hero-actions {
+    justify-content: center;
     gap: 0.55rem;
     margin-top: 1.2rem;
   }
@@ -1262,12 +1282,13 @@ h3 {
   }
 
   .hero-certificate figcaption {
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
+    text-align: center;
   }
 
   .hero-certificate figcaption strong {
-    text-align: left;
+    text-align: center;
   }
 
   .badge-row {
@@ -1275,6 +1296,7 @@ h3 {
     grid-template-columns: 1fr;
     gap: 0.5rem;
     margin-top: 1rem;
+    justify-items: center;
   }
 
   .premium-badge {
@@ -1306,6 +1328,13 @@ h3 {
   .game-hero-image {
     border-radius: 8px;
     box-shadow: 0 14px 38px rgba(17, 24, 39, 0.1);
+  }
+
+  .hero-certificate {
+    width: 100%;
+    max-width: 29rem;
+    justify-self: center;
+    margin-inline: auto;
   }
 
   .certificate-seal {
@@ -1348,6 +1377,10 @@ h3 {
 
   .game-hero-copy h1 {
     font-size: clamp(2.85rem, 13vw, 3.6rem);
+  }
+
+  .game-hero {
+    text-align: center;
   }
 
   .game-gallery {
