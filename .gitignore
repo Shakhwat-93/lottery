@@ -1,4 +1,5 @@
 *-backup.*
+*-original.*
 *.bak
 .vscode/
 .idea/
