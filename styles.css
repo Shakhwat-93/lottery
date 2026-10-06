@@ -2408,106 +2408,20 @@ h3 {
   .site-header {
     position: sticky;
     align-items: center;
+    justify-content: center;
     flex-direction: row;
-    gap: 0.85rem;
-    padding: 0.85rem 1rem;
+    padding: 0.75rem 1rem;
   }
 
   .brand {
-    flex: 1;
-  }
-
-  .menu-toggle {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .menu-button {
-    display: inline-flex;
-    flex-direction: column;
     justify-content: center;
-    gap: 0.32rem;
-    width: 2.85rem;
-    height: 2.85rem;
-    border: 1.5px solid var(--royal-gold);
-    border-radius: var(--radius-card);
-    background: var(--royal-navy);
-    box-shadow: var(--shadow-sm);
-    cursor: pointer;
-  }
-
-  .menu-button span {
-    display: block;
-    width: 1.25rem;
-    height: 0.14rem;
-    margin-inline: auto;
-    border-radius: var(--radius-pill);
-    background: #FFD700;
-    transition: transform 180ms ease, opacity 180ms ease;
-  }
-
-  .menu-toggle:checked + .menu-button span:nth-child(1) {
-    transform: translateY(0.46rem) rotate(45deg);
-  }
-
-  .menu-toggle:checked + .menu-button span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .menu-toggle:checked + .menu-button span:nth-child(3) {
-    transform: translateY(-0.46rem) rotate(-45deg);
-  }
-
-  .nav-panel {
-    position: absolute;
-    top: calc(100% + 0.45rem);
-    left: 1rem;
-    right: 1rem;
-    display: block;
-    max-height: 0;
-    overflow: hidden;
-    border: 0;
-    border-radius: var(--radius-card);
-    background: rgba(7, 23, 57, 0.98);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 20px 60px rgba(4, 13, 33, 0.6);
-    transition: max-height 240ms ease, border-color 240ms ease;
-  }
-
-  .menu-toggle:checked ~ .nav-panel {
-    max-height: 26rem;
-    border: 2px solid var(--royal-gold);
-  }
-
-  .nav-links {
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 100%;
-    gap: 0.5rem;
-    overflow: visible;
-    padding: 0.95rem;
-    font-size: 0.92rem;
-  }
-
-  .nav-links a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 2.75rem;
-    padding: 0.65rem 0.6rem;
-    border: 1px solid rgba(212, 175, 55, 0.35);
-    border-radius: var(--radius-card);
-    background: rgba(255, 255, 255, 0.05);
-    color: #FFFDF8;
     text-align: center;
-    line-height: 1.2;
   }
 
-  .nav-links .nav-cta {
-    background: linear-gradient(180deg, var(--royal-red-bright) 0%, var(--royal-red-dark) 100%);
-    color: #ffffff;
-    border-color: #FFD700;
+  .menu-toggle,
+  .menu-button,
+  .nav-panel {
+    display: none !important;
   }
 
   .hero,
