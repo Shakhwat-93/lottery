@@ -88,6 +88,51 @@
         }
       });
     }
+
+    // --- 3. LIVE DISCOUNT COUNTDOWN TIMER (PERSISTENT & REAL-TIME) ---
+    function initOfferCountdown() {
+      const hoursEl = document.getElementById('timer-hours');
+      const minutesEl = document.getElementById('timer-minutes');
+      const secondsEl = document.getElementById('timer-seconds');
+
+      if (!hoursEl || !minutesEl || !secondsEl) return;
+
+      const STORAGE_KEY = 'thai_lottery_vip_deadline';
+      let deadline = localStorage.getItem(STORAGE_KEY);
+      const now = Date.now();
+      const DURATION = (3 * 3600 + 48 * 60 + 20) * 1000;
+
+      if (!deadline || parseInt(deadline, 10) <= now) {
+        deadline = now + DURATION;
+        localStorage.setItem(STORAGE_KEY, deadline.toString());
+      } else {
+        deadline = parseInt(deadline, 10);
+      }
+
+      function updateTimer() {
+        const currentTime = Date.now();
+        let diff = Math.max(0, Math.floor((deadline - currentTime) / 1000));
+
+        if (diff <= 0) {
+          deadline = Date.now() + (2 * 3600 + 45 * 60 + 15) * 1000;
+          localStorage.setItem(STORAGE_KEY, deadline.toString());
+          diff = Math.floor((deadline - Date.now()) / 1000);
+        }
+
+        const h = Math.floor(diff / 3600);
+        const m = Math.floor((diff % 3600) / 60);
+        const s = diff % 60;
+
+        hoursEl.textContent = String(h).padStart(2, '0');
+        minutesEl.textContent = String(m).padStart(2, '0');
+        secondsEl.textContent = String(s).padStart(2, '0');
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    }
+
+    initOfferCountdown();
   }
 
   if (document.readyState === 'loading') {
