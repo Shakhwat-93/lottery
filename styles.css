@@ -973,9 +973,11 @@ h3 {
 
 .certificate-layout {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 48rem);
+  justify-content: center;
   gap: clamp(1.5rem, 3vw, 2.5rem);
   align-items: stretch;
+  margin: 0 auto;
 }
 
 .certificate-focus {
