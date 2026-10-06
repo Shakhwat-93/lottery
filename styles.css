@@ -377,53 +377,30 @@ main,
   pointer-events: none;
 }
 
-/* Royal 100% Trusted Badge on Video */
-.top-showcase-badge,
-.top-showcase-label {
+/* Official Verified Blue Tick on Video */
+.top-showcase-verified {
   position: absolute;
   left: clamp(1rem, 3.5vw, 2.5rem);
   top: clamp(1rem, 2.5vw, 1.8rem);
   z-index: 10;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.38rem 0.95rem 0.38rem 0.48rem;
-  border-radius: var(--radius-pill);
-  background: rgba(7, 23, 57, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid var(--royal-gold-bright);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), 0 0 14px rgba(212, 175, 55, 0.45);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  justify-content: center;
+  filter: drop-shadow(0 4px 16px rgba(29, 155, 240, 0.75)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
+  cursor: default;
+  user-select: none;
 }
 
-.top-showcase-badge:hover {
-  transform: translateY(-1px) scale(1.04);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 215, 0, 0.6);
+.top-showcase-verified:hover {
+  transform: translateY(-2px) scale(1.15);
+  filter: drop-shadow(0 6px 24px rgba(29, 155, 240, 0.95)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
 }
 
-.trust-badge-symbol {
-  display: inline-grid;
-  width: 1.45rem;
-  height: 1.45rem;
-  place-items: center;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #FFD700 0%, #C69214 100%);
-  color: var(--royal-navy);
-  font-size: 0.85rem;
-  font-weight: 900;
-  line-height: 1;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-.trust-badge-text {
-  color: #FFFDF8;
-  font-family: var(--font-royal);
-  font-size: 0.86rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+.verified-blue-tick {
+  display: block;
+  width: clamp(2.2rem, 3.5vw, 2.85rem);
+  height: clamp(2.2rem, 3.5vw, 2.85rem);
 }
 
 /* ==========================================================================
