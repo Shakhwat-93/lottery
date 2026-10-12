@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const PAPERS = [
   { id: 1, label: 'Paper 01', src: '/assets/game/game-01.jpg', isLarge: true },
@@ -14,6 +15,8 @@ const PAPERS = [
 ];
 
 export default function GamePage() {
+  useScrollReveal();
+
   useEffect(() => {
     document.body.classList.add('game-page');
     window.scrollTo(0, 0);
@@ -26,7 +29,7 @@ export default function GamePage() {
     <>
       <Header page="game" />
       <main>
-        <section className="game-hero">
+        <section className="game-hero reveal-on-scroll">
           <div className="game-hero-copy">
             <p className="eyebrow">งวดปี 2569 • 100% Sure • ১০০% নিশ্চিত লটারি পেপার</p>
             <h1>Official 100% Sure Papers</h1>
@@ -58,7 +61,7 @@ export default function GamePage() {
           </figure>
         </section>
 
-        <section className="section game-gallery-section" id="game-papers">
+        <section className="section game-gallery-section reveal-on-scroll" id="game-papers">
           <div className="section-heading">
             <p className="eyebrow">เอกสารเกม • Sure Game Papers • নিশ্চিত গেম পেপার</p>
             <h2>Official 100% Sure Paper Gallery</h2>
@@ -84,7 +87,7 @@ export default function GamePage() {
           </div>
         </section>
 
-        <section className="game-panel" id="download">
+        <section className="game-panel reveal-on-scroll" id="download">
           <div>
             <p className="eyebrow">เข้าสู่หน้าเกม</p>
             <h2>DOWN GAME 100%</h2>

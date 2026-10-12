@@ -5,7 +5,7 @@ export default function OnlineForm() {
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
 
   return (
-    <section className="section form-section" id="online-form">
+    <section className="section form-section reveal-on-scroll" id="online-form">
       <div className="section-heading">
         <p className="eyebrow">แบบฟอร์มลงทะเบียนออนไลน์ • Online Registration • অফিসিয়াল অনলাইন রেজিস্ট্রেশন</p>
         <h2>Thailand Lottery Official Membership Registration Form</h2>
@@ -89,13 +89,13 @@ export default function OnlineForm() {
       {/* Form Lightbox Modal */}
       {isFormModalOpen && (
         <div
-          className="winner-modal-overlay"
+          className="winner-modal-overlay modal-fade-in"
           onClick={() => setIsFormModalOpen(false)}
           role="dialog"
           aria-modal="true"
           aria-label="Thailand Lottery Membership Registration Form"
         >
-          <div className="winner-modal-card form-lightbox-card" onClick={(e) => e.stopPropagation()}>
+          <div className="winner-modal-card form-lightbox-card modal-scale-in" onClick={(e) => e.stopPropagation()}>
             <div className="winner-modal-header">
               <strong>Official Membership Registration Form 2026 (Md Fahim Chowdhury TL-001)</strong>
               <button

@@ -55,7 +55,7 @@ export default function VipOfferTimer() {
   }, []);
 
   return (
-    <section className="section offer-timer-section" id="vip-offer" aria-label="Limited time VIP discount offer">
+    <section className="section offer-timer-section reveal-on-scroll" id="vip-offer" aria-label="Limited time VIP discount offer">
       <div className="offer-card">
         {/* Top Row: Alert Ribbons and Remaining Forms Count */}
         <div className="offer-header-row">

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function CustomerReview({ videoRef }) {
   return (
-    <section className="section review-section" id="customer-review">
+    <section className="section review-section reveal-on-scroll" id="customer-review">
       <div className="review-layout">
         <div className="review-copy">
           <p className="eyebrow">ความคิดเห็นจากลูกค้า • Genuine Reviews • সম্মানিত গ্রাহকদের সরাসরি রিভিউ</p>

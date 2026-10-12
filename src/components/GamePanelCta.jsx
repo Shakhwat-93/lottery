@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function GamePanelCta() {
   return (
-    <section className="game-panel" id="game-open">
+    <section className="game-panel reveal-on-scroll" id="game-open">
       <div>
         <p className="eyebrow">เข้าสู่ระบบ • 100% Sure Paper • ১০০% নিশ্চিত লটারি পেপার</p>
         <h2>Thailand Lottery Official Game Papers</h2>

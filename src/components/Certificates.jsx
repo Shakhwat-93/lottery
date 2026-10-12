@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Certificates() {
   return (
-    <section className="section certificate-section" id="certificate">
+    <section className="section certificate-section reveal-on-scroll" id="certificate">
       <div className="section-heading">
         <p className="eyebrow">เอกสารและใบรับรอง • Official Certificates • সরকারি লাইসেন্স ও সনদপত্র</p>
         <h2>Verified Government Licenses & Official Proofs</h2>

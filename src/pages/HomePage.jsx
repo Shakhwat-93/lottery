@@ -9,11 +9,14 @@ import PaymentMethods from '../components/PaymentMethods';
 import CustomerReview from '../components/CustomerReview';
 import PreviousWinners from '../components/PreviousWinners';
 import OnlineForm from '../components/OnlineForm';
+import SurePaperSlider from '../components/SurePaperSlider';
 import GamePanelCta from '../components/GamePanelCta';
 import { useMediaCoordinator } from '../hooks/useMediaCoordinator';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export default function HomePage() {
   const { heroVideoRef, reviewVideoRef, handleHeroClick } = useMediaCoordinator();
+  useScrollReveal();
 
   return (
     <>
@@ -27,6 +30,7 @@ export default function HomePage() {
         <PreviousWinners />
         <PaymentMethods />
         <CustomerReview videoRef={reviewVideoRef} />
+        <SurePaperSlider />
         <GamePanelCta />
       </main>
       <Footer page="home" />

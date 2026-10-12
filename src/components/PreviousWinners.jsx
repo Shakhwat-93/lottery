@@ -56,7 +56,7 @@ export default function PreviousWinners() {
     : WINNERS_DATA.filter((w) => w.drawDate === activeDraw);
 
   return (
-    <section className="section winners-section" id="previous-winners" aria-label="Previous Game Form Winners">
+    <section className="section winners-section reveal-on-scroll" id="previous-winners" aria-label="Previous Game Form Winners">
       <div className="section-heading">
         <p className="eyebrow">
           <span className="eyebrow-flag" aria-hidden="true">🏆</span> ผู้ชนะเกมก่อนหน้า • VERIFIED WINNERS • পূর্ববর্তী গেমের ফর্ম বিজয়ী
@@ -122,7 +122,7 @@ export default function PreviousWinners() {
         {displayedWinners.map((winner) => {
           const currentTab = activeTabs[winner.id];
           return (
-            <article key={winner.id} className="winner-card">
+            <article key={winner.id} className="winner-card card-enter-anim">
               {/* Top Glowing Already Winned Banner */}
               <div className="card-already-winned-banner">
                 <div className="winned-banner-left">
@@ -275,13 +275,13 @@ export default function PreviousWinners() {
       {/* Image Modal Lightbox */}
       {modalImage && (
         <div
-          className="winner-modal-overlay"
+          className="winner-modal-overlay modal-fade-in"
           onClick={() => setModalImage(null)}
           role="dialog"
           aria-modal="true"
           aria-label={modalImage.title}
         >
-          <div className="winner-modal-card" onClick={(e) => e.stopPropagation()}>
+          <div className="winner-modal-card modal-scale-in" onClick={(e) => e.stopPropagation()}>
             <div className="winner-modal-header">
               <strong>{modalImage.title}</strong>
               <button

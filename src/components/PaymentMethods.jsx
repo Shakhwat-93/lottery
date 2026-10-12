@@ -17,7 +17,7 @@ export default function PaymentMethods() {
   };
 
   return (
-    <section className="section payment-section" id="payment-methods" aria-label="Official Government Payment and Treasury">
+    <section className="section payment-section reveal-on-scroll" id="payment-methods" aria-label="Official Government Payment and Treasury">
       <div className="payment-wrapper">
         {/* Main Payment & Treasury Card */}
         <div className="payment-card">

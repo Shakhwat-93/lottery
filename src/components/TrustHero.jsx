@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function TrustHero() {
   return (
-    <section className="hero">
+    <section className="hero reveal-on-scroll">
       <div className="hero-content">
         <p className="eyebrow">ราชอาณาจักรไทย • Thailand Official Lottery • সরকারি অনুমোদনপ্রাপ্ত</p>
         <h1>Welcome To Thailand Lottery 2026</h1>
