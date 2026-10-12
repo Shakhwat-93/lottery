@@ -1,5 +1,9 @@
 *-backup.*
 *-original.*
+*-legacy.*
 *.bak
+node_modules/
+dist/
 .vscode/
 .idea/
+
