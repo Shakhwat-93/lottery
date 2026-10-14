@@ -56,61 +56,62 @@ export default function VipOfferTimer() {
 
   return (
     <section className="section offer-timer-section reveal-on-scroll" id="vip-offer" aria-label="Limited time VIP discount offer">
-      <div className="offer-card">
-        {/* Top Row: Alert Ribbons and Remaining Forms Count */}
-        <div className="offer-header-row">
-          <span className="offer-badge-pill">
-            <span className="pulse-fire" aria-hidden="true">
-              🔥
+      <div className="offer-card golden-offer-card">
+        {/* Top Prominent Highlight Banner: "মাত্র ৫টি ফর্ম বাকি আছে শুধু" */}
+        <div className="urgent-forms-highlight-banner" role="alert">
+          <div className="urgent-badge-left">
+            <span className="urgent-beacon-dot" aria-hidden="true" />
+            <span className="urgent-badge-text">জরুরি কোটা নোটিশ • LIMITED TIME OFFER</span>
+          </div>
+
+          <div className="urgent-main-highlight">
+            <span className="urgent-siren" aria-hidden="true">🚨</span>
+            <span className="urgent-message">
+              আর মাত্র <strong className="golden-urgent-number">৫টি</strong> ফর্ম বাকি আছে শুধু!
             </span>
-            <span>ข้อเสนอพิเศษ • সীমিত সময়ের অফার • LIMITED TIME OFFER</span>
-          </span>
-          <div className="seats-alert-badge forms-alert-badge">
-            <span className="seat-dot pulse-red" aria-hidden="true" />
-            <strong>
-              🚨 আর মাত্র <span className="seats-num">৫টি</span> ফর্ম বাকি আছে!
-            </strong>
-            <small>เหลือเพียง 5 แบบฟอร์มเท่านั้น • Only 5 Forms Left</small>
+          </div>
+
+          <div className="urgent-quota-chip">
+            <span>কোটা: <strong>৯৫% বুকড</strong> • অবশিষ্ট: <strong className="chip-gold-num">৫টি</strong></span>
           </div>
         </div>
 
-        {/* Main Content: Headings, Descriptions and Timer Blocks */}
+        {/* Main Content: Headings, Descriptions and Golden Timer */}
         <div className="offer-main-content">
           <div className="offer-title-group">
-            <p className="eyebrow">
-              <span className="alert-fire-icon" aria-hidden="true">⚡</span> สมาชิกวีไอพี • আর মাত্র ৫টি ফর্ম বাকি • LIMITED 5 FORMS ONLY
-            </p>
-            <h2>আর মাত্র ৫টি ফর্ম বাকি আছে — দ্রুত আপনার ফর্মটি বুক করুন!</h2>
+            <h2 className="golden-timer-headline">
+              আর মাত্র <span className="title-count-highlight">৫টি</span> ফর্ম বাকি আছে — দ্রুত আপনার ফর্মটি বুক করুন!
+            </h2>
             <p className="offer-desc">
-              থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) অনুমোদিত মেম্বারশিপ কোটায় সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (TL-001)</strong> এর অধীনে আর <strong>মাত্র ৫টি অফিসিয়াল মেম্বারশিপ ফর্ম</strong> খালি রয়েছে। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার বুক করুন!
+              থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) অনুমোদিত মেম্বারশিপ কোটায় সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (TL-001)</strong> এর অধীনে আর <strong>মাত্র ৫টি অফিসিয়াল মেম্বারশিপ ফর্ম</strong> খালি রয়েছে। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার কনফার্ম করুন!
             </p>
           </div>
 
-          {/* Live Countdown Timer */}
-          <div className="countdown-wrapper" aria-label="Countdown timer">
-            <div className="countdown-box">
-              <span className="count-val" id="timer-hours">
+          {/* Luxury 24K Royal Golden Countdown Timer */}
+          <div className="countdown-wrapper golden-countdown-wrapper" aria-label="Golden countdown timer">
+            <div className="countdown-box golden-countdown-box">
+              <span className="count-val golden-val" id="timer-hours">
                 {timeLeft.hours}
               </span>
-              <span className="count-label">ঘণ্টা (Hours)</span>
+              <span className="count-label golden-label">ঘণ্টা (Hours)</span>
             </div>
-            <span className="count-sep" aria-hidden="true">
+            <span className="count-sep golden-sep" aria-hidden="true">
               :
             </span>
-            <div className="countdown-box">
-              <span className="count-val" id="timer-minutes">
+            <div className="countdown-box golden-countdown-box">
+              <span className="count-val golden-val" id="timer-minutes">
                 {timeLeft.minutes}
               </span>
-              <span className="count-label">মিনিট (Mins)</span>
+              <span className="count-label golden-label">মিনিট (Mins)</span>
             </div>
-            <span className="count-sep" aria-hidden="true">
+            <span className="count-sep golden-sep" aria-hidden="true">
               :
             </span>
-            <div className="countdown-box">
-              <span className="count-val" id="timer-seconds">
+            <div className="countdown-box golden-countdown-box">
+              <span className="count-val golden-val" id="timer-seconds">
                 {timeLeft.seconds}
               </span>
-              <span className="count-label">সেকেন্ড (Secs)</span>
+              <span className="count-label golden-label">সেকেন্ড (Secs)</span>
             </div>
           </div>
         </div>
@@ -123,16 +124,16 @@ export default function VipOfferTimer() {
                 🔥 ফর্ম পূরণ চলছে: <strong>৯৫টি ফরম সম্পন্ন (৯৫%)</strong>
               </span>
               <span>
-                অবশিষ্ট কোটা: <strong className="seat-highlight">মাত্র ৫ / ১০০ টি ফর্ম বাকি!</strong>
+                অবশিষ্ট কোটা: <strong className="seat-highlight-gold">মাত্র ৫টি ফর্ম বাকি শুধু!</strong>
               </span>
             </div>
             <div className="progress-track" role="progressbar" aria-valuenow={95} aria-valuemin={0} aria-valuemax={100}>
-              <div className="progress-fill" style={{ width: '95%' }} />
+              <div className="progress-fill golden-progress-fill" style={{ width: '95%' }} />
             </div>
           </div>
 
           <div className="offer-cta-group">
-            <a className="button primary offer-cta-btn" href="#online-form">
+            <a className="button primary offer-cta-btn golden-cta-btn" href="#online-form">
               <span>বাকি ৫টি ফর্মের ১টি পূরণ করুন ✍️</span>
               <span className="btn-arrow" aria-hidden="true">
                 →
