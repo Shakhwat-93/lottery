@@ -1,4 +1,5 @@
 import React from 'react';
+import FacebookLiveStream from './FacebookLiveStream';
 
 export default function TrustHero() {
   return (
@@ -26,7 +27,11 @@ export default function TrustHero() {
         </div>
       </div>
 
-      <figure className="hero-certificate">
+      <div className="hero-certificate-column">
+        {/* Facebook Live Streaming Video (Directly Above Agent Certificate) */}
+        <FacebookLiveStream />
+
+        <figure className="hero-certificate">
         {/* Elite Official Government Agent Credential Header */}
         <div className="agent-official-credential-card">
           {/* Top Government Tag & Live Verification Status */}
@@ -109,6 +114,7 @@ export default function TrustHero() {
           </div>
         </div>
       </figure>
-    </section>
+    </div>
+  </section>
   );
 }
