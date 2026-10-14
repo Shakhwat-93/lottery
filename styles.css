@@ -4167,6 +4167,249 @@ h3 {
   color: var(--text-secondary);
 }
 
+/* ==========================================================================
+   WINNER REGISTRATION FORMS SHOWCASE (Mohammad Zohurul Islam & MD Bahar)
+   ========================================================================== */
+
+.winner-forms-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3.5vw, 2.5rem);
+  margin-top: 2rem;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.winner-form-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--royal-parchment-soft, #FFFDF5);
+  border: 2px solid var(--royal-gold, #D4AF37);
+  border-radius: var(--radius-card-lg, 16px);
+  overflow: hidden;
+  box-shadow: 0 16px 45px rgba(7, 23, 57, 0.12), inset 0 0 0 2px rgba(255, 232, 153, 0.4);
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.winner-form-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(7, 23, 57, 0.2), 0 0 30px rgba(212, 175, 55, 0.35);
+}
+
+.winner-form-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1.25rem;
+  background: linear-gradient(135deg, #051026 0%, #0B1D45 50%, #051026 100%);
+  border-bottom: 2px solid var(--royal-gold, #D4AF37);
+  position: relative;
+  overflow: hidden;
+}
+
+.winner-form-header-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.winner-form-badge {
+  font-family: var(--font-bengali);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #FFD700;
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.winner-form-name {
+  font-family: var(--font-bengali);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.winner-form-name-en {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.88rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #F6D678;
+}
+
+.winner-form-verified-tag {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.6);
+  color: #34D399;
+  font-family: var(--font-bengali);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill, 9999px);
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.25);
+}
+
+.winner-form-img-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.48;
+  background: #051026;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.winner-form-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.winner-form-img-wrapper:hover .winner-form-main-img {
+  transform: scale(1.03);
+}
+
+.winner-form-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 23, 57, 0.15) 0%, rgba(7, 23, 57, 0.8) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.winner-form-img-wrapper:hover .winner-form-hover-overlay {
+  opacity: 1;
+}
+
+.winner-form-hover-btn {
+  background: rgba(7, 23, 57, 0.92);
+  color: #FFD700;
+  border: 2px solid #FFD700;
+  padding: 0.65rem 1.35rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-family: var(--font-bengali);
+  font-size: 0.92rem;
+  font-weight: 800;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.4);
+  transform: translateY(10px);
+  transition: transform 250ms ease;
+}
+
+.winner-form-img-wrapper:hover .winner-form-hover-btn {
+  transform: translateY(0);
+}
+
+.winner-form-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1.15rem;
+  background: #FFFDF5;
+  border-top: 1.5px solid rgba(212, 175, 55, 0.35);
+  flex-wrap: wrap;
+}
+
+.winner-form-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.winner-meta-pill {
+  font-family: var(--font-bengali);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #4A3305;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill, 9999px);
+}
+
+.button-form-fullscreen {
+  background: linear-gradient(135deg, #071739 0%, #0d2252 100%);
+  color: #FFD700;
+  border: 1.5px solid var(--royal-gold, #D4AF37);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-family: var(--font-bengali);
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 200ms ease;
+  box-shadow: 0 4px 12px rgba(7, 23, 57, 0.15);
+  white-space: nowrap;
+}
+
+.button-form-fullscreen:hover {
+  background: #0d265a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(7, 23, 57, 0.25), 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Modal form adjustments */
+.winner-form-modal-card {
+  max-width: 680px !important;
+  width: 95% !important;
+  max-height: 94vh !important;
+}
+
+.winner-form-modal-body {
+  max-height: 80vh !important;
+  padding: 0.5rem !important;
+  overflow-y: auto !important;
+}
+
+.winner-form-full-img {
+  max-height: 78vh !important;
+  width: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  border-radius: 6px !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6) !important;
+}
+
+@media (max-width: 768px) {
+  .winner-forms-grid {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+  
+  .winner-form-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+  }
+  
+  .winner-form-verified-tag {
+    align-self: flex-start;
+  }
+  
+  .winner-form-card-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+  }
+  
+  .button-form-fullscreen {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 /* Winner styling in OnlineForm Member Card */
 .membership-card-winner {
   border: 2px solid #D4AF37 !important;

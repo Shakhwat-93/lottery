@@ -28,8 +28,8 @@ export default function HomePage() {
         <VipOfferTimer />
         <OnlineForm />
         <PreviousWinners />
-        <PaymentMethods />
         <CustomerReview videoRef={reviewVideoRef} />
+        <PaymentMethods />
         <SurePaperSlider />
         <GamePanelCta />
       </main>
