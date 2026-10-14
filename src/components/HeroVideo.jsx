@@ -62,27 +62,23 @@ export default function HeroVideo({ videoRef, onVideoClick }) {
         <img src="/assets/site/top-office.jpg" alt="Thailand Lottery office banner" />
       </video>
 
-      {/* Luxury 24K Gold Play / Pause Button in Center */}
-      <button
-        type="button"
-        className={`hero-center-play-btn ${isPlaying ? 'playing' : 'paused'}`}
-        onClick={handleToggle}
-        aria-label={isPlaying ? 'Pause video (পজ করুন)' : 'Play video (ভিডিও প্লে করুন)'}
-        title={isPlaying ? 'Pause (পজ)' : 'Play (প্লে)'}
-      >
-        {!isPlaying && <span className="hero-play-pulse" aria-hidden="true" />}
-        <span className="hero-play-icon-wrap">
-          {isPlaying ? (
-            <svg className="hero-play-svg pause-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-            </svg>
-          ) : (
+      {/* Luxury 24K Gold Play Button in Center - Disappears completely when video plays */}
+      {!isPlaying && (
+        <button
+          type="button"
+          className="hero-center-play-btn paused"
+          onClick={handleToggle}
+          aria-label="Play video (ভিডিও প্লে করুন)"
+          title="Play (ভিডিও প্লে করুন)"
+        >
+          <span className="hero-play-pulse" aria-hidden="true" />
+          <span className="hero-play-icon-wrap">
             <svg className="hero-play-svg play-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="currentColor" d="M8 5v14l11-7z" />
             </svg>
-          )}
-        </span>
-      </button>
+          </span>
+        </button>
+      )}
     </section>
   );
 }

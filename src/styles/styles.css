@@ -565,18 +565,13 @@ main,
   transform: translate(-50%, -50%) scale(0.96);
 }
 
-/* While Playing: smoothly hide center button, reveal on hover */
+/* While Playing: completely hide center play button */
 .top-showcase.is-playing .hero-center-play-btn {
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, -50%) scale(0.85);
-}
-
-.top-showcase.is-playing:hover .hero-center-play-btn,
-.top-showcase.is-playing:focus-within .hero-center-play-btn {
-  opacity: 0.92;
-  pointer-events: auto;
-  transform: translate(-50%, -50%) scale(1);
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translate(-50%, -50%) scale(0.7) !important;
 }
 
 /* ==========================================================================
