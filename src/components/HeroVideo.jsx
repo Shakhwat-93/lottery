@@ -1,32 +1,88 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function HeroVideo({ videoRef, onVideoClick }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef?.current;
+    if (!video) return;
+
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+    const onEnded = () => {
+      video.pause();
+      video.currentTime = 0;
+      setIsPlaying(false);
+    };
+
+    video.addEventListener('play', onPlay);
+    video.addEventListener('pause', onPause);
+    video.addEventListener('ended', onEnded);
+
+    return () => {
+      video.removeEventListener('play', onPlay);
+      video.removeEventListener('pause', onPause);
+      video.removeEventListener('ended', onEnded);
+    };
+  }, [videoRef]);
+
+  const handleToggle = (e) => {
+    e.stopPropagation();
+    if (onVideoClick) {
+      onVideoClick();
+    } else {
+      const video = videoRef?.current;
+      if (!video) return;
+      if (video.paused) {
+        video.muted = false;
+        video.volume = 1.0;
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    }
+  };
+
   return (
-    <section className="top-showcase" aria-label="Thailand Lottery office banner">
+    <section
+      className={`top-showcase ${isPlaying ? 'is-playing' : 'is-paused'}`}
+      aria-label="Thailand Lottery office banner"
+    >
       <video
         ref={videoRef}
         className="top-showcase-video"
         id="hero-video"
-        autoPlay
-        loop
         playsInline
         preload="auto"
         poster="/assets/site/top-office.jpg"
-        onClick={onVideoClick}
+        onClick={handleToggle}
         style={{ cursor: 'pointer' }}
       >
         <source src="/hero-section.mp4" type="video/mp4" />
         <img src="/assets/site/top-office.jpg" alt="Thailand Lottery office banner" />
       </video>
-      <div className="top-showcase-verified" aria-label="Official Verified Badge" title="Official Verified">
-        <svg className="verified-blue-tick" viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            fill="#1D9BF0"
-            d="M22.25 12c0-1.43-.88-2.67-2.19-3.19.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.52-1.31-1.76-2.19-3.19-2.19s-2.67.88-3.19 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91C2.93 9.33 2.05 10.57 2.05 12s.88 2.67 2.19 3.19c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.52 1.31 1.76 2.19 3.19 2.19s2.67-.88 3.19-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.52 2.19-1.76 2.19-3.19z"
-          />
-          <path fill="#FFFFFF" d="M10.09 16.72l-4.14-4.14 1.41-1.41 2.73 2.73 6.13-6.13 1.41 1.41-7.54 7.54z" />
-        </svg>
-      </div>
+
+      {/* Luxury 24K Gold Play / Pause Button in Center */}
+      <button
+        type="button"
+        className={`hero-center-play-btn ${isPlaying ? 'playing' : 'paused'}`}
+        onClick={handleToggle}
+        aria-label={isPlaying ? 'Pause video (পজ করুন)' : 'Play video (ভিডিও প্লে করুন)'}
+        title={isPlaying ? 'Pause (পজ)' : 'Play (প্লে)'}
+      >
+        {!isPlaying && <span className="hero-play-pulse" aria-hidden="true" />}
+        <span className="hero-play-icon-wrap">
+          {isPlaying ? (
+            <svg className="hero-play-svg pause-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+            </svg>
+          ) : (
+            <svg className="hero-play-svg play-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M8 5v14l11-7z" />
+            </svg>
+          )}
+        </span>
+      </button>
     </section>
   );
 }
