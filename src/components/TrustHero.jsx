@@ -5,22 +5,21 @@ export default function TrustHero() {
   return (
     <section className="hero reveal-on-scroll">
       <div className="hero-content">
-        <p className="eyebrow">
-          <span className="eyebrow-flag" aria-hidden="true">🇹🇭</span> OFFICIAL GLO THAILAND
+        <p className="eyebrow hero-eyebrow-multiline">
+          ราชอาณาจักรไทย&nbsp;•&nbsp;THAILAND OFFICIAL LOTTERY&nbsp;•&nbsp;সরকারি অনুমোদনপ্রাপ্ত
         </p>
         <h1 className="hero-main-title">
-          <span className="hero-title-main">Thailand Official Lottery</span>
+          <span className="hero-title-welcome">Welcome To</span>
+          <span className="hero-title-main">Thailand Lottery</span>
           <span className="hero-title-year">2026</span>
         </h1>
-        <p className="hero-copy">
-          <span>থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO)</span>
-          <span>অনুমোদিত মেম্বারশিপ পোর্টাল।</span>
+        <p className="hero-copy hero-copy-paragraph">
+          থাইল্যান্ড সরকারের গভর্নমেন্ট লটারির অফিস (GLO) দ্বারা সরাসরি লাইসেন্সপ্রাপ্ত ও আন্তর্জাতিকভাবে বিশ্বস্ত প্ল্যাটফর্ম। ১০০% নিরাপদ লেনদেন, ভেরিফাইড রেজাল্ট ও অফিসিয়াল মেম্বারশিপ সেবা।
         </p>
 
         <div className="trust-list" aria-label="Trust signals">
-          <span>✓ লাইসেন্স: GLO-BD-2026</span>
-          <span>★ বেস্ট এজেন্ট: ফাহিম চৌধুরী</span>
-          <span>🛡️ ১০০% ভেরিফায়েড পে-আউট</span>
+          <span>✓ লাইসেন্স নং TGL-2025-001784</span>
+          <span>★ সেরা এজেন্ট ২০২৬ (Best Agent)</span>
         </div>
 
         <div className="hero-actions">
