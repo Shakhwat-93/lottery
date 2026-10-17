@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 export default function Header({ page = 'home' }) {
   const isGamePage = page === 'game';
   const tickerText = isGamePage
-    ? 'สำนักงานสลากกินแบ่งรัฐบาล • ১০০% Sure Paper'
-    : 'สำนักงานสลากกินแบ่งรัฐบาล • সরকারি অনুমোদিত';
+    ? 'สำนักงานสลากกินแบ่งรัฐบาล • VIP 100% SURE PAPERS • คลังเอกสาร VIP'
+    : 'สำนักงานสลากกินแบ่งรัฐบาล • THE GOVERNMENT LOTTERY OFFICE (GLO) • 100% OFFICIAL';
 
   return (
     <>
@@ -56,7 +56,7 @@ export default function Header({ page = 'home' }) {
           </Link>
         ) : (
           <Link to="/" className="mobile-header-cta" aria-label="Home">
-            <span>Home (হোম)</span>
+            <span>Home • หน้าหลัก</span>
           </Link>
         )}
 
@@ -64,20 +64,21 @@ export default function Header({ page = 'home' }) {
           <nav className="nav-links" aria-label="Primary navigation">
             {!isGamePage ? (
               <>
-                <a href="#certificate">Certificates</a>
-                <a href="#previous-winners">Winners</a>
-                <a href="#customer-review">Review</a>
-                <a href="#online-form">Online Form</a>
-                <a href="#location">Office</a>
+                <a href="#certificate">Certificates • ใบรับรอง</a>
+                <a href="#vip-offer">VIP Quota • โควตา</a>
+                <a href="#online-form">Register • ลงทะเบียน</a>
+                <a href="#previous-winners">Winners • ผู้ชนะ</a>
+                <a href="#customer-review">Review • รีวิว</a>
+                <a href="#location">Bangkok HQ • ที่ตั้ง</a>
                 <Link className="nav-cta" to="/game">
                   100% Sure Paper
                 </Link>
               </>
             ) : (
               <>
-                <Link to="/">Home (হোম)</Link>
-                <a href="#game-papers">Papers (পেপার)</a>
-                <a href="#download">Download</a>
+                <Link to="/">Home • หน้าหลัก</Link>
+                <a href="#game-papers">VIP Papers • เอกสาร</a>
+                <a href="#download">Direct Game ↗</a>
               </>
             )}
           </nav>

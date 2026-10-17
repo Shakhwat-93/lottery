@@ -23,7 +23,7 @@ export default function PaymentMethods() {
         <div className="payment-card">
           <div className="payment-copy">
             <p className="eyebrow">
-              <span className="eyebrow-flag" aria-hidden="true">🇹🇭</span> รัฐบาลไทย • Official Govt Treasury • সরাসরি সরকারি কোষাগার
+              <span className="eyebrow-flag" aria-hidden="true">🇹🇭</span> กระทรวงการคลัง • GOVT TREASURY
             </p>
             <h2>Accepted Payment Methods & Direct Govt Treasury</h2>
 
@@ -31,17 +31,17 @@ export default function PaymentMethods() {
             <div className="payee-official-box">
               <div className="payee-badge-row">
                 <span className="payee-pill">
-                  <span className="payee-check">✓</span> সরাসরি থাইল্যান্ড সরকারে জমা
+                  <span className="payee-check">✓</span> โอนตรงกระทรวงการคลัง • DIRECT GOVT TREASURY
                 </span>
                 <span className="payee-merchant-code">
-                  মার্চেন্ট আইডি: <strong>TH-GLO-GOV-2026</strong>
+                  MERCHANT ID: <strong>TH-GLO-GOV-2026</strong>
                 </span>
               </div>
 
               <div className="payee-details">
-                <span className="payee-title-label">পেমেন্ট প্রাপক (Official Payee):</span>
+                <span className="payee-title-label">OFFICIAL PAYEE (ผู้รับเงินอย่างเป็นทางการ):</span>
                 <strong className="payee-name-bn">
-                  গভর্নমেন্ট লটারি অফিস (GLO) কেন্দ্রীয় কোষাগার, থাইল্যান্ড সরকার
+                  สำนักงานสลากกินแบ่งรัฐบาล (GLO) กรุงเทพมหานคร
                 </strong>
                 <span className="payee-name-en">
                   The Government Lottery Office (GLO) Treasury, Royal Thai Government
@@ -49,7 +49,7 @@ export default function PaymentMethods() {
               </div>
 
               <p className="payee-guarantee-note">
-                🛡️ আপনার জমাকৃত প্রতিটি ডিপোজিট বা ফি সরাসরি থাইল্যান্ড সরকারের কেন্দ্রীয় ট্রেজারি গেটওয়েতে ব্যাংক-এনক্রিপ্টেড পদ্ধতিতে জমা হয়। কোনো ব্যক্তি বা মধ্যস্থতাকারীর ব্যক্তিগত অ্যাকাউন্টে টাকা নেওয়া হয় না।
+                🛡️ การชำระเงินทุกรายการจะเข้าสู่กระทรวงการคลังโดยตรงผ่านระบบ 256-Bit SSL • All transactions are deposited directly into Royal Thai Government central treasury. কোনো মধ্যস্থতাকারীর ব্যক্তিগত একাউন্টে নয়, সরাসরি সরকারি কেন্দ্রীয় একাউন্টে জমা।
               </p>
             </div>
           </div>
@@ -73,9 +73,9 @@ export default function PaymentMethods() {
             </div>
 
             <div className="payment-security-badges">
-              <span>🔒 256-Bit SSL এনক্রিপশন</span>
-              <span>⚡ কেন্দ্রীয় সার্ভারে ইনস্ট্যান্ট ভেরিফিকেশন</span>
-              <span>🏛️ ১০০% থাই গভর্নমেন্ট এসক্রো সুরক্ষিত</span>
+              <span>🔒 256-Bit SSL Encryption • ปลอดภัยสูงสุด</span>
+              <span>⚡ Instant GLO Verification • ตรวจสอบทันที</span>
+              <span>🏛️ 100% Thai Govt Escrow • คุ้มครองโดยรัฐบาล</span>
             </div>
           </div>
         </div>
@@ -105,14 +105,14 @@ export default function PaymentMethods() {
             </div>
             <div className="gov-office-text">
               <div className="gov-office-header-line">
-                <strong className="gov-office-title">থাইল্যান্ড সরকারি প্রধান কার্যালয় ও কেন্দ্রীয় কোষাগার (GLO Bangkok HQ)</strong>
-                <span className="gov-verified-pill">● হেড অফিস ভেরিফাইড</span>
+                <strong className="gov-office-title">สำนักงานสลากกินแบ่งรัฐบาล (GLO Bangkok HQ)</strong>
+                <span className="gov-verified-pill">● สำนักงานใหญ่ • GLO Verified</span>
               </div>
               <p className="gov-office-address">
-                อาคาร 333 ถนนพหลโยธิน แขวงจอมพล เขตจตุจักร กรุงเทพมหานคร 10900 (333 Phahonyothin Rd, Chatuchak, Bangkok, Thailand)
+                อาคาร 333 ถนนพหลโยธิน แขวงจอมพล เขตจตุจักร กรุงเทพมหานคร 10900 (333 Phahonyothin Rd, Bangkok 10900)
               </p>
               <span className="gov-click-hint">
-                👉 এখানে ক্লিক করে ব্যাংকক কেন্দ্রীয় প্রধান কার্যালয়ের লাইভ গুগল ম্যাপ দেখুন
+                👉 ดูแผนที่สำนักงานใหญ่ • Click to View Interactive Map (লাইভ ব্যাংকক ম্যাপ)
               </span>
             </div>
           </div>
@@ -125,7 +125,7 @@ export default function PaymentMethods() {
               handleToggleMap();
             }}
           >
-            <span>{isMapOpen ? '✕ ম্যাপ বন্ধ করুন' : '🗺️ লাইভ ম্যাপ দেখুন'}</span>
+            <span>{isMapOpen ? '✕ ปิดแผนที่ (Close)' : '🗺️ View Map • แผนที่ที่ตั้ง'}</span>
             <span className="toggle-chevron" aria-hidden="true">
               {isMapOpen ? '▲' : '▼'}
             </span>
@@ -138,8 +138,8 @@ export default function PaymentMethods() {
             <div className="gov-map-header">
               <div className="gov-map-title-block">
                 <span className="gov-thai-badge">สำนักงานสลากกินแบ่งรัฐบาล</span>
-                <h4>Government Lottery Office (GLO) Bangkok Headquarters</h4>
-                <p>333 Phahonyothin Rd, Chom Phon, Chatuchak, Bangkok 10900, Thailand • কেন্দ্রীয় নিয়ন্ত্রণ ও ট্রেজারি ভবন</p>
+                <h4>The Government Lottery Office (GLO) Bangkok Headquarters</h4>
+                <p>333 Phahonyothin Rd, Chom Phon, Chatuchak, Bangkok 10900, Thailand • สำนักงานใหญ่และกระทรวงการคลัง</p>
               </div>
               <div className="gov-map-actions">
                 <a
@@ -148,7 +148,7 @@ export default function PaymentMethods() {
                   rel="noopener noreferrer"
                   className="gov-map-ext-link"
                 >
-                  গুগল ম্যাপে ডিরেকশন নিন ↗
+                  Get Directions • นำทาง ↗
                 </a>
                 <button
                   type="button"
@@ -173,16 +173,16 @@ export default function PaymentMethods() {
 
             <div className="gov-office-meta-bar">
               <div className="meta-item">
-                <span className="meta-label">কার্যালয় সময়:</span>
-                <strong>সোম - শুক্র (সকাল ৮:৩০ - বিকাল ৪:৩০ ব্যাংকক সময়)</strong>
+                <span className="meta-label">OFFICE HOURS (เวลาทำการ):</span>
+                <strong>Mon - Fri 08:30 - 16:30 ICT (সোম-শুক্র)</strong>
               </div>
               <div className="meta-item">
-                <span className="meta-label">কেন্দ্রীয় হটলাইন:</span>
+                <span className="meta-label">HOTLINE (สายด่วน):</span>
                 <strong>+66 2 528 9999</strong>
               </div>
               <div className="meta-item">
-                <span className="meta-label">স্ট্যাটাস:</span>
-                <strong className="status-live">✓ সেন্ট্রাল হেডকোয়ার্টার লাইভ</strong>
+                <span className="meta-label">STATUS:</span>
+                <strong className="status-live">● GLO HEADQUARTERS ACTIVE (เปิดทำการ)</strong>
               </div>
             </div>
           </div>

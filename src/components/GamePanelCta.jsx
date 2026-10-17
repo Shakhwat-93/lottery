@@ -5,14 +5,14 @@ export default function GamePanelCta() {
   return (
     <section className="game-panel reveal-on-scroll" id="game-open">
       <div>
-        <p className="eyebrow">เข้าสู่ระบบ • 100% Sure Paper • ১০০% নিশ্চিত লটারি পেপার</p>
-        <h2>Thailand Lottery Official Game Papers</h2>
+        <p className="eyebrow">ระบบเอกสาร • VIP ACCESS</p>
+        <h2>Thailand Lottery Official Master Papers</h2>
         <p>
-          সকল অফিসিয়াল সার্টিফিকেট ও লাইসেন্স যাচাই শেষ হলে সরাসরি গ্যালারি থেকে ১০০% নিশ্চিত পেপার ও নম্বরসমূহ দেখে নিন।
+          เข้าสู่คลังเอกสาร VIP 100% • Access all official master papers, touch charts and cut numbers. ১০০% নিশ্চিত পেপার ও নম্বর গ্যালারি দেখতে প্রবেশ করুন।
         </p>
       </div>
       <Link className="button primary" to="/game">
-        গেম পেপার
+        ดูเอกสาร • VIP Papers ↗
       </Link>
     </section>
   );

@@ -66,11 +66,11 @@ export default function SurePaperSlider() {
     <section className="section slider-section reveal-on-scroll" id="sure-papers-slider" aria-label="100% Sure Paper Slider">
       <div className="section-heading">
         <p className="eyebrow">
-          <span className="alert-fire-icon" aria-hidden="true">⚡</span> งวดล่าสุด 2569 • LIVE SLIDER • নিশ্চিত পেপার স্লাইডার
+          <span className="alert-fire-icon" aria-hidden="true">⚡</span> งวดปี 2569 • 100% SURE PAPERS
         </p>
         <h2>Official 100% Sure Paper Showcase Slider</h2>
         <p>
-          থাইল্যান্ড সরকারের পূর্ববর্তী ড্র-এর ধারাবাহিকতায় আগামী ড্র-এর জন্য শতভাগ নিশ্চিত ও এক্সক্লুসিভ গেম পেপারসমূহ স্লাইড করে দেখে নিন:
+          เอกสาร VIP งวดล่าสุด 2569 • Exclusive 100% Sure Papers & Cut Digits for upcoming draw. আসন্ন ড্র-এর নিশ্চিত পেপারসমূহ স্লাইড করে দেখুন:
         </p>
       </div>
 
@@ -117,7 +117,7 @@ export default function SurePaperSlider() {
                     onClick={() => setModalImage(paper)}
                     role="button"
                     tabIndex={0}
-                    title="ক্লিক করে সম্পূর্ণ পেপারটি বড় করে দেখুন"
+                    title="คลิกเพื่อดูภาพขนาดเต็ม (Click to View Full Screen)"
                   >
                     <img
                       src={paper.src}
@@ -125,7 +125,7 @@ export default function SurePaperSlider() {
                       className="slide-image"
                       loading="lazy"
                     />
-                    <span className="slide-zoom-hint">🔍 ক্লিক করে ফুল স্ক্রিন ভিউ</span>
+                    <span className="slide-zoom-hint">🔍 ดูขนาดเต็ม • Full Preview</span>
                   </div>
 
                   <div className="slide-footer-meta">
@@ -135,7 +135,7 @@ export default function SurePaperSlider() {
                       className="slide-zoom-btn"
                       onClick={() => setModalImage(paper)}
                     >
-                      ফুল সাইজ প্রিভিউ ↗
+                      Full Preview • ดูเอกสาร ↗
                     </button>
                   </div>
                 </div>
@@ -173,7 +173,7 @@ export default function SurePaperSlider() {
       {/* Bottom CTA to View All Papers */}
       <div className="slider-bottom-action">
         <Link className="button primary slider-all-btn" to="/game">
-          🎯 সকল গেম পেপার গ্যালারি দেখুন (View All Papers)
+          🎯 ดูเอกสารทั้งหมด • View All VIP Papers (সকল পেপার)
         </Link>
       </div>
 
@@ -188,7 +188,7 @@ export default function SurePaperSlider() {
         >
           <div className="winner-modal-card modal-scale-in" onClick={(e) => e.stopPropagation()}>
             <div className="winner-modal-header">
-              <strong>{modalImage.label} ({modalImage.tag})</strong>
+              <strong>{modalImage.label} ({modalImage.tag}) • VIP 100%</strong>
               <button
                 type="button"
                 className="winner-modal-close"
@@ -206,13 +206,13 @@ export default function SurePaperSlider() {
               />
             </div>
             <div className="winner-modal-footer">
-              <span>✓ ১০০% আসল ও অরিজিনাল থাইল্যান্ড লটারি পেপার</span>
+              <span>สำนักงานสลากกินแบ่งรัฐบาล • 100% Authentic GLO Certified Papers</span>
               <button
                 type="button"
                 className="button secondary"
                 onClick={() => setModalImage(null)}
               >
-                বন্ধ করুন
+                Close • ปิด (বন্ধ করুন)
               </button>
             </div>
           </div>

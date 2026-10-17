@@ -7,17 +7,17 @@ export default function OnlineForm() {
   return (
     <section className="section form-section reveal-on-scroll" id="online-form">
       <div className="section-heading">
-        <p className="eyebrow">แบบฟอร์มลงทะเบียนออนไลน์ • Online Registration • অফিসিয়াল অনলাইন রেজিস্ট্রেশন</p>
-        <h2>Thailand Lottery Official Membership Registration Form</h2>
+        <p className="eyebrow">แบบฟอร์ม • GLO REGISTRATION</p>
+        <h2>Official Membership Registration Form 2026</h2>
         <p>
-          থাইল্যান্ড সরকারের গভর্নমেন্ট লটারি অফিস (GLO) মেম্বার হতে নিচের অফিসিয়াল রেজিস্ট্রেশন ফরমটি পূরণ করুন। অনুমোদিত সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (Agent ID: TL-001)</strong> এর অধীনে আর <strong>মাত্র ৫টি ফর্ম বাকি রয়েছে</strong>।
+          The Government Lottery Office of Thailand (GLO). অনুমোদিত সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (Agent ID: TL-001)</strong> এর অধীনে আর মাত্র ৫টি ফর্ম বাকি রয়েছে:
         </p>
       </div>
 
       <div className="membership-board" aria-label="Online registration and member verification">
         <div className="online-form-title">
-          <span>Membership Registration Form • แบบฟอร์มออนไลน์</span>
-          <span className="form-remaining-pill">🚨 মাত্র ৫টি ফর্ম বাকি!</span>
+          <span>VIP APPLICATION • แบบฟอร์มออนไลน์</span>
+          <span className="form-remaining-pill">🚨 ONLY 5 SLOTS LEFT (เหลือ 5 ใบ)</span>
         </div>
 
         <div className="form-showcase-layout">
@@ -31,37 +31,37 @@ export default function OnlineForm() {
                 onClick={() => setIsFormModalOpen(true)}
                 role="button"
                 tabIndex={0}
-                title="ক্লিক করে সম্পূর্ণ ফর্মটি বড় করে দেখুন"
+                title="คลิกเพื่อดูแบบฟอร์มขนาดเต็ม (Click to View High-Res)"
               >
                 <img
                   src="/assets/site/official-membership-registration-form.jpg"
                   alt="Thailand Lottery Official Membership Registration Form - Agent Md Fahim Chowdhury TL-001"
                   loading="lazy"
                 />
-                <span className="form-zoom-overlay">🔍 ক্লিক করে বড় ফরম দেখুন</span>
+                <span className="form-zoom-overlay">🔍 ดูขนาดเต็ม • Click to Zoom (ফুল ভিউ)</span>
               </div>
 
               <figcaption className="form-template-caption">
                 <div className="form-caption-header">
                   <strong>MEMBERSHIP REGISTRATION FORM 2026</strong>
-                  <span>The Government Lottery Office of Thailand • GLO</span>
+                  <span>The Government Lottery Office of Thailand • สำนักงานสลากกินแบ่งรัฐบาล (GLO)</span>
                 </div>
                 <div className="form-agent-meta-box">
                   <div className="form-agent-line">
-                    <span>অথরাইজড এজেন্ট:</span>
-                    <strong>মোঃ ফাহিম চৌধুরী (MD FAHIM CHOWDHURY)</strong>
+                    <span>AUTHORIZED AGENT (ตัวแทน):</span>
+                    <strong>Md Fahim Chowdhury (মোঃ ফাহিম চৌধুরী)</strong>
                   </div>
                   <div className="form-agent-line">
-                    <span>এজেন্ট আইডি:</span>
-                    <strong className="agent-code-chip">TL-001</strong>
+                    <span>AGENT ID (รหัสตัวแทน):</span>
+                    <strong className="agent-code-chip">TL-001 • GLO BANGKOK</strong>
                   </div>
                   <div className="form-agent-line status-alert-line">
-                    <span>অবশিষ্ট কোটা:</span>
-                    <strong className="remaining-alert-text">🚨 আর মাত্র ৫টি ফর্ম খালি আছে!</strong>
+                    <span>QUOTA STATUS (สถานะ):</span>
+                    <strong className="remaining-alert-text">🚨 Only 5 Forms Remaining (মাত্র ৫টি বাকি!)</strong>
                   </div>
                 </div>
                 <p>
-                  গোল্ডেন গারুদা ও থাই রাজকীয় সিলমোহরযুক্ত মূল রেজিস্ট্রেশন ফরম। পার্সোনাল ইনফরমেশন, এনআইডি/পাসপোর্ট ভেরিফিকেশন এবং মেম্বারশিপ মেয়াদ (৩/৬/১২ মাস) নির্বাচনের সুযোগ রয়েছে।
+                  ตราครุฑและตราประทับทางการ • Verified with Royal Garuda & GLO Bangkok Official Seal. Includes Identity Verification (NID/Passport) & Tiered Validity (3/6/12 Months).
                 </p>
                 <div className="form-actions-row">
                   <button
@@ -69,7 +69,7 @@ export default function OnlineForm() {
                     className="button primary"
                     onClick={() => setIsFormModalOpen(true)}
                   >
-                    🔍 মূল ফরমটি দেখুন
+                    🔍 View Form • ดูแบบฟอร์ม
                   </button>
                   <a
                     className="button secondary"
@@ -77,7 +77,7 @@ export default function OnlineForm() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    📥 ফুল স্ক্রিন ভিউ
+                    📥 Full View • ขยาย ↗
                   </a>
                 </div>
               </figcaption>
@@ -97,7 +97,7 @@ export default function OnlineForm() {
         >
           <div className="winner-modal-card form-lightbox-card modal-scale-in" onClick={(e) => e.stopPropagation()}>
             <div className="winner-modal-header">
-              <strong>Official Membership Registration Form 2026 (Md Fahim Chowdhury TL-001)</strong>
+              <strong>Official Membership Registration Form 2026 (Md Fahim Chowdhury TL-001 • สำนักงานสลากกินแบ่งรัฐบาล)</strong>
               <button
                 type="button"
                 className="winner-modal-close"
@@ -115,7 +115,7 @@ export default function OnlineForm() {
               />
             </div>
             <div className="winner-modal-footer">
-              <span className="form-lightbox-alert">🚨 আর মাত্র ৫টি ফর্ম খালি আছে!</span>
+              <span className="form-lightbox-alert">🚨 ONLY 5 SLOTS LEFT • เหลือเพียง 5 ใบสุดท้าย (আর মাত্র ৫টি ফর্ম খালি)</span>
               <div className="form-lightbox-actions">
                 <a
                   className="button primary"
@@ -123,14 +123,14 @@ export default function OnlineForm() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  ডাউনলোড / ফুল সাইজ ভিউ ↗
+                  Download / Full View • ดูขนาดเต็ม ↗
                 </a>
                 <button
                   type="button"
                   className="button secondary"
                   onClick={() => setIsFormModalOpen(false)}
                 >
-                  বন্ধ করুন
+                  Close • ปิด (বন্ধ করুন)
                 </button>
               </div>
             </div>

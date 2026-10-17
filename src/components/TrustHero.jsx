@@ -5,24 +5,29 @@ export default function TrustHero() {
   return (
     <section className="hero reveal-on-scroll">
       <div className="hero-content">
-        <p className="eyebrow">ราชอาณาจักรไทย • Thailand Official Lottery • সরকারি অনুমোদনপ্রাপ্ত</p>
-        <h1>Welcome To Thailand Lottery 2026</h1>
+        <p className="eyebrow">
+          <span className="eyebrow-flag" aria-hidden="true">🇹🇭</span> สำนักงานสลากกินแบ่งรัฐบาล (GLO)
+        </p>
+        <h1>Thailand Official Lottery 2026</h1>
+        <p className="hero-subheading-thai">
+          สลากกินแบ่งรัฐบาล ประจำปี 2569 • Central Bangkok Draw
+        </p>
         <p className="hero-copy">
-          থাইল্যান্ড সরকারের গভর্নমেন্ট লটারি অফিস (GLO) দ্বারা সরাসরি লাইসেন্সপ্রাপ্ত ও আন্তর্জাতিকভাবে বিশ্বস্ত প্ল্যাটফর্ম। ১০০% নিরাপদ লেনদেন, ভেরিফাইড রেজাল্ট ও অফিসিয়াল মেম্বারশিপ সেবা।
+          Authorized & Certified by The Government Lottery Office (GLO) Bangkok. ১০০% নিরাপদ ও সরকারি লটারি মেম্বারশিপ সার্ভিস।
         </p>
 
         <div className="trust-list" aria-label="Trust signals">
-          <span>✓ লাইসেন্স নং TGL-2025-001784</span>
-          <span>★ সেরা এজেন্ট ২০২৬: ফাহিম চৌধুরী</span>
-          <span>🛡️ ১০০% নিশ্চিত পে-আউট গ্যারান্টি</span>
+          <span>LICENSE: GLO-BD-2026-001784</span>
+          <span>BEST AGENT 2026: FAHIM CHOWDHURY (ตัวแทนยอดเยี่ยม)</span>
+          <span>100% VERIFIED DRAW & PAYOUT (ผลสลากทางการ)</span>
         </div>
 
         <div className="hero-actions">
           <a className="button primary" href="#certificate">
-            যাচাই করুন
+            Verify Licenses • ตรวจสอบ
           </a>
           <a className="button secondary" href="#online-form">
-            রেজিস্ট্রেশন
+            Register Now • ลงทะเบียน
           </a>
         </div>
       </div>
@@ -42,11 +47,11 @@ export default function TrustHero() {
                 <rect y="2.67" width="24" height="10.66" fill="#F4F5F8" />
                 <rect y="5.33" width="24" height="5.34" fill="#2D2A4A" />
               </svg>
-              <span className="agent-gov-text">থাইল্যান্ড সরকার (GLO) অনুমোদিত অফিসিয়াল এজেন্ট</span>
+              <span className="agent-gov-text">สำนักงานสลากกินแบ่งรัฐบาล • GLO AUTHORIZED AGENT</span>
             </div>
             <div className="agent-verified-pill">
               <span className="pulse-dot" aria-hidden="true"></span>
-              <span>ভেরিফাইড ২০২৬</span>
+              <span>VERIFIED 2026 • ตรวจสอบแล้ว</span>
             </div>
           </div>
 
@@ -61,10 +66,10 @@ export default function TrustHero() {
 
             <div className="agent-text-details">
               <div className="agent-title-kicker">
-                <span>গভর্নমেন্ট লটারি অফিস • আন্তর্জাতিক সেরা এজেন্ট</span>
+                <span>GLO BANGKOK ACCREDITED AGENT • ตัวแทนจำหน่ายอย่างเป็นทางการ</span>
               </div>
               <div className="agent-name-display">
-                <h3 className="agent-name-bengali">ফাহিম চৌধুরী</h3>
+                <h3 className="agent-name-bengali">মোঃ ফাহিম চৌধুরী</h3>
                 <span className="agent-verified-badge" title="Government Verified Official Agent">
                   <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
                     <path
@@ -82,16 +87,16 @@ export default function TrustHero() {
           {/* Credentials Data Bar */}
           <div className="agent-credentials-bar">
             <div className="agent-data-item">
-              <span className="data-label">লাইসেন্স নং:</span>
+              <span className="data-label">LICENSE NO:</span>
               <strong className="data-value highlight">GLO-BD-2026-001784</strong>
             </div>
             <div className="agent-data-item">
-              <span className="data-label">হেড অফিস:</span>
-              <strong className="data-value">ব্যাংকক, থাইল্যান্ড</strong>
+              <span className="data-label">HEAD OFFICE:</span>
+              <strong className="data-value">Bangkok, Thailand (กรุงเทพฯ)</strong>
             </div>
             <div className="agent-data-item status-item">
               <span className="data-check">✓</span>
-              <span className="data-status">১০০% সরকার অনুমোদিত</span>
+              <span className="data-status">100% GLO ACCREDITED • รับรองโดยรัฐบาล</span>
             </div>
           </div>
         </div>

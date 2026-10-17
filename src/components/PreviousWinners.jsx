@@ -6,9 +6,9 @@ const WINNER_FORMS = [
     nameBn: 'মুহাম্মদ জহুরুল ইসলাম',
     nameEn: 'MOHAMMAD ZOHURUL ISLAM',
     formImg: '/assets/site/winners/winner-form-zohurul.jpg',
-    badge: '🏆 ১ম ক্যাটাগরি বিজয়ী ফরম',
-    country: 'সৌদি আরব (Saudi Arabia)',
-    agent: 'মোঃ ফাহিম চৌধুরী (TL-001)',
+    badge: '🏆 1ST CATEGORY WINNER • รางวัลที่ 1',
+    country: 'Saudi Arabia • ซาอุดีอาระเบีย (সৌদি আরব)',
+    agent: 'Md Fahim Chowdhury (TL-001)',
     price: '250 SAR (Special Discount)'
   },
   {
@@ -16,9 +16,9 @@ const WINNER_FORMS = [
     nameBn: 'মোঃ বাহার',
     nameEn: 'MD BAHAR',
     formImg: '/assets/site/winners/winner-form-bahar.jpg',
-    badge: '👑 মেগা ক্যাটাগরি বিজয়ী ফরম',
-    country: 'সৌদি আরব (Saudi Arabia)',
-    agent: 'মোঃ ফাহিম চৌধুরী (TL-001)',
+    badge: '👑 MEGA CATEGORY WINNER • รางวัลพิเศษ',
+    country: 'Saudi Arabia • ซาอุดีอาระเบีย (সৌদি আরব)',
+    agent: 'Md Fahim Chowdhury (TL-001)',
     price: '250 SAR (Special Discount)'
   }
 ];
@@ -30,11 +30,11 @@ export default function PreviousWinners() {
     <section className="section winners-section reveal-on-scroll" id="previous-winners" aria-label="Previous Game Form Winners">
       <div className="section-heading">
         <p className="eyebrow">
-          <span className="eyebrow-flag" aria-hidden="true">🏆</span> ผู้ชนะเกมก่อนหน้า • OFFICIAL VERIFIED WINNERS • পূর্ববর্তী গেমের ফর্ম বিজয়ী
+          <span className="eyebrow-flag" aria-hidden="true">🏆</span> ทำเนียบผู้โชคดี • OFFICIAL WINNERS
         </p>
-        <h2>Previous Game Form Winners • সরাসরি বিজয়ী মেম্বারশিপ ফরম</h2>
+        <h2>GLO Certified Previous Winners • ผลรางวัลทางการ</h2>
         <p>
-          থাইল্যান্ড সরকারের পূর্ববর্তী ড্র-তে অফিসিয়াল মেম্বারশিপ ফর্ম পূরণ করে যারা সরাসরি ক্যাটাগরি বিজয়ী হয়েছেন—নিচে তাদের মূল ভেরিফায়েড অফিসিয়াল ফরম তুলে ধরা হলো (সম্পূর্ণ বড় করে দেখতে ফর্মের ওপর ক্লিক করুন):
+          Official GLO Membership Forms of recent draw winners. ক্লিক করে ফুল সাইজ ভেরিফাইড ফরম দেখুন:
         </p>
       </div>
 
@@ -49,21 +49,21 @@ export default function PreviousWinners() {
                   {winner.nameBn} <span className="winner-form-name-en">({winner.nameEn})</span>
                 </strong>
               </div>
-              <span className="winner-form-verified-tag">✓ ভেরিফাইড ফরম</span>
+              <span className="winner-form-verified-tag">✓ VERIFIED • ตรวจสอบแล้ว</span>
             </div>
 
             {/* Form Image Container with Zoom overlay */}
             <div
               className="winner-form-img-wrapper"
-              onClick={() => setModalImage({ src: winner.formImg, title: `${winner.nameBn} (${winner.nameEn}) - অফিসিয়াল বিজয়ী ফরম` })}
+              onClick={() => setModalImage({ src: winner.formImg, title: `${winner.nameBn} (${winner.nameEn}) - Official GLO Winner Form` })}
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
-                  setModalImage({ src: winner.formImg, title: `${winner.nameBn} (${winner.nameEn}) - অফিসিয়াল বিজয়ী ফরম` });
+                  setModalImage({ src: winner.formImg, title: `${winner.nameBn} (${winner.nameEn}) - Official GLO Winner Form` });
                 }
               }}
-              title="ক্লিক করে বড় করে দেখুন"
+              title="คลิกเพื่อดูแบบฟอร์มขนาดเต็ม (Click to Zoom)"
             >
               <img
                 src={winner.formImg}
@@ -72,7 +72,7 @@ export default function PreviousWinners() {
                 loading="lazy"
               />
               <div className="winner-form-hover-overlay">
-                <span className="winner-form-hover-btn">🔍 বড় করে দেখুন (Click to Zoom)</span>
+                <span className="winner-form-hover-btn">🔍 ดูขนาดเต็ม • Click to Zoom (ফুল ভিউ)</span>
               </div>
             </div>
 
@@ -80,14 +80,14 @@ export default function PreviousWinners() {
             <div className="winner-form-card-footer">
               <div className="winner-form-meta">
                 <span className="winner-meta-pill">📍 {winner.country}</span>
-                <span className="winner-meta-pill">✍️ এজেন্ট: {winner.agent}</span>
+                <span className="winner-meta-pill">✍️ AGENT: {winner.agent}</span>
               </div>
               <button
                 type="button"
                 className="button-form-fullscreen"
-                onClick={() => setModalImage({ src: winner.formImg, title: `${winner.nameBn} (${winner.nameEn}) - অফিসিয়াল বিজয়ী ফরম` })}
+                onClick={() => setModalImage({ src: winner.formImg, title: `${winner.nameBn} (${winner.nameEn}) - Official GLO Winner Form` })}
               >
-                🔍 ফুল স্ক্রিন দেখুন
+                🔍 Full Screen • ขยาย ↗
               </button>
             </div>
           </article>
@@ -119,13 +119,13 @@ export default function PreviousWinners() {
               <img src={modalImage.src} alt={modalImage.title} className="winner-modal-img winner-form-full-img" />
             </div>
             <div className="winner-modal-footer">
-              <span>✓ থাইল্যান্ড গভর্নমেন্ট লটারি অফিসিয়াল মেম্বারশিপ রেজিস্ট্রেশন ফরম</span>
+              <span>สำนักงานสลากกินแบ่งรัฐบาล • Official GLO Membership Registration Record • অফিসিয়াল রেকর্ড</span>
               <button
                 type="button"
                 className="button secondary"
                 onClick={() => setModalImage(null)}
               >
-                বন্ধ করুন
+                Close • ปิด (বন্ধ করুন)
               </button>
             </div>
           </div>

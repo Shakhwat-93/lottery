@@ -30,8 +30,7 @@ export default function Footer({ page = 'home' }) {
 
           {/* Sleek, Non-Wrapping Back to Top Button */}
           <a href="#top" onClick={scrollToTop} className="footer-back-to-top" aria-label="Back to top">
-            <span>উপরে যান</span>
-            <span className="back-top-arrow" aria-hidden="true">↑</span>
+            <span>กลับขึ้นด้านบน • Top ↑</span>
           </a>
         </div>
 
@@ -43,18 +42,18 @@ export default function Footer({ page = 'home' }) {
           <div className="footer-disclaimer-box">
             <span className="footer-18-badge">18+</span>
             <p className="footer-warning-text">
-              <strong>সতর্কতা:</strong> শুধুমাত্র ১৮+ বছর বা তদূর্ধ্ব বয়স্কদের জন্য প্রযোজ্য। থাইল্যান্ড সরকারের গভর্নমেন্ট লটারি আইন অনুযায়ী পরিচালিত।
+              <strong>ข้อกำหนดอายุ 18+ • AGE RESTRICTION:</strong> ผู้มีอายุต่ำกว่า 18 ปีบริบูรณ์ไม่สามารถเข้าร่วมได้ • Strictly 18+ Only. থাইল্যান্ড সরকারি লটারি বিধিমালা অনুযায়ী পরিচালিত।
             </p>
           </div>
 
           <p className="footer-copyright">
-            © 2026 Thailand Lottery Head Office (สำนักงานสลากกินแบ่งรัฐบาล). All Rights Reserved.
+            © 2026 สำนักงานสลากกินแบ่งรัฐบาล (The Government Lottery Office of Thailand). All Rights Reserved.
           </p>
 
           {isGamePage && (
             <div className="footer-nav-link">
               <Link to="/" className="footer-home-btn">
-                ← กลับหน้าหลัก (হোমে ফিরুন)
+                ← กลับหน้าหลัก • Home (হোমে ফিরুন)
               </Link>
             </div>
           )}

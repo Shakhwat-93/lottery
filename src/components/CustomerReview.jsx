@@ -6,10 +6,10 @@ export default function CustomerReview({ videoRef }) {
     <section className="section review-section reveal-on-scroll" id="customer-review">
       <div className="review-layout">
         <div className="review-copy">
-          <p className="eyebrow">ความคิดเห็นจากลูกค้า • Genuine Reviews • সম্মানিত গ্রাহকদের সরাসরি রিভিউ</p>
-          <h2>Real Customer Video Feedback</h2>
+          <p className="eyebrow">ความคิดเห็น • VERIFIED REVIEWS</p>
+          <h2>Real Customer Video Testimonials</h2>
           <p className="review-subtext">
-            সরাসরি জয়ী গ্রাহক ও সদস্যদের ভিডিও অভিজ্ঞতা শুনুন—যেখানে রয়েছে ১০০% সততা, স্বচ্ছতা এবং সরাসরি ব্যাংক একাউন্টে পুরস্কার ও পেপার পাওয়ার প্রমাণ।
+            Authentic member video testimonials with verified draw results & direct payouts. সম্মানিত সদস্যদের সরাসরি ভিডিও প্রতিক্রিয়া:
           </p>
 
           <div className="review-stats-card">
@@ -20,39 +20,39 @@ export default function CustomerReview({ videoRef }) {
               <span className="review-score">4.9 / 5.0</span>
               <span className="verified-badge-mini">Verified Review</span>
             </div>
-            <p className="review-stats-note">ยืนยันจากสมาชิกและตัวแทนมากกว่า 10,000+ รายการ • ১০,০০০+ সন্তুষ্ট গ্রাহক</p>
+            <p className="review-stats-note">ยืนยันจากสมาชิก 10,000+ ราย • 10,000+ Verified Members (১০,০০০+ নিবন্ধিত সদস্য)</p>
           </div>
 
           <div className="review-features">
             <div className="review-feature-item">
               <span className="feature-check">&#10003;</span>
               <div>
-                <strong>১. গ্রাহকদের বাস্তব ভিডিও (Genuine Member Experience)</strong>
-                <small>ลูกค้าตัวจริง 100% • কোনো কৃত্রিম বিজ্ঞাপন বা এডিটিং ছাড়া গ্রাহকের নিজস্ব ভিডিও বার্তা।</small>
+                <strong>1. 100% UNEDITED VIDEO • ลูกค้าตัวจริง</strong>
+                <small>সরাসরি জয়ী সদস্যদের বাস্তব ভিডিও অভিজ্ঞতা ও জেনুইন প্রমাণ।</small>
               </div>
             </div>
             <div className="review-feature-item">
               <span className="feature-check">&#10003;</span>
               <div>
-                <strong>২. সঠিক ফলাফল ও পে-আউট নিশ্চয়তা (Guaranteed Payout)</strong>
-                <small>ได้รับเงินรางวัลจริง • থাইল্যান্ড সরকারের নির্ধারিত রেজাল্টের সাথে হুবহু মিল ও দ্রুত পেমেন্ট।</small>
+                <strong>2. GUARANTEED PAYOUT • ได้รับเงินรางวัลจริง</strong>
+                <small>সরাসরি ব্যাংক বা একাউন্টে শতভাগ দ্রুত পে-আউট নিশ্চয়তা।</small>
               </div>
             </div>
             <div className="review-feature-item">
               <span className="feature-check">&#10003;</span>
               <div>
-                <strong>৩. অফিসিয়াল নিরাপত্তা ও সহায়তা (Official Security)</strong>
-                <small>ปลอดภัย มีเอกสารรับรอง • ২৪ ঘণ্টা সার্বক্ষণিক কাস্টমার কেয়ার ও ভেরিফাইড ডকুমেন্ট সাপোর্ট।</small>
+                <strong>3. GLO ACCREDITED SUPPORT • มีเอกสารรับรอง</strong>
+                <small>২৪/৭ অফিসিয়াল গাইডেন্স ও সার্বক্ষণিক ভেরিফাইড সাপোর্ট।</small>
               </div>
             </div>
           </div>
 
           <div className="review-actions">
             <a className="button primary" href="#online-form">
-              মেম্বারশিপ ফরম
+              ลงทะเบียน • Register Form
             </a>
             <Link className="button secondary" to="/game">
-              সিওর পেপার
+              ดูเอกสาร • Sure Papers
             </Link>
           </div>
         </div>
@@ -62,7 +62,7 @@ export default function CustomerReview({ videoRef }) {
             <div className="phone-speaker" />
             <div className="phone-header">
               <span className="live-dot" />
-              <strong>CUSTOMER REVIEW LIVE</strong>
+              <strong>CUSTOMER REVIEW • ความคิดเห็นจากลูกค้า</strong>
               <span className="thai-badge-mini">TH</span>
             </div>
             <video
@@ -78,7 +78,7 @@ export default function CustomerReview({ videoRef }) {
               เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอ
             </video>
             <div className="phone-footer-bar">
-              <span>&#10003; 100% Verified Customer Feedback</span>
+              <span>&#10003; 100% Verified Customer Feedback • ยืนยันแล้ว</span>
             </div>
           </div>
         </div>
