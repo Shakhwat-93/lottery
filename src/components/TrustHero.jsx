@@ -6,28 +6,25 @@ export default function TrustHero() {
     <section className="hero reveal-on-scroll">
       <div className="hero-content">
         <p className="eyebrow">
-          <span className="eyebrow-flag" aria-hidden="true">🇹🇭</span> สำนักงานสลากกินแบ่งรัฐบาล (GLO)
+          <span className="eyebrow-flag" aria-hidden="true">🇹🇭</span> OFFICIAL GLO THAILAND
         </p>
         <h1>Thailand Official Lottery 2026</h1>
-        <p className="hero-subheading-thai">
-          สลากกินแบ่งรัฐบาล ประจำปี 2569 • Central Bangkok Draw
-        </p>
         <p className="hero-copy">
-          Authorized & Certified by The Government Lottery Office (GLO) Bangkok. ১০০% নিরাপদ ও সরকারি লটারি মেম্বারশিপ সার্ভিস।
+          থাইল্যান্ড সরকারের গভর্নমেন্ট লটারি অফিস (GLO) অনুমোদিত মেম্বারশিপ পোর্টাল।
         </p>
 
         <div className="trust-list" aria-label="Trust signals">
-          <span>LICENSE: GLO-BD-2026-001784</span>
-          <span>BEST AGENT 2026: FAHIM CHOWDHURY (ตัวแทนยอดเยี่ยม)</span>
-          <span>100% VERIFIED DRAW & PAYOUT (ผลสลากทางการ)</span>
+          <span>✓ লাইসেন্স: GLO-BD-2026</span>
+          <span>★ বেস্ট এজেন্ট: ফাহিম চৌধুরী</span>
+          <span>🛡️ ১০০% ভেরিফায়েড পে-আউট</span>
         </div>
 
         <div className="hero-actions">
-          <a className="button primary" href="#certificate">
-            Verify Licenses • ตรวจสอบ
+          <a className="button primary" href="#online-form">
+            রেজিস্ট্রেশন
           </a>
-          <a className="button secondary" href="#online-form">
-            Register Now • ลงทะเบียน
+          <a className="button secondary" href="#certificate">
+            লাইসেন্স যাচাই
           </a>
         </div>
       </div>
@@ -47,11 +44,11 @@ export default function TrustHero() {
                 <rect y="2.67" width="24" height="10.66" fill="#F4F5F8" />
                 <rect y="5.33" width="24" height="5.34" fill="#2D2A4A" />
               </svg>
-              <span className="agent-gov-text">สำนักงานสลากกินแบ่งรัฐบาล • GLO AUTHORIZED AGENT</span>
+              <span className="agent-gov-text">สำนักงานสลากกินแบ่งรัฐบาล • GLO AUTHORIZED</span>
             </div>
             <div className="agent-verified-pill">
               <span className="pulse-dot" aria-hidden="true"></span>
-              <span>VERIFIED 2026 • ตรวจสอบแล้ว</span>
+              <span>VERIFIED 2026</span>
             </div>
           </div>
 
@@ -66,7 +63,7 @@ export default function TrustHero() {
 
             <div className="agent-text-details">
               <div className="agent-title-kicker">
-                <span>GLO BANGKOK ACCREDITED AGENT • ตัวแทนจำหน่ายอย่างเป็นทางการ</span>
+                <span>GLO BANGKOK ACCREDITED AGENT</span>
               </div>
               <div className="agent-name-display">
                 <h3 className="agent-name-bengali">মোঃ ফাহিম চৌধুরী</h3>
@@ -92,11 +89,11 @@ export default function TrustHero() {
             </div>
             <div className="agent-data-item">
               <span className="data-label">HEAD OFFICE:</span>
-              <strong className="data-value">Bangkok, Thailand (กรุงเทพฯ)</strong>
+              <strong className="data-value">Bangkok, Thailand</strong>
             </div>
             <div className="agent-data-item status-item">
               <span className="data-check">✓</span>
-              <span className="data-status">100% GLO ACCREDITED • รับรองโดยรัฐบาล</span>
+              <span className="data-status">100% GLO ACCREDITED</span>
             </div>
           </div>
         </div>

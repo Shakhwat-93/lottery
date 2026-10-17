@@ -32,25 +32,25 @@ export default function GamePage() {
       <main>
         <section className="game-hero reveal-on-scroll">
           <div className="game-hero-copy">
-            <p className="eyebrow">งวดปี 2569 • 100% SURE PAPERS</p>
+            <p className="eyebrow">100% SURE PAPERS</p>
             <h1>Official 100% Sure Paper Gallery</h1>
             <p>
-              คลังเอกสาร VIP สลากกินแบ่งรัฐบาลไทย • Official 100% Sure Papers, Master Digits and Touch Charts. প্রতিটি পেপারে ট্যাপ করে হাই-রেজোলিউশনে দেখুন:
+              অফিসিয়াল ১০০% সিওর পেপার, মাস্টার ডিজিট ও টাচ চার্ট গ্যালারি:
             </p>
 
             <div className="badge-row" aria-label="Game trust badges">
               <span className="premium-badge badge-green">
                 <span className="badge-symbol">&#10003;</span>
                 <span>
-                  <strong>UPDATED • งวดล่าสุด</strong>
-                  <small>ปี 2569 / 2026</small>
+                  <strong>UPDATED 2026</strong>
+                  <small>ปี 2569</small>
                 </span>
               </span>
               <span className="premium-badge badge-gold">
                 <span className="badge-symbol">&#9733;</span>
                 <span>
                   <strong>GLO VIP PAPERS</strong>
-                  <small>ชุดเอกสาร • অরিজিনাল</small>
+                  <small>100% Official</small>
                 </span>
               </span>
             </div>
@@ -61,21 +61,21 @@ export default function GamePage() {
             onClick={() => setModalImage({ label: 'Latest Paper 01 (3UP Master)', src: '/assets/game/game-01.jpg' })}
             role="button"
             tabIndex={0}
-            title="คลิกเพื่อดูภาพขนาดเต็ม (Click to Zoom)"
+            title="ক্লিক করে ফুল ভিউ দেখুন"
             style={{ cursor: 'pointer' }}
           >
             <span className="document-badge">VIP Paper 01</span>
             <img src="/assets/game/game-01.jpg" alt="Featured 100% Sure lottery paper" />
-            <span className="game-zoom-chip">🔍 ดูขนาดเต็ม • Tap to Zoom</span>
+            <span className="game-zoom-chip">🔍 ফুল ভিউ</span>
           </figure>
         </section>
 
         <section className="section game-gallery-section reveal-on-scroll" id="game-papers">
           <div className="section-heading">
-            <p className="eyebrow">เอกสารเกม • VIP PAPERS GALLERY</p>
+            <p className="eyebrow">VIP PAPERS</p>
             <h2>Official 100% Sure Paper Gallery</h2>
             <p>
-              ชุดเอกสารคำนวณหวยรัฐบาลไทย • All official papers organized in high definition. ট্যাপ করে ফুল স্ক্রিন ভিউ দেখুন:
+              ক্লিক করে ফুল স্ক্রিন ভিউ দেখুন:
             </p>
           </div>
 
@@ -92,7 +92,7 @@ export default function GamePage() {
                     setModalImage(paper);
                   }
                 }}
-                title="คลิกเพื่อดูภาพขนาดเต็ม (Click for Full Screen)"
+                title="ক্লিক করে ফুল স্ক্রিন দেখুন"
                 style={{ cursor: 'pointer' }}
               >
                 <span className="card-badge">{paper.label}</span>
@@ -103,7 +103,7 @@ export default function GamePage() {
                     loading="lazy"
                   />
                   <div className="game-card-hover-hint">
-                    <span>🔍 ดูขนาดเต็ม • Full Screen</span>
+                    <span>🔍 ফুল ভিউ</span>
                   </div>
                 </div>
               </article>
@@ -113,9 +113,9 @@ export default function GamePage() {
 
         <section className="game-panel reveal-on-scroll" id="download">
           <div>
-            <p className="eyebrow">ระบบเข้าสู่หน้าเกม • DIRECT ACCESS</p>
-            <h2>DOWN GAME 100% DIRECT ACCESS</h2>
-            <p>เข้าสู่หน้าเกมหลักอย่างเป็นทางการ • Access official game server via verified portal link.</p>
+            <p className="eyebrow">DIRECT ACCESS</p>
+            <h2>Down Game 100% Direct Access</h2>
+            <p>অফিসিয়াল গেম সার্ভার পেজে প্রবেশ করুন:</p>
           </div>
           <a
             className="button primary"
@@ -123,7 +123,7 @@ export default function GamePage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Open Main Page • เปิดหน้าเกม ↗
+            ওপেন গেম পেজ ↗
           </a>
         </section>
       </main>
@@ -139,7 +139,7 @@ export default function GamePage() {
         >
           <div className="winner-modal-card modal-scale-in" onClick={(e) => e.stopPropagation()}>
             <div className="winner-modal-header">
-              <strong>{modalImage.label} • 100% Sure Paper (สำนักงานสลากกินแบ่งรัฐบาล)</strong>
+              <strong>{modalImage.label} • 100% Sure Paper</strong>
               <button
                 type="button"
                 className="winner-modal-close"
@@ -157,13 +157,13 @@ export default function GamePage() {
               />
             </div>
             <div className="winner-modal-footer">
-              <span>สำนักงานสลากกินแบ่งรัฐบาล • Official GLO Certified Paper • ১০০% অরিজিনাল পেপার</span>
+              <span>The Government Lottery Office (GLO) Official Paper</span>
               <button
                 type="button"
                 className="button secondary"
                 onClick={() => setModalImage(null)}
               >
-                Close • ปิด (বন্ধ করুন)
+                বন্ধ করুন
               </button>
             </div>
           </div>

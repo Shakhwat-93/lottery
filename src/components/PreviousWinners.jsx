@@ -6,20 +6,20 @@ const WINNER_FORMS = [
     nameBn: 'মুহাম্মদ জহুরুল ইসলাম',
     nameEn: 'MOHAMMAD ZOHURUL ISLAM',
     formImg: '/assets/site/winners/winner-form-zohurul.jpg',
-    badge: '🏆 1ST CATEGORY WINNER • รางวัลที่ 1',
-    country: 'Saudi Arabia • ซาอุดีอาระเบีย (সৌদি আরব)',
+    badge: '🏆 ১ম ক্যাটাগরি বিজয়ী',
+    country: 'সৌদি আরব (Saudi Arabia)',
     agent: 'Md Fahim Chowdhury (TL-001)',
-    price: '250 SAR (Special Discount)'
+    price: '250 SAR'
   },
   {
     id: 'winner-2',
     nameBn: 'মোঃ বাহার',
     nameEn: 'MD BAHAR',
     formImg: '/assets/site/winners/winner-form-bahar.jpg',
-    badge: '👑 MEGA CATEGORY WINNER • รางวัลพิเศษ',
-    country: 'Saudi Arabia • ซาอุดีอาระเบีย (সৌদি আরব)',
+    badge: '👑 মেগা ক্যাটাগরি বিজয়ী',
+    country: 'সৌদি আরব (Saudi Arabia)',
     agent: 'Md Fahim Chowdhury (TL-001)',
-    price: '250 SAR (Special Discount)'
+    price: '250 SAR'
   }
 ];
 
@@ -30,11 +30,11 @@ export default function PreviousWinners() {
     <section className="section winners-section reveal-on-scroll" id="previous-winners" aria-label="Previous Game Form Winners">
       <div className="section-heading">
         <p className="eyebrow">
-          <span className="eyebrow-flag" aria-hidden="true">🏆</span> ทำเนียบผู้โชคดี • OFFICIAL WINNERS
+          <span className="eyebrow-flag" aria-hidden="true">🏆</span> পূর্ববর্তী বিজয়ী তালিকা
         </p>
-        <h2>GLO Certified Previous Winners • ผลรางวัลทางการ</h2>
+        <h2>ভেরিফাইড বিজয়ী মেম্বারশিপ রেকর্ড</h2>
         <p>
-          Official GLO Membership Forms of recent draw winners. ক্লিক করে ফুল সাইজ ভেরিফাইড ফরম দেখুন:
+          সাম্প্রতিক ড্র-এর বিজয়ীদের ভেরিফাইড মেম্বারশিপ ফর্ম:
         </p>
       </div>
 
@@ -49,7 +49,7 @@ export default function PreviousWinners() {
                   {winner.nameBn} <span className="winner-form-name-en">({winner.nameEn})</span>
                 </strong>
               </div>
-              <span className="winner-form-verified-tag">✓ VERIFIED • ตรวจสอบแล้ว</span>
+              <span className="winner-form-verified-tag">✓ ভেরিফাইড</span>
             </div>
 
             {/* Form Image Container with Zoom overlay */}
@@ -63,7 +63,7 @@ export default function PreviousWinners() {
                   setModalImage({ src: winner.formImg, title: `${winner.nameBn} (${winner.nameEn}) - Official GLO Winner Form` });
                 }
               }}
-              title="คลิกเพื่อดูแบบฟอร์มขนาดเต็ม (Click to Zoom)"
+              title="ক্লিক করে ফুল ভিউ দেখুন"
             >
               <img
                 src={winner.formImg}
@@ -72,7 +72,7 @@ export default function PreviousWinners() {
                 loading="lazy"
               />
               <div className="winner-form-hover-overlay">
-                <span className="winner-form-hover-btn">🔍 ดูขนาดเต็ม • Click to Zoom (ফুল ভিউ)</span>
+                <span className="winner-form-hover-btn">🔍 ফুল ভিউ</span>
               </div>
             </div>
 
@@ -87,7 +87,7 @@ export default function PreviousWinners() {
                 className="button-form-fullscreen"
                 onClick={() => setModalImage({ src: winner.formImg, title: `${winner.nameBn} (${winner.nameEn}) - Official GLO Winner Form` })}
               >
-                🔍 Full Screen • ขยาย ↗
+                ফুল ভিউ ↗
               </button>
             </div>
           </article>
@@ -119,13 +119,13 @@ export default function PreviousWinners() {
               <img src={modalImage.src} alt={modalImage.title} className="winner-modal-img winner-form-full-img" />
             </div>
             <div className="winner-modal-footer">
-              <span>สำนักงานสลากกินแบ่งรัฐบาล • Official GLO Membership Registration Record • অফিসিয়াল রেকর্ড</span>
+              <span>The Government Lottery Office (GLO) Official Record</span>
               <button
                 type="button"
                 className="button secondary"
                 onClick={() => setModalImage(null)}
               >
-                Close • ปิด (বন্ধ করুন)
+                বন্ধ করুন
               </button>
             </div>
           </div>

@@ -61,18 +61,18 @@ export default function VipOfferTimer() {
         <div className="urgent-forms-highlight-banner" role="alert">
           <div className="urgent-badge-left">
             <span className="urgent-beacon-dot" aria-hidden="true" />
-            <span className="urgent-badge-text">โควตาพิเศษ • VIP QUOTA</span>
+            <span className="urgent-badge-text">VIP QUOTA</span>
           </div>
 
           <div className="urgent-main-highlight">
             <span className="urgent-siren" aria-hidden="true">🚨</span>
             <span className="urgent-message">
-              เหลือเพียง <strong className="golden-urgent-number">5</strong> ที่นั่ง • ONLY <strong className="golden-urgent-number">5</strong> SLOTS LEFT!
+              জরুরি নোটিশ: আর মাত্র <strong className="golden-urgent-number">৫টি</strong> ফর্ম বাকি আছে!
             </span>
           </div>
 
           <div className="urgent-quota-chip">
-            <span>จองแล้ว: <strong>95%</strong> • เหลือ: <strong className="chip-gold-num">5 ใบ (৫টি বাকি)</strong></span>
+            <span>বুকিং: <strong>৯৫%</strong> • বাকি: <strong className="chip-gold-num">৫টি ফর্ম</strong></span>
           </div>
         </div>
 
@@ -80,10 +80,10 @@ export default function VipOfferTimer() {
         <div className="offer-main-content">
           <div className="offer-title-group">
             <h2 className="golden-timer-headline">
-              โควตาพิเศษ VIP 2569 — আর মাত্র <span className="title-count-highlight">৫টি</span> ফর্ম বাকি আছে
+              সীমিত মেম্বারশিপ কোটা — আর মাত্র <span className="title-count-highlight">৫টি</span> ফর্ম বাকি
             </h2>
             <p className="offer-desc">
-              The Government Lottery Office (GLO) Bangkok authorized VIP registration under Senior Agent <strong>Md Fahim Chowdhury (TL-001)</strong>. সময় শেষ হওয়ার পূর্বেই রেজিস্ট্রেশন সম্পন্ন করে মেম্বারশিপ নিশ্চিত করুন।
+              The Government Lottery Office (GLO) Bangkok অনুমোদিত মেম্বারশিপ পোর্টাল। সময় শেষ হওয়ার পূর্বেই আবেদন সম্পন্ন করুন।
             </p>
           </div>
 
@@ -93,7 +93,7 @@ export default function VipOfferTimer() {
               <span className="count-val golden-val" id="timer-hours">
                 {timeLeft.hours}
               </span>
-              <span className="count-label golden-label">HOURS • ชม.</span>
+              <span className="count-label golden-label">HOURS</span>
             </div>
             <span className="count-sep golden-sep" aria-hidden="true">
               :
@@ -102,7 +102,7 @@ export default function VipOfferTimer() {
               <span className="count-val golden-val" id="timer-minutes">
                 {timeLeft.minutes}
               </span>
-              <span className="count-label golden-label">MINS • นาที</span>
+              <span className="count-label golden-label">MINS</span>
             </div>
             <span className="count-sep golden-sep" aria-hidden="true">
               :
@@ -111,7 +111,7 @@ export default function VipOfferTimer() {
               <span className="count-val golden-val" id="timer-seconds">
                 {timeLeft.seconds}
               </span>
-              <span className="count-label golden-label">SECS • วินาที</span>
+              <span className="count-label golden-label">SECS</span>
             </div>
           </div>
         </div>
@@ -121,10 +121,10 @@ export default function VipOfferTimer() {
           <div className="seats-progress-container">
             <div className="progress-labels">
               <span>
-                🔥 รับสมัครแล้ว: <strong>95 Completed (จองแล้ว 95%)</strong>
+                আবেদন সম্পন্ন: <strong>৯৫%</strong>
               </span>
               <span>
-                โควตาคงเหลือ: <strong className="seat-highlight-gold">Only 5 Slots Left (মাত্র ৫টি বাকি)</strong>
+                অবশিষ্ট: <strong className="seat-highlight-gold">মাত্র ৫টি ফর্ম বাকি</strong>
               </span>
             </div>
             <div className="progress-track" role="progressbar" aria-valuenow={95} aria-valuemin={0} aria-valuemax={100}>
@@ -134,13 +134,13 @@ export default function VipOfferTimer() {
 
           <div className="offer-cta-group">
             <a className="button primary offer-cta-btn golden-cta-btn" href="#online-form">
-              <span>ลงทะเบียน • Register Now (বাকি ৫টি ফর্ম)</span>
+              <span>রেজিস্ট্রেশন করুন</span>
               <span className="btn-arrow" aria-hidden="true">
                 →
               </span>
             </a>
             <Link className="button secondary" to="/game">
-              ดูเอกสาร • View Sure Papers
+              সিওর পেপার
             </Link>
           </div>
         </div>

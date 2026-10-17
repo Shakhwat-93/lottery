@@ -23,15 +23,15 @@ export default function PaymentMethods() {
         <div className="payment-card">
           <div className="payment-copy">
             <p className="eyebrow">
-              <span className="eyebrow-flag" aria-hidden="true">🇹🇭</span> กระทรวงการคลัง • GOVT TREASURY
+              <span className="eyebrow-flag" aria-hidden="true">🇹🇭</span> GOVT TREASURY
             </p>
-            <h2>Accepted Payment Methods & Direct Govt Treasury</h2>
+            <h2>পেমেন্ট পদ্ধতি ও সরকারি কোষাগার</h2>
 
             {/* Payee Transparency Box */}
             <div className="payee-official-box">
               <div className="payee-badge-row">
                 <span className="payee-pill">
-                  <span className="payee-check">✓</span> โอนตรงกระทรวงการคลัง • DIRECT GOVT TREASURY
+                  <span className="payee-check">✓</span> সরাসরি সরকারি কোষাগারে জমা
                 </span>
                 <span className="payee-merchant-code">
                   MERCHANT ID: <strong>TH-GLO-GOV-2026</strong>
@@ -39,9 +39,9 @@ export default function PaymentMethods() {
               </div>
 
               <div className="payee-details">
-                <span className="payee-title-label">OFFICIAL PAYEE (ผู้รับเงินอย่างเป็นทางการ):</span>
+                <span className="payee-title-label">OFFICIAL PAYEE:</span>
                 <strong className="payee-name-bn">
-                  สำนักงานสลากกินแบ่งรัฐบาล (GLO) กรุงเทพมหานคร
+                  สำนักงานสลากกินแบ่งรัฐบาล (GLO Bangkok HQ)
                 </strong>
                 <span className="payee-name-en">
                   The Government Lottery Office (GLO) Treasury, Royal Thai Government
@@ -49,7 +49,7 @@ export default function PaymentMethods() {
               </div>
 
               <p className="payee-guarantee-note">
-                🛡️ การชำระเงินทุกรายการจะเข้าสู่กระทรวงการคลังโดยตรงผ่านระบบ 256-Bit SSL • All transactions are deposited directly into Royal Thai Government central treasury. কোনো মধ্যস্থতাকারীর ব্যক্তিগত একাউন্টে নয়, সরাসরি সরকারি কেন্দ্রীয় একাউন্টে জমা।
+                🛡️ প্রতিটি ট্রানজেকশন সরাসরি থাইল্যান্ড সরকারের কেন্দ্রীয় ট্রেজারিতে জমা হয়। শতভাগ নিরাপদ ও এনক্রিপ্টেড পেমেন্ট ব্যবস্থা।
               </p>
             </div>
           </div>
@@ -73,9 +73,9 @@ export default function PaymentMethods() {
             </div>
 
             <div className="payment-security-badges">
-              <span>🔒 256-Bit SSL Encryption • ปลอดภัยสูงสุด</span>
-              <span>⚡ Instant GLO Verification • ตรวจสอบทันที</span>
-              <span>🏛️ 100% Thai Govt Escrow • คุ้มครองโดยรัฐบาล</span>
+              <span>🔒 256-Bit SSL Encryption</span>
+              <span>⚡ Instant Verification</span>
+              <span>🏛️ 100% Thai Govt Escrow</span>
             </div>
           </div>
         </div>
@@ -106,13 +106,13 @@ export default function PaymentMethods() {
             <div className="gov-office-text">
               <div className="gov-office-header-line">
                 <strong className="gov-office-title">สำนักงานสลากกินแบ่งรัฐบาล (GLO Bangkok HQ)</strong>
-                <span className="gov-verified-pill">● สำนักงานใหญ่ • GLO Verified</span>
+                <span className="gov-verified-pill">● প্রধান কার্যালয়</span>
               </div>
               <p className="gov-office-address">
-                อาคาร 333 ถนนพหลโยธิน แขวงจอมพล เขตจตุจักร กรุงเทพมหานคร 10900 (333 Phahonyothin Rd, Bangkok 10900)
+                333 Phahonyothin Rd, Chatuchak, Bangkok 10900, Thailand
               </p>
               <span className="gov-click-hint">
-                👉 ดูแผนที่สำนักงานใหญ่ • Click to View Interactive Map (লাইভ ব্যাংকক ম্যাপ)
+                👉 ব্যাংকক অফিসের লাইভ ম্যাপ দেখতে ক্লিক করুন
               </span>
             </div>
           </div>
@@ -125,7 +125,7 @@ export default function PaymentMethods() {
               handleToggleMap();
             }}
           >
-            <span>{isMapOpen ? '✕ ปิดแผนที่ (Close)' : '🗺️ View Map • แผนที่ที่ตั้ง'}</span>
+            <span>{isMapOpen ? '✕ বন্ধ করুন' : '🗺️ ম্যাপ দেখুন'}</span>
             <span className="toggle-chevron" aria-hidden="true">
               {isMapOpen ? '▲' : '▼'}
             </span>
@@ -139,7 +139,7 @@ export default function PaymentMethods() {
               <div className="gov-map-title-block">
                 <span className="gov-thai-badge">สำนักงานสลากกินแบ่งรัฐบาล</span>
                 <h4>The Government Lottery Office (GLO) Bangkok Headquarters</h4>
-                <p>333 Phahonyothin Rd, Chom Phon, Chatuchak, Bangkok 10900, Thailand • สำนักงานใหญ่และกระทรวงการคลัง</p>
+                <p>333 Phahonyothin Rd, Chom Phon, Chatuchak, Bangkok 10900, Thailand</p>
               </div>
               <div className="gov-map-actions">
                 <a
@@ -148,7 +148,7 @@ export default function PaymentMethods() {
                   rel="noopener noreferrer"
                   className="gov-map-ext-link"
                 >
-                  Get Directions • นำทาง ↗
+                  ম্যাপে যান ↗
                 </a>
                 <button
                   type="button"
@@ -173,16 +173,16 @@ export default function PaymentMethods() {
 
             <div className="gov-office-meta-bar">
               <div className="meta-item">
-                <span className="meta-label">OFFICE HOURS (เวลาทำการ):</span>
-                <strong>Mon - Fri 08:30 - 16:30 ICT (সোম-শুক্র)</strong>
+                <span className="meta-label">OFFICE HOURS:</span>
+                <strong>Mon - Fri 08:30 - 16:30 ICT</strong>
               </div>
               <div className="meta-item">
-                <span className="meta-label">HOTLINE (สายด่วน):</span>
+                <span className="meta-label">HOTLINE:</span>
                 <strong>+66 2 528 9999</strong>
               </div>
               <div className="meta-item">
                 <span className="meta-label">STATUS:</span>
-                <strong className="status-live">● GLO HEADQUARTERS ACTIVE (เปิดทำการ)</strong>
+                <strong className="status-live">● GLO ACTIVE</strong>
               </div>
             </div>
           </div>

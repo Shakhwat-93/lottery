@@ -6,10 +6,10 @@ export default function CustomerReview({ videoRef }) {
     <section className="section review-section reveal-on-scroll" id="customer-review">
       <div className="review-layout">
         <div className="review-copy">
-          <p className="eyebrow">ความคิดเห็น • VERIFIED REVIEWS</p>
-          <h2>Real Customer Video Testimonials</h2>
+          <p className="eyebrow">VERIFIED REVIEWS</p>
+          <h2>গ্রাহকদের বাস্তব ভিডিও রিভিউ</h2>
           <p className="review-subtext">
-            Authentic member video testimonials with verified draw results & direct payouts. সম্মানিত সদস্যদের সরাসরি ভিডিও প্রতিক্রিয়া:
+            সরাসরি জয়ী সদস্যদের বাস্তব ভিডিও প্রতিক্রিয়া:
           </p>
 
           <div className="review-stats-card">
@@ -20,39 +20,39 @@ export default function CustomerReview({ videoRef }) {
               <span className="review-score">4.9 / 5.0</span>
               <span className="verified-badge-mini">Verified Review</span>
             </div>
-            <p className="review-stats-note">ยืนยันจากสมาชิก 10,000+ ราย • 10,000+ Verified Members (১০,০০০+ নিবন্ধিত সদস্য)</p>
+            <p className="review-stats-note">১০,০০০+ নিবন্ধিত সদস্য (Verified Members)</p>
           </div>
 
           <div className="review-features">
             <div className="review-feature-item">
               <span className="feature-check">&#10003;</span>
               <div>
-                <strong>1. 100% UNEDITED VIDEO • ลูกค้าตัวจริง</strong>
-                <small>সরাসরি জয়ী সদস্যদের বাস্তব ভিডিও অভিজ্ঞতা ও জেনুইন প্রমাণ।</small>
+                <strong>১. বাস্তব ভিডিও অভিজ্ঞতা</strong>
+                <small>সরাসরি জয়ী সদস্যদের বাস্তব ভিডিও মতামত ও প্রমাণ।</small>
               </div>
             </div>
             <div className="review-feature-item">
               <span className="feature-check">&#10003;</span>
               <div>
-                <strong>2. GUARANTEED PAYOUT • ได้รับเงินรางวัลจริง</strong>
-                <small>সরাসরি ব্যাংক বা একাউন্টে শতভাগ দ্রুত পে-আউট নিশ্চয়তা।</small>
+                <strong>২. শতভাগ পে-আউট নিশ্চয়তা</strong>
+                <small>সরাসরি একাউন্টে শতভাগ দ্রুত পে-আউট নিশ্চয়তা।</small>
               </div>
             </div>
             <div className="review-feature-item">
               <span className="feature-check">&#10003;</span>
               <div>
-                <strong>3. GLO ACCREDITED SUPPORT • มีเอกสารรับรอง</strong>
-                <small>২৪/৭ অফিসিয়াল গাইডেন্স ও সার্বক্ষণিক ভেরিফাইড সাপোর্ট।</small>
+                <strong>৩. সার্বক্ষণিক মেম্বারশিপ সাপোর্ট</strong>
+                <small>২৪/৭ অফিসিয়াল গাইডেন্স ও সার্বক্ষণিক সাপোর্ট।</small>
               </div>
             </div>
           </div>
 
           <div className="review-actions">
             <a className="button primary" href="#online-form">
-              ลงทะเบียน • Register Form
+              রেজিস্ট্রেশন
             </a>
             <Link className="button secondary" to="/game">
-              ดูเอกสาร • Sure Papers
+              সিওর পেপার
             </Link>
           </div>
         </div>
@@ -62,7 +62,7 @@ export default function CustomerReview({ videoRef }) {
             <div className="phone-speaker" />
             <div className="phone-header">
               <span className="live-dot" />
-              <strong>CUSTOMER REVIEW • ความคิดเห็นจากลูกค้า</strong>
+              <strong>CUSTOMER REVIEW</strong>
               <span className="thai-badge-mini">TH</span>
             </div>
             <video
@@ -75,10 +75,10 @@ export default function CustomerReview({ videoRef }) {
               poster="/assets/site/review-poster.jpg"
             >
               <source src="/review.mp4" type="video/mp4" />
-              เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอ
+              Your browser does not support video playback.
             </video>
             <div className="phone-footer-bar">
-              <span>&#10003; 100% Verified Customer Feedback • ยืนยันแล้ว</span>
+              <span>&#10003; 100% Verified Customer Feedback</span>
             </div>
           </div>
         </div>

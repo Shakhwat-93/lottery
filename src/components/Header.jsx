@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 export default function Header({ page = 'home' }) {
   const isGamePage = page === 'game';
   const tickerText = isGamePage
-    ? 'สำนักงานสลากกินแบ่งรัฐบาล • VIP 100% SURE PAPERS • คลังเอกสาร VIP'
-    : 'สำนักงานสลากกินแบ่งรัฐบาล • THE GOVERNMENT LOTTERY OFFICE (GLO) • 100% OFFICIAL';
+    ? 'สำนักงานสลากกินแบ่งรัฐบาล • VIP 100% SURE PAPERS'
+    : 'สำนักงานสลากกินแบ่งรัฐบาล • Thailand Official Lottery (GLO)';
 
   return (
     <>
@@ -52,11 +52,11 @@ export default function Header({ page = 'home' }) {
         {/* Mobile quick action button */}
         {!isGamePage ? (
           <Link to="/game" className="mobile-header-cta" aria-label="100% Sure Paper">
-            <span>100% Sure</span>
+            <span>Sure Paper</span>
           </Link>
         ) : (
           <Link to="/" className="mobile-header-cta" aria-label="Home">
-            <span>Home • หน้าหลัก</span>
+            <span>Home</span>
           </Link>
         )}
 
@@ -64,20 +64,20 @@ export default function Header({ page = 'home' }) {
           <nav className="nav-links" aria-label="Primary navigation">
             {!isGamePage ? (
               <>
-                <a href="#certificate">Certificates • ใบรับรอง</a>
-                <a href="#vip-offer">VIP Quota • โควตา</a>
-                <a href="#online-form">Register • ลงทะเบียน</a>
-                <a href="#previous-winners">Winners • ผู้ชนะ</a>
-                <a href="#customer-review">Review • รีวิว</a>
-                <a href="#location">Bangkok HQ • ที่ตั้ง</a>
+                <a href="#certificate">Certificates</a>
+                <a href="#vip-offer">VIP Quota</a>
+                <a href="#online-form">Register</a>
+                <a href="#previous-winners">Winners</a>
+                <a href="#customer-review">Reviews</a>
+                <a href="#location">Bangkok HQ</a>
                 <Link className="nav-cta" to="/game">
-                  100% Sure Paper
+                  Sure Paper
                 </Link>
               </>
             ) : (
               <>
-                <Link to="/">Home • หน้าหลัก</Link>
-                <a href="#game-papers">VIP Papers • เอกสาร</a>
+                <Link to="/">Home</Link>
+                <a href="#game-papers">VIP Papers</a>
                 <a href="#download">Direct Game ↗</a>
               </>
             )}
