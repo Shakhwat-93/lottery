@@ -8,9 +8,13 @@ export default function TrustHero() {
         <p className="eyebrow">
           <span className="eyebrow-flag" aria-hidden="true">🇹🇭</span> OFFICIAL GLO THAILAND
         </p>
-        <h1>Thailand Official Lottery 2026</h1>
+        <h1 className="hero-main-title">
+          <span className="hero-title-main">Thailand Official Lottery</span>
+          <span className="hero-title-year">2026</span>
+        </h1>
         <p className="hero-copy">
-          থাইল্যান্ড সরকারের গভর্নমেন্ট লটারি অফিস (GLO) অনুমোদিত মেম্বারশিপ পোর্টাল।
+          <span>থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO)</span>
+          <span>অনুমোদিত মেম্বারশিপ পোর্টাল।</span>
         </p>
 
         <div className="trust-list" aria-label="Trust signals">
