@@ -48,6 +48,16 @@ export default function HeroVideo({ videoRef, onVideoClick }) {
       className={`top-showcase ${isPlaying ? 'is-playing' : 'is-paused'}`}
       aria-label="Thailand Lottery office banner"
     >
+      {/* 100% TRUSTED GLO Official Corner Badge */}
+      <div className="hero-trusted-glo-badge" aria-label="100% Trusted GLO">
+        <span className="trusted-glo-icon-wrap" aria-hidden="true">
+          <svg className="trusted-glo-check-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z" stroke="currentColor" strokeWidth="0.8" />
+          </svg>
+        </span>
+        <span className="trusted-glo-text">100% TRUSTED GLO</span>
+      </div>
+
       <video
         ref={videoRef}
         className="top-showcase-video"
