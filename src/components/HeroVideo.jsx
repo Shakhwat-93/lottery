@@ -54,12 +54,12 @@ export default function HeroVideo({ videoRef, onVideoClick }) {
         id="hero-video"
         playsInline
         preload="auto"
-        poster="/assets/site/top-office.jpg"
+        poster="/assets/site/hero-video-poster.jpg"
         onClick={handleToggle}
         style={{ cursor: 'pointer' }}
       >
         <source src="/hero-section.mp4" type="video/mp4" />
-        <img src="/assets/site/top-office.jpg" alt="Thailand Lottery office banner" />
+        <img src="/assets/site/hero-video-poster.jpg" alt="Thailand Lottery Official Studio Video" />
       </video>
 
       {/* Luxury 24K Gold Play Button in Center - Disappears completely when video plays */}

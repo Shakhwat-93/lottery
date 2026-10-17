@@ -13,7 +13,7 @@ import React, { useState, useEffect, useRef } from 'react';
  */
 
 const DEMO_VIDEO_SRC = '/hero-section.mp4';
-const DEMO_POSTER_SRC = '/assets/site/top-office.jpg';
+const DEMO_POSTER_SRC = '/assets/site/hero-video-poster.jpg';
 
 const LIVE_COMMENTS = [
   { id: 1, name: 'মোঃ রফিক', text: 'ফাহিম ভাইয়ের রেজাল্ট ১০০% সঠিক 👍', time: '১ মিনিট আগে' },
