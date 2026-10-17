@@ -7,12 +7,12 @@ import { useEffect } from 'react';
  */
 export function useScrollReveal() {
   useEffect(() => {
-    // If IntersectionObserver is not supported, reveal all immediately
-    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+    // If IntersectionObserver is not supported or on mobile screens, reveal all immediately
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window) || window.innerWidth <= 768) {
       document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
         el.classList.add('is-revealed');
       });
-      return;
+      if (window.innerWidth <= 768) return;
     }
 
     const observer = new IntersectionObserver(
@@ -26,8 +26,8 @@ export function useScrollReveal() {
         });
       },
       {
-        threshold: 0.12,
-        rootMargin: '0px 0px -40px 0px'
+        threshold: 0.02,
+        rootMargin: '120px 0px 120px 0px'
       }
     );
 
