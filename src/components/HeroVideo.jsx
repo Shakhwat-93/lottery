@@ -71,24 +71,6 @@ export default function HeroVideo({ videoRef, onVideoClick }) {
         <source src="/hero-section.mp4" type="video/mp4" />
         <img src="/assets/site/hero-video-poster.jpg" alt="Thailand Lottery Official Studio Video" />
       </video>
-
-      {/* Luxury 24K Gold Play Button in Center - Disappears completely when video plays */}
-      {!isPlaying && (
-        <button
-          type="button"
-          className="hero-center-play-btn paused"
-          onClick={handleToggle}
-          aria-label="Play video (ভিডিও প্লে করুন)"
-          title="Play (ভিডিও প্লে করুন)"
-        >
-          <span className="hero-play-pulse" aria-hidden="true" />
-          <span className="hero-play-icon-wrap">
-            <svg className="hero-play-svg play-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M8 5v14l11-7z" />
-            </svg>
-          </span>
-        </button>
-      )}
     </section>
   );
 }

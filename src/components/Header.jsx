@@ -7,6 +7,8 @@ export default function Header({ page = 'home' }) {
     ? 'สำนักงานสลากกินแบ่งรัฐบาล • VIP 100% SURE PAPERS'
     : 'สำนักงานสลากกินแบ่งรัฐบาล • Thailand Official Lottery (GLO)';
 
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
   return (
     <>
       <div className="thai-flag-top-strip" aria-hidden="true" />
@@ -24,61 +26,45 @@ export default function Header({ page = 'home' }) {
           <span className="brand-text">
             <strong className="brand-title">
               <span>Thailand Lottery</span>
-              <svg
-                className="brand-verified-tick"
-                viewBox="0 0 24 24"
-                aria-label="Verified"
-                title="Official Verified"
-              >
-                <path
-                  fill="#1D9BF0"
-                  d="M22.25 12c0-1.43-.88-2.67-2.19-3.19.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.52-1.31-1.76-2.19-3.19-2.19s-2.67.88-3.19 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91C2.93 9.33 2.05 10.57 2.05 12s.88 2.67 2.19 3.19c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.52 1.31 1.76 2.19 3.19 2.19s2.67-.88 3.19-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.52 2.19-1.76 2.19-3.19z"
-                />
-                <path
-                  fill="#FFFFFF"
-                  d="M10.09 16.72l-4.14-4.14 1.41-1.41 2.73 2.73 6.13-6.13 1.41 1.41-7.54 7.54z"
-                />
-              </svg>
             </strong>
-            <span className="brand-ticker-wrap">
-              <small className="brand-ticker-track">
-                <span>{tickerText}</span>
-                <span>{tickerText}</span>
-              </small>
+            <span className="brand-subtitle">
+              สำนักงานสลากกินแบ่งรัฐบาล • সরকারি অনুমোদিত
             </span>
           </span>
         </Link>
 
-        {/* Mobile quick action button */}
-        {!isGamePage ? (
-          <Link to="/game" className="mobile-header-cta" aria-label="100% Sure Paper">
-            <span>Sure Paper</span>
-          </Link>
-        ) : (
-          <Link to="/" className="mobile-header-cta" aria-label="Home">
-            <span>Home</span>
-          </Link>
-        )}
+        {/* Mobile Hamburger Button with Gold Pill Outline */}
+        <button
+          type="button"
+          className="header-hamburger-btn"
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={mobileMenuOpen}
+        >
+          <span className="hamburger-bar"></span>
+          <span className="hamburger-bar"></span>
+          <span className="hamburger-bar"></span>
+        </button>
 
-        <div className="nav-panel">
+        <div className={`nav-panel ${mobileMenuOpen ? 'is-open' : ''}`}>
           <nav className="nav-links" aria-label="Primary navigation">
             {!isGamePage ? (
               <>
-                <a href="#certificate">Certificates</a>
-                <a href="#vip-offer">VIP Quota</a>
-                <a href="#online-form">Register</a>
-                <a href="#previous-winners">Winners</a>
-                <a href="#customer-review">Reviews</a>
-                <a href="#location">Bangkok HQ</a>
-                <Link className="nav-cta" to="/game">
+                <a href="#certificate" onClick={() => setMobileMenuOpen(false)}>Certificates</a>
+                <a href="#vip-offer" onClick={() => setMobileMenuOpen(false)}>VIP Quota</a>
+                <a href="#online-form" onClick={() => setMobileMenuOpen(false)}>Register</a>
+                <a href="#previous-winners" onClick={() => setMobileMenuOpen(false)}>Winners</a>
+                <a href="#customer-review" onClick={() => setMobileMenuOpen(false)}>Reviews</a>
+                <a href="#location" onClick={() => setMobileMenuOpen(false)}>Bangkok HQ</a>
+                <Link className="nav-cta" to="/game" onClick={() => setMobileMenuOpen(false)}>
                   Sure Paper
                 </Link>
               </>
             ) : (
               <>
-                <Link to="/">Home</Link>
-                <a href="#game-papers">VIP Papers</a>
-                <a href="#download">Direct Game ↗</a>
+                <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+                <a href="#game-papers" onClick={() => setMobileMenuOpen(false)}>VIP Papers</a>
+                <a href="#download" onClick={() => setMobileMenuOpen(false)}>Direct Game ↗</a>
               </>
             )}
           </nav>
