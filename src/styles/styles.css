@@ -759,8 +759,8 @@ h1 {
   justify-content: center;
   text-align: center;
   margin-bottom: 1.15rem;
-  font-size: clamp(1.65rem, 2.45vw, 2.25rem);
-  line-height: 1.15;
+  font-size: clamp(2.2rem, 3.8vw, 3.5rem);
+  line-height: 1.12;
   font-weight: 900;
   width: 100%;
   letter-spacing: 0.01em;
@@ -775,14 +775,14 @@ h1 {
 .hero-main-title .hero-title-year {
   display: block;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.65em;
   font-weight: 900;
-  letter-spacing: 0.06em;
-  margin-top: 0.08em;
+  letter-spacing: 0.08em;
+  margin-top: 0.1em;
   background: linear-gradient(180deg, #FFF6D6 0%, #FFD700 45%, #C69214 80%, #7A5306 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 4px 12px rgba(198, 146, 20, 0.45));
+  filter: drop-shadow(0 6px 16px rgba(198, 146, 20, 0.55));
 }
 
 h2 {
@@ -6156,10 +6156,10 @@ h3 {
   }
 
   .hero-main-title {
-    font-size: clamp(0.95rem, 4.75vw, 1.45rem) !important;
-    line-height: 1.18 !important;
+    font-size: clamp(1.2rem, 6.5vw, 1.85rem) !important;
+    line-height: 1.15 !important;
     word-break: normal !important;
-    margin-bottom: 0.85rem !important;
+    margin-bottom: 0.75rem !important;
     width: 100% !important;
     max-width: 100% !important;
     font-weight: 900 !important;
@@ -6174,10 +6174,10 @@ h3 {
   .hero-main-title .hero-title-year {
     text-align: center !important;
     display: block !important;
-    font-size: 1.6em !important;
+    font-size: 1.75em !important;
     font-weight: 900 !important;
-    letter-spacing: 0.06em !important;
-    margin-top: 0.08em !important;
+    letter-spacing: 0.08em !important;
+    margin-top: 0.1em !important;
   }
 
   .hero-copy {
