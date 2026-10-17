@@ -1216,10 +1216,16 @@ h3 {
   cursor: pointer;
 }
 
-.fb-video-element {
+.fb-video-element,
+.fb-video-container iframe,
+.fb-iframe-player {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border: 0;
   display: block;
 }
 

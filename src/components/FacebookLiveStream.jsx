@@ -1,19 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 /**
  * ============================================================================
- * FACEBOOK LIVE VIDEO STREAM COMPONENT (DEMO)
+ * FACEBOOK LIVE VIDEO STREAM COMPONENT
  * ============================================================================
- * Placed directly above the Official Agent Certificate.
- * 
- * TO REPLACE WITH REAL FACEBOOK LIVE LATER:
- * Option A (MP4 / Stream URL): Change the `DEMO_VIDEO_SRC` constant below.
- * Option B (Facebook iframe embed): Replace the <video> element with your Facebook embed <iframe>.
+ * Features the official Facebook Live Video:
+ * Source: https://www.facebook.com/share/v/1TeU2wQZqg/
+ * Canonical: https://www.facebook.com/LottoLiveThailand/videos/1112938755005390/
  * ============================================================================
  */
 
-const DEMO_VIDEO_SRC = '/hero-section.mp4';
-const DEMO_POSTER_SRC = '/assets/site/hero-video-poster.jpg';
+const FB_VIDEO_SHARE_URL = 'https://www.facebook.com/share/v/1TeU2wQZqg/';
+const FB_EMBED_SRC =
+  'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2FLottoLiveThailand%2Fvideos%2F1112938755005390%2F&show_text=false&width=476&t=0';
 
 const LIVE_COMMENTS = [
   { id: 1, name: 'মোঃ রফিক', text: 'ফাহিম ভাইয়ের রেজাল্ট ১০০% সঠিক 👍', time: '১ মিনিট আগে' },
@@ -24,9 +23,6 @@ const LIVE_COMMENTS = [
 ];
 
 export default function FacebookLiveStream() {
-  const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
   const [viewers, setViewers] = useState(4268);
   const [activeCommentIndex, setActiveCommentIndex] = useState(0);
   const [reactions, setReactions] = useState([]);
@@ -64,39 +60,8 @@ export default function FacebookLiveStream() {
     return () => clearInterval(reactionInterval);
   }, []);
 
-  // Autoplay muted on mount
-  useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.muted = true;
-      video.play().catch(() => {
-        setIsPlaying(false);
-      });
-    }
-  }, []);
-
-  const togglePlay = (e) => {
-    e.stopPropagation();
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.paused) {
-      video.play().then(() => setIsPlaying(true)).catch(() => {});
-    } else {
-      video.pause();
-      setIsPlaying(false);
-    }
-  };
-
-  const toggleMute = (e) => {
-    e.stopPropagation();
-    const video = videoRef.current;
-    if (!video) return;
-    video.muted = !video.muted;
-    setIsMuted(video.muted);
-  };
-
   return (
-    <div className="fb-live-card" aria-label="Facebook Live Streaming - Fahim Chowdhury">
+    <div className="fb-live-card" aria-label="Facebook Live Streaming - Lotto Live Thailand">
       {/* 1. Facebook Live Top Navigation & Identity Bar */}
       <div className="fb-live-header">
         <div className="fb-author-info">
@@ -113,7 +78,7 @@ export default function FacebookLiveStream() {
 
           <div className="fb-author-meta">
             <div className="fb-author-title">
-              <strong>ফাহিম চৌধুরী (Fahim Chowdhury)</strong>
+              <strong>ফাহিম চৌধুরী • Lotto Live Thailand</strong>
               <svg className="fb-verified-tick" viewBox="0 0 24 24" width="16" height="16" aria-label="Verified">
                 <path
                   fill="#1877F2"
@@ -126,7 +91,7 @@ export default function FacebookLiveStream() {
                 <span className="fb-live-dot" />
                 LIVE
               </span>
-              <span className="fb-meta-desc">থাইল্যান্ড লটারি অফিশিয়াল লাইভ সম্প্রচার</span>
+              <span className="fb-meta-desc">থাইল্যান্ড লটারি অফিশিয়াল লাইভ ড্র সম্প্রচার</span>
             </div>
           </div>
         </div>
@@ -139,7 +104,7 @@ export default function FacebookLiveStream() {
             <span>{viewers.toLocaleString('en-US')}</span>
           </div>
           <a
-            href="https://facebook.com"
+            href={FB_VIDEO_SHARE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="fb-follow-button"
@@ -150,18 +115,17 @@ export default function FacebookLiveStream() {
         </div>
       </div>
 
-      {/* 2. Facebook Live Video Player Container */}
-      <div className="fb-video-container" onClick={togglePlay}>
-        <video
-          ref={videoRef}
-          className="fb-video-element"
-          playsInline
-          loop
-          muted={isMuted}
-          poster={DEMO_POSTER_SRC}
-        >
-          <source src={DEMO_VIDEO_SRC} type="video/mp4" />
-        </video>
+      {/* 2. Official Facebook Video Player Embed */}
+      <div className="fb-video-container">
+        <iframe
+          src={FB_EMBED_SRC}
+          className="fb-iframe-player"
+          scrolling="no"
+          frameBorder="0"
+          allowFullScreen={true}
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          title="Thailand Lottery Official Facebook Live - Lotto Live Thailand"
+        />
 
         {/* Video Overlay Watermark & Live Indicators */}
         <div className="fb-video-overlay-top">
@@ -169,7 +133,15 @@ export default function FacebookLiveStream() {
             <span className="live-blink-circle" />
             <span>ফেসবুক লাইভ সম্প্রচার</span>
           </div>
-          <span className="fb-watermark-logo">facebook live</span>
+          <a
+            href={FB_VIDEO_SHARE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="fb-watermark-logo"
+            title="Open on Facebook"
+          >
+            facebook live ↗
+          </a>
         </div>
 
         {/* Floating Facebook Live Reactions */}
@@ -189,43 +161,6 @@ export default function FacebookLiveStream() {
             <span className="comment-body">{LIVE_COMMENTS[activeCommentIndex].text}</span>
           </div>
         </div>
-
-        {/* Center Play/Pause Overlay Indicator (shows when paused) */}
-        {!isPlaying && (
-          <div className="fb-center-play-overlay">
-            <div className="fb-play-circle" title="Play Video">
-              <svg viewBox="0 0 24 24" width="34" height="34" fill="#FFFFFF">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-            <span className="fb-tap-hint">ভিডিও প্লে করতে ট্যাপ করুন</span>
-          </div>
-        )}
-
-        {/* Sound / Unmute Control Button */}
-        <button
-          type="button"
-          className="fb-audio-toggle-btn"
-          onClick={toggleMute}
-          aria-label={isMuted ? 'Unmute Sound (সাউন্ড চালু করুন)' : 'Mute Sound (সাউন্ড বন্ধ করুন)'}
-          title={isMuted ? 'Unmute (সাউন্ড শুনুন)' : 'Mute (সাউন্ড মিউট করুন)'}
-        >
-          {isMuted ? (
-            <>
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
-              </svg>
-              <span>সাউন্ড শুনুন</span>
-            </>
-          ) : (
-            <>
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
-              </svg>
-              <span>সাউন্ড চালু আছে</span>
-            </>
-          )}
-        </button>
       </div>
 
       {/* 3. Facebook Live Bottom Reactions & Interaction Bar */}
@@ -246,7 +181,7 @@ export default function FacebookLiveStream() {
         </div>
 
         <a
-          href="https://facebook.com"
+          href={FB_VIDEO_SHARE_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="fb-watch-live-btn"
