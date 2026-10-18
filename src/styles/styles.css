@@ -4818,6 +4818,538 @@ h3 {
   padding: clamp(3.5rem, 6vw, 5.8rem) 0;
 }
 
+/* ==========================================================================
+   GOOGLE FORM STYLE REGISTRATION
+   ========================================================================== */
+.google-form-container {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: var(--font-bengali), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Top Hero Card */
+.gform-top-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+  box-shadow: 0 8px 30px rgba(7, 23, 57, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gform-color-stripe {
+  height: 10px;
+  width: 100%;
+  background: linear-gradient(90deg, #673AB7 0%, #1D9BF0 35%, #D4AF37 70%, #C4151C 100%);
+}
+
+.gform-header-content {
+  padding: clamp(1.2rem, 3.5vw, 2rem);
+}
+
+.gform-logo-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.gform-brand-mark {
+  flex-shrink: 0;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.05) 70%, transparent 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.5));
+  border: 1.5px solid rgba(212, 175, 55, 0.6);
+  padding: 4px;
+}
+
+.gform-brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.gform-official-text {
+  flex: 1;
+}
+
+.gform-verified-badge-line {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.45rem;
+}
+
+.gform-govt-seal {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #555555;
+  letter-spacing: 0.02em;
+}
+
+.gform-verified-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #E8F5FD;
+  color: #1D9BF0;
+  border: 1px solid rgba(29, 155, 240, 0.35);
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.2rem 0.65rem;
+}
+
+.gform-main-heading {
+  font-family: var(--font-royal);
+  font-size: clamp(1.2rem, 2.8vw, 1.65rem);
+  font-weight: 900;
+  color: var(--text-navy, #071739);
+  line-height: 1.35;
+  margin: 0 0 0.45rem 0;
+}
+
+.gform-subtext {
+  font-size: 0.9rem;
+  color: var(--text-secondary, #4A5568);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.gform-meta-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding: 0.85rem 1.15rem;
+  background: linear-gradient(135deg, #FFF9E6 0%, #FFF2D1 100%);
+  border-radius: 8px;
+  border: 1.5px solid rgba(212, 175, 55, 0.55);
+}
+
+.gform-fee-pill {
+  color: #8A6409;
+  font-size: 0.92rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.gform-fee-pill strong {
+  color: #B80C14;
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.gform-quota-pill {
+  color: #B80C14;
+  font-size: 0.88rem;
+  font-weight: 800;
+  background: rgba(184, 12, 20, 0.08);
+  border: 1px solid rgba(184, 12, 20, 0.3);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+}
+
+.gform-notice-box {
+  margin-top: 1.1rem;
+  padding-top: 0.9rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.12);
+  font-size: 0.84rem;
+  color: #666666;
+  line-height: 1.55;
+}
+
+.gform-notice-box p {
+  margin: 0;
+}
+
+.gform-required-note {
+  display: block;
+  color: #D93025;
+  font-weight: 700;
+  margin-top: 0.45rem;
+  font-size: 0.8rem;
+}
+
+/* Question Cards */
+.gform-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.gform-question-card {
+  background: #FFFFFF;
+  border-radius: 10px;
+  border: 1.5px solid rgba(212, 175, 55, 0.32);
+  padding: clamp(1.1rem, 2.8vw, 1.5rem);
+  box-shadow: 0 2px 10px rgba(7, 23, 57, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gform-question-card:focus-within {
+  border-color: #1D9BF0;
+  box-shadow: 0 4px 18px rgba(29, 155, 240, 0.16);
+}
+
+.gform-question-title {
+  font-family: var(--font-bengali);
+  font-size: 1rem;
+  font-weight: 800;
+  color: #202124;
+  display: block;
+  margin-bottom: 0.3rem;
+  line-height: 1.4;
+}
+
+.gform-req {
+  color: #D93025;
+  font-weight: 800;
+  margin-left: 2px;
+}
+
+.gform-question-desc {
+  font-size: 0.82rem;
+  color: #5F6368;
+  margin: 0 0 0.85rem 0;
+  line-height: 1.45;
+}
+
+.gform-text-input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  border-bottom: 2px solid #DADCE0;
+  border-radius: 6px 6px 0 0;
+  background: #F8F9FA;
+  padding: 0.85rem 1rem;
+  font-family: var(--font-bengali);
+  font-size: 0.98rem;
+  color: #202124;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gform-text-input:focus {
+  border-bottom: 2px solid #1D9BF0;
+  background: #FFFFFF;
+  box-shadow: 0 2px 0 #1D9BF0;
+}
+
+.gform-text-input::placeholder {
+  color: #9AA0A6;
+  font-size: 0.9rem;
+}
+
+.gform-textarea {
+  resize: vertical;
+  min-height: 75px;
+  border: 1.5px solid #DADCE0;
+  border-radius: 6px;
+}
+
+.gform-textarea:focus {
+  border-color: #1D9BF0;
+  box-shadow: 0 0 0 3px rgba(29, 155, 240, 0.2);
+}
+
+/* Registration Fee Display */
+.gform-fee-display-box {
+  background: #FAF7EE;
+  border: 1.5px solid #D4AF37;
+  border-radius: 8px;
+  padding: 1rem 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.gform-fee-amount-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.fee-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.fee-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.fee-amount {
+  font-size: 1.25rem;
+  color: #B80C14;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.fee-note {
+  font-size: 0.78rem;
+  color: #7A5800;
+  font-weight: 700;
+  margin-top: 0.15rem;
+}
+
+.gform-fee-radio-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #137333;
+  background: #E6F4EA;
+  border: 1.5px solid #34A853;
+  padding: 0.5rem 0.95rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.gform-fee-radio-pill input {
+  accent-color: #34A853;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Payment Methods Grid */
+.gform-payment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.gform-payment-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 0.9rem;
+  border: 1.5px solid #DADCE0;
+  border-radius: 8px;
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gform-payment-option:hover {
+  border-color: #1D9BF0;
+  background: #F8FBFF;
+}
+
+.gform-payment-option.is-selected {
+  border-color: #D4AF37;
+  background: #FFFDF5;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.35);
+}
+
+.gform-payment-option input[type="radio"] {
+  accent-color: #C4151C;
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.gform-pay-brand-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.gform-mini-pay {
+  transform: scale(0.9);
+  transform-origin: left center;
+  margin: 0;
+}
+
+.gform-pay-name {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: #202124;
+}
+
+.gform-security-footer {
+  margin-top: 0.95rem;
+  font-size: 0.8rem;
+  color: #137333;
+  background: #E6F4EA;
+  border: 1px solid rgba(52, 168, 83, 0.35);
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  display: inline-block;
+  font-weight: 600;
+}
+
+/* Action Bar */
+.gform-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.gform-submit-btn {
+  padding: 0.95rem 2.25rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(184, 12, 20, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gform-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(184, 12, 20, 0.55);
+}
+
+.gform-clear-btn {
+  background: transparent;
+  border: 0;
+  color: #5F6368;
+  font-family: var(--font-bengali);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0.45rem 0.75rem;
+  transition: color 0.2s ease;
+}
+
+.gform-clear-btn:hover {
+  color: #202124;
+}
+
+/* Success Card */
+.gform-success-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  border: 2px solid #34A853;
+  padding: clamp(2rem, 5vw, 3rem) clamp(1.2rem, 3.5vw, 2.5rem);
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(52, 168, 83, 0.18);
+}
+
+.gform-success-icon {
+  width: 72px;
+  height: 72px;
+  background: #E6F4EA;
+  color: #34A853;
+  font-size: 2.4rem;
+  font-weight: 900;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.3rem;
+  border: 2.5px solid #34A853;
+}
+
+.gform-success-card h3 {
+  font-family: var(--font-royal);
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  font-weight: 900;
+  color: #137333;
+  margin-bottom: 0.65rem;
+}
+
+.gform-success-card p {
+  font-size: 0.95rem;
+  color: #3C4043;
+  line-height: 1.6;
+  max-width: 540px;
+  margin: 0 auto 1rem;
+}
+
+.gform-success-meta {
+  background: #F8F9FA;
+  border: 1px solid #DADCE0;
+  border-radius: 8px;
+  padding: 1.1rem 1.4rem;
+  margin: 1.4rem auto;
+  max-width: 440px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+  color: #202124;
+}
+
+.gform-success-note {
+  font-size: 0.88rem;
+  color: #5F6368 !important;
+  margin-bottom: 1.75rem !important;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 600px) {
+  .gform-logo-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .gform-brand-mark {
+    margin-bottom: 0.25rem;
+  }
+
+  .gform-verified-badge-line {
+    justify-content: center;
+  }
+
+  .gform-meta-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gform-quota-pill {
+    margin-left: 0;
+  }
+
+  .gform-payment-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gform-action-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gform-submit-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .gform-clear-btn {
+    text-align: center;
+  }
+}
+
 .membership-board {
   margin-bottom: clamp(2rem, 4vw, 3.5rem);
 }

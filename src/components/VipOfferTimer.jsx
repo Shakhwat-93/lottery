@@ -134,7 +134,7 @@ export default function VipOfferTimer() {
 
           <div className="offer-cta-group">
             <a className="button primary offer-cta-btn golden-cta-btn" href="#online-form">
-              <span>রেজিস্ট্রেশন করুন</span>
+              <span>ফর্ম নিতে এখানে ক্লিক করুন</span>
               <span className="btn-arrow" aria-hidden="true">
                 →
               </span>
