@@ -75,10 +75,21 @@ export default function Header({ page = 'home' }) {
             {page === 'form' && (
               <>
                 <Link to="/" onClick={() => setMobileMenuOpen(false)}>← Home</Link>
+                <Link to="/3-set-game" onClick={() => setMobileMenuOpen(false)}>3 Set Game</Link>
                 <Link to="/game" onClick={() => setMobileMenuOpen(false)}>VIP Sure Papers</Link>
                 <a href="#online-form" className="nav-cta" onClick={() => setMobileMenuOpen(false)}>
                   ফর্ম পূরণ করুন
                 </a>
+              </>
+            )}
+            {page === '3-set-game' && (
+              <>
+                <Link to="/" onClick={() => setMobileMenuOpen(false)}>← Home</Link>
+                <Link to="/form" onClick={() => setMobileMenuOpen(false)}>মেম্বারশিপ ফর্ম</Link>
+                <Link to="/game" onClick={() => setMobileMenuOpen(false)}>VIP Sure Papers</Link>
+                <Link to="/3-set-game" className="nav-cta" onClick={() => setMobileMenuOpen(false)}>
+                  3 Set Game
+                </Link>
               </>
             )}
           </nav>

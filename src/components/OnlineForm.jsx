@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function OnlineForm({ isStandalonePage = false }) {
   const [formData, setFormData] = useState({
@@ -330,6 +331,23 @@ export default function OnlineForm({ isStandalonePage = false }) {
             </div>
           </form>
         )}
+      </div>
+
+      {/* 3 Set Game Button Section Directly After Form */}
+      <div className="three-set-cta-wrapper">
+        <div className="three-set-cta-card">
+          <div className="three-set-glow-ring" aria-hidden="true" />
+          <div className="three-set-card-content">
+            <span className="three-set-badge-tag">✦ VIP OFFICIAL ✦</span>
+            <p className="three-set-notice">থাইল্যান্ড লটারি অফিসিয়াল ৩ সেট গেম পেপার দেখতে নিচে ক্লিক করুন:</p>
+            <Link to="/3-set-game" className="three-set-glowing-btn" aria-label="Open 3 set game document">
+              <span className="three-set-shimmer" aria-hidden="true" />
+              <span className="three-set-icon" aria-hidden="true">👑</span>
+              <span className="three-set-text">3 set game</span>
+              <span className="three-set-arrow" aria-hidden="true">➔</span>
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

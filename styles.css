@@ -6340,6 +6340,496 @@ h3 {
 }
 
 /* ==========================================================================
+   16C. 3 SET GAME BUTTON & DEDICATED PAGE
+   ========================================================================== */
+
+/* Keyframe animations for 3 Set Game Button */
+@keyframes threeSetGlowPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 16px rgba(255, 23, 68, 0.75),
+      0 0 35px rgba(212, 175, 55, 0.6),
+      0 6px 20px rgba(184, 12, 20, 0.45);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow:
+      0 0 28px rgba(255, 23, 68, 0.95),
+      0 0 55px rgba(255, 215, 0, 0.85),
+      0 10px 30px rgba(196, 21, 28, 0.65);
+    transform: scale(1.03);
+  }
+}
+
+@keyframes threeSetShimmer {
+  0% {
+    transform: translateX(-150%) skewX(-25deg);
+  }
+  50%, 100% {
+    transform: translateX(350%) skewX(-25deg);
+  }
+}
+
+@keyframes arrowBounceX {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+/* The Glowing Button Component */
+.three-set-glowing-btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.95rem 2.25rem;
+  border-radius: var(--radius-pill);
+  border: 2px solid #FFD700;
+  background: linear-gradient(135deg, #E60026 0%, #B80C14 50%, #800000 100%);
+  color: #FFF6D6 !important;
+  font-family: var(--font-royal);
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  cursor: pointer;
+  animation: threeSetGlowPulse 2.4s ease-in-out infinite;
+  transition: transform 0.25s ease, filter 0.25s ease;
+  z-index: 1;
+}
+
+.three-set-glowing-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  filter: brightness(1.12);
+  color: #FFFFFF !important;
+}
+
+.three-set-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: threeSetShimmer 3s infinite;
+  pointer-events: none;
+}
+
+.three-set-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.three-set-text {
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.three-set-arrow {
+  color: #FFD700;
+  font-size: 1.25rem;
+  display: inline-block;
+  animation: arrowBounceX 1.6s ease-in-out infinite;
+}
+
+/* Card Wrap After Form on FormPage */
+.three-set-cta-wrapper {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.three-set-cta-card {
+  position: relative;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFDF5 60%, #FFF8E7 100%);
+  border: 2px solid var(--royal-gold);
+  border-radius: var(--radius-card);
+  padding: clamp(1.4rem, 3.5vw, 2.2rem) clamp(1rem, 3vw, 2rem);
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.18), 0 2px 8px rgba(7, 23, 57, 0.06);
+  overflow: hidden;
+}
+
+.three-set-glow-ring {
+  position: absolute;
+  top: -40%;
+  left: 20%;
+  width: 60%;
+  height: 180%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.22) 0%, rgba(228, 30, 63, 0.1) 50%, transparent 75%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.three-set-card-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.three-set-badge-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(184, 12, 20, 0.1) 0%, rgba(212, 175, 55, 0.2) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  color: #8A6409;
+  font-family: var(--font-royal);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.85rem;
+  border-radius: var(--radius-pill);
+}
+
+.three-set-notice {
+  font-family: var(--font-bengali);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-navy, #071739);
+  margin: 0.25rem 0 0.85rem 0;
+  line-height: 1.5;
+}
+
+/* Home Page Strip */
+.three-set-home-strip {
+  padding: clamp(1.5rem, 3vw, 2.8rem) 0;
+}
+
+.three-set-home-card {
+  position: relative;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFDF5 60%, #FFF9EB 100%);
+  border: 2px solid var(--royal-gold);
+  border-radius: var(--radius-card);
+  padding: clamp(1.4rem, 3vw, 2rem) clamp(1.2rem, 3.5vw, 2.5rem);
+  box-shadow: 0 10px 32px rgba(212, 175, 55, 0.18), 0 3px 10px rgba(7, 23, 57, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.three-set-home-text {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 260px;
+}
+
+.three-set-home-text h3 {
+  font-family: var(--font-royal);
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+  font-weight: 900;
+  color: var(--text-navy, #071739);
+  margin: 0.4rem 0 0.3rem;
+  line-height: 1.35;
+}
+
+.three-set-home-text p {
+  font-size: 0.92rem;
+  color: var(--text-secondary, #4A5568);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Dedicated 3 Set Game Page Styles */
+.three-set-page {
+  background-color: var(--royal-parchment);
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.25), transparent 45rem),
+    radial-gradient(circle at 10% 30%, rgba(228, 30, 63, 0.08), transparent 35rem),
+    radial-gradient(circle at 90% 60%, rgba(29, 155, 240, 0.08), transparent 35rem),
+    linear-gradient(180deg, #FAF6EB 0%, #FFFDF8 45%, #FAF6EB 100%);
+  min-height: 100vh;
+}
+
+.three-set-main {
+  width: min(840px, calc(100% - 1.5rem));
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 2.2rem) 0 clamp(3.5rem, 6vw, 5.5rem);
+  box-sizing: border-box;
+}
+
+.three-set-topbar {
+  margin-bottom: 1.5rem;
+}
+
+.three-set-topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.three-set-back-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.three-set-back-btn,
+.three-set-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(212, 175, 55, 0.5);
+  color: var(--text-navy, #071739);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-bengali);
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(7, 23, 57, 0.05);
+  transition: all 0.2s ease;
+}
+
+.three-set-back-btn:hover,
+.three-set-home-btn:hover {
+  background: #FFFDF5;
+  border-color: #D4AF37;
+  transform: translateX(-3px);
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+}
+
+.three-set-verified-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #E8F5FD;
+  border: 1px solid rgba(29, 155, 240, 0.35);
+  color: #0C63E4;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+}
+
+.three-set-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.three-set-hero-header {
+  text-align: center;
+}
+
+.three-set-title {
+  font-family: var(--font-royal);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 900;
+  color: var(--text-navy, #071739);
+  margin: 0.6rem 0 0.5rem;
+  line-height: 1.3;
+}
+
+.three-set-desc {
+  font-size: 1rem;
+  color: var(--text-secondary, #4A5568);
+  max-width: 580px;
+  margin: 0 auto 1.25rem;
+  line-height: 1.6;
+}
+
+.three-set-badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+/* Document Card with Gold Frame */
+.three-set-card-wrap {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.three-set-document-card {
+  position: relative;
+  background: #FFFFFF;
+  border: 3.5px solid var(--royal-gold);
+  border-radius: var(--radius-card);
+  padding: 0.85rem;
+  box-shadow:
+    0 0 0 2px rgba(7, 23, 57, 0.8),
+    0 22px 65px rgba(7, 23, 57, 0.3),
+    0 0 35px rgba(212, 175, 55, 0.25);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+  margin: 0;
+}
+
+.three-set-document-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow:
+    0 0 0 2px rgba(7, 23, 57, 0.9),
+    0 28px 75px rgba(7, 23, 57, 0.4),
+    0 0 45px rgba(212, 175, 55, 0.4);
+}
+
+.three-set-img-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000000;
+}
+
+.three-set-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.three-set-document-card:hover .three-set-img {
+  transform: scale(1.02);
+}
+
+.three-set-zoom-hint {
+  position: absolute;
+  bottom: 0.85rem;
+  right: 0.85rem;
+  background: rgba(7, 23, 57, 0.88);
+  color: #FFD700;
+  border: 1.5px solid rgba(212, 175, 55, 0.6);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-bengali);
+  font-size: 0.82rem;
+  font-weight: 700;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* Actions Panel */
+.three-set-actions-panel {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.three-set-actions-inner {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFDF5 100%);
+  border: 1.5px solid var(--royal-gold);
+  border-radius: var(--radius-card);
+  padding: clamp(1.4rem, 3.5vw, 2rem);
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(7, 23, 57, 0.05);
+}
+
+.three-set-actions-inner h3 {
+  font-family: var(--font-royal);
+  font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+  font-weight: 800;
+  color: var(--text-navy, #071739);
+  margin: 0 0 0.45rem;
+}
+
+.three-set-actions-inner p {
+  font-size: 0.92rem;
+  color: var(--text-secondary, #4A5568);
+  margin: 0 0 1.25rem;
+}
+
+.three-set-cta-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+/* Modal styles for 3 Set Game */
+.three-set-modal-content {
+  max-width: 680px;
+  width: 95%;
+}
+
+.three-set-modal-body {
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 0.75rem;
+  display: flex;
+  justify-content: center;
+  background: #051026;
+}
+
+.three-set-modal-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Responsive adjustments for 3 Set Game */
+@media (max-width: 650px) {
+  .three-set-home-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.2rem;
+  }
+
+  .three-set-home-text {
+    min-width: 100%;
+  }
+
+  .three-set-glowing-btn {
+    width: 100%;
+    max-width: 320px;
+    padding: 0.85rem 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  .three-set-topbar-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .three-set-badges {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .three-set-badges .premium-badge {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .three-set-cta-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .three-set-cta-buttons .button {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
    17. SITE FOOTER (Royal Navy Finish with Thai Flag Bottom Trim)
    ========================================================================== */
 

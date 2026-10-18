@@ -51,7 +51,7 @@ export default function Footer({ page = 'home' }) {
             © 2026 The Government Lottery Office of Thailand (GLO). All Rights Reserved.
           </p>
 
-          {(isGamePage || isFormPage) && (
+          {(isGamePage || isFormPage || page === '3-set-game') && (
             <div className="footer-nav-link">
               <Link to="/" className="footer-home-btn">
                 ← হোমে ফিরুন

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeroVideo from '../components/HeroVideo';
@@ -25,6 +26,22 @@ export default function HomePage() {
         <TrustHero />
         <Certificates />
         <VipOfferTimer />
+        <section className="section three-set-home-strip reveal-on-scroll" id="three-set-game-section">
+          <div className="three-set-home-card">
+            <div className="three-set-glow-ring" aria-hidden="true" />
+            <div className="three-set-home-text">
+              <span className="three-set-badge-tag">✦ VIP OFFICIAL DOCUMENT ✦</span>
+              <h3>থাইল্যান্ড লটারি ৩ সেট গেম পেপার ২০২৬</h3>
+              <p>অফিসিয়াল ৩ সেট গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:</p>
+            </div>
+            <Link to="/3-set-game" className="three-set-glowing-btn" aria-label="Open 3 set game document">
+              <span className="three-set-shimmer" aria-hidden="true" />
+              <span className="three-set-icon" aria-hidden="true">👑</span>
+              <span className="three-set-text">3 set game</span>
+              <span className="three-set-arrow" aria-hidden="true">➔</span>
+            </Link>
+          </div>
+        </section>
         <PreviousWinners />
         <CustomerReview videoRef={reviewVideoRef} />
         <PaymentMethods />
