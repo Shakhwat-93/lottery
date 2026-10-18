@@ -48,9 +48,9 @@ export default function CustomerReview({ videoRef }) {
           </div>
 
           <div className="review-actions">
-            <a className="button primary" href="#online-form">
+            <Link className="button primary" to="/form">
               রেজিস্ট্রেশন
-            </a>
+            </Link>
             <Link className="button secondary" to="/game">
               সিওর পেপার
             </Link>

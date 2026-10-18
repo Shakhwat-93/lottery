@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function DealerAgreement() {
   return (
@@ -43,9 +44,9 @@ export default function DealerAgreement() {
           >
             চুক্তিপত্র দেখুন
           </a>
-          <a className="button secondary" href="#online-form">
+          <Link className="button secondary" to="/form">
             রেজিস্ট্রেশন
-          </a>
+          </Link>
         </div>
       </div>
 

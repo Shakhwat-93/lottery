@@ -8,7 +8,6 @@ import VipOfferTimer from '../components/VipOfferTimer';
 import PaymentMethods from '../components/PaymentMethods';
 import CustomerReview from '../components/CustomerReview';
 import PreviousWinners from '../components/PreviousWinners';
-import OnlineForm from '../components/OnlineForm';
 import SurePaperSlider from '../components/SurePaperSlider';
 import GamePanelCta from '../components/GamePanelCta';
 import { useMediaCoordinator } from '../hooks/useMediaCoordinator';
@@ -26,7 +25,6 @@ export default function HomePage() {
         <TrustHero />
         <Certificates />
         <VipOfferTimer />
-        <OnlineForm />
         <PreviousWinners />
         <CustomerReview videoRef={reviewVideoRef} />
         <PaymentMethods />

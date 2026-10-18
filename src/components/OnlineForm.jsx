@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function OnlineForm() {
+export default function OnlineForm({ isStandalonePage = false }) {
   const [formData, setFormData] = useState({
     name: '',
     familyMembersName: '',
@@ -34,14 +34,35 @@ export default function OnlineForm() {
   };
 
   return (
-    <section className="section form-section reveal-on-scroll" id="online-form">
-      <div className="section-heading">
-        <p className="eyebrow">GLO REGISTRATION</p>
-        <h2>Official Membership Registration Form 2026</h2>
-        <p>
-          The Government Lottery Office (GLO) অনুমোদিত সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (Agent ID: TL-001)</strong> এর অধীনে আর মাত্র ৫টি ফর্ম বাকি:
-        </p>
-      </div>
+    <section className={`section form-section ${isStandalonePage ? 'standalone-form-section' : 'reveal-on-scroll'}`} id="online-form">
+      {isStandalonePage ? (
+        <div className="standalone-form-header">
+          <div className="standalone-form-badge-row">
+            <span className="premium-badge badge-green">
+              <span className="badge-symbol">✓</span>
+              <span>
+                <strong>OFFICIAL GLO FORM 2026</strong>
+                <small>থাইল্যান্ড সরকার অনুমোদিত</small>
+              </span>
+            </span>
+            <span className="premium-badge badge-gold">
+              <span className="badge-symbol">★</span>
+              <span>
+                <strong>VIP QUOTA ACTIVE</strong>
+                <small>বাকি মাত্র ৫টি ফর্ম</small>
+              </span>
+            </span>
+          </div>
+        </div>
+      ) : (
+        <div className="section-heading">
+          <p className="eyebrow">GLO REGISTRATION</p>
+          <h2>Official Membership Registration Form 2026</h2>
+          <p>
+            The Government Lottery Office (GLO) অনুমোদিত সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (Agent ID: TL-001)</strong> এর অধীনে আর মাত্র ৫টি ফর্ম বাকি:
+          </p>
+        </div>
+      )}
 
       <div className="google-form-container" aria-label="Official Google Form Style Registration">
         {/* Google Form Top Card */}

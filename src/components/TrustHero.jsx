@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import FacebookLiveStream from './FacebookLiveStream';
 
 export default function TrustHero() {
@@ -23,9 +24,9 @@ export default function TrustHero() {
         </div>
 
         <div className="hero-actions">
-          <a className="button primary" href="#online-form">
+          <Link className="button primary" to="/form">
             রেজিস্ট্রেশন
-          </a>
+          </Link>
           <a className="button secondary" href="#certificate">
             লাইসেন্স যাচাই
           </a>

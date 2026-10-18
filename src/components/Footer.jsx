@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Footer({ page = 'home' }) {
   const isGamePage = page === 'game';
+  const isFormPage = page === 'form';
 
   const scrollToTop = (e) => {
     e.preventDefault();
@@ -50,7 +51,7 @@ export default function Footer({ page = 'home' }) {
             © 2026 The Government Lottery Office of Thailand (GLO). All Rights Reserved.
           </p>
 
-          {isGamePage && (
+          {(isGamePage || isFormPage) && (
             <div className="footer-nav-link">
               <Link to="/" className="footer-home-btn">
                 ← হোমে ফিরুন

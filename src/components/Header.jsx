@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 
 export default function Header({ page = 'home' }) {
   const isGamePage = page === 'game';
+  const isFormPage = page === 'form';
   const tickerText = isGamePage
     ? 'สำนักงานสลากกินแบ่งรัฐบาล • VIP 100% SURE PAPERS'
+    : isFormPage
+    ? 'สำนักงานสลากกินแบ่งรัฐบาล • OFFICIAL MEMBERSHIP FORM 2026'
     : 'สำนักงานสลากกินแบ่งรัฐบาล • Thailand Official Lottery (GLO)';
 
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -48,11 +51,11 @@ export default function Header({ page = 'home' }) {
 
         <div className={`nav-panel ${mobileMenuOpen ? 'is-open' : ''}`}>
           <nav className="nav-links" aria-label="Primary navigation">
-            {!isGamePage ? (
+            {page === 'home' && (
               <>
                 <a href="#certificate" onClick={() => setMobileMenuOpen(false)}>Certificates</a>
                 <a href="#vip-offer" onClick={() => setMobileMenuOpen(false)}>VIP Quota</a>
-                <a href="#online-form" onClick={() => setMobileMenuOpen(false)}>Register</a>
+                <Link to="/form" onClick={() => setMobileMenuOpen(false)}>Register</Link>
                 <a href="#previous-winners" onClick={() => setMobileMenuOpen(false)}>Winners</a>
                 <a href="#customer-review" onClick={() => setMobileMenuOpen(false)}>Reviews</a>
                 <a href="#location" onClick={() => setMobileMenuOpen(false)}>Bangkok HQ</a>
@@ -60,11 +63,22 @@ export default function Header({ page = 'home' }) {
                   Sure Paper
                 </Link>
               </>
-            ) : (
+            )}
+            {page === 'game' && (
               <>
                 <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+                <Link to="/form" onClick={() => setMobileMenuOpen(false)}>Official Form</Link>
                 <a href="#game-papers" onClick={() => setMobileMenuOpen(false)}>VIP Papers</a>
                 <a href="#download" onClick={() => setMobileMenuOpen(false)}>Direct Game ↗</a>
+              </>
+            )}
+            {page === 'form' && (
+              <>
+                <Link to="/" onClick={() => setMobileMenuOpen(false)}>← Home</Link>
+                <Link to="/game" onClick={() => setMobileMenuOpen(false)}>VIP Sure Papers</Link>
+                <a href="#online-form" className="nav-cta" onClick={() => setMobileMenuOpen(false)}>
+                  ফর্ম পূরণ করুন
+                </a>
               </>
             )}
           </nav>
