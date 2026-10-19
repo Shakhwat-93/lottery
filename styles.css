@@ -2193,44 +2193,6 @@ h3 {
   border-radius: 0 0 10px 10px;
 }
 
-.cert-recipient-name-overlay {
-  position: absolute;
-  top: 51.5%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 78%;
-  pointer-events: none;
-  z-index: 4;
-}
-
-.cert-recipient-bn {
-  font-family: 'Noto Serif Bengali', 'Hind Siliguri', serif;
-  font-size: clamp(1.1rem, 2.8vw, 1.95rem);
-  font-weight: 800;
-  color: #071739;
-  letter-spacing: 0.02em;
-  line-height: 1.15;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95);
-  border-bottom: 2px solid rgba(212, 175, 55, 0.85);
-  padding-bottom: 2px;
-}
-
-.cert-recipient-en {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(0.7rem, 1.6vw, 1.05rem);
-  font-weight: 700;
-  font-style: italic;
-  color: #8A6409;
-  letter-spacing: 0.04em;
-  margin-top: 2px;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.9);
-}
-
 .info-focus {
   max-width: 35rem;
   justify-self: end;
@@ -8069,14 +8031,6 @@ h3 {
 
   .agent-data-item .data-value.highlight {
     font-size: 0.72rem;
-  }
-
-  .cert-recipient-bn {
-    font-size: clamp(1rem, 4.2vw, 1.4rem);
-  }
-
-  .cert-recipient-en {
-    font-size: clamp(0.6rem, 2.5vw, 0.82rem);
   }
 
   .certificate-seal {

@@ -111,13 +111,8 @@ export default function TrustHero() {
           </div>
           <img
             src="/assets/site/best-agent-certificate.jpg"
-            alt="Thailand Lottery Official Government Best Agent Certificate 2026 - Fahim Chowdhury"
+            alt="Thailand Lottery Official Government Best Agent Certificate 2026"
           />
-          {/* Authentic Certificate Recipient Name Overlay */}
-          <div className="cert-recipient-name-overlay" aria-hidden="true">
-            <span className="cert-recipient-bn">ফাহিম চৌধুরী</span>
-            <span className="cert-recipient-en">Fahim Chowdhury</span>
-          </div>
         </div>
       </figure>
     </div>
