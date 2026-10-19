@@ -107,8 +107,8 @@ export default function VipOfferTimer() {
             <span className="count-sep golden-sep" aria-hidden="true">
               :
             </span>
-            <div className="countdown-box golden-countdown-box">
-              <span className="count-val golden-val" id="timer-seconds">
+            <div className="countdown-box golden-countdown-box countdown-box-seconds">
+              <span className="count-val golden-val count-val-seconds" id="timer-seconds">
                 {timeLeft.seconds}
               </span>
               <span className="count-label golden-label">SECS</span>
@@ -121,14 +121,17 @@ export default function VipOfferTimer() {
           <div className="seats-progress-container">
             <div className="progress-labels">
               <span>
-                আবেদন সম্পন্ন: <strong>৯৫%</strong>
+                আবেদন সম্পন্ন: <strong className="booking-pct-highlight">৯৫%</strong>
               </span>
-              <span>
+              <span className="quota-remain-live">
+                <span className="live-pulse-dot" aria-hidden="true" />
                 অবশিষ্ট: <strong className="seat-highlight-gold">মাত্র ৫টি ফর্ম বাকি</strong>
               </span>
             </div>
             <div className="progress-track" role="progressbar" aria-valuenow={95} aria-valuemin={0} aria-valuemax={100}>
-              <div className="progress-fill golden-progress-fill" style={{ width: '95%' }} />
+              <div className="progress-fill golden-progress-fill" style={{ width: '95%' }}>
+                <span className="progress-shimmer-sweep" aria-hidden="true" />
+              </div>
             </div>
           </div>
 
