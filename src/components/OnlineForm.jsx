@@ -9,7 +9,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
     dobYear: '1995',
     gender: 'Male',
     phone: '',
-    email: '',
     address: '',
     country: 'Bangladesh',
     customCountry: '',
@@ -153,11 +152,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
       setActiveCard('phone');
       return;
     }
-    if (!formData.email.trim()) {
-      alert('Please enter your Email Address (อีเมล).');
-      setActiveCard('email');
-      return;
-    }
     if (!formData.address.trim()) {
       alert('Please enter your Current Address (ที่อยู่ปัจจุบัน).');
       setActiveCard('address');
@@ -186,7 +180,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
       dobYear: '1995',
       gender: 'Male',
       phone: '',
-      email: '',
       address: '',
       country: 'Bangladesh',
       customCountry: '',
@@ -341,10 +334,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   <div className="receipt-row">
                     <span className="receipt-label">Contact Number (เบอร์โทรศัพท์):</span>
                     <strong className="receipt-value">{formData.phone}</strong>
-                  </div>
-                  <div className="receipt-row">
-                    <span className="receipt-label">Email Address (อีเมล):</span>
-                    <strong className="receipt-value">{formData.email}</strong>
                   </div>
                   <div className="receipt-row">
                     <span className="receipt-label">Current Address (ที่อยู่ปัจจุบัน):</span>
@@ -723,35 +712,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
 
-            {/* 8. Email Address (อีเมล) */}
-            <div
-              className={`gform-question-card ${activeCard === 'email' ? 'is-active-card' : ''}`}
-              onClick={() => setActiveCard('email')}
-            >
-              <div className="gform-card-left-indicator" aria-hidden="true" />
-              <label className="gform-question-title" htmlFor="gform-email">
-                Email Address (อีเมล) <span className="gform-req">*</span>
-              </label>
-              <p className="gform-question-desc">
-                Official digital registration card and draw results will be delivered to your email
-              </p>
-              <div className="gform-input-wrapper">
-                <input
-                  id="gform-email"
-                  name="email"
-                  type="email"
-                  required
-                  className="gform-underline-input"
-                  placeholder="your.email@example.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  onFocus={() => setActiveCard('email')}
-                />
-                <span className="gform-input-focus-line" aria-hidden="true" />
-              </div>
-            </div>
-
-            {/* 9. Address (ที่อยู่ปัจจุบัน) */}
+            {/* 7. Current Address (ที่อยู่ปัจจุบัน) */}
             <div
               className={`gform-question-card ${activeCard === 'address' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('address')}
