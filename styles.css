@@ -5346,6 +5346,80 @@ h3 {
   margin: 0;
 }
 
+/* Urgent Quota Notice Box inside Google Form */
+.gform-urgent-quota-box {
+  margin-top: 1.25rem;
+  padding: 1.15rem 1.35rem;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #FFF8F0 0%, #FFF3EB 50%, #FFFDF8 100%);
+  border: 1.8px solid #E60000;
+  box-shadow: 0 4px 16px rgba(230, 0, 0, 0.08), 0 0 10px rgba(255, 215, 0, 0.15);
+}
+
+.gform-urgent-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  margin-bottom: 0.65rem;
+}
+
+.gform-urgent-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, #D32F2F 0%, #B71C1C 100%) !important;
+  border: 1.5px solid #FFD700 !important;
+  color: #FFF9E0 !important;
+  font-family: var(--font-royal);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 8px rgba(196, 21, 28, 0.35);
+}
+
+.gform-urgent-stat {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #B31D1D;
+  background: rgba(196, 21, 28, 0.08);
+  border: 1px solid rgba(196, 21, 28, 0.2);
+  padding: 0.28rem 0.65rem;
+  border-radius: var(--radius-pill);
+}
+
+.gform-urgent-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 2.2vw, 1.28rem);
+  font-weight: 800;
+  color: #071739;
+  line-height: 1.4;
+  margin: 0 0 0.55rem;
+}
+
+.gform-urgent-heading .gform-gold-count {
+  color: #E60000;
+  font-weight: 900;
+  font-size: 1.35em;
+  padding: 0 0.15rem;
+}
+
+.gform-urgent-desc {
+  font-family: var(--font-bengali);
+  font-size: clamp(0.86rem, 1.8vw, 0.94rem);
+  color: #2D3748;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.gform-urgent-desc strong {
+  color: #071739;
+  font-weight: 700;
+}
+
 .gform-meta-banner {
   display: flex;
   flex-wrap: wrap;

@@ -57,22 +57,22 @@ export default function VipOfferTimer() {
   return (
     <section className="section offer-timer-section reveal-on-scroll" id="vip-offer" aria-label="Limited time VIP discount offer">
       <div className="offer-card golden-offer-card">
-        {/* Top Prominent Highlight Banner: Official Quota Announcement */}
+        {/* Top Prominent Highlight Banner: "মাত্র ৫টি ফর্ম বাকি আছে শুধু" */}
         <div className="urgent-forms-highlight-banner" role="alert">
           <div className="urgent-badge-left">
             <span className="urgent-beacon-dot" aria-hidden="true" />
-            <span className="urgent-badge-text">VIP QUOTA</span>
+            <span className="urgent-badge-text">জরুরি কোটা নোটিশ • LIMITED TIME OFFER</span>
           </div>
 
           <div className="urgent-main-highlight">
             <span className="urgent-siren" aria-hidden="true">🚨</span>
             <span className="urgent-message">
-              জরুরি নোটিশ: আর মাত্র <strong className="golden-urgent-number">৫টি</strong> ফর্ম বাকি আছে!
+              আর মাত্র <strong className="golden-urgent-number">৫টি</strong> ফর্ম বাকি আছে শুধু!
             </span>
           </div>
 
           <div className="urgent-quota-chip">
-            <span>বুকিং: <strong>৯৫%</strong> • বাকি: <strong className="chip-gold-num">৫টি ফর্ম</strong></span>
+            <span>কোটা: <strong>৯৫% বুকড</strong> • অবশিষ্ট: <strong className="chip-gold-num">৫টি</strong></span>
           </div>
         </div>
 
@@ -80,10 +80,10 @@ export default function VipOfferTimer() {
         <div className="offer-main-content">
           <div className="offer-title-group">
             <h2 className="golden-timer-headline">
-              সীমিত মেম্বারশিপ কোটা — আর মাত্র <span className="title-count-highlight">৫টি</span> ফর্ম বাকি
+              আর মাত্র <span className="title-count-highlight">৫টি</span> ফর্ম বাকি আছে — দ্রুত আপনার ফর্মটি বুক করুন!
             </h2>
             <p className="offer-desc">
-              The Government Lottery Office (GLO) Bangkok অনুমোদিত মেম্বারশিপ পোর্টাল। সময় শেষ হওয়ার পূর্বেই আবেদন সম্পন্ন করুন।
+              থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) অনুমোদিত মেম্বারশিপ কোটায় সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (TL-001)</strong> এর অধীনে আর <strong>মাত্র ৫টি অফিসিয়াল মেম্বারশিপ ফর্ম</strong> খালি রয়েছে। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার কনফার্ম করুন!
             </p>
           </div>
 
@@ -93,7 +93,7 @@ export default function VipOfferTimer() {
               <span className="count-val golden-val" id="timer-hours">
                 {timeLeft.hours}
               </span>
-              <span className="count-label golden-label">HOURS</span>
+              <span className="count-label golden-label">ঘণ্টা (Hours)</span>
             </div>
             <span className="count-sep golden-sep" aria-hidden="true">
               :
@@ -102,7 +102,7 @@ export default function VipOfferTimer() {
               <span className="count-val golden-val" id="timer-minutes">
                 {timeLeft.minutes}
               </span>
-              <span className="count-label golden-label">MINS</span>
+              <span className="count-label golden-label">মিনিট (Mins)</span>
             </div>
             <span className="count-sep golden-sep" aria-hidden="true">
               :
@@ -111,7 +111,7 @@ export default function VipOfferTimer() {
               <span className="count-val golden-val count-val-seconds" id="timer-seconds">
                 {timeLeft.seconds}
               </span>
-              <span className="count-label golden-label">SECS</span>
+              <span className="count-label golden-label">সেকেন্ড (Secs)</span>
             </div>
           </div>
         </div>
@@ -121,11 +121,10 @@ export default function VipOfferTimer() {
           <div className="seats-progress-container">
             <div className="progress-labels">
               <span>
-                আবেদন সম্পন্ন: <strong className="booking-pct-highlight">৯৫%</strong>
+                🔥 ফর্ম পূরণ চলছে: <strong>৯৫টি ফরম সম্পন্ন (৯৫%)</strong>
               </span>
-              <span className="quota-remain-live">
-                <span className="live-pulse-dot" aria-hidden="true" />
-                অবশিষ্ট: <strong className="seat-highlight-gold">মাত্র ৫টি ফর্ম বাকি</strong>
+              <span>
+                অবশিষ্ট কোটা: <strong className="seat-highlight-gold">মাত্র ৫টি ফর্ম বাকি শুধু!</strong>
               </span>
             </div>
             <div className="progress-track" role="progressbar" aria-valuenow={95} aria-valuemin={0} aria-valuemax={100}>
