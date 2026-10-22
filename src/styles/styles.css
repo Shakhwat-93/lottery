@@ -5179,12 +5179,12 @@ h3 {
 }
 
 /* Clear all luxury gold gradients and drop-shadows from Google Forms */
-.google-form-container h1,
-.google-form-container h2,
-.google-form-container h3,
-.google-form-container p,
-.google-form-container label,
-.google-form-container span {
+.google-form-container h1:not([class*="urgent"]):not([class*="highlight"]),
+.google-form-container h2:not([class*="urgent"]):not([class*="highlight"]),
+.google-form-container h3:not([class*="urgent"]):not([class*="highlight"]),
+.google-form-container p:not([class*="urgent"]):not([class*="highlight"]):not([class*="desc"]),
+.google-form-container label:not([class*="card"]):not([class*="row"]),
+.google-form-container span:not([class*="badge"]):not([class*="pill"]):not([class*="chip"]):not([class*="tag"]):not([class*="dot"]):not([class*="num"]):not([class*="stat"]):not([class*="crest"]):not([class*="indicator"]):not([class*="count"]):not([class*="radio"]):not([class*="quote"]) {
   background: none !important;
   -webkit-background-clip: initial !important;
   -webkit-text-fill-color: initial !important;
@@ -6054,6 +6054,630 @@ h3 {
   overflow: hidden;
 }
 
+/* ==========================================================================
+   OFFICIAL ROYAL MEMBERSHIP FORM INPUT STYLES (Matching Reference Graphic)
+   ========================================================================== */
+
+.gform-thai-tagline {
+  font-family: var(--font-thai);
+  font-size: 0.86rem;
+  color: #C4151C;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.gform-section-header-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, #091936 0%, #102A54 50%, #0A1C3B 100%);
+  border: 1.8px solid #D4AF37;
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.85rem;
+  box-shadow: 0 4px 14px rgba(9, 25, 54, 0.25), 0 0 10px rgba(212, 175, 55, 0.2);
+}
+
+.gform-section-header-banner.gform-fee-banner {
+  background: linear-gradient(135deg, #1A120B 0%, #3C2A21 50%, #1A120B 100%);
+  border-color: #FFD700;
+}
+
+.gform-section-header-banner.gform-bkash-banner {
+  background: linear-gradient(135deg, #5A082C 0%, #8A1248 50%, #5A082C 100%);
+  border-color: #FF66AA;
+}
+
+.gform-section-banner-title {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: #FFF9E0;
+  font-family: var(--font-royal);
+  font-size: clamp(0.88rem, 2.2vw, 1.05rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.gform-section-icon {
+  font-size: 1.25rem;
+}
+
+.gform-section-pill {
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: linear-gradient(180deg, #D4AF37 0%, #AA8010 100%);
+  color: #071739;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.06em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Date of Birth Grid */
+.gform-dob-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1.1fr;
+  gap: 12px;
+  margin-top: 0.75rem;
+}
+
+.gform-dob-col {
+  position: relative;
+}
+
+.gform-dob-label {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #5F6368;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+/* Gender Radio Group */
+.gform-gender-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 0.65rem;
+}
+
+/* Applicant Photo Upload Box & Quote */
+.gform-photo-upload-box {
+  background: #F8F9FA;
+  border: 2px dashed #1A73E8;
+  border-radius: 8px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.gform-photo-quote {
+  font-family: var(--font-royal);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: #C4151C;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-top: 0.25rem;
+}
+
+.gform-quote-mark {
+  color: #D4AF37;
+  font-size: 1.1rem;
+  padding: 0 2px;
+}
+
+.gform-file-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #071739;
+  background: #FFF0D4;
+  border: 1px solid #D4AF37;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.gform-nid-dashed-box {
+  background: #F8F9FA;
+  border: 2px dashed #34A853;
+  border-radius: 8px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Pricing Box Showcase */
+.gform-pricing-showcase-card {
+  background: linear-gradient(135deg, #091734 0%, #112347 100%) !important;
+  border: 2px solid #D4AF37 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 20px rgba(9, 23, 52, 0.35) !important;
+}
+
+.gform-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.gform-price-box {
+  border-radius: 8px;
+  padding: 1.15rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.gform-price-original {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+}
+
+.gform-price-label {
+  font-size: 0.8rem;
+  color: #CBD5E1;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.gform-price-num-struck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.gform-struck-line {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #94A3B8;
+  text-decoration: line-through;
+  text-decoration-color: #EF4444;
+  text-decoration-thickness: 3px;
+}
+
+.gform-price-sub {
+  font-size: 0.82rem;
+  color: #94A3B8;
+}
+
+.gform-price-tag-badge {
+  font-size: 0.72rem;
+  color: #94A3B8;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.gform-price-discount {
+  background: linear-gradient(135deg, #7F1D1D 0%, #991B1B 50%, #B91C1C 100%);
+  border: 2px solid #FFD700;
+  box-shadow: 0 4px 16px rgba(185, 28, 28, 0.4), 0 0 12px rgba(255, 215, 0, 0.35);
+}
+
+.gform-discount-chip {
+  font-size: 0.76rem;
+  font-weight: 800;
+  background: #FFD700;
+  color: #071739;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.gform-price-num-highlight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.gform-price-loud {
+  font-family: var(--font-royal);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #FFD700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.gform-price-bdt {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #FFF9E0;
+}
+
+.gform-limited-badge {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #FEF08A;
+}
+
+.gform-price-special-client {
+  background: rgba(212, 175, 55, 0.12);
+  border: 1.5px solid #D4AF37;
+  justify-content: center;
+}
+
+.gform-special-flag {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}
+
+.gform-arabic-discount {
+  font-family: "Amiri", "Traditional Arabic", serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #FFD700;
+  margin-bottom: 6px;
+  direction: rtl;
+}
+
+.gform-special-note {
+  font-size: 0.76rem;
+  color: #E2E8F0;
+  line-height: 1.4;
+}
+
+/* Membership Duration Group */
+.gform-duration-radio-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 0.75rem;
+}
+
+.gform-duration-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 1rem;
+  background: #F8F9FA;
+  border: 1.5px solid #DADCE0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gform-duration-card.is-checked {
+  background: #E8F0FE;
+  border-color: #1A73E8;
+  box-shadow: 0 2px 8px rgba(26, 115, 232, 0.2);
+}
+
+.gform-duration-card.is-popular {
+  border-color: #D4AF37;
+}
+
+.gform-duration-card.is-popular.is-checked {
+  border-color: #D4AF37;
+  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
+}
+
+.gform-popular-badge {
+  position: absolute;
+  top: -10px;
+  right: 12px;
+  background: #D4AF37;
+  color: #071739;
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.05em;
+}
+
+.gform-duration-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gform-duration-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gform-duration-name {
+  font-size: 0.95rem;
+  color: #202124;
+}
+
+.gform-duration-note {
+  font-size: 0.78rem;
+  color: #5F6368;
+  margin-left: 26px;
+}
+
+/* Agent Information Card */
+.gform-agent-profile-card {
+  background: #FFFDF8 !important;
+  border: 1.8px solid #D4AF37 !important;
+}
+
+.gform-agent-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1.4fr 0.8fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.gform-agent-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gform-agent-label {
+  font-size: 0.78rem;
+  color: #5F6368;
+  font-weight: 600;
+}
+
+.gform-agent-name-highlight {
+  font-family: var(--font-bengali);
+  font-size: 1.05rem;
+  color: #071739;
+  font-weight: 800;
+}
+
+.gform-agent-id-badge {
+  display: inline-block;
+  font-family: monospace;
+  font-size: 1rem;
+  font-weight: 800;
+  background: #071739;
+  color: #FFD700;
+  padding: 2px 10px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  width: fit-content;
+}
+
+.gform-agent-subtext {
+  font-size: 0.76rem;
+  color: #70757A;
+}
+
+.gform-agent-documents-box {
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 6px;
+  padding: 10px 14px;
+}
+
+.gform-docs-title {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #C4151C;
+  margin-bottom: 6px;
+  letter-spacing: 0.03em;
+}
+
+.gform-docs-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: #3C4043;
+}
+
+.gform-agent-crest-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  background: linear-gradient(180deg, #FFF7E6 0%, #FFEDD5 100%);
+  border: 1.5px solid #D4AF37;
+  border-radius: 8px;
+}
+
+.gform-agent-crest-icon {
+  font-size: 1.8rem;
+  margin-bottom: 2px;
+}
+
+.gform-agent-crest-text {
+  font-family: var(--font-royal);
+  font-size: 0.76rem;
+  font-weight: 900;
+  color: #071739;
+  letter-spacing: 0.05em;
+}
+
+.gform-agent-crest-sub {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #B45309;
+}
+
+.gform-success-thai-title {
+  font-family: var(--font-thai);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #137333;
+  margin-bottom: 0.5rem;
+}
+
+/* Google Form bKash Card Styling */
+.gform-bkash-card {
+  background: linear-gradient(135deg, #FFF5F8 0%, #FFFFFF 50%, #FFF0F5 100%);
+  border: 2px solid #E2136E;
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-top: 10px;
+  box-shadow: 0 4px 16px rgba(226, 19, 110, 0.1);
+}
+
+.gform-bkash-top {
+  margin-bottom: 14px;
+}
+
+.gform-bkash-logo-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.bkash-badge-chip {
+  background: #E2136E !important;
+  color: #FFFFFF !important;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  display: inline-block;
+}
+
+.bkash-verified-indicator {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #137333 !important;
+  background: #E6F4EA !important;
+  border: 1px solid rgba(19, 115, 51, 0.3) !important;
+  padding: 3px 10px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.gform-bkash-number-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(226, 19, 110, 0.35);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.gform-bkash-number {
+  font-family: var(--font-royal), monospace;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #E2136E;
+  letter-spacing: 1.5px;
+}
+
+.gform-copy-btn {
+  background: #E2136E;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(226, 19, 110, 0.3);
+}
+
+.gform-copy-btn:hover {
+  background: #C20F5C;
+  transform: translateY(-1px);
+}
+
+.gform-bkash-instructions {
+  font-size: 0.84rem;
+  color: #4A5568;
+  line-height: 1.5;
+  margin: 0;
+  padding: 8px 12px;
+  background: rgba(226, 19, 110, 0.05);
+  border-radius: 6px;
+}
+
+.gform-bkash-inputs-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.gform-subfield {
+  display: flex;
+  flex-direction: column;
+}
+
+.gform-subfield-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #202124;
+  margin-bottom: 6px;
+}
+
+/* Footer Action Bar */
+.gform-footer-action-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+.gform-submit-btn {
+  width: 100%;
+  max-width: 520px;
+  padding: 1rem 2rem !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  text-align: center;
+  justify-content: center;
+  border-radius: 8px !important;
+  background: linear-gradient(180deg, #E60000 0%, #C4151C 45%, #990000 100%) !important;
+  border: 1.5px solid #FFD700 !important;
+  color: #FFF9E0 !important;
+  box-shadow: 0 6px 20px rgba(196, 21, 28, 0.45), 0 0 14px rgba(255, 215, 0, 0.3) !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gform-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(196, 21, 28, 0.6), 0 0 20px rgba(255, 215, 0, 0.5) !important;
+}
+
+.gform-security-footer-note {
+  font-size: 0.78rem;
+  color: #5F6368;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
 .gform-success-body {
   padding: clamp(1.8rem, 4vw, 2.5rem);
   text-align: left;
@@ -6256,6 +6880,38 @@ h3 {
 
   .gform-clear-form-btn {
     text-align: center;
+  }
+
+  .gform-dob-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .gform-agent-layout {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .gform-agent-meta {
+    align-items: center;
+  }
+
+  .gform-pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .gform-duration-radio-group {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .gform-section-header-banner {
+    padding: 0.65rem 0.85rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
   }
 }
 
