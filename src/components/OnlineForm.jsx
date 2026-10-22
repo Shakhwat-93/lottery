@@ -278,25 +278,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
 
-            {/* Official Quota Urgent Banner */}
-            <div className="gform-urgent-quota-box" role="alert">
-              <div className="gform-urgent-top">
-                <div className="urgent-badge-left">
-                  <span className="urgent-beacon-dot" aria-hidden="true" />
-                  <span className="urgent-badge-text">জরুরি কোটা নোটিশ • LIMITED TIME OFFER</span>
-                </div>
-                <div className="urgent-quota-chip">
-                  <span>কোটা: <strong>৯৫% বুকড</strong> • অবশিষ্ট: <strong className="chip-gold-num">৫টি</strong></span>
-                </div>
-              </div>
-              <h3 className="gform-urgent-heading">
-                🚨 আর মাত্র <span className="gform-gold-count">৫টি</span> ফর্ম বাকি আছে — দ্রুত আপনার ফর্মটি বুক করুন!
-              </h3>
-              <p className="gform-urgent-desc">
-                থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) অনুমোদিত মেম্বারশিপ কোটায় সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (TL-001)</strong> এর অধীনে আর <strong>মাত্র ৫টি অফিসিয়াল মেম্বারশিপ ফর্ম</strong> খালি রয়েছে। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার কনফার্ম করুন!
-              </p>
-            </div>
-
             <div className="gform-meta-banner">
               <span className="gform-fee-pill">
                 🏛️ Official Quota Fee: <strong>250 SAR / 2,500 BDT</strong>
