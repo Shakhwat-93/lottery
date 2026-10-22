@@ -137,13 +137,13 @@ export default function VipOfferTimer() {
 
           <div className="offer-cta-group">
             <Link className="button primary offer-cta-btn golden-cta-btn" to="/form">
-              <span>ফর্ম নিতে এখানে ক্লিক করুন</span>
+              <span>বাকি ৫টি ফর্মের ১টি পূরণ করুন ✍️</span>
               <span className="btn-arrow" aria-hidden="true">
                 →
               </span>
             </Link>
             <Link className="button secondary" to="/game">
-              সিওর পেপার
+              সিওর পেপার দেখুন
             </Link>
           </div>
         </div>

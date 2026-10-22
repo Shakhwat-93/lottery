@@ -23,25 +23,25 @@ export default function PaymentMethods() {
         <div className="payment-card">
           <div className="payment-copy">
             <p className="eyebrow">
-              <span className="eyebrow-flag" aria-hidden="true">🇹🇭</span> GOVT TREASURY
+              <span className="eyebrow-flag" aria-hidden="true">🇹🇭</span> รัฐบาลไทย • OFFICIAL GOVT TREASURY • সরাসরি সরকারি কোষাগার
             </p>
-            <h2>পেমেন্ট পদ্ধতি ও সরকারি কোষাগার</h2>
+            <h2>Accepted Payment Methods & Direct Govt Treasury</h2>
 
             {/* Payee Transparency Box */}
             <div className="payee-official-box">
               <div className="payee-badge-row">
                 <span className="payee-pill">
-                  <span className="payee-check">✓</span> সরাসরি সরকারি কোষাগারে জমা
+                  <span className="payee-check">✓</span> সরাসরি থাইল্যান্ড সরকারে জমা
                 </span>
                 <span className="payee-merchant-code">
-                  MERCHANT ID: <strong>TH-GLO-GOV-2026</strong>
+                  মার্চেন্ট আইডি: <strong>TH-GLO-GOV-2026</strong>
                 </span>
               </div>
 
               <div className="payee-details">
-                <span className="payee-title-label">OFFICIAL PAYEE:</span>
+                <span className="payee-title-label">পেমেন্ট প্রাপক (Official Payee):</span>
                 <strong className="payee-name-bn">
-                  สำนักงานสลากกินแบ่งรัฐบาล (GLO Bangkok HQ)
+                  গভর্নমেন্ট লটারি অফিস (GLO) কেন্দ্রীয় কোষাগার, থাইল্যান্ড সরকার
                 </strong>
                 <span className="payee-name-en">
                   The Government Lottery Office (GLO) Treasury, Royal Thai Government
@@ -49,7 +49,7 @@ export default function PaymentMethods() {
               </div>
 
               <p className="payee-guarantee-note">
-                🛡️ প্রতিটি ট্রানজেকশন সরাসরি থাইল্যান্ড সরকারের কেন্দ্রীয় ট্রেজারিতে জমা হয়। শতভাগ নিরাপদ ও এনক্রিপ্টেড পেমেন্ট ব্যবস্থা।
+                🛡️ আপনার জমাকৃত প্রতিটি ডিপোজিট বা ফি সরাসরি থাইল্যান্ড সরকারের কেন্দ্রীয় ট্রেজারি গেটওয়েতে ব্যাংক-এনক্রিপ্টেড পদ্ধতিতে জমা হয়। কোনো ব্যক্তি বা মধ্যস্থতাকারীর ব্যক্তিগত অ্যাকাউন্টে টাকা নেওয়া হয় না।
               </p>
             </div>
           </div>

@@ -6,6 +6,7 @@ import HeroVideo from '../components/HeroVideo';
 import TrustHero from '../components/TrustHero';
 import Certificates from '../components/Certificates';
 import VipOfferTimer from '../components/VipOfferTimer';
+import FormShowcase from '../components/FormShowcase';
 import PaymentMethods from '../components/PaymentMethods';
 import CustomerReview from '../components/CustomerReview';
 import PreviousWinners from '../components/PreviousWinners';
@@ -26,6 +27,10 @@ export default function HomePage() {
         <TrustHero />
         <Certificates />
         <VipOfferTimer />
+        <FormShowcase />
+        <PreviousWinners />
+        <CustomerReview videoRef={reviewVideoRef} />
+        <PaymentMethods />
         <section className="section three-set-home-strip reveal-on-scroll" id="three-set-game-section">
           <div className="three-set-home-card">
             <div className="three-set-glow-ring" aria-hidden="true" />
@@ -42,9 +47,6 @@ export default function HomePage() {
             </Link>
           </div>
         </section>
-        <PreviousWinners />
-        <CustomerReview videoRef={reviewVideoRef} />
-        <PaymentMethods />
         <SurePaperSlider />
         <GamePanelCta />
       </main>

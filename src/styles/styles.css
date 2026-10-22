@@ -782,27 +782,29 @@ main {
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  margin: 0 0 1rem;
-  padding: 0.36rem clamp(0.7rem, 2.8vw, 1.25rem);
+  margin: 0 auto 1.1rem;
+  padding: 0.42rem clamp(0.9rem, 3vw, 1.6rem);
   border-radius: var(--radius-pill);
-  background: linear-gradient(180deg, var(--royal-red-bright) 0%, var(--royal-red-dark) 100%);
-  border: 1.5px solid var(--royal-gold-bright);
-  color: #FFF9E0;
+  background: linear-gradient(180deg, var(--royal-red-bright) 0%, var(--royal-red-dark) 100%) !important;
+  border: 1.5px solid var(--royal-gold-bright) !important;
+  color: #FFF9E0 !important;
   font-family: var(--font-royal);
-  font-size: clamp(0.72rem, 2.2vw, 0.82rem);
-  font-weight: 800;
-  letter-spacing: 0.05em;
+  font-size: clamp(0.72rem, 2.2vw, 0.84rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  box-shadow: 0 4px 16px rgba(196, 21, 28, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 18px rgba(196, 21, 28, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
   max-width: 96%;
-  white-space: nowrap;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .eyebrow::before,
 .eyebrow::after {
   content: "❖";
-  color: #FFD700;
-  font-size: 0.68rem;
+  color: #FFD700 !important;
+  font-size: 0.72rem;
+  font-weight: 900;
 }
 
 h1,
@@ -8579,15 +8581,20 @@ h3 {
   }
 
   .eyebrow {
-    margin-bottom: 0.65rem !important;
-    font-size: clamp(0.68rem, 2.8vw, 0.76rem) !important;
-    line-height: 1.4 !important;
-    padding: 0.32rem 0.7rem !important;
-    max-width: 100% !important;
+    margin: 0 auto 0.75rem !important;
+    font-size: clamp(0.68rem, 2.7vw, 0.76rem) !important;
+    line-height: 1.45 !important;
+    padding: 0.45rem 1.15rem !important;
+    max-width: 92% !important;
     white-space: normal !important;
     text-align: center !important;
     word-break: break-word !important;
     box-sizing: border-box !important;
+    color: #FFF9E0 !important;
+    border-radius: var(--radius-pill) !important;
+    background: linear-gradient(180deg, var(--royal-red-bright) 0%, var(--royal-red-dark) 100%) !important;
+    border: 1.5px solid #FFD700 !important;
+    box-shadow: 0 4px 18px rgba(196, 21, 28, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
   }
 
   .hero-copy,
