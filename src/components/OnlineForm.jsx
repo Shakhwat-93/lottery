@@ -12,7 +12,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
     address: '',
     country: 'Bangladesh',
     customCountry: '',
-    membershipDuration: '6 Months',
     govtPaymentMethod: 'Visa',
     bkashSenderNumber: '',
     bkashTrxId: ''
@@ -183,7 +182,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
       address: '',
       country: 'Bangladesh',
       customCountry: '',
-      membershipDuration: '6 Months',
       govtPaymentMethod: 'Visa',
       bkashSenderNumber: '',
       bkashTrxId: ''
@@ -344,10 +342,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
                     <strong className="receipt-value">
                       {formData.country === 'Other Country' ? formData.customCountry : formData.country}
                     </strong>
-                  </div>
-                  <div className="receipt-row">
-                    <span className="receipt-label">Membership Duration (ระยะเวลา):</span>
-                    <strong className="receipt-value highlight-govt">{formData.membershipDuration}</strong>
                   </div>
                   <div className="receipt-row">
                     <span className="receipt-label">Applicant Photo (รูปถ่าย):</span>
@@ -826,62 +820,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   <div className="gform-arabic-discount">خصم خاص للعملاء المتميزين</div>
                   <span className="gform-special-note">Special VIP Quota Authorized by GLO Bangkok</span>
                 </div>
-              </div>
-            </div>
-
-            {/* Section Divider: MEMBERSHIP DURATION */}
-            <div className="gform-section-header-banner">
-              <div className="gform-section-banner-title">
-                <span className="gform-section-icon" aria-hidden="true">🗓️</span>
-                <span className="gform-section-text">
-                  MEMBERSHIP DURATION (เลือกประเภทสมาชิก)
-                </span>
-              </div>
-              <span className="gform-section-pill">SELECT DURATION</span>
-            </div>
-
-            {/* 12. Membership Duration (เลือกประเภทสมาชิก) */}
-            <div
-              className={`gform-question-card ${activeCard === 'duration' ? 'is-active-card' : ''}`}
-              onClick={() => setActiveCard('duration')}
-            >
-              <div className="gform-card-left-indicator" aria-hidden="true" />
-              <div className="gform-question-title">
-                Membership Duration (เลือกประเภทสมาชิก) <span className="gform-req">*</span>
-              </div>
-              <p className="gform-question-desc">Select your desired VIP membership valid subscription period</p>
-
-              <div className="gform-duration-radio-group">
-                {[
-                  { id: '3 Months', label: '3 Months (3 เดือน)', note: 'Quarterly Package' },
-                  { id: '6 Months', label: '6 Months (6 เดือน)', note: 'Most Popular VIP Package', popular: true },
-                  { id: '12 Months', label: '12 Months (12 เดือน)', note: 'Annual Full-Year VIP Access' }
-                ].map((dur) => (
-                  <label
-                    key={dur.id}
-                    className={`gform-duration-card ${formData.membershipDuration === dur.id ? 'is-checked' : ''} ${dur.popular ? 'is-popular' : ''}`}
-                  >
-                    <input
-                      type="radio"
-                      name="membershipDuration"
-                      value={dur.id}
-                      checked={formData.membershipDuration === dur.id}
-                      onChange={handleChange}
-                      onFocus={() => setActiveCard('duration')}
-                      className="gform-native-radio"
-                    />
-                    <div className="gform-duration-content">
-                      <div className="gform-duration-header">
-                        <span className="gform-custom-radio" aria-hidden="true">
-                          <span className="gform-radio-inner-dot" />
-                        </span>
-                        <strong className="gform-duration-name">{dur.label}</strong>
-                      </div>
-                      <span className="gform-duration-note">{dur.note}</span>
-                    </div>
-                    {dur.popular && <span className="gform-popular-badge">RECOMMENDED</span>}
-                  </label>
-                ))}
               </div>
             </div>
 
