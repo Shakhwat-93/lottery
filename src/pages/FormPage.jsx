@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import OnlineForm from '../components/OnlineForm';
-import FormVideoPopup from '../components/FormVideoPopup';
 
 export default function FormPage() {
   useEffect(() => {
@@ -12,11 +11,8 @@ export default function FormPage() {
   }, []);
 
   return (
-    <>
-      <FormVideoPopup videoSrc="/form-intro-video.mp4" />
-      <main className="form-page-main form-page-standalone">
-        <OnlineForm isStandalonePage={true} />
-      </main>
-    </>
+    <main className="form-page-main form-page-standalone">
+      <OnlineForm isStandalonePage={true} />
+    </main>
   );
 }
