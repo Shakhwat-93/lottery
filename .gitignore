@@ -10,6 +10,8 @@ scratch/
 Downloads/
 *.mp4
 !public/form-intro-video.mp4
+!public/Video-Project-11.mp4
+!public/form-video-optimized.mp4
 !public/logo-transition.mp4
 out/
 

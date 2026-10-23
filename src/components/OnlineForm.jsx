@@ -165,6 +165,46 @@ export default function OnlineForm({ isStandalonePage = false }) {
       id="online-form"
     >
       <div className="google-form-container" aria-label="Official Thailand Lottery Registration Form">
+        {/* Official Top Video Card */}
+        <div className="gform-top-video-card" aria-label="Official Briefing Video">
+          <div className="gform-video-header-bar">
+            <div className="gform-video-title-wrap">
+              <span className="gform-video-live-pill">
+                <span className="gform-video-pulse" aria-hidden="true" />
+                OFFICIAL VIDEO
+              </span>
+              <h2 className="gform-video-headline">গভর্নমেন্ট লটারি অফিস অফিশিয়াল দিকনির্দেশনা</h2>
+            </div>
+            <span className="gform-video-duration-badge" title="ভিডিও সময়সীমা">10s HD</span>
+          </div>
+
+          <div className="gform-video-player-container">
+            <video
+              className="gform-hero-video"
+              controls
+              playsInline
+              preload="metadata"
+              poster="/form-video-poster.jpg"
+              title="Official Thailand Lottery Video Briefing"
+            >
+              <source src="/form-video-optimized.mp4" type="video/mp4" />
+              <source src="/Video-Project-11.mp4" type="video/mp4" />
+              আপনার ব্রাউজারে ভিডিও প্লেয়ার সমর্থিত নয়।
+            </video>
+          </div>
+
+          <div className="gform-video-footer-bar">
+            <span className="gform-video-info-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+              </svg>
+            </span>
+            <p className="gform-video-note">
+              ফরম পূরণ করার পূর্বে উপরের অফিশিয়াল দিকনির্দেশনামূলক ভিডিওটি সম্পূর্ণ মনোযোগ দিয়ে দেখে নিন।
+            </p>
+          </div>
+        </div>
+
         {/* Top Header Card */}
         <div className="gform-top-card">
           <div className="gform-color-stripe" />

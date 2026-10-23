@@ -5211,6 +5211,139 @@ h3 {
   text-rendering: optimizeLegibility;
 }
 
+/* ==========================================================================
+   TOP BRIEFING VIDEO CARD (ELITE AGENCY TIER)
+   ========================================================================== */
+.gform-top-video-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+  box-shadow: 0 10px 30px -5px rgba(7, 23, 57, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gform-top-video-card:hover {
+  box-shadow: 0 16px 40px -6px rgba(7, 23, 57, 0.12), 0 4px 14px rgba(212, 175, 55, 0.2);
+}
+
+.gform-video-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, #071739 0%, #0c2356 100%);
+  color: #FFFFFF;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.gform-video-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.gform-video-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(225, 29, 72, 0.2);
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  color: #FFB3BA;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 3px 9px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.gform-video-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #EF4444;
+  box-shadow: 0 0 8px #EF4444;
+  animation: pulseVideoDot 1.8s infinite ease-in-out;
+}
+
+@keyframes pulseVideoDot {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.gform-video-headline {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #F8FAFC;
+  letter-spacing: -0.01em;
+}
+
+.gform-video-duration-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #D4AF37;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.gform-video-player-container {
+  position: relative;
+  width: 100%;
+  background: #020617;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.gform-hero-video {
+  width: 100%;
+  max-width: 100%;
+  max-height: 520px;
+  display: block;
+  margin: 0 auto;
+  aspect-ratio: 4 / 5;
+  object-fit: contain;
+  background: #000000;
+  outline: none;
+}
+
+.gform-video-footer-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: #FFFDF5;
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
+  color: #78350F;
+}
+
+.gform-video-info-icon {
+  display: flex;
+  align-items: center;
+  color: #D97706;
+  flex-shrink: 0;
+}
+
+.gform-video-note {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #92400E;
+  font-weight: 500;
+}
+
 /* Top Hero Card */
 .gform-top-card {
   background: #FFFFFF;
@@ -6422,6 +6555,32 @@ h3 {
     width: 100%;
     max-width: 100%;
     gap: 12px;
+  }
+
+  .gform-top-video-card {
+    border-radius: 12px;
+  }
+
+  .gform-video-header-bar {
+    padding: 10px 12px;
+  }
+
+  .gform-video-headline {
+    font-size: 0.84rem;
+  }
+
+  .gform-hero-video {
+    max-height: 72vh;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .gform-video-footer-bar {
+    padding: 8px 12px;
+  }
+
+  .gform-video-note {
+    font-size: 0.78rem;
   }
 
   .gform-header-content {
