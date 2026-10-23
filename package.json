@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "remotion:preview": "remotion preview src/remotion/index.ts",
+    "remotion:render": "remotion render src/remotion/index.ts LogoTransitionVertical public/logo-transition.mp4 --codec h264 --crf 18 --overwrite",
     "start": "vite"
   },
   "keywords": [
@@ -19,9 +21,11 @@
   "dependencies": {
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "react-router-dom": "^7.18.4"
+    "react-router-dom": "^7.18.4",
+    "remotion": "^4.0.538"
   },
   "devDependencies": {
+    "@remotion/cli": "^4.0.538",
     "@vitejs/plugin-react": "^6.1.2",
     "vite": "^8.3.4"
   }
