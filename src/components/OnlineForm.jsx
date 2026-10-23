@@ -224,25 +224,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
 
-            <div className="gform-meta-banner gform-meta-highlight-box" role="status">
-              <div className="gform-fee-pill">
-                <span className="gform-fee-icon" aria-hidden="true">🏛️</span>
-                <span className="gform-fee-title">Official Quota Fee:</span>
-                <div className="gform-fee-prices-wrap">
-                  <del className="gform-fee-original" title="Regular Official Fee">2500 SAR</del>
-                  <span className="gform-fee-discounted-glow">
-                    <strong className="gform-glowing-number">250 SAR</strong>
-                    <span className="gform-glowing-bdt">/ 2,500 BDT</span>
-                  </span>
-                  <span className="gform-discount-tag">-90% OFF</span>
-                </div>
-              </div>
-              <div className="gform-quota-pill gform-quota-pill-pulse">
-                <span className="gform-quota-siren" aria-hidden="true">🚨</span>
-                <span>Remaining Slots: <strong>Only 5 quotas available (মাত্র ৫টি বাকি)</strong></span>
-              </div>
-            </div>
-
             <div className="gform-notice-box">
               <p>⚠️ Please submit verified and accurate information matching your official documents.</p>
               <span className="gform-required-note">* Indicates required question</span>
