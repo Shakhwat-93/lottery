@@ -742,50 +742,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
               )}
             </div>
 
-            {/* Section Divider: MEMBERSHIP FEE & DISCOUNT */}
-            <div className="gform-section-header-banner gform-fee-banner">
-              <div className="gform-section-banner-title">
-                <span className="gform-section-icon" aria-hidden="true">💳</span>
-                <span className="gform-section-text">
-                  MEMBERSHIP FEE & QUOTA
-                </span>
-              </div>
-              <span className="gform-section-pill">SPECIAL DISCOUNT OFFER</span>
-            </div>
-
-            {/* 11. Visual Pricing Box Matching Image Reference */}
-            <div className="gform-question-card gform-pricing-showcase-card">
-              <div className="gform-card-left-indicator" aria-hidden="true" />
-              <div className="gform-pricing-grid">
-                {/* Original Price */}
-                <div className="gform-price-box gform-price-original">
-                  <span className="gform-price-label">Original Price</span>
-                  <div className="gform-price-num-struck">
-                    <span className="gform-struck-line">1250 SAR</span>
-                    <span className="gform-price-sub">(35,000 BDT)</span>
-                  </div>
-                  <span className="gform-price-tag-badge">International Standard</span>
-                </div>
-
-                {/* Special Discount Price */}
-                <div className="gform-price-box gform-price-discount">
-                  <span className="gform-discount-chip">Special Discount Price</span>
-                  <div className="gform-price-num-highlight">
-                    <span className="gform-price-loud">250 SAR</span>
-                    <span className="gform-price-bdt">(২,৫০০ টাকা / BDT)</span>
-                  </div>
-                  <span className="gform-limited-badge">⚡ Limited Time Offer</span>
-                </div>
-
-                {/* Saudi & International Arabic Tag */}
-                <div className="gform-price-box gform-price-special-client">
-                  <div className="gform-special-flag">🇸🇦 🇧🇩 🇦🇪</div>
-                  <div className="gform-arabic-discount">خصم خاص للعملاء المتميزين</div>
-                  <span className="gform-special-note">Special VIP Quota Authorized by GLO Bangkok</span>
-                </div>
-              </div>
-            </div>
-
             {/* Section Divider: AGENT INFORMATION */}
             <div className="gform-section-header-banner">
               <div className="gform-section-banner-title">
