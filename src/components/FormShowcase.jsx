@@ -8,7 +8,7 @@ export default function FormShowcase() {
     <section className="section form-section reveal-on-scroll" id="online-form">
       <div className="section-heading">
         <p className="eyebrow">
-          แบบฟอร์มลงทะเบียนออนไลน์ • ONLINE REGISTRATION • অফিসিয়াল অনলাইন রেজিস্ট্রেশন
+          ONLINE REGISTRATION • অফিসিয়াল অনলাইন রেজিস্ট্রেশন
         </p>
         <h2>Thailand Lottery Official Membership Registration Form</h2>
         <p>
@@ -18,7 +18,7 @@ export default function FormShowcase() {
 
       <div className="membership-board" aria-label="Online registration and member verification">
         <div className="online-form-title">
-          <span>MEMBERSHIP REGISTRATION FORM • แบบฟอร์มออนไลน์</span>
+          <span>MEMBERSHIP REGISTRATION FORM</span>
           <span className="form-remaining-pill">🚨 মাত্র ৫টি ফর্ম বাকি!</span>
         </div>
 
