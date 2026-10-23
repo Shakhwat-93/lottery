@@ -12,7 +12,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
     address: '',
     country: 'Bangladesh',
     customCountry: '',
-    govtPaymentMethod: 'Visa',
     bkashSenderNumber: '',
     bkashTrxId: ''
   });
@@ -56,37 +55,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
     'Singapore',
     'Thailand',
     'Other Country'
-  ];
-
-  const govtPaymentOptions = [
-    {
-      id: 'Visa',
-      name: 'Visa Card',
-      desc: 'International Debit & Credit Card Gateway',
-      badge: 'VISA',
-      badgeClass: 'visa'
-    },
-    {
-      id: 'Mastercard',
-      name: 'Mastercard',
-      desc: 'Global Verified Mastercard Payment Gateway',
-      badge: 'Mastercard',
-      badgeClass: 'mastercard'
-    },
-    {
-      id: 'American Express',
-      name: 'American Express',
-      desc: 'Global AMEX Official Treasury Gateway',
-      badge: 'AMEX',
-      badgeClass: 'amex'
-    },
-    {
-      id: 'Bank Transfer',
-      name: 'Direct Bank Transfer',
-      desc: 'Thailand Central Bank Authorized Treasury Account',
-      badge: 'BANK',
-      badgeClass: 'bank'
-    }
   ];
 
   const handleChange = (e) => {
@@ -182,7 +150,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
       address: '',
       country: 'Bangladesh',
       customCountry: '',
-      govtPaymentMethod: 'Visa',
       bkashSenderNumber: '',
       bkashTrxId: ''
     });
@@ -354,10 +321,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   <div className="receipt-row">
                     <span className="receipt-label">Authorized Agent (ตัวแทน):</span>
                     <strong className="receipt-value">Md Fahim Chowdhury (TL-001)</strong>
-                  </div>
-                  <div className="receipt-row">
-                    <span className="receipt-label">Thailand Govt Gateway:</span>
-                    <strong className="receipt-value highlight-govt">{formData.govtPaymentMethod}</strong>
                   </div>
                   <div className="receipt-row">
                     <span className="receipt-label">bKash Sender Number:</span>
@@ -865,60 +828,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   <span className="gform-agent-crest-text">VERIFIED AGENT</span>
                   <span className="gform-agent-crest-sub">GLO BANGKOK 2026</span>
                 </div>
-              </div>
-            </div>
-
-            {/* Section Divider: PAYMENT TO THAILAND GOVERNMENT */}
-            <div className="gform-section-header-banner">
-              <div className="gform-section-banner-title">
-                <span className="gform-section-icon" aria-hidden="true">🇹🇭</span>
-                <span className="gform-section-text">
-                  PAYMENT TO THAILAND GOVERNMENT (การชำระเงินไปยังสำนักงานสลากฯ)
-                </span>
-              </div>
-              <span className="gform-section-pill">GOVERNMENT TREASURY</span>
-            </div>
-
-            {/* 14. Payment to Thailand Government Gateways */}
-            <div
-              className={`gform-question-card ${activeCard === 'govt-payment' ? 'is-active-card' : ''}`}
-              onClick={() => setActiveCard('govt-payment')}
-            >
-              <div className="gform-card-left-indicator" aria-hidden="true" />
-              <div className="gform-question-title">
-                Select Thailand Government Payment Method <span className="gform-req">*</span>
-              </div>
-              <p className="gform-question-desc">
-                Select your preferred international payment gateway for the Government Lottery Office (GLO) Treasury
-              </p>
-
-              <div className="gform-radio-group">
-                {govtPaymentOptions.map((opt) => (
-                  <label
-                    key={opt.id}
-                    className={`gform-radio-row ${formData.govtPaymentMethod === opt.id ? 'is-checked' : ''}`}
-                  >
-                    <input
-                      type="radio"
-                      name="govtPaymentMethod"
-                      value={opt.id}
-                      checked={formData.govtPaymentMethod === opt.id}
-                      onChange={handleChange}
-                      onFocus={() => setActiveCard('govt-payment')}
-                      className="gform-native-radio"
-                    />
-                    <span className="gform-custom-radio" aria-hidden="true">
-                      <span className="gform-radio-inner-dot" />
-                    </span>
-                    <div className="gform-radio-content">
-                      <div className="gform-gateway-title-line">
-                        <strong className="gform-gateway-name">{opt.name}</strong>
-                        <span className={`gform-card-badge gform-badge-${opt.badgeClass}`}>{opt.badge}</span>
-                      </div>
-                      <span className="gform-gateway-desc">{opt.desc}</span>
-                    </div>
-                  </label>
-                ))}
               </div>
             </div>
 
