@@ -4,7 +4,6 @@ import HomePage from './pages/HomePage';
 import GamePage from './pages/GamePage';
 import FormPage from './pages/FormPage';
 import ThreeSetGamePage from './pages/ThreeSetGamePage';
-import FloatingContactButtons from './components/FloatingContactButtons';
 
 export default function App() {
   return (
@@ -21,7 +20,6 @@ export default function App() {
         <Route path="/game.html" element={<GamePage />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
-      <FloatingContactButtons />
     </BrowserRouter>
   );
 }
