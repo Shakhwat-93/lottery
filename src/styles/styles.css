@@ -51,12 +51,12 @@
   --radius-card-lg: 20px;
   --radius-pill: 999px;
 
-  /* Typography */
+  /* Typography — Enhanced Crisp Bengali & Global Typography */
   --font-thai: "Sarabun", "Thonburi", "Leelawadee UI", sans-serif;
-  --font-bengali: "Hind Siliguri", "Noto Serif Bengali", sans-serif;
-  --font-royal: "Playfair Display", "Cinzel", "Sarabun", "Noto Serif Bengali", Georgia, serif;
-  --font-heading: "Playfair Display", "Cinzel", "Sarabun", "Noto Serif Bengali", Georgia, serif;
-  --font-body: "Inter", "Sarabun", "Hind Siliguri", system-ui, -apple-system, sans-serif;
+  --font-bengali: "Hind Siliguri", "Noto Sans Bengali", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-royal: "Playfair Display", "Cinzel", "Hind Siliguri", "Noto Sans Bengali", Georgia, serif;
+  --font-heading: "Playfair Display", "Cinzel", "Hind Siliguri", "Noto Sans Bengali", Georgia, serif;
+  --font-body: "Hind Siliguri", "Noto Sans Bengali", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 * {
@@ -82,9 +82,12 @@ body {
   color: var(--text-secondary);
   font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.68;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "tnum" 1, "kern" 1;
+  font-variant-numeric: tabular-nums;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -92,6 +95,33 @@ body {
   outline: 2.5px solid var(--royal-gold);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* ==========================================================================
+   GLOBAL CRISP BENGALI TYPOGRAPHY & NUMERALS SYSTEM
+   ========================================================================== */
+:lang(bn),
+.bn,
+[data-lang="bn"],
+.bengali-text,
+p, h1, h2, h3, h4, h5, h6, span, strong, em, li, label, input, button, select, textarea {
+  font-feature-settings: "tnum" 1, "kern" 1;
+  text-rendering: optimizeLegibility;
+}
+
+.bengali-num,
+.num,
+.stat-num,
+.digit,
+[class*="num"],
+[class*="count"],
+[class*="price"],
+[class*="date"],
+[class*="phone"],
+[class*="trx"],
+[class*="code"] {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
 }
 
 img {
@@ -5160,7 +5190,7 @@ h3 {
 }
 
 /* ==========================================================================
-   AUTHENTIC GOOGLE FORM STYLE REGISTRATION (CLEAN AGENCY POLISH)
+   13. ELITE AGENCY-TIER OFFICIAL PORTAL REGISTRATION FORM (CLEAN & LUXURY)
    ========================================================================== */
 .google-form-container,
 .google-form-container * {
@@ -5169,62 +5199,55 @@ h3 {
 
 .google-form-container {
   width: 100%;
-  max-width: 680px;
+  max-width: 720px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  font-family: 'Google Sans', Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #202124;
-}
-
-/* Clear all luxury gold gradients and drop-shadows from Google Forms */
-.google-form-container h1:not([class*="urgent"]):not([class*="highlight"]),
-.google-form-container h2:not([class*="urgent"]):not([class*="highlight"]),
-.google-form-container h3:not([class*="urgent"]):not([class*="highlight"]),
-.google-form-container p:not([class*="urgent"]):not([class*="highlight"]):not([class*="desc"]),
-.google-form-container label:not([class*="card"]):not([class*="row"]),
-.google-form-container span:not([class*="badge"]):not([class*="pill"]):not([class*="chip"]):not([class*="tag"]):not([class*="dot"]):not([class*="num"]):not([class*="stat"]):not([class*="crest"]):not([class*="indicator"]):not([class*="count"]):not([class*="radio"]):not([class*="quote"]) {
-  background: none !important;
-  -webkit-background-clip: initial !important;
-  -webkit-text-fill-color: initial !important;
-  filter: none !important;
-  text-shadow: none !important;
+  gap: 18px;
+  font-family: var(--font-bengali);
+  color: #1E293B;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Top Hero Card */
 .gform-top-card {
   background: #FFFFFF;
-  border-radius: 8px;
-  border: 1px solid #DADCE0;
-  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.12), 0 1px 2px rgba(60, 64, 67, 0.24);
+  border-radius: 16px;
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 30px -5px rgba(7, 23, 57, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
   overflow: hidden;
   position: relative;
   min-width: 0;
   width: 100%;
-  max-width: 100%;
   box-sizing: border-box;
+  transition: box-shadow 0.25s ease;
 }
 
-/* Google Form Colored Top Stripe (Purple / Royal Brand) */
+.gform-top-card:hover {
+  box-shadow: 0 14px 40px -6px rgba(7, 23, 57, 0.12), 0 4px 12px rgba(212, 175, 55, 0.15);
+}
+
+/* Royal Brand Stripe */
 .gform-color-stripe {
-  height: 10px;
+  height: 8px;
   width: 100%;
-  background: linear-gradient(90deg, #673AB7 0%, #1A73E8 50%, #673AB7 100%);
+  background: linear-gradient(90deg, #071739 0%, #D4AF37 50%, #071739 100%);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.35);
 }
 
 .gform-header-content {
-  padding: clamp(0.9rem, 3.5vw, 1.8rem);
+  padding: clamp(1.2rem, 4vw, 2.2rem);
   box-sizing: border-box;
   width: 100%;
-  max-width: 100%;
 }
 
 .gform-logo-row {
   display: flex;
   align-items: center;
-  gap: 1.1rem;
-  margin-bottom: 1.1rem;
+  gap: 1.25rem;
+  margin-bottom: 1.2rem;
   width: 100%;
 }
 
@@ -5235,16 +5258,16 @@ h3 {
 
 .gform-brand-mark {
   position: relative;
-  width: 64px;
-  height: 64px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
   background: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #D4AF37;
+  border: 2.5px solid #D4AF37;
   padding: 5px;
-  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35), 0 2px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35), 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .gform-brand-mark img {
@@ -5257,15 +5280,15 @@ h3 {
   position: absolute;
   bottom: -2px;
   right: -2px;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   background: #FFFFFF;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-  border: 1.5px solid #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border: 2px solid #FFFFFF;
   z-index: 2;
 }
 
@@ -5277,50 +5300,50 @@ h3 {
 .gform-verified-badge-line {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.55rem;
   flex-wrap: wrap;
   margin-bottom: 0.35rem;
 }
 
 .gform-govt-seal {
-  font-size: 0.74rem;
-  font-weight: 600;
-  color: #5F6368;
-  letter-spacing: 0.01em;
+  font-family: var(--font-bengali);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748B;
+  letter-spacing: 0.02em;
 }
 
 .gform-verified-tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  background: #E8F0FE;
-  color: #1A73E8;
-  border: 1px solid rgba(26, 115, 232, 0.3);
+  gap: 0.35rem;
+  background: #EFF6FF;
+  color: #1D4ED8;
+  border: 1px solid rgba(29, 78, 216, 0.25);
   border-radius: var(--radius-pill);
-  font-size: 0.7rem;
+  font-family: var(--font-bengali);
+  font-size: 0.72rem;
   font-weight: 700;
-  padding: 0.12rem 0.55rem;
+  padding: 0.15rem 0.65rem;
+  box-shadow: 0 1px 3px rgba(29, 78, 216, 0.1);
 }
 
 .gform-title-with-badge {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
-  margin-bottom: 0.15rem;
-  max-width: 100%;
+  margin-bottom: 0.2rem;
 }
 
 .gform-main-heading {
-  font-family: 'Google Sans', Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-  font-size: clamp(1.15rem, 3.5vw, 1.7rem) !important;
-  font-weight: 700 !important;
-  color: #202124 !important;
+  font-family: 'Cinzel Decorative', 'Cinzel', var(--font-royal);
+  font-size: clamp(1.25rem, 3.8vw, 1.85rem) !important;
+  font-weight: 800 !important;
+  color: #071739 !important;
   line-height: 1.25 !important;
   margin: 0 !important;
   letter-spacing: -0.01em;
-  word-break: break-word;
-  overflow-wrap: break-word;
 }
 
 .gform-verified-title-check {
@@ -5331,508 +5354,511 @@ h3 {
 }
 
 .gform-form-name {
-  font-family: 'Google Sans', Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-  font-size: clamp(0.92rem, 2.4vw, 1.15rem) !important;
-  font-weight: 600 !important;
-  color: #1A73E8 !important;
-  margin: 0.2rem 0 0.45rem 0 !important;
+  font-family: 'Inter', var(--font-bengali);
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem) !important;
+  font-weight: 800 !important;
+  color: #1D4ED8 !important;
+  margin: 0.25rem 0 0.5rem 0 !important;
   line-height: 1.35 !important;
+  letter-spacing: 0.03em;
+}
+
+.gform-thai-tagline {
+  font-family: var(--font-bengali);
+  font-size: 0.88rem;
+  color: #991B1B;
+  font-weight: 700;
+  margin-bottom: 0.45rem;
 }
 
 .gform-subtext {
-  font-size: 0.88rem;
-  color: #5F6368;
-  line-height: 1.55;
-  margin: 0;
-}
-
-/* Urgent Quota Notice Box inside Google Form */
-.gform-urgent-quota-box {
-  margin-top: 1.25rem;
-  padding: 1.15rem 1.35rem;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #FFF8F0 0%, #FFF3EB 50%, #FFFDF8 100%);
-  border: 1.8px solid #E60000;
-  box-shadow: 0 4px 16px rgba(230, 0, 0, 0.08), 0 0 10px rgba(255, 215, 0, 0.15);
-}
-
-.gform-urgent-top {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.65rem;
-  margin-bottom: 0.65rem;
-}
-
-.gform-urgent-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.35rem 0.95rem;
-  border-radius: var(--radius-pill);
-  background: linear-gradient(135deg, #D32F2F 0%, #B71C1C 100%) !important;
-  border: 1.5px solid #FFD700 !important;
-  color: #FFF9E0 !important;
-  font-family: var(--font-royal);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  box-shadow: 0 2px 8px rgba(196, 21, 28, 0.35);
-}
-
-.gform-urgent-stat {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #B31D1D;
-  background: rgba(196, 21, 28, 0.08);
-  border: 1px solid rgba(196, 21, 28, 0.2);
-  padding: 0.28rem 0.65rem;
-  border-radius: var(--radius-pill);
-}
-
-.gform-urgent-heading {
-  font-family: var(--font-heading);
-  font-size: clamp(1.05rem, 2.2vw, 1.28rem);
-  font-weight: 800;
-  color: #071739;
-  line-height: 1.4;
-  margin: 0 0 0.55rem;
-}
-
-.gform-urgent-heading .gform-gold-count {
-  color: #E60000;
-  font-weight: 900;
-  font-size: 1.35em;
-  padding: 0 0.15rem;
-}
-
-.gform-urgent-desc {
   font-family: var(--font-bengali);
-  font-size: clamp(0.86rem, 1.8vw, 0.94rem);
-  color: #2D3748;
-  line-height: 1.6;
+  font-size: 0.92rem;
+  color: #475569;
+  line-height: 1.65;
   margin: 0;
 }
 
-.gform-urgent-desc strong {
-  color: #071739;
-  font-weight: 700;
-}
-
-.gform-meta-banner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-top: 1.25rem;
-  padding: 0.85rem 1.15rem;
-  background: #F8F9FA;
-  border-radius: 6px;
-  border: 1px solid #DADCE0;
-}
-
-/* ==========================================================================
-   GLOWING ANIMATED PRICE & FULL HIGHLIGHT BANNER
-   "2500 SAR kete diye 250 SAR dekhabe, price ta glowing animated dekhabe"
-   ========================================================================== */
-
+/* Glowing Animated Fee Box */
 .gform-meta-banner.gform-meta-highlight-box {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 0.95rem;
-  margin-top: 1.25rem;
-  padding: 1rem 1.25rem;
-  background: linear-gradient(135deg, #FFFDF6 0%, #FFF9E6 48%, #FFF2CC 100%) !important;
-  border: 2px solid #D4AF37 !important;
+  gap: 1rem;
+  margin-top: 1.35rem;
+  padding: 1.1rem 1.35rem;
+  background: linear-gradient(135deg, #FFFDF8 0%, #FFFBEB 45%, #FEF3C7 100%) !important;
+  border: 1.8px solid #F59E0B !important;
   border-radius: 12px !important;
-  box-shadow:
-    0 6px 22px rgba(212, 175, 55, 0.28),
-    0 0 16px rgba(255, 215, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
-  animation: bannerHighlightGlow 3s ease-in-out infinite alternate;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
   position: relative;
   overflow: hidden;
-}
-
-/* Subtle sweep light on the highlighted banner */
-.gform-meta-banner.gform-meta-highlight-box::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -60%;
-  width: 40%;
-  height: 200%;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.7) 50%, transparent 100%);
-  transform: skewX(-25deg);
-  pointer-events: none;
-  animation: bannerSweepLight 4.5s ease-in-out infinite;
-}
-
-@keyframes bannerHighlightGlow {
-  0% {
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25), 0 0 12px rgba(255, 215, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    border-color: #D4AF37;
-  }
-  50% {
-    box-shadow: 0 8px 28px rgba(212, 175, 55, 0.45), 0 0 24px rgba(255, 200, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 1);
-    border-color: #F59E0B;
-  }
-  100% {
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25), 0 0 12px rgba(255, 215, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    border-color: #D4AF37;
-  }
 }
 
 .gform-fee-pill {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.55rem;
+  gap: 0.6rem;
   color: #071739;
-  font-size: 0.95rem;
+  font-family: var(--font-bengali);
+  font-size: 0.96rem;
   font-weight: 700;
 }
 
 .gform-fee-icon {
-  font-size: 1.3rem;
-  display: inline-block;
-  line-height: 1;
+  font-size: 1.35rem;
 }
 
 .gform-fee-title {
   color: #071739;
   font-weight: 800;
-  letter-spacing: 0.02em;
 }
 
 .gform-fee-prices-wrap {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.65rem;
   flex-wrap: wrap;
 }
 
-/* Original 2,500 SAR crossed out with red strikethrough */
 .gform-fee-original {
-  font-family: var(--font-royal), monospace;
+  font-family: var(--font-bengali);
   font-size: 1.15rem;
   font-weight: 800;
   color: #94A3B8;
   text-decoration: line-through;
-  text-decoration-color: #DC2626;
+  text-decoration-color: #EF4444;
   text-decoration-thickness: 2.5px;
-  opacity: 0.85;
 }
 
-/* Special Glowing Animated 250 SAR */
 .gform-fee-discounted-glow {
   display: inline-flex;
   align-items: baseline;
-  gap: 0.25rem;
-  padding: 0.22rem 0.65rem;
-  border-radius: 6px;
+  gap: 0.35rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 8px;
   background: linear-gradient(135deg, #071739 0%, #0F2756 100%) !important;
   border: 1.5px solid #FFD700 !important;
-  box-shadow: 0 2px 10px rgba(7, 23, 57, 0.35), 0 0 12px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 3px 12px rgba(7, 23, 57, 0.35), 0 0 14px rgba(255, 215, 0, 0.45);
   animation: priceGlowPulse 1.8s ease-in-out infinite alternate;
 }
 
-@keyframes priceGlowPulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 2px 10px rgba(7, 23, 57, 0.35), 0 0 10px rgba(255, 215, 0, 0.4);
-    border-color: #FFD700;
-  }
-  50% {
-    transform: scale(1.05);
-    box-shadow: 0 4px 18px rgba(7, 23, 57, 0.55), 0 0 22px rgba(255, 215, 0, 0.85), 0 0 35px rgba(245, 158, 11, 0.45);
-    border-color: #FBBF24;
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 2px 10px rgba(7, 23, 57, 0.35), 0 0 10px rgba(255, 215, 0, 0.4);
-    border-color: #FFD700;
-  }
-}
-
 .gform-glowing-number {
-  font-family: var(--font-royal);
+  font-family: var(--font-bengali);
   font-size: 1.35rem;
   font-weight: 900;
   color: #FFD700 !important;
   -webkit-text-fill-color: #FFD700 !important;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.75), 0 2px 4px rgba(0, 0, 0, 0.6);
-  letter-spacing: 0.5px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.75);
 }
 
 .gform-glowing-bdt {
-  font-size: 0.85rem;
+  font-family: var(--font-bengali);
+  font-size: 0.88rem;
   font-weight: 800;
   color: #FFF9E0 !important;
   -webkit-text-fill-color: #FFF9E0 !important;
-  opacity: 0.95;
 }
 
 .gform-discount-tag {
   background: #DC2626 !important;
   color: #FFFFFF !important;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 900;
-  padding: 0.2rem 0.55rem;
+  padding: 0.25rem 0.65rem;
   border-radius: var(--radius-pill);
-  letter-spacing: 0.04em;
   box-shadow: 0 2px 6px rgba(220, 38, 38, 0.35);
-  animation: discountTagPop 2s ease-in-out infinite;
 }
 
-@keyframes discountTagPop {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-}
-
-/* Pulsing Quota Pill */
 .gform-quota-pill.gform-quota-pill-pulse {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
   color: #991B1B !important;
-  font-size: 0.86rem;
-  font-weight: 800;
+  font-family: var(--font-bengali);
+  font-size: 0.88rem;
+  font-weight: 700;
   background: #FEE2E2 !important;
   border: 1.5px solid #EF4444 !important;
-  padding: 0.4rem 0.85rem;
+  padding: 0.45rem 0.95rem;
   border-radius: var(--radius-pill);
-  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
-}
-
-.gform-quota-siren {
-  font-size: 1.15rem;
-  display: inline-block;
-  animation: sirenAlertBounce 1.2s ease-in-out infinite;
-}
-
-.gform-fee-pill {
-  color: #202124;
-  font-size: 0.92rem;
-  font-weight: 600;
-}
-
-.gform-fee-pill strong {
-  color: #137333;
-  font-size: 1rem;
-  font-weight: 800;
-}
-
-.gform-quota-pill {
-  color: #C5221F;
-  font-size: 0.86rem;
-  font-weight: 700;
-  background: #FCE8E6;
-  border: 1px solid rgba(197, 34, 31, 0.3);
-  padding: 0.25rem 0.65rem;
-  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.18);
 }
 
 .gform-notice-box {
-  margin-top: 1.1rem;
-  padding-top: 0.85rem;
-  border-top: 1px solid #E0E0E0;
-  font-size: 0.84rem;
-  color: #5F6368;
-  line-height: 1.55;
-}
-
-.gform-notice-box p {
-  margin: 0;
+  margin-top: 1.2rem;
+  padding-top: 0.95rem;
+  border-top: 1px solid #E2E8F0;
+  font-family: var(--font-bengali);
+  font-size: 0.86rem;
+  color: #64748B;
+  line-height: 1.6;
 }
 
 .gform-required-note {
   display: block;
-  color: #D93025;
-  font-weight: 600;
-  margin-top: 0.5rem;
+  color: #DC2626;
+  font-weight: 700;
+  margin-top: 0.45rem;
   font-size: 0.82rem;
 }
 
-/* Question Cards (Google Forms Style) */
+/* Question Cards & Body (Elite Agency Polish) */
 .gform-body {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .gform-question-card {
   position: relative;
   background: #FFFFFF;
-  border-radius: 8px;
-  border: 1px solid #DADCE0;
-  padding: clamp(1.2rem, 3vw, 1.6rem);
-  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.08);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 14px;
+  border: 1.5px solid #E2E8F0;
+  padding: clamp(1.25rem, 3.2vw, 1.75rem);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.03);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
 
-/* Left Accent Indicator on Active / Focused Card */
-.gform-card-left-indicator {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 6px;
-  background: transparent;
-  transition: background 0.2s ease;
+.gform-question-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.07);
+  transform: translateY(-1.5px);
 }
 
 .gform-question-card.is-active-card {
-  border-color: #DADCE0;
-  box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.2), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+  border-color: #1A73E8;
+  box-shadow: 0 8px 25px rgba(26, 115, 232, 0.12), 0 0 0 1px #1A73E8;
+  transform: translateY(-1.5px);
+}
+
+.gform-card-left-indicator {
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 0;
+  width: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background: transparent;
+  transition: background 0.25s ease;
 }
 
 .gform-question-card.is-active-card .gform-card-left-indicator {
-  background: #1A73E8;
+  background: linear-gradient(180deg, #1A73E8 0%, #0D47A1 100%);
 }
 
 .gform-question-title {
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #202124;
-  display: block;
-  margin-bottom: 0.25rem;
-  line-height: 1.45;
-}
-
-.gform-req {
-  color: #D93025;
+  font-family: var(--font-bengali);
+  font-size: 1.04rem;
   font-weight: 700;
-  margin-left: 2px;
-}
-
-.gform-question-desc {
-  font-size: 0.82rem;
-  color: #70757A;
-  margin: 0 0 1rem 0;
+  color: #0F172A;
+  display: block;
+  margin-bottom: 0.35rem;
   line-height: 1.5;
 }
 
-/* Underline Input Style (Exact Google Forms signature) */
+.gform-req {
+  color: #DC2626;
+  font-weight: 800;
+  margin-left: 3px;
+}
+
+.gform-question-desc {
+  font-family: var(--font-bengali);
+  font-size: 0.86rem;
+  color: #64748B;
+  margin: 0 0 1.1rem 0;
+  line-height: 1.58;
+}
+
+/* Framed Modern Input Style (Elite Agency Polish) */
 .gform-input-wrapper {
   position: relative;
   width: 100%;
-  max-width: 480px;
+  max-width: 100%;
 }
 
 .gform-underline-input {
   width: 100%;
   box-sizing: border-box;
-  border: none;
-  border-bottom: 1px solid #DADCE0;
-  border-radius: 0;
-  background: transparent;
-  padding: 8px 0 6px 0;
-  font-family: inherit;
-  font-size: 0.95rem;
-  color: #202124;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 10px;
+  background: #F8FAFC;
+  padding: 12px 16px;
+  font-family: var(--font-bengali);
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: #0F172A;
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
 }
 
 .gform-underline-input::placeholder {
-  color: #70757A;
+  color: #94A3B8;
   font-size: 0.92rem;
+  font-weight: 400;
+}
+
+.gform-underline-input:hover {
+  border-color: #CBD5E1;
+  background: #FFFFFF;
+}
+
+.gform-underline-input:focus {
+  background: #FFFFFF;
+  border-color: #1A73E8;
+  box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.12), inset 0 1px 2px rgba(15, 23, 42, 0.02);
 }
 
 .gform-input-focus-line {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: #1A73E8;
-  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
-}
-
-.gform-underline-input:focus ~ .gform-input-focus-line {
-  width: 100%;
-  left: 0;
+  display: none;
 }
 
 /* Dropdown Select Style */
 .gform-select-wrapper {
   position: relative;
   width: 100%;
-  max-width: 380px;
+  max-width: 100%;
 }
 
 .gform-dropdown-select {
   width: 100%;
   box-sizing: border-box;
   appearance: none;
-  border: 1px solid #DADCE0;
-  border-radius: 4px;
-  padding: 10px 38px 10px 14px;
-  background: #FFFFFF;
-  font-family: inherit;
-  font-size: 0.95rem;
-  color: #202124;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 12px 42px 12px 16px;
+  background: #F8FAFC;
+  font-family: var(--font-bengali);
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: #0F172A;
   cursor: pointer;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.gform-dropdown-select:hover {
+  border-color: #CBD5E1;
+  background: #FFFFFF;
 }
 
 .gform-dropdown-select:focus {
   border-color: #1A73E8;
-  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.12);
 }
 
 .gform-dropdown-arrow {
   position: absolute;
-  right: 14px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  font-size: 9px;
-  color: #5F6368;
+  font-size: 11px;
+  color: #64748B;
 }
 
 .gform-sub-input {
   margin-top: 12px;
 }
 
-/* Google Form File Upload Actions */
-.gform-upload-action-box {
+/* Section Header Banners */
+.gform-section-header-banner {
   display: flex;
   align-items: center;
-  gap: 14px;
+  justify-content: space-between;
+  gap: 12px;
   flex-wrap: wrap;
+  background: linear-gradient(135deg, #071739 0%, #0F2756 50%, #071739 100%);
+  border: 1.5px solid rgba(255, 215, 0, 0.45);
+  border-radius: 12px;
+  padding: 0.85rem 1.35rem;
+  margin-top: 1.3rem;
+  margin-bottom: 0.85rem;
+  box-shadow: 0 6px 18px rgba(7, 23, 57, 0.22), 0 0 12px rgba(212, 175, 55, 0.15);
+}
+
+.gform-section-header-banner.gform-bkash-banner {
+  background: linear-gradient(135deg, #4A0E2E 0%, #781446 50%, #4A0E2E 100%);
+  border-color: #FF80BF;
+  box-shadow: 0 6px 18px rgba(120, 20, 70, 0.25);
+}
+
+.gform-section-banner-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #FFF9E0;
+  font-family: var(--font-royal);
+  font-size: clamp(0.92rem, 2.2vw, 1.08rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.gform-section-icon {
+  font-size: 1.3rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.gform-section-pill {
+  font-family: var(--font-bengali);
+  font-size: 0.74rem;
+  font-weight: 800;
+  background: linear-gradient(180deg, #FFD700 0%, #D4AF37 100%);
+  color: #071739;
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Date of Birth Grid */
+.gform-dob-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1.1fr;
+  gap: 12px;
+  margin-top: 0.75rem;
+}
+
+.gform-dob-col .gform-dob-label {
+  display: inline-block;
+  font-family: var(--font-bengali);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748B;
+  margin-bottom: 6px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Gender Radio Buttons (Clean Pill Buttons) */
+.gform-gender-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 0.75rem;
+}
+
+.gform-radio-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1.5px solid #E2E8F0;
+  background: #F8FAFC;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-bengali);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #334155;
+  user-select: none;
+}
+
+.gform-radio-row:hover {
+  background: #F1F5F9;
+  border-color: #CBD5E1;
+  transform: translateY(-1px);
+}
+
+.gform-radio-row.is-checked {
+  background: #EFF6FF;
+  border-color: #1A73E8;
+  color: #1D4ED8;
+  box-shadow: 0 2px 8px rgba(26, 115, 232, 0.15);
+}
+
+.gform-native-radio {
+  display: none;
+}
+
+.gform-custom-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #CBD5E1;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.gform-radio-row.is-checked .gform-custom-radio {
+  border-color: #1A73E8;
+}
+
+.gform-radio-inner-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background 0.2s ease, transform 0.2s ease;
+  transform: scale(0);
+}
+
+.gform-radio-row.is-checked .gform-radio-inner-dot {
+  background: #1A73E8;
+  transform: scale(1);
+}
+
+.gform-radio-label-text {
+  font-family: var(--font-bengali);
+}
+
+/* Upload Dropzones */
+.gform-upload-action-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 16px;
+  border-radius: 12px;
+  background: #F8FAFC;
+  border: 2px dashed #CBD5E1;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.gform-upload-action-box:hover {
+  border-color: #1A73E8;
+  background: #EFF6FF;
 }
 
 .gform-add-file-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   background: #FFFFFF;
-  border: 1px solid #DADCE0;
-  border-radius: 4px;
-  padding: 8px 18px;
-  color: #1A73E8;
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 600;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 8px;
+  padding: 10px 22px;
+  color: #0F172A;
+  font-family: var(--font-bengali);
+  font-size: 0.94rem;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.1);
-  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+  transition: all 0.2s ease;
 }
 
 .gform-add-file-btn:hover {
-  background: #F8FAFD;
+  background: #1A73E8;
+  color: #FFFFFF;
   border-color: #1A73E8;
-  box-shadow: 0 1px 3px rgba(26, 115, 232, 0.2);
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.28);
+  transform: translateY(-1px);
+}
+
+.gform-add-file-btn:hover svg path {
+  fill: #FFFFFF;
 }
 
 .gform-hidden-file-input {
@@ -5840,28 +5866,44 @@ h3 {
 }
 
 .gform-upload-hint {
-  font-size: 0.8rem;
-  color: #70757A;
+  font-family: var(--font-bengali);
+  font-size: 0.82rem;
+  color: #64748B;
 }
 
-/* File Uploaded Preview Card */
+.gform-photo-quote {
+  font-family: var(--font-royal);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: #C4151C;
+  font-weight: 700;
+  margin-top: 0.25rem;
+}
+
+.gform-quote-mark {
+  color: #D4AF37;
+  font-size: 1.1rem;
+  padding: 0 2px;
+}
+
+/* Uploaded File Card Preview */
 .gform-file-card-preview {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 8px 14px;
-  background: #F1F3F4;
-  border: 1px solid #DADCE0;
-  border-radius: 6px;
-  max-width: 440px;
+  padding: 10px 16px;
+  background: #F1F5F9;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 10px;
+  max-width: 460px;
 }
 
 .gform-file-thumb {
-  width: 42px;
-  height: 42px;
-  border-radius: 4px;
+  width: 46px;
+  height: 46px;
+  border-radius: 6px;
   overflow: hidden;
-  background: #E8EAED;
+  background: #E2E8F0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5875,7 +5917,7 @@ h3 {
 }
 
 .gform-pdf-icon {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
 .gform-file-details {
@@ -5887,9 +5929,10 @@ h3 {
 }
 
 .gform-file-name {
+  font-family: var(--font-bengali);
   font-size: 0.88rem;
-  font-weight: 600;
-  color: #202124;
+  font-weight: 700;
+  color: #0F172A;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -5897,469 +5940,13 @@ h3 {
 
 .gform-file-size {
   font-size: 0.76rem;
-  color: #137333;
+  color: #16A34A;
   font-weight: 600;
-}
-
-.gform-file-remove-btn {
-  background: transparent;
-  border: none;
-  color: #5F6368;
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 50%;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.gform-file-remove-btn:hover {
-  background: #DADCE0;
-  color: #D93025;
-}
-
-/* Payment to Thailand Government Radio Selection */
-.gform-radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.gform-radio-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 10px 14px;
-  border-radius: 6px;
-  border: 1px solid #E0E0E0;
-  background: #FFFFFF;
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-
-.gform-radio-row:hover {
-  background: #F8FAFD;
-  border-color: #1A73E8;
-}
-
-.gform-radio-row.is-checked {
-  background: #E8F0FE;
-  border-color: #1A73E8;
-}
-
-.gform-radio-circle {
-  accent-color: #1A73E8;
-  width: 18px;
-  height: 18px;
-  margin-top: 3px;
-  cursor: pointer;
-}
-
-.gform-radio-label-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.gform-radio-title-line {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.gform-pay-badge {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 800;
-  padding: 2px 7px;
-  border-radius: 3px;
-  letter-spacing: 0.5px;
-}
-
-.gform-pay-badge.visa {
-  background: #1A1F71;
-  color: #FFFFFF;
-}
-
-.gform-pay-badge.mastercard {
-  background: #EB001B;
-  color: #FFFFFF;
-}
-
-.gform-pay-badge.amex {
-  background: #006FCF;
-  color: #FFFFFF;
-}
-
-.gform-pay-badge.bank {
-  background: #00875A;
-  color: #FFFFFF;
-}
-
-.gform-radio-main-text {
-  font-size: 0.94rem;
-  color: #202124;
-}
-
-.gform-radio-sub-text {
-  font-size: 0.8rem;
-  color: #5F6368;
-}
-
-.gform-govt-notice {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 12px;
-  padding: 8px 12px;
-  background: #F8F9FA;
-  border: 1px solid #DADCE0;
-  border-radius: 6px;
-  font-size: 0.82rem;
-  color: #5F6368;
-}
-
-.gform-shield-icon {
-  font-size: 1.1rem;
-}
-
-/* Membership Final Payment — বিকাশ (bKash Payment Card) */
-.gform-bkash-box {
-  background: linear-gradient(135deg, #FFF5F8 0%, #FFFFFF 60%, #FFF8FA 100%);
-  border: 1.5px solid #E2136E;
-  border-radius: 8px;
-  padding: 16px 18px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 10px rgba(226, 19, 110, 0.08);
-}
-
-.bkash-header-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px dashed rgba(226, 19, 110, 0.3);
-  margin-bottom: 12px;
-}
-
-.bkash-logo-brand {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #E2136E;
-  font-size: 1.05rem;
-  font-weight: 800;
-}
-
-.bkash-type-badge {
-  background: #E2136E;
-  color: #FFFFFF;
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
-.bkash-number-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  background: #FFFFFF;
-  border: 1px solid rgba(226, 19, 110, 0.35);
-  border-radius: 6px;
-  padding: 10px 14px;
-  margin-bottom: 10px;
-}
-
-.bkash-num-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.bkash-num-label {
-  font-size: 0.76rem;
-  color: #5F6368;
-  font-weight: 600;
-}
-
-.bkash-display-number {
-  font-family: var(--font-royal), monospace;
-  font-size: 1.35rem;
-  font-weight: 900;
-  color: #E2136E;
-  letter-spacing: 1px;
-}
-
-.bkash-copy-btn {
-  background: #E2136E;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 4px;
-  padding: 6px 14px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.15s ease, transform 0.15s ease;
-}
-
-.bkash-copy-btn:hover {
-  background: #C20F5C;
-}
-
-.bkash-copy-btn.copied {
-  background: #137333;
-}
-
-.bkash-fee-strip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.88rem;
-  color: #202124;
-  padding: 6px 0;
-  font-weight: 600;
-}
-
-.bkash-fee-amount {
-  color: #E2136E;
-  font-size: 0.95rem;
-  font-weight: 800;
-}
-
-.bkash-instructions-box {
-  background: #F8F9FA;
-  border-radius: 6px;
-  padding: 10px 12px;
-  font-size: 0.82rem;
-  color: #4A5568;
-  line-height: 1.6;
-  margin-top: 10px;
-}
-
-.bkash-instructions-box p {
-  margin: 0;
-}
-
-.gform-bkash-inputs-group {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.gform-input-subcard {
-  display: flex;
-  flex-direction: column;
-}
-
-.gform-sub-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #202124;
-  margin-bottom: 4px;
-}
-
-/* Action Bar (Google Forms Style) */
-.gform-action-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 8px;
-  flex-wrap: wrap;
-}
-
-.gform-google-submit-btn {
-  background: #1A73E8;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 24px;
-  font-family: inherit;
-  font-size: 0.92rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-  transition: background 0.2s ease, box-shadow 0.2s ease;
-}
-
-.gform-google-submit-btn:hover {
-  background: #1557B0;
-  box-shadow: 0 1px 3px 1px rgba(60, 64, 67, 0.2);
-}
-
-.gform-clear-form-btn {
-  background: transparent;
-  border: none;
-  color: #1A73E8;
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: background 0.15s ease;
-}
-
-.gform-clear-form-btn:hover {
-  background: rgba(26, 115, 232, 0.08);
-}
-
-.gform-footer-disclaimer {
-  text-align: center;
-  font-size: 0.74rem;
-  color: #70757A;
-  margin-top: 18px;
-  line-height: 1.5;
-}
-
-.gform-footer-disclaimer p {
-  margin: 4px 0 10px 0;
-}
-
-.gform-google-branding {
-  font-size: 1.15rem;
-  color: #5F6368;
-}
-
-.gform-google-branding strong {
-  color: #4285F4;
-}
-
-/* Google Form Response Submitted Success Card */
-.gform-success-card {
-  background: #FFFFFF;
-  border-radius: 8px;
-  border: 1px solid #DADCE0;
-  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.15);
-  overflow: hidden;
-}
-
-/* ==========================================================================
-   OFFICIAL ROYAL MEMBERSHIP FORM INPUT STYLES (Matching Reference Graphic)
-   ========================================================================== */
-
-.gform-thai-tagline {
-  font-family: var(--font-thai);
-  font-size: 0.86rem;
-  color: #C4151C;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.gform-section-header-banner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  background: linear-gradient(135deg, #091936 0%, #102A54 50%, #0A1C3B 100%);
-  border: 1.8px solid #D4AF37;
-  border-radius: 8px;
-  padding: 0.75rem 1.25rem;
-  margin-top: 1.25rem;
-  margin-bottom: 0.85rem;
-  box-shadow: 0 4px 14px rgba(9, 25, 54, 0.25), 0 0 10px rgba(212, 175, 55, 0.2);
-}
-
-.gform-section-header-banner.gform-fee-banner {
-  background: linear-gradient(135deg, #1A120B 0%, #3C2A21 50%, #1A120B 100%);
-  border-color: #FFD700;
-}
-
-.gform-section-header-banner.gform-bkash-banner {
-  background: linear-gradient(135deg, #5A082C 0%, #8A1248 50%, #5A082C 100%);
-  border-color: #FF66AA;
-}
-
-.gform-section-banner-title {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  color: #FFF9E0;
-  font-family: var(--font-royal);
-  font-size: clamp(0.88rem, 2.2vw, 1.05rem);
-  font-weight: 800;
-  letter-spacing: 0.04em;
-}
-
-.gform-section-icon {
-  font-size: 1.25rem;
-}
-
-.gform-section-pill {
-  font-size: 0.72rem;
-  font-weight: 800;
-  background: linear-gradient(180deg, #D4AF37 0%, #AA8010 100%);
-  color: #071739;
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--radius-pill);
-  letter-spacing: 0.06em;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Date of Birth Grid */
-.gform-dob-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr 1.1fr;
-  gap: 12px;
-  margin-top: 0.75rem;
-}
-
-.gform-dob-col {
-  position: relative;
-}
-
-.gform-dob-label {
-  display: block;
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: #5F6368;
-  margin-bottom: 4px;
-  text-transform: uppercase;
-}
-
-/* Gender Radio Group */
-.gform-gender-radio-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 0.65rem;
-}
-
-/* Applicant Photo Upload Box & Quote */
-.gform-photo-upload-box {
-  background: #F8F9FA;
-  border: 2px dashed #1A73E8;
-  border-radius: 8px;
-  padding: 1.5rem 1rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.gform-photo-quote {
-  font-family: var(--font-royal);
-  font-style: italic;
-  font-size: 0.88rem;
-  color: #C4151C;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  margin-top: 0.25rem;
-}
-
-.gform-quote-mark {
-  color: #D4AF37;
-  font-size: 1.1rem;
-  padding: 0 2px;
 }
 
 .gform-file-badge {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   font-weight: 800;
   color: #071739;
   background: #FFF0D4;
@@ -6367,232 +5954,46 @@ h3 {
   padding: 2px 8px;
   border-radius: 4px;
   margin-top: 4px;
+  width: fit-content;
+}
+
+.gform-file-remove-btn {
+  background: #E2E8F0;
+  border: none;
+  color: #475569;
+  font-size: 0.95rem;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transition: all 0.15s ease;
+}
+
+.gform-file-remove-btn:hover {
+  background: #FEE2E2;
+  color: #DC2626;
 }
 
 .gform-nid-dashed-box {
-  background: #F8F9FA;
-  border: 2px dashed #34A853;
-  border-radius: 8px;
-  padding: 1.25rem 1rem;
+  background: #F8FAFC;
+  border: 2px dashed #CBD5E1;
+  border-radius: 12px;
+  padding: 24px 16px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-}
-
-/* Pricing Box Showcase */
-.gform-pricing-showcase-card {
-  background: linear-gradient(135deg, #091734 0%, #112347 100%) !important;
-  border: 2px solid #D4AF37 !important;
-  color: #FFFFFF !important;
-  box-shadow: 0 6px 20px rgba(9, 23, 52, 0.35) !important;
-}
-
-.gform-pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-
-.gform-price-box {
-  border-radius: 8px;
-  padding: 1.15rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  position: relative;
-}
-
-.gform-price-original {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
-}
-
-.gform-price-label {
-  font-size: 0.8rem;
-  color: #CBD5E1;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.gform-price-num-struck {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.gform-struck-line {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: #94A3B8;
-  text-decoration: line-through;
-  text-decoration-color: #EF4444;
-  text-decoration-thickness: 3px;
-}
-
-.gform-price-sub {
-  font-size: 0.82rem;
-  color: #94A3B8;
-}
-
-.gform-price-tag-badge {
-  font-size: 0.72rem;
-  color: #94A3B8;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
-.gform-price-discount {
-  background: linear-gradient(135deg, #7F1D1D 0%, #991B1B 50%, #B91C1C 100%);
-  border: 2px solid #FFD700;
-  box-shadow: 0 4px 16px rgba(185, 28, 28, 0.4), 0 0 12px rgba(255, 215, 0, 0.35);
-}
-
-.gform-discount-chip {
-  font-size: 0.76rem;
-  font-weight: 800;
-  background: #FFD700;
-  color: #071739;
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-  margin-bottom: 6px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.gform-price-num-highlight {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 6px;
-}
-
-.gform-price-loud {
-  font-family: var(--font-royal);
-  font-size: 2.2rem;
-  font-weight: 900;
-  color: #FFD700;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-}
-
-.gform-price-bdt {
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: #FFF9E0;
-}
-
-.gform-limited-badge {
-  font-size: 0.74rem;
-  font-weight: 700;
-  color: #FEF08A;
-}
-
-.gform-price-special-client {
-  background: rgba(212, 175, 55, 0.12);
-  border: 1.5px solid #D4AF37;
-  justify-content: center;
-}
-
-.gform-special-flag {
-  font-size: 1.4rem;
-  margin-bottom: 4px;
-}
-
-.gform-arabic-discount {
-  font-family: "Amiri", "Traditional Arabic", serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #FFD700;
-  margin-bottom: 6px;
-  direction: rtl;
-}
-
-.gform-special-note {
-  font-size: 0.76rem;
-  color: #E2E8F0;
-  line-height: 1.4;
-}
-
-/* Membership Duration Group */
-.gform-duration-radio-group {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
-  margin-top: 0.75rem;
-}
-
-.gform-duration-card {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
   gap: 10px;
-  padding: 1rem;
-  background: #F8F9FA;
-  border: 1.5px solid #DADCE0;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 
-.gform-duration-card.is-checked {
-  background: #E8F0FE;
-  border-color: #1A73E8;
-  box-shadow: 0 2px 8px rgba(26, 115, 232, 0.2);
-}
-
-.gform-duration-card.is-popular {
-  border-color: #D4AF37;
-}
-
-.gform-duration-card.is-popular.is-checked {
-  border-color: #D4AF37;
-  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
-}
-
-.gform-popular-badge {
-  position: absolute;
-  top: -10px;
-  right: 12px;
-  background: #D4AF37;
-  color: #071739;
-  font-size: 0.68rem;
-  font-weight: 900;
-  padding: 2px 8px;
-  border-radius: var(--radius-pill);
-  letter-spacing: 0.05em;
-}
-
-.gform-duration-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.gform-duration-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.gform-duration-name {
-  font-size: 0.95rem;
-  color: #202124;
-}
-
-.gform-duration-note {
-  font-size: 0.78rem;
-  color: #5F6368;
-  margin-left: 26px;
-}
-
-/* Agent Information Card */
+/* Agent Information Card (Executive Design) */
 .gform-agent-profile-card {
-  background: #FFFDF8 !important;
+  background: linear-gradient(145deg, #FFFFFF 0%, #FFFDF7 100%) !important;
   border: 1.8px solid #D4AF37 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.12) !important;
 }
 
 .gform-agent-layout {
@@ -6609,41 +6010,45 @@ h3 {
 }
 
 .gform-agent-label {
+  font-family: var(--font-bengali);
   font-size: 0.78rem;
-  color: #5F6368;
+  color: #64748B;
   font-weight: 600;
 }
 
 .gform-agent-name-highlight {
   font-family: var(--font-bengali);
-  font-size: 1.05rem;
+  font-size: 1.12rem;
   color: #071739;
   font-weight: 800;
 }
 
 .gform-agent-id-badge {
   display: inline-block;
-  font-family: monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 1rem;
   font-weight: 800;
   background: #071739;
   color: #FFD700;
-  padding: 2px 10px;
-  border-radius: 4px;
-  letter-spacing: 1px;
+  padding: 3px 12px;
+  border-radius: 6px;
+  letter-spacing: 1.5px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 2px 6px rgba(7, 23, 57, 0.3);
   width: fit-content;
 }
 
 .gform-agent-subtext {
-  font-size: 0.76rem;
-  color: #70757A;
+  font-family: var(--font-bengali);
+  font-size: 0.78rem;
+  color: #64748B;
 }
 
 .gform-agent-documents-box {
-  background: #FFFFFF;
-  border: 1px solid #E0E0E0;
-  border-radius: 6px;
-  padding: 10px 14px;
+  background: #F8FAFC;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 12px 16px;
 }
 
 .gform-docs-title {
@@ -6652,7 +6057,7 @@ h3 {
   font-weight: 800;
   color: #C4151C;
   margin-bottom: 6px;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.05em;
 }
 
 .gform-docs-list {
@@ -6661,9 +6066,11 @@ h3 {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 0.8rem;
-  color: #3C4043;
+  gap: 5px;
+  font-family: var(--font-bengali);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #334155;
 }
 
 .gform-agent-crest-box {
@@ -6671,10 +6078,11 @@ h3 {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 10px;
-  background: linear-gradient(180deg, #FFF7E6 0%, #FFEDD5 100%);
-  border: 1.5px solid #D4AF37;
-  border-radius: 8px;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #FFFBEB 0%, #FEF3C7 100%);
+  border: 1.5px solid #F59E0B;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.15);
 }
 
 .gform-agent-crest-icon {
@@ -6696,22 +6104,14 @@ h3 {
   color: #B45309;
 }
 
-.gform-success-thai-title {
-  font-family: var(--font-thai);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #137333;
-  margin-bottom: 0.5rem;
-}
-
-/* Google Form bKash Card Styling */
+/* bKash Payment Box */
 .gform-bkash-card {
-  background: linear-gradient(135deg, #FFF5F8 0%, #FFFFFF 50%, #FFF0F5 100%);
+  background: linear-gradient(145deg, #FFF5F9 0%, #FFFFFF 50%, #FFF8FA 100%);
   border: 2px solid #E2136E;
-  border-radius: 10px;
-  padding: 16px 18px;
-  margin-top: 10px;
-  box-shadow: 0 4px 16px rgba(226, 19, 110, 0.1);
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-top: 12px;
+  box-shadow: 0 6px 20px rgba(226, 19, 110, 0.12);
 }
 
 .gform-bkash-top {
@@ -6724,28 +6124,30 @@ h3 {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .bkash-badge-chip {
   background: #E2136E !important;
   color: #FFFFFF !important;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 800;
-  padding: 4px 12px;
-  border-radius: 4px;
+  padding: 5px 14px;
+  border-radius: 6px;
   letter-spacing: 0.04em;
   display: inline-block;
+  box-shadow: 0 2px 8px rgba(226, 19, 110, 0.3);
 }
 
 .bkash-verified-indicator {
-  font-size: 0.76rem;
+  font-family: var(--font-bengali);
+  font-size: 0.78rem;
   font-weight: 700;
-  color: #137333 !important;
-  background: #E6F4EA !important;
-  border: 1px solid rgba(19, 115, 51, 0.3) !important;
-  padding: 3px 10px;
-  border-radius: 4px;
+  color: #15803D !important;
+  background: #DCFCE7 !important;
+  border: 1px solid rgba(21, 128, 61, 0.3) !important;
+  padding: 4px 12px;
+  border-radius: 6px;
   display: inline-block;
 }
 
@@ -6756,54 +6158,56 @@ h3 {
   gap: 12px;
   flex-wrap: wrap;
   background: #FFFFFF;
-  border: 1.5px solid rgba(226, 19, 110, 0.35);
-  border-radius: 8px;
-  padding: 10px 14px;
-  margin-bottom: 10px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+  border: 1.5px solid rgba(226, 19, 110, 0.4);
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(226, 19, 110, 0.08);
 }
 
 .gform-bkash-number {
-  font-family: var(--font-royal), monospace;
-  font-size: 1.5rem;
+  font-family: var(--font-bengali);
+  font-size: 1.55rem;
   font-weight: 900;
   color: #E2136E;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
 }
 
 .gform-copy-btn {
-  background: #E2136E;
+  background: linear-gradient(135deg, #E2136E 0%, #C20F5C 100%);
   color: #FFFFFF;
   border: none;
-  border-radius: 6px;
-  padding: 8px 16px;
-  font-size: 0.85rem;
+  border-radius: 8px;
+  padding: 9px 18px;
+  font-family: var(--font-bengali);
+  font-size: 0.88rem;
   font-weight: 800;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(226, 19, 110, 0.3);
+  box-shadow: 0 3px 10px rgba(226, 19, 110, 0.35);
 }
 
 .gform-copy-btn:hover {
-  background: #C20F5C;
-  transform: translateY(-1px);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 16px rgba(226, 19, 110, 0.5);
 }
 
 .gform-bkash-instructions {
-  font-size: 0.84rem;
-  color: #4A5568;
-  line-height: 1.5;
+  font-family: var(--font-bengali);
+  font-size: 0.88rem;
+  color: #475569;
+  line-height: 1.6;
   margin: 0;
-  padding: 8px 12px;
-  background: rgba(226, 19, 110, 0.05);
-  border-radius: 6px;
+  padding: 10px 14px;
+  background: rgba(226, 19, 110, 0.06);
+  border-radius: 8px;
 }
 
 .gform-bkash-inputs-group {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  margin-top: 14px;
+  margin-top: 16px;
 }
 
 .gform-subfield {
@@ -6812,9 +6216,10 @@ h3 {
 }
 
 .gform-subfield-label {
-  font-size: 0.88rem;
+  font-family: var(--font-bengali);
+  font-size: 0.9rem;
   font-weight: 700;
-  color: #202124;
+  color: #0F172A;
   margin-bottom: 6px;
 }
 
@@ -6823,41 +6228,65 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-top: 2rem;
   padding-top: 1rem;
 }
 
 .gform-submit-btn {
   width: 100%;
-  max-width: 520px;
-  padding: 1rem 2rem !important;
-  font-size: 1.05rem !important;
+  max-width: 540px;
+  box-sizing: border-box !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+  line-height: 1.4 !important;
+  padding: 1.15rem 1.8rem !important;
+  font-family: var(--font-bengali);
+  font-size: 1.1rem !important;
   font-weight: 800 !important;
   text-align: center;
   justify-content: center;
-  border-radius: 8px !important;
-  background: linear-gradient(180deg, #E60000 0%, #C4151C 45%, #990000 100%) !important;
-  border: 1.5px solid #FFD700 !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #071739 0%, #152A55 50%, #071739 100%) !important;
+  border: 2px solid #FFD700 !important;
   color: #FFF9E0 !important;
-  box-shadow: 0 6px 20px rgba(196, 21, 28, 0.45), 0 0 14px rgba(255, 215, 0, 0.3) !important;
+  letter-spacing: 0.02em;
+  box-shadow: 0 10px 28px rgba(7, 23, 57, 0.35), 0 0 18px rgba(255, 215, 0, 0.3) !important;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .gform-submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(196, 21, 28, 0.6), 0 0 20px rgba(255, 215, 0, 0.5) !important;
+  border-color: #FFE600 !important;
+  box-shadow: 0 14px 34px rgba(7, 23, 57, 0.45), 0 0 28px rgba(255, 215, 0, 0.45) !important;
+}
+
+.gform-submit-btn:active {
+  transform: translateY(1px);
 }
 
 .gform-security-footer-note {
-  font-size: 0.78rem;
-  color: #5F6368;
-  text-align: center;
+  font-family: var(--font-bengali);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748B;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 6px;
+  text-align: center;
+  justify-content: center;
+}
+
+/* Success Card */
+.gform-success-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1.5px solid #CBD5E1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
 .gform-success-body {
@@ -6866,39 +6295,48 @@ h3 {
 }
 
 .gform-success-check-badge {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  background: #E6F4EA;
-  color: #137333;
+  background: #DCFCE7;
+  color: #16A34A;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 900;
   margin-bottom: 1rem;
 }
 
 .gform-success-title {
-  font-family: 'Google Sans', Roboto, sans-serif;
+  font-family: var(--font-bengali);
   font-size: clamp(1.3rem, 2.8vw, 1.7rem);
-  font-weight: 700;
-  color: #202124;
+  font-weight: 800;
+  color: #0F172A;
   margin: 0 0 0.5rem 0;
 }
 
+.gform-success-thai-title {
+  font-family: var(--font-bengali);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #16A34A;
+  margin-bottom: 0.5rem;
+}
+
 .gform-success-subtitle {
-  font-size: 0.92rem;
-  color: #5F6368;
-  line-height: 1.6;
+  font-family: var(--font-bengali);
+  font-size: 0.94rem;
+  color: #475569;
+  line-height: 1.65;
   margin: 0 0 1.5rem 0;
 }
 
 .gform-receipt-summary {
-  background: #F8F9FA;
-  border: 1px solid #DADCE0;
-  border-radius: 6px;
-  padding: 16px 18px;
+  background: #F8FAFC;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 18px 20px;
   margin-bottom: 1.5rem;
 }
 
@@ -6906,49 +6344,51 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.88rem;
+  font-family: var(--font-bengali);
+  font-size: 0.92rem;
   font-weight: 700;
-  color: #202124;
+  color: #0F172A;
   padding-bottom: 10px;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #E2E8F0;
   margin-bottom: 12px;
 }
 
 .receipt-tag {
   font-size: 0.72rem;
   font-weight: 800;
-  background: #FFF0D4;
-  color: #B06000;
-  padding: 2px 8px;
+  background: #FEF3C7;
+  color: #B45309;
+  padding: 2px 10px;
   border-radius: 4px;
 }
 
 .gform-receipt-grid {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .receipt-row {
   display: flex;
   justify-content: space-between;
-  font-size: 0.88rem;
+  font-family: var(--font-bengali);
+  font-size: 0.9rem;
   gap: 12px;
   padding: 4px 0;
 }
 
 .receipt-label {
-  color: #5F6368;
+  color: #64748B;
 }
 
 .receipt-value {
-  color: #202124;
+  color: #0F172A;
   font-weight: 600;
   text-align: right;
 }
 
 .receipt-value.file-ok {
-  color: #137333;
+  color: #16A34A;
 }
 
 .receipt-value.highlight-govt {
@@ -6966,10 +6406,11 @@ h3 {
 
 .gform-reset-btn {
   background: transparent !important;
-  color: #1A73E8 !important;
+  color: #1D4ED8 !important;
   border: none !important;
-  font-size: 0.88rem !important;
-  font-weight: 600 !important;
+  font-family: var(--font-bengali);
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
   cursor: pointer;
   padding: 0 !important;
   text-decoration: underline;
@@ -6980,111 +6421,20 @@ h3 {
   .google-form-container {
     width: 100%;
     max-width: 100%;
-    padding: 0;
-  }
-
-  .gform-header-content {
-    padding: 1.1rem 0.85rem !important;
-  }
-
-  .gform-question-card {
-    padding: 1.1rem 0.85rem !important;
-  }
-
-  .gform-bkash-box {
-    padding: 12px 10px !important;
-  }
-
-  .bkash-number-row {
-    padding: 8px 10px !important;
-  }
-
-  .gform-logo-row {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.75rem;
-    margin-bottom: 0.85rem;
-  }
-
-  .gform-logo-box {
-    margin-bottom: 0.15rem;
-  }
-
-  .gform-verified-badge-line {
-    justify-content: center;
-    text-align: center;
-  }
-
-  .gform-title-with-badge {
-    justify-content: center;
-    text-align: center;
-  }
-
-  .gform-main-heading {
-    font-size: 1.15rem !important;
-    text-align: center;
-    word-break: break-word;
-    overflow-wrap: break-word;
-  }
-
-  .gform-form-name {
-    font-size: 0.92rem !important;
-    text-align: center;
-  }
-
-  .gform-subtext {
-    text-align: center;
-    font-size: 0.82rem;
-  }
-
-  .gform-meta-banner,
-  .gform-meta-banner.gform-meta-highlight-box {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0.95rem 1rem !important;
-    gap: 0.75rem;
-  }
-
-  .gform-fee-pill {
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  .gform-fee-prices-wrap {
-    width: 100%;
-    margin-top: 4px;
-  }
-
-  .gform-quota-pill.gform-quota-pill-pulse {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-    box-sizing: border-box;
-  }
-
-  .gform-bkash-inputs-group {
-    grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  .gform-action-bar {
-    flex-direction: column;
-    align-items: stretch;
+  .gform-header-content {
+    padding: 1.2rem 1rem !important;
   }
 
-  .gform-google-submit-btn {
-    width: 100%;
-    text-align: center;
+  .gform-question-card {
+    padding: 1.2rem 1rem !important;
+    border-radius: 12px;
   }
 
-  .gform-clear-form-btn {
-    text-align: center;
-  }
-
-  .gform-dob-grid {
-    grid-template-columns: 1fr;
-    gap: 8px;
+  .gform-top-card {
+    border-radius: 12px;
   }
 
   .gform-agent-layout {
@@ -7097,14 +6447,43 @@ h3 {
     align-items: center;
   }
 
-  .gform-pricing-grid {
+  .gform-bkash-card {
+    padding: 14px 12px !important;
+    border-radius: 12px;
+  }
+
+  .gform-bkash-number {
+    font-size: 1.3rem;
+  }
+
+  .gform-copy-btn {
+    padding: 7px 14px;
+    font-size: 0.82rem;
+  }
+
+  .gform-bkash-inputs-group {
     grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  .gform-duration-radio-group {
+  .gform-dob-grid {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 8px;
+  }
+
+  .gform-dropdown-select {
+    padding: 10px 32px 10px 12px;
+    font-size: 0.92rem;
+  }
+
+  .gform-underline-input {
+    padding: 10px 14px;
+    font-size: 0.92rem;
+  }
+
+  .gform-submit-btn {
+    padding: 1rem 1.4rem !important;
+    font-size: 1rem !important;
   }
 
   .gform-section-header-banner {

@@ -881,10 +881,10 @@ export default function OnlineForm({ isStandalonePage = false }) {
                 {isSubmitting ? (
                   <span className="gform-submitting-state">
                     <span className="gform-spinner" aria-hidden="true" />
-                    Submitting Application...
+                    আবেদন জমা হচ্ছে... (Submitting...)
                   </span>
                 ) : (
-                  <span>Submit Application & Confirm Membership</span>
+                  <span>আবেদন জমা দিন • Submit Application →</span>
                 )}
               </button>
               <div className="gform-security-footer-note">
