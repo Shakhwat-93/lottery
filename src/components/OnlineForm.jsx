@@ -3,10 +3,6 @@ import React, { useState } from 'react';
 export default function OnlineForm({ isStandalonePage = false }) {
   const [formData, setFormData] = useState({
     name: '',
-    nidNumber: '',
-    dobDay: '15',
-    dobMonth: '06',
-    dobYear: '1995',
     gender: 'Male',
     phone: '',
     address: '',
@@ -24,24 +20,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const bkashNumber = '01910243177';
-
-  const days = Array.from({ length: 31 }, (_, i) => String(i + 1).padStart(2, '0'));
-  const months = [
-    { value: '01', label: '01 - January' },
-    { value: '02', label: '02 - February' },
-    { value: '03', label: '03 - March' },
-    { value: '04', label: '04 - April' },
-    { value: '05', label: '05 - May' },
-    { value: '06', label: '06 - June' },
-    { value: '07', label: '07 - July' },
-    { value: '08', label: '08 - August' },
-    { value: '09', label: '09 - September' },
-    { value: '10', label: '10 - October' },
-    { value: '11', label: '11 - November' },
-    { value: '12', label: '12 - December' }
-  ];
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 70 }, (_, i) => String(currentYear - 16 - i));
 
   const countryList = [
     'Bangladesh',
@@ -104,11 +82,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
       setActiveCard('photo');
       return;
     }
-    if (!formData.nidNumber.trim()) {
-      alert('Please enter your NID / Passport Number.');
-      setActiveCard('nid');
-      return;
-    }
     if (!nidFile) {
       alert('Please upload your NID or Passport document photo (NID PHOTO HERE).');
       setActiveCard('nidPhoto');
@@ -141,10 +114,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
   const resetForm = () => {
     setFormData({
       name: '',
-      nidNumber: '',
-      dobDay: '15',
-      dobMonth: '06',
-      dobYear: '1995',
       gender: 'Male',
       phone: '',
       address: '',
@@ -325,14 +294,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
                     <strong className="receipt-value">{formData.name}</strong>
                   </div>
                   <div className="receipt-row">
-                    <span className="receipt-label">NID Number:</span>
-                    <strong className="receipt-value">{formData.nidNumber}</strong>
-                  </div>
-                  <div className="receipt-row">
-                    <span className="receipt-label">Date of Birth:</span>
-                    <strong className="receipt-value">{formData.dobDay}/{formData.dobMonth}/{formData.dobYear}</strong>
-                  </div>
-                  <div className="receipt-row">
                     <span className="receipt-label">Gender:</span>
                     <strong className="receipt-value">{formData.gender}</strong>
                   </div>
@@ -485,35 +446,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
               )}
             </div>
 
-            {/* 3. NID Number */}
-            <div
-              className={`gform-question-card ${activeCard === 'nid' ? 'is-active-card' : ''}`}
-              onClick={() => setActiveCard('nid')}
-            >
-              <div className="gform-card-left-indicator" aria-hidden="true" />
-              <label className="gform-question-title" htmlFor="gform-nid-number">
-                NID / Passport Number <span className="gform-req">*</span>
-              </label>
-              <p className="gform-question-desc">
-                Enter your National ID, Iqama, or Passport number
-              </p>
-              <div className="gform-input-wrapper">
-                <input
-                  id="gform-nid-number"
-                  name="nidNumber"
-                  type="text"
-                  required
-                  className="gform-underline-input"
-                  placeholder="e.g. 199XXXXXXXXXX / Iqama / Passport Number"
-                  value={formData.nidNumber}
-                  onChange={handleChange}
-                  onFocus={() => setActiveCard('nid')}
-                />
-                <span className="gform-input-focus-line" aria-hidden="true" />
-              </div>
-            </div>
-
-            {/* 4. NID Photo Upload */}
+            {/* 3. NID / Document Photo Upload */}
             <div
               className={`gform-question-card ${activeCard === 'nidPhoto' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('nidPhoto')}
@@ -572,77 +505,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
               )}
             </div>
 
-            {/* 5. Date of Birth */}
-            <div
-              className={`gform-question-card ${activeCard === 'dob' ? 'is-active-card' : ''}`}
-              onClick={() => setActiveCard('dob')}
-            >
-              <div className="gform-card-left-indicator" aria-hidden="true" />
-              <label className="gform-question-title">
-                Date of Birth <span className="gform-req">*</span>
-              </label>
-              <p className="gform-question-desc">
-                Select your Day, Month and Year of birth according to official documents
-              </p>
-
-              <div className="gform-dob-grid">
-                <div className="gform-select-wrapper gform-dob-col">
-                  <span className="gform-dob-label">DD</span>
-                  <select
-                    name="dobDay"
-                    value={formData.dobDay}
-                    onChange={handleChange}
-                    className="gform-dropdown-select"
-                    onFocus={() => setActiveCard('dob')}
-                  >
-                    {days.map((d) => (
-                      <option key={d} value={d}>
-                        {d}
-                      </option>
-                    ))}
-                  </select>
-                  <span className="gform-dropdown-arrow" aria-hidden="true">▼</span>
-                </div>
-
-                <div className="gform-select-wrapper gform-dob-col">
-                  <span className="gform-dob-label">MM</span>
-                  <select
-                    name="dobMonth"
-                    value={formData.dobMonth}
-                    onChange={handleChange}
-                    className="gform-dropdown-select"
-                    onFocus={() => setActiveCard('dob')}
-                  >
-                    {months.map((m) => (
-                      <option key={m.value} value={m.value}>
-                        {m.label}
-                      </option>
-                    ))}
-                  </select>
-                  <span className="gform-dropdown-arrow" aria-hidden="true">▼</span>
-                </div>
-
-                <div className="gform-select-wrapper gform-dob-col">
-                  <span className="gform-dob-label">YYYY</span>
-                  <select
-                    name="dobYear"
-                    value={formData.dobYear}
-                    onChange={handleChange}
-                    className="gform-dropdown-select"
-                    onFocus={() => setActiveCard('dob')}
-                  >
-                    {years.map((y) => (
-                      <option key={y} value={y}>
-                        {y}
-                      </option>
-                    ))}
-                  </select>
-                  <span className="gform-dropdown-arrow" aria-hidden="true">▼</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 6. Gender */}
+            {/* 4. Gender */}
             <div
               className={`gform-question-card ${activeCard === 'gender' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('gender')}
@@ -681,7 +544,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
 
-            {/* 7. Contact Number */}
+            {/* 5. Contact Number */}
             <div
               className={`gform-question-card ${activeCard === 'phone' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('phone')}
@@ -709,7 +572,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
 
-            {/* 8. Current Address */}
+            {/* 6. Current Address */}
             <div
               className={`gform-question-card ${activeCard === 'address' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('address')}
@@ -737,7 +600,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
 
-            {/* 9. Country of Residence */}
+            {/* 7. Country of Residence */}
             <div
               className={`gform-question-card ${activeCard === 'country' ? 'is-active-card' : ''}`}
               onClick={() => setActiveCard('country')}
