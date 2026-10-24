@@ -15,12 +15,12 @@ export default function TrustHero() {
           <span className="hero-title-year">2026</span>
         </h1>
         <p className="hero-copy hero-copy-paragraph">
-          থাইল্যান্ড সরকারের গভর্নমেন্ট লটারির অফিস (GLO) দ্বারা সরাসরি লাইসেন্সপ্রাপ্ত ও আন্তর্জাতিকভাবে বিশ্বস্ত প্ল্যাটফর্ম। ১০০% নিরাপদ লেনদেন, ভেরিফাইড রেজাল্ট ও অফিসিয়াল মেম্বারশিপ সেবা।
+          থাইল্যান্ড সরকারের গভর্নমেন্ট লটারির অফিস (GLO) দ্বারা সরাসরি লাইসেন্সপ্রাপ্ত ও আন্তর্জাতিকভাবে বিশ্বস্ত প্ল্যাটফর্ম। <span className="no-break-wrap"><strong className="clarity-digit">100%</strong> নিরাপদ লেনদেন,</span> ভেরিফাইড রেজাল্ট ও অফিসিয়াল মেম্বারশিপ সেবা।
         </p>
 
         <div className="trust-list" aria-label="Trust signals">
-          <span>✓ লাইসেন্স নং TGL-2025-001784</span>
-          <span>★ সেরা এজেন্ট ২০২৬ (Best Agent)</span>
+          <span>লাইসেন্স নং TGL-2025-001784</span>
+          <span>সেরা এজেন্ট 2026 (Best Agent)</span>
         </div>
 
         <div className="hero-actions">

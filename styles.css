@@ -51,12 +51,12 @@
   --radius-card-lg: 20px;
   --radius-pill: 999px;
 
-  /* Typography — Enhanced Crisp Bengali & Global Typography */
+  /* Typography — Elite Crisp Bengali (Anek Bangla + Noto Sans Bengali) */
   --font-thai: "Sarabun", "Thonburi", "Leelawadee UI", sans-serif;
-  --font-bengali: "Hind Siliguri", "Noto Sans Bengali", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-royal: "Playfair Display", "Cinzel", "Hind Siliguri", "Noto Sans Bengali", Georgia, serif;
-  --font-heading: "Playfair Display", "Cinzel", "Hind Siliguri", "Noto Sans Bengali", Georgia, serif;
-  --font-body: "Hind Siliguri", "Noto Sans Bengali", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-bengali: "Anek Bangla", "Noto Sans Bengali", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-royal: "Playfair Display", "Cinzel", "Anek Bangla", "Noto Sans Bengali", Georgia, serif;
+  --font-heading: "Playfair Display", "Cinzel", "Anek Bangla", "Noto Sans Bengali", Georgia, serif;
+  --font-body: "Anek Bangla", "Noto Sans Bengali", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 * {
@@ -962,15 +962,33 @@ h1 {
   filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.95)) drop-shadow(0 4px 10px rgba(60, 38, 0, 0.4));
 }
 
-/* Hero paragraph description */
+/* Hero paragraph description - High Clarity & Enhanced Bengali Font */
 .hero-copy-paragraph {
   display: block !important;
   text-align: center;
-  font-size: clamp(0.9rem, 2vw, 1.05rem);
-  line-height: 1.65;
-  color: var(--text-navy);
-  max-width: 34rem;
+  font-family: var(--font-bengali);
+  font-size: clamp(0.98rem, 2.2vw, 1.15rem) !important;
+  font-weight: 500 !important;
+  line-height: 1.75 !important;
+  color: #071739 !important;
+  max-width: 38rem;
   margin: 0 auto 1.35rem;
+  letter-spacing: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.clarity-digit {
+  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, var(--font-bengali);
+  font-weight: 800;
+  color: #071739;
+  letter-spacing: 0.01em;
+  display: inline-block;
+  padding: 0 1px;
+}
+
+.no-break-wrap {
+  white-space: nowrap;
 }
 
 h2 {
@@ -1005,10 +1023,14 @@ h3 {
 .section-heading p,
 .game-panel p,
 .asset-card p {
-  color: var(--text-secondary);
+  color: #1E293B;
   font-family: var(--font-body);
   font-size: 1.08rem;
+  font-weight: 500;
   line-height: 1.75;
+  letter-spacing: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 .hero-copy {
@@ -10705,8 +10727,11 @@ h3 {
   .hero-copy-paragraph {
     display: block !important;
     text-align: center !important;
-    font-size: clamp(0.82rem, 3.5vw, 1rem) !important;
-    line-height: 1.65 !important;
+    font-family: var(--font-bengali) !important;
+    font-size: clamp(0.92rem, 3.8vw, 1.05rem) !important;
+    font-weight: 500 !important;
+    line-height: 1.7 !important;
+    color: #071739 !important;
     max-width: 100% !important;
     margin: 0 auto 0.85rem !important;
     width: 100% !important;
@@ -10763,8 +10788,11 @@ h3 {
   .asset-card p,
   .offer-desc,
   .review-subtext {
-    font-size: clamp(0.85rem, 3.5vw, 0.94rem) !important;
-    line-height: 1.6 !important;
+    font-family: var(--font-bengali) !important;
+    font-size: clamp(0.9rem, 3.7vw, 1.02rem) !important;
+    font-weight: 500 !important;
+    line-height: 1.68 !important;
+    color: #1E293B !important;
   }
 
   .section-heading {

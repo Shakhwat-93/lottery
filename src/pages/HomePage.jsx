@@ -36,8 +36,8 @@ export default function HomePage() {
             <div className="three-set-glow-ring" aria-hidden="true" />
             <div className="three-set-home-text">
               <span className="three-set-badge-tag">✦ VIP OFFICIAL DOCUMENT ✦</span>
-              <h3>থাইল্যান্ড লটারি ৩ সেট গেম পেপার ২০২৬</h3>
-              <p>অফিসিয়াল ৩ সেট গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:</p>
+              <h3>থাইল্যান্ড লটারি 3 সেট গেম পেপার 2026</h3>
+              <p>অফিসিয়াল 3 সেট গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:</p>
             </div>
             <Link to="/3-set-game" className="three-set-glowing-btn" aria-label="Open 3 set game document">
               <span className="three-set-shimmer" aria-hidden="true" />

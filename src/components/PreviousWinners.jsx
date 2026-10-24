@@ -6,7 +6,7 @@ const WINNER_FORMS = [
     nameBn: 'মুহাম্মদ জহুরুল ইসলাম',
     nameEn: 'MOHAMMAD ZOHURUL ISLAM',
     formImg: '/assets/site/winners/winner-form-zohurul.jpg',
-    badge: '🏆 ১ম ক্যাটাগরি বিজয়ী ফরম',
+    badge: '🏆 1st ক্যাটাগরি বিজয়ী ফরম',
     country: 'সৌদি আরব (Saudi Arabia)',
     agent: 'Md Fahim Chowdhury (TL-001)',
     price: '250 SAR'

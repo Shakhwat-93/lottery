@@ -57,7 +57,7 @@ export default function VipOfferTimer() {
   return (
     <section className="section offer-timer-section reveal-on-scroll" id="vip-offer" aria-label="Limited time VIP discount offer">
       <div className="offer-card golden-offer-card">
-        {/* Top Prominent Highlight Banner: "মাত্র ৫টি ফর্ম বাকি আছে শুধু" */}
+        {/* Top Prominent Highlight Banner: "মাত্র 5টি ফর্ম বাকি আছে শুধু" */}
         <div className="urgent-forms-highlight-banner" role="alert">
           <div className="urgent-badge-left">
             <span className="urgent-beacon-dot" aria-hidden="true" />
@@ -67,12 +67,12 @@ export default function VipOfferTimer() {
           <div className="urgent-main-highlight">
             <span className="urgent-siren" aria-hidden="true">🚨</span>
             <span className="urgent-message">
-              আর মাত্র <strong className="golden-urgent-number">৫টি</strong> ফর্ম বাকি আছে শুধু!
+              আর মাত্র <strong className="golden-urgent-number">5টি</strong> ফর্ম বাকি আছে শুধু!
             </span>
           </div>
 
           <div className="urgent-quota-chip">
-            <span>কোটা: <strong>৯৫% বুকড</strong> • অবশিষ্ট: <strong className="chip-gold-num">৫টি</strong></span>
+            <span>কোটা: <strong>95% বুকড</strong> • অবশিষ্ট: <strong className="chip-gold-num">5টি</strong></span>
           </div>
         </div>
 
@@ -80,10 +80,10 @@ export default function VipOfferTimer() {
         <div className="offer-main-content">
           <div className="offer-title-group">
             <h2 className="golden-timer-headline">
-              আর মাত্র <span className="title-count-highlight">৫টি</span> ফর্ম বাকি আছে — দ্রুত আপনার ফর্মটি বুক করুন!
+              আর মাত্র <span className="title-count-highlight">5টি</span> ফর্ম বাকি আছে — দ্রুত আপনার ফর্মটি বুক করুন!
             </h2>
             <p className="offer-desc">
-              থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) অনুমোদিত মেম্বারশিপ কোটায় সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (TL-001)</strong> এর অধীনে আর <strong>মাত্র ৫টি অফিসিয়াল মেম্বারশিপ ফর্ম</strong> খালি রয়েছে। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার কনফার্ম করুন!
+              থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) অনুমোদিত মেম্বারশিপ কোটায় সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (TL-001)</strong> এর অধীনে আর <strong>মাত্র 5টি অফিসিয়াল মেম্বারশিপ ফর্ম</strong> খালি রয়েছে। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার কনফার্ম করুন!
             </p>
           </div>
 
@@ -121,10 +121,10 @@ export default function VipOfferTimer() {
           <div className="seats-progress-container">
             <div className="progress-labels">
               <span>
-                🔥 ফর্ম পূরণ চলছে: <strong>৯৫টি ফরম সম্পন্ন (৯৫%)</strong>
+                🔥 ফর্ম পূরণ চলছে: <strong>95টি ফরম সম্পন্ন (95%)</strong>
               </span>
               <span>
-                অবশিষ্ট কোটা: <strong className="seat-highlight-gold">মাত্র ৫টি ফর্ম বাকি শুধু!</strong>
+                অবশিষ্ট কোটা: <strong className="seat-highlight-gold">মাত্র 5টি ফর্ম বাকি শুধু!</strong>
               </span>
             </div>
             <div className="progress-track" role="progressbar" aria-valuenow={95} aria-valuemin={0} aria-valuemax={100}>
@@ -136,7 +136,7 @@ export default function VipOfferTimer() {
 
           <div className="offer-cta-group">
             <Link className="button primary offer-cta-btn golden-cta-btn" to="/form">
-              <span>বাকি ৫টি ফর্মের ১টি পূরণ করুন ✍️</span>
+              <span>বাকি 5টি ফর্মের 1টি পূরণ করুন ✍️</span>
               <span className="btn-arrow" aria-hidden="true">
                 →
               </span>

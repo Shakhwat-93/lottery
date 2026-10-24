@@ -35,7 +35,7 @@ export default function GamePage() {
             <p className="eyebrow">100% SURE PAPERS</p>
             <h1>Official 100% Sure Paper Gallery</h1>
             <p>
-              অফিসিয়াল ১০০% সিওর পেপার, মাস্টার ডিজিট ও টাচ চার্ট গ্যালারি:
+              অফিসিয়াল <strong className="clarity-digit">100%</strong> সিওর পেপার, মাস্টার ডিজিট ও টাচ চার্ট গ্যালারি:
             </p>
 
             <div className="badge-row" aria-label="Game trust badges">

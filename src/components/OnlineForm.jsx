@@ -654,7 +654,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                       <span className="gform-sub-badge">Standard VIP</span>
                     </div>
                     <div className="gform-sub-duration">3 Month</div>
-                    <div className="gform-sub-duration-bn">৩ মাস মেম্বারশিপ</div>
+                    <div className="gform-sub-duration-bn">3 মাস মেম্বারশিপ</div>
 
                     {/* Pricing Highlight Box */}
                     <div className="gform-sub-pricing-block">
@@ -665,7 +665,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                       <span className="gform-sub-price-label">সৌদি রিয়াল (SAR)</span>
                     </div>
 
-                    <div className="gform-sub-desc">৩ মাসের নিয়মিত ভিআইপি শিওর পেপার ও গেম এক্সেস</div>
+                    <div className="gform-sub-desc">3 মাসের নিয়মিত ভিআইপি শিওর পেপার ও গেম এক্সেস</div>
                     <div className="gform-sub-check-indicator">
                       <span className="gform-sub-checkmark">✓</span>
                     </div>
@@ -691,7 +691,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                       <span className="gform-sub-badge badge-popular">Recommended</span>
                     </div>
                     <div className="gform-sub-duration">6 Month</div>
-                    <div className="gform-sub-duration-bn">৬ মাস মেম্বারশিপ</div>
+                    <div className="gform-sub-duration-bn">6 মাস মেম্বারশিপ</div>
 
                     {/* Pricing Highlight Box */}
                     <div className="gform-sub-pricing-block">
@@ -702,7 +702,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                       <span className="gform-sub-price-label">সৌদি রিয়াল (SAR)</span>
                     </div>
 
-                    <div className="gform-sub-desc">৬ মাসের নিয়মিত ভিআইপি এক্সেস ও সিনিয়র এজেন্ট সরাসরি সাপোর্ট</div>
+                    <div className="gform-sub-desc">6 মাসের নিয়মিত ভিআইপি এক্সেস ও সিনিয়র এজেন্ট সরাসরি সাপোর্ট</div>
                     <div className="gform-sub-check-indicator">
                       <span className="gform-sub-checkmark">✓</span>
                     </div>
@@ -728,7 +728,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                       <span className="gform-sub-badge badge-gold">Best Value</span>
                     </div>
                     <div className="gform-sub-duration">12 Month</div>
-                    <div className="gform-sub-duration-bn">১২ মাস (১ বছর VIP)</div>
+                    <div className="gform-sub-duration-bn">12 মাস (1 বছর VIP)</div>
 
                     {/* Pricing Highlight Box */}
                     <div className="gform-sub-pricing-block">
@@ -739,7 +739,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                       <span className="gform-sub-price-label">সৌদি রিয়াল (SAR)</span>
                     </div>
 
-                    <div className="gform-sub-desc">সম্পূর্ণ ১ বছর আনলিমিটেড প্রিমিয়াম মেম্বারশিপ ও সর্বোচ্চ সুবিধা</div>
+                    <div className="gform-sub-desc">সম্পূর্ণ 1 বছর আনলিমিটেড প্রিমিয়াম মেম্বারশিপ ও সর্বোচ্চ সুবিধা</div>
                     <div className="gform-sub-check-indicator">
                       <span className="gform-sub-checkmark">✓</span>
                     </div>

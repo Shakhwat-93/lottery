@@ -44,7 +44,7 @@ export default function ThreeSetGamePage() {
             <span className="premium-tag">สำนักงานสลากกินแบ่งรัฐบาล • GLO VIP 2026</span>
             <h1 className="three-set-title">Thailand Official 3 Set Game 2026</h1>
             <p className="three-set-desc">
-              থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) দ্বারা সরাসরি নিয়ন্ত্রিত অফিসিয়াল <strong>৩ সেট গেম (3 Set Game)</strong> পেপার ও লাইসেন্স ভাউচার।
+              থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) দ্বারা সরাসরি নিয়ন্ত্রিত অফিসিয়াল <strong>3 সেট গেম (3 Set Game)</strong> পেপার ও লাইসেন্স ভাউচার।
             </p>
 
             <div className="three-set-badges">

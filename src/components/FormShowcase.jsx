@@ -12,14 +12,14 @@ export default function FormShowcase() {
         </p>
         <h2>Thailand Lottery Official Membership Registration Form</h2>
         <p>
-          থাইল্যান্ড সরকারের গভর্নমেন্ট লটারি অফিস (GLO) মেম্বার হতে নিচের অফিসিয়াল রেজিস্ট্রেশন ফরমটি পূরণ করুন। অনুমোদিত সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (Agent ID: TL-001)</strong> এর অধীনে আর <strong>মাত্র ৫টি ফর্ম বাকি রয়েছে</strong>। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার কনফার্ম করুন!
+          থাইল্যান্ড সরকারের গভর্নমেন্ট লটারি অফিস (GLO) মেম্বার হতে নিচের অফিসিয়াল রেজিস্ট্রেশন ফরমটি পূরণ করুন। অনুমোদিত সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (Agent ID: TL-001)</strong> এর অধীনে আর <strong>মাত্র 5টি ফর্ম বাকি রয়েছে</strong>। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার কনফার্ম করুন!
         </p>
       </div>
 
       <div className="membership-board" aria-label="Online registration and member verification">
         <div className="online-form-title">
           <span>MEMBERSHIP REGISTRATION FORM</span>
-          <span className="form-remaining-pill">🚨 মাত্র ৫টি ফর্ম বাকি!</span>
+          <span className="form-remaining-pill">🚨 মাত্র 5টি ফর্ম বাকি!</span>
         </div>
 
         <div className="form-showcase-layout">
@@ -64,7 +64,7 @@ export default function FormShowcase() {
                   </div>
                   <div className="form-agent-line status-alert-line">
                     <span>QUOTA STATUS:</span>
-                    <strong className="remaining-alert-text">🚨 মাত্র ৫টি ফর্ম বাকি</strong>
+                    <strong className="remaining-alert-text">🚨 মাত্র 5টি ফর্ম বাকি</strong>
                   </div>
                 </div>
 
@@ -126,7 +126,7 @@ export default function FormShowcase() {
               />
             </div>
             <div className="winner-modal-footer">
-              <span className="form-lightbox-alert">🚨 মাত্র ৫টি ফর্ম খালি রয়েছে!</span>
+              <span className="form-lightbox-alert">🚨 মাত্র 5টি ফর্ম খালি রয়েছে!</span>
               <div className="form-lightbox-actions">
                 <Link
                   className="button primary"

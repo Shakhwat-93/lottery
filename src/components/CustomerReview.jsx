@@ -9,7 +9,7 @@ export default function CustomerReview({ videoRef }) {
           <p className="eyebrow">ความคิดเห็นจากลูกค้า • GENUINE REVIEWS • সম্মানিত গ্রাহকদের সরাসরি রিভিউ</p>
           <h2>Real Customer Video Feedback</h2>
           <p className="review-subtext">
-            সরাসরি জয়ী গ্রাহক ও সদস্যদের ভিডিও অভিজ্ঞতা শুনুন—যেখানে রয়েছে ১০০% সততা, স্বচ্ছতা এবং সরাসরি ব্যাংক একাউন্টে পুরস্কার ও পেপার পাওয়ার প্রমাণ।
+            সরাসরি জয়ী গ্রাহক ও সদস্যদের ভিডিও অভিজ্ঞতা শুনুন—যেখানে রয়েছে <strong className="clarity-digit">100%</strong> সততা, স্বচ্ছতা এবং সরাসরি ব্যাংক একাউন্টে পুরস্কার ও পেপার পাওয়ার প্রমাণ।
           </p>
 
           <div className="review-stats-card">
@@ -20,29 +20,29 @@ export default function CustomerReview({ videoRef }) {
               <span className="review-score">4.9 / 5.0</span>
               <span className="verified-badge-mini">VERIFIED REVIEW</span>
             </div>
-            <p className="review-stats-note">ยืนยันจากสมาชิกและตัวแทนมากกว่า 10,000+ รายการ • ১০,০০০+ সন্তুষ্ট গ্রাহক</p>
+            <p className="review-stats-note">ยืนยันจากสมาชิกและตัวแทนมากกว่า 10,000+ รายการ • 10,000+ সন্তুষ্ট গ্রাহক</p>
           </div>
 
           <div className="review-features">
             <div className="review-feature-item">
               <span className="feature-check">&#10003;</span>
               <div>
-                <strong>১. গ্রাহকদের বাস্তব ভিডিও (Genuine Member Experience)</strong>
+                <strong>1. গ্রাহকদের বাস্তব ভিডিও (Genuine Member Experience)</strong>
                 <small>ลูกค้าตัวจริง 100% • কোনো কৃত্রিম বিজ্ঞাপন বা এডিটিং ছাড়া গ্রাহকের নিজস্ব ভিডিও বার্তা।</small>
               </div>
             </div>
             <div className="review-feature-item">
               <span className="feature-check">&#10003;</span>
               <div>
-                <strong>২. সঠিক ফলাফল ও পে-আউট নিশ্চয়তা (Guaranteed Payout)</strong>
+                <strong>2. সঠিক ফলাফল ও পে-আউট নিশ্চয়তা (Guaranteed Payout)</strong>
                 <small>ได้รับเงินรางวัลจริง • থাইল্যান্ড সরকারের নির্ধারিত রেজাল্টের সাথে হুবহু মিল ও দ্রুত পেমেন্ট।</small>
               </div>
             </div>
             <div className="review-feature-item">
               <span className="feature-check">&#10003;</span>
               <div>
-                <strong>৩. অফিসিয়াল সিকিউরিটি ও নিশ্চয়তা (Official Security)</strong>
-                <small>ปลอดภัย มีเอกสารรับรอง • ২৪ ঘণ্টা সার্বক্ষণিক কাস্টমার কেয়ার ও ভেরিফাইড ডকুমেন্ট সাপোর্ট।</small>
+                <strong>3. অফিসিয়াল সিকিউরিটি ও নিশ্চয়তা (Official Security)</strong>
+                <small>ปลอดภัย มีเอกสารรับรอง • 24 ঘণ্টা সার্বক্ষণিক কাস্টমার কেয়ার ও ভেরিফাইড ডকুমেন্ট সাপোর্ট।</small>
               </div>
             </div>
           </div>

@@ -159,7 +159,7 @@ export default function FloatingContactButtons() {
 
             <div className="imo-modal-footer">
               <span className="imo-footer-status-dot" aria-hidden="true" />
-              <span>২৪/৭ ইমো ও হোয়াটসঅ্যাপ সাপোর্ট একটিভ রয়েছে</span>
+              <span>24/7 ইমো ও হোয়াটসঅ্যাপ সাপোর্ট একটিভ রয়েছে</span>
             </div>
           </div>
         </div>

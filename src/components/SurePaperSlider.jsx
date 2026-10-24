@@ -66,7 +66,7 @@ export default function SurePaperSlider() {
     <section className="section slider-section reveal-on-scroll" id="sure-papers-slider" aria-label="100% Sure Paper Slider">
       <div className="section-heading">
         <p className="eyebrow">
-          <span className="alert-fire-icon" aria-hidden="true">⚡</span> ১০০% সিওর পেপার
+          <span className="alert-fire-icon" aria-hidden="true">⚡</span> <strong className="clarity-digit">100%</strong> সিওর পেপার
         </p>
         <h2>আসন্ন ড্র-এর সিওর পেপার গ্যালারি</h2>
         <p>
