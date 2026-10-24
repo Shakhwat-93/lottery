@@ -21,6 +21,16 @@ export default function OnlineForm({ isStandalonePage = false }) {
   const [registrationId, setRegistrationId] = useState('GLO-TL-784291');
   const [submissionTime, setSubmissionTime] = useState('24 Oct 2026, 02:35 PM');
   const [copiedId, setCopiedId] = useState(false);
+  const [copiedBkash, setCopiedBkash] = useState(false);
+
+  const copyBkashNumber = () => {
+    const bkashNum = '+8801705330881';
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(bkashNum);
+      setCopiedBkash(true);
+      setTimeout(() => setCopiedBkash(false), 2000);
+    }
+  };
 
   const countryList = [
     'Bangladesh',
@@ -182,18 +192,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
                     width="72"
                     height="72"
                   />
-                  <span className="gform-logo-verified-badge" title="Official Verified GLO Thailand">
-                    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-                      <path
-                        fill="#1D9BF0"
-                        d="M22.25 12c0-1.43-.88-2.67-2.19-3.19.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.52-1.31-1.76-2.19-3.19-2.19s-2.67.88-3.19 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91C2.93 9.33 2.05 10.57 2.05 12s.88 2.67 2.19 3.19c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.52 1.31 1.76 2.19 3.19 2.19s2.67-.88 3.19-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.52 2.19-1.76 2.19-3.19z"
-                      />
-                      <path
-                        fill="#FFFFFF"
-                        d="M10.09 16.72l-4.14-4.14 1.41-1.41 2.73 2.73 6.13-6.13 1.41 1.41-7.54 7.54z"
-                      />
-                    </svg>
-                  </span>
                 </div>
               </div>
               <div className="gform-official-text">
@@ -202,7 +200,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   <span className="gform-verified-tag">
                     <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
                       <path
-                        fill="#1D9BF0"
+                        fill="#10B981"
                         d="M22.25 12c0-1.43-.88-2.67-2.19-3.19.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.52-1.31-1.76-2.19-3.19-2.19s-2.67.88-3.19 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91C2.93 9.33 2.05 10.57 2.05 12s.88 2.67 2.19 3.19c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.52 1.31 1.76 2.19 3.19 2.19s2.67-.88 3.19-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.52 2.19-1.76 2.19-3.19z"
                       />
                       <path
@@ -214,19 +212,22 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   </span>
                 </div>
                 <div className="gform-title-with-badge">
-                  <h1 className="gform-main-heading">Thailand Official Lottery</h1>
-                  <span className="gform-verified-title-check" title="Verified Portal">
-                    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-                      <path
-                        fill="#1D9BF0"
-                        d="M22.25 12c0-1.43-.88-2.67-2.19-3.19.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.52-1.31-1.76-2.19-3.19-2.19s-2.67.88-3.19 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91C2.93 9.33 2.05 10.57 2.05 12s.88 2.67 2.19 3.19c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.52 1.31 1.76 2.19 3.19 2.19s2.67-.88 3.19-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.52 2.19-1.76 2.19-3.19z"
-                      />
-                      <path
-                        fill="#FFFFFF"
-                        d="M10.09 16.72l-4.14-4.14 1.41-1.41 2.73 2.73 6.13-6.13 1.41 1.41-7.54 7.54z"
-                      />
-                    </svg>
-                  </span>
+                  <h1 className="gform-main-heading">
+                    Thailand Official <span className="gform-heading-nowrap">Lottery
+                      <span className="gform-verified-title-check" title="Official Verified GLO Thailand">
+                        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                          <path
+                            fill="#10B981"
+                            d="M22.25 12c0-1.43-.88-2.67-2.19-3.19.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.52-1.31-1.76-2.19-3.19-2.19s-2.67.88-3.19 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91C2.93 9.33 2.05 10.57 2.05 12s.88 2.67 2.19 3.19c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.52 1.31 1.76 2.19 3.19 2.19s2.67-.88 3.19-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.52 2.19-1.76 2.19-3.19z"
+                          />
+                          <path
+                            fill="#FFFFFF"
+                            d="M10.09 16.72l-4.14-4.14 1.41-1.41 2.73 2.73 6.13-6.13 1.41 1.41-7.54 7.54z"
+                          />
+                        </svg>
+                      </span>
+                    </span>
+                  </h1>
                 </div>
                 <h2 className="gform-form-name">MEMBERSHIP REGISTRATION FORM 2026</h2>
                 <div className="gform-thai-tagline">
@@ -729,22 +730,46 @@ export default function OnlineForm({ isStandalonePage = false }) {
 
             {/* Form Footer Action */}
             <div className="gform-footer-action-bar">
-              {/* bKash Payment Notice Strip (Right Before Submit) */}
-              <div className="gform-bkash-notice-strip" role="note" aria-label="bKash Payment Notice">
-                <div className="gform-bkash-logo-wrap">
-                  <img
-                    src="/assets/bkash-logo.svg"
-                    alt="bKash Logo"
-                    className="gform-bkash-strip-logo"
-                    width="68"
-                    height="32"
-                    loading="lazy"
-                  />
+              {/* bKash Payment Notice Card (Right Before Submit) */}
+              <div className="gform-bkash-notice-card" role="note" aria-label="bKash Payment Notice">
+                <div className="gform-bkash-card-top">
+                  <div className="gform-bkash-brand-badge">
+                    <div className="gform-bkash-logo-wrap">
+                      <img
+                        src="/assets/bkash-logo.svg"
+                        alt="bKash Logo"
+                        className="gform-bkash-strip-logo"
+                        width="74"
+                        height="32"
+                        loading="lazy"
+                      />
+                    </div>
+                    <span className="gform-bkash-type-pill">পার্সোনাল বিকাশ নাম্বার</span>
+                  </div>
+                  <span className="gform-bkash-action-pill">⚡ Send Money করতে হবে</span>
                 </div>
-                <div className="gform-bkash-notice-content">
-                  <p className="gform-bkash-notice-text">
-                    ফাহিম চৌধুরীকে মেম্বারশিপ কনফার্ম করতে <strong>বিকাশে পেমেন্ট করুন</strong>
-                  </p>
+
+                <p className="gform-bkash-target-text">
+                  ফাহিম চৌধুরীকে মেম্বারশিপ কনফার্ম করতে বিকাশ এ পেমেন্ট করুন:
+                </p>
+
+                <div className="gform-bkash-num-container">
+                  <div className="gform-bkash-num-left">
+                    <span className="gform-bkash-num-tag">Personal bKash No.</span>
+                    <span className="gform-bkash-digits">+8801705330881</span>
+                  </div>
+                  <button
+                    type="button"
+                    className={`gform-bkash-copy-btn ${copiedBkash ? 'is-copied' : ''}`}
+                    onClick={copyBkashNumber}
+                    title="Copy bKash Number"
+                  >
+                    {copiedBkash ? '✓ কপি হয়েছে!' : '📋 কপি করুন'}
+                  </button>
+                </div>
+
+                <div className="gform-bkash-foot-note">
+                  💡 অনুগ্রহ করে বিকাশ অ্যাপ অথবা *247# ডায়াল করে উক্ত নাম্বারে <strong>Send Money</strong> সম্পন্ন করুন।
                 </div>
               </div>
 
@@ -785,18 +810,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   width="88"
                   height="88"
                 />
-                <span className="gform-success-verified-check" title="Official Verified GLO Thailand">
-                  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-                    <path
-                      fill="#1D9BF0"
-                      d="M22.25 12c0-1.43-.88-2.67-2.19-3.19.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.52-1.31-1.76-2.19-3.19-2.19s-2.67.88-3.19 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91C2.93 9.33 2.05 10.57 2.05 12s.88 2.67 2.19 3.19c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.52 1.31 1.76 2.19 3.19 2.19s2.67-.88 3.19-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.52 2.19-1.76 2.19-3.19z"
-                    />
-                    <path
-                      fill="#FFFFFF"
-                      d="M10.09 16.72l-4.14-4.14 1.41-1.41 2.73 2.73 6.13-6.13 1.41 1.41-7.54 7.54z"
-                    />
-                  </svg>
-                </span>
               </div>
 
               <div className="gform-success-authority-badge">

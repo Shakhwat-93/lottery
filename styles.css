@@ -5815,22 +5815,19 @@ h3 {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: #EFF6FF;
-  color: #1D4ED8;
-  border: 1px solid rgba(29, 78, 216, 0.25);
+  background: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
   border-radius: var(--radius-pill);
   font-family: var(--font-bengali);
   font-size: 0.72rem;
   font-weight: 700;
   padding: 0.15rem 0.65rem;
-  box-shadow: 0 1px 3px rgba(29, 78, 216, 0.1);
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.1);
 }
 
 .gform-title-with-badge {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  display: block;
   margin-bottom: 0.2rem;
 }
 
@@ -5844,11 +5841,21 @@ h3 {
   letter-spacing: -0.01em;
 }
 
+.gform-heading-nowrap {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: 6px;
+  vertical-align: middle;
+}
+
 .gform-verified-title-check {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  vertical-align: middle;
+  filter: drop-shadow(0 2px 5px rgba(16, 185, 129, 0.35));
 }
 
 .gform-form-name {
@@ -6940,29 +6947,43 @@ h3 {
   padding-top: 1rem;
 }
 
-/* bKash Payment Notice Strip (Directly Above Submit Button) */
-.gform-bkash-notice-strip {
+/* bKash Payment Notice Card (Directly Above Submit Button) */
+.gform-bkash-notice-card {
   width: 100%;
   max-width: 540px;
   box-sizing: border-box;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  padding: 12px 18px;
-  background: linear-gradient(135deg, #FFF5F8 0%, #FFFFFF 50%, #FFF8FA 100%);
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #FFF6FA 0%, #FFFFFF 55%, #FFF0F6 100%);
   border: 1.5px solid #FBCFE8;
   border-left: 5px solid #E2126E;
-  border-radius: 12px;
-  box-shadow: 0 4px 18px rgba(226, 18, 110, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(226, 18, 110, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
   transition: all 0.25s ease;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
+  text-align: left;
 }
 
-.gform-bkash-notice-strip:hover {
+.gform-bkash-notice-card:hover {
   border-color: #F472B6;
   border-left-color: #E2126E;
-  box-shadow: 0 6px 22px rgba(226, 18, 110, 0.14);
+  box-shadow: 0 6px 24px rgba(226, 18, 110, 0.14);
+}
+
+.gform-bkash-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.gform-bkash-brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .gform-bkash-logo-wrap {
@@ -6970,7 +6991,7 @@ h3 {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  padding: 4px 8px;
+  padding: 4px 10px;
   background: #FFFFFF;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
@@ -6978,46 +6999,179 @@ h3 {
 }
 
 .gform-bkash-strip-logo {
-  height: 28px;
+  height: 26px;
   width: auto;
-  max-width: 60px;
+  max-width: 66px;
   object-fit: contain;
   display: block;
 }
 
-.gform-bkash-notice-content {
-  flex: 1;
-  text-align: left;
+.gform-bkash-type-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  background: #FFF1F6;
+  color: #9D174D;
+  border: 1px solid #FBCFE8;
+  border-radius: 999px;
+  font-family: var(--font-bengali, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
 }
 
-.gform-bkash-notice-text {
+.gform-bkash-action-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  background: linear-gradient(135deg, #FFE4E6 0%, #FECDD3 100%);
+  color: #BE123C;
+  border: 1px solid #FDA4AF;
+  border-radius: 999px;
   font-family: var(--font-bengali, sans-serif);
-  font-size: 0.96rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  box-shadow: 0 1px 3px rgba(225, 29, 72, 0.1);
+}
+
+.gform-bkash-target-text {
+  font-family: var(--font-bengali, sans-serif);
+  font-size: 0.95rem;
   font-weight: 700;
   color: #1E293B;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.gform-bkash-num-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #FFFFFF;
+  border: 1.5px solid #F472B6;
+  border-radius: 12px;
+  box-shadow: inset 0 1px 3px rgba(226, 18, 110, 0.04), 0 2px 8px rgba(226, 18, 110, 0.06);
+}
+
+.gform-bkash-num-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gform-bkash-num-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #BE185D;
+}
+
+.gform-bkash-digits {
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #831843;
+  letter-spacing: 0.04em;
+  user-select: all;
+}
+
+.gform-bkash-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #E2126E 0%, #BE1256 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-bengali, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(226, 18, 110, 0.25);
+  flex-shrink: 0;
+}
+
+.gform-bkash-copy-btn:hover {
+  background: linear-gradient(135deg, #C20E5C 0%, #A20D4A 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(226, 18, 110, 0.35);
+}
+
+.gform-bkash-copy-btn.is-copied {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
+}
+
+.gform-bkash-foot-note {
+  font-family: var(--font-bengali, sans-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #475569;
   line-height: 1.45;
   margin: 0;
 }
 
-.gform-bkash-notice-text strong {
+.gform-bkash-foot-note strong {
   color: #E2126E;
-  font-weight: 900;
-  text-shadow: 0 0 10px rgba(226, 18, 110, 0.15);
+  font-weight: 800;
 }
 
 @media (max-width: 640px) {
-  .gform-bkash-notice-strip {
-    padding: 10px 14px;
+  .gform-bkash-notice-card {
+    padding: 12px 14px;
     gap: 10px;
+  }
+
+  .gform-bkash-card-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 
   .gform-bkash-strip-logo {
     height: 24px;
-    max-width: 52px;
+    max-width: 58px;
   }
 
-  .gform-bkash-notice-text {
+  .gform-bkash-type-pill,
+  .gform-bkash-action-pill {
+    font-size: 0.76rem;
+    padding: 3px 8px;
+  }
+
+  .gform-bkash-target-text {
     font-size: 0.88rem;
+  }
+
+  .gform-bkash-num-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .gform-bkash-digits {
+    font-size: 1.15rem;
+  }
+
+  .gform-bkash-copy-btn {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+
+  .gform-bkash-foot-note {
+    font-size: 0.78rem;
   }
 }
 
@@ -8107,11 +8261,8 @@ h3 {
   }
 
   .gform-title-with-badge {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    display: block !important;
     text-align: center !important;
-    gap: 0.45rem !important;
     width: 100% !important;
     margin-bottom: 0.2rem !important;
   }
