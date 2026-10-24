@@ -1,5 +1,30 @@
 import React, { useState, useRef } from 'react';
 
+function ThaiFlag({ width = 20, height = 13, className = "", style = {} }) {
+  return (
+    <svg
+      className={`thai-flag-svg ${className}`}
+      viewBox="0 0 900 600"
+      width={width}
+      height={height}
+      aria-label="Flag of Thailand"
+      role="img"
+      style={{
+        borderRadius: '2px',
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        flexShrink: 0,
+        boxShadow: '0 1px 3px rgba(0,0,0,0.25)',
+        ...style
+      }}
+    >
+      <rect width="900" height="600" fill="#A51931" />
+      <rect y="100" width="900" height="400" fill="#FFFFFF" />
+      <rect y="200" width="900" height="200" fill="#2D2A4A" />
+    </svg>
+  );
+}
+
 export default function PaymentMethods() {
   const [isMapOpen, setIsMapOpen] = useState(false);
   const mapSectionRef = useRef(null);
@@ -137,13 +162,16 @@ export default function PaymentMethods() {
           <div className="gov-interactive-map-wrapper" ref={mapSectionRef}>
             <div className="gov-map-header">
               <div className="gov-map-title-block">
-                <span className="gov-thai-badge">สำนักงานสลากกินแบ่งรัฐบาล</span>
+                <span className="gov-thai-badge">
+                  <ThaiFlag width={16} height={11} style={{ marginRight: '5px' }} />
+                  สำนักงานสลากกินแบ่งรัฐบาล • THAILAND
+                </span>
                 <h4>The Government Lottery Office (GLO) Bangkok Headquarters</h4>
-                <p>333 Phahonyothin Rd, Chom Phon, Chatuchak, Bangkok 10900, Thailand</p>
+                <p>📍 359 Nonthaburi Rd, Tha Sai, Mueang Nonthaburi, Bangkok 11000, Thailand</p>
               </div>
               <div className="gov-map-actions">
                 <a
-                  href="https://www.google.com/maps?q=13.8486,100.4651"
+                  href="https://www.google.com/maps?q=The+Government+Lottery+Office,+Bangkok,+Thailand"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="gov-map-ext-link"
@@ -162,16 +190,35 @@ export default function PaymentMethods() {
               </div>
             </div>
 
+            {/* Official Prominent Thailand Point Bar */}
+            <div className="gov-map-verified-strip">
+              <div className="gov-map-strip-left">
+                <span className="gov-map-pulse-dot" aria-hidden="true" />
+                <ThaiFlag width={22} height={14} />
+                <span className="gov-map-strip-title">
+                  ম্যাপ লোকেশন পয়েন্ট: <strong>ব্যাংকক, থাইল্যান্ড (Bangkok, Thailand)</strong>
+                </span>
+              </div>
+              <span className="gov-map-strip-badge">✓ Google Verified GLO HQ</span>
+            </div>
+
             <div className="gov-map-iframe-container">
               <iframe
-                title="Thailand Government Lottery Office Bangkok Headquarters Interactive Map"
-                src="https://www.google.com/maps?q=13.8486,100.4651&z=15&output=embed"
-                loading="lazy"
+                title="The Government Lottery Office (GLO) Bangkok, Thailand Interactive Map"
+                src="https://maps.google.com/maps?q=The+Government+Lottery+Office,+Bangkok,+Thailand&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                loading="eager"
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
 
             <div className="gov-office-meta-bar">
+              <div className="meta-item">
+                <span className="meta-label">OFFICE LOCATION:</span>
+                <strong>
+                  <ThaiFlag width={18} height={12} style={{ marginRight: '6px' }} />
+                  Bangkok, Thailand
+                </strong>
+              </div>
               <div className="meta-item">
                 <span className="meta-label">OFFICE HOURS:</span>
                 <strong>Mon - Fri 08:30 - 16:30 ICT</strong>

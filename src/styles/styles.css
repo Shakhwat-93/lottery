@@ -3942,10 +3942,108 @@ h3 {
   border-color: #EF4444;
 }
 
+.gov-map-verified-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 18px;
+  background: linear-gradient(90deg, #071739 0%, #0F2856 100%);
+  border-top: 1px solid rgba(212, 175, 55, 0.4);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+  font-family: var(--font-bengali);
+  flex-wrap: wrap;
+}
+
+.gov-map-strip-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gov-map-strip-title {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #F8FAFC;
+}
+
+.gov-map-strip-title strong {
+  color: #FDE047;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.gov-map-strip-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid #10B981;
+  color: #34D399;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
 .gov-map-iframe-container {
+  position: relative;
   width: 100%;
-  height: 380px;
+  height: 400px;
   background: #E2E8F0;
+}
+
+.gov-map-location-tag {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(7, 23, 57, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid var(--royal-gold, #D4AF37);
+  border-radius: 9999px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  font-family: var(--font-bengali);
+}
+
+.gov-map-pulse-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: mapPulseDot 2s infinite;
+}
+
+@keyframes mapPulseDot {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.gov-map-tag-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: 0.01em;
+}
+
+.gov-map-tag-text strong {
+  color: #FDE047;
+  font-weight: 800;
 }
 
 .gov-map-iframe-container iframe {
@@ -11521,8 +11619,33 @@ h3 {
     justify-content: space-between;
   }
 
+  .gov-map-verified-strip {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .gov-map-strip-title {
+    font-size: 0.78rem;
+  }
+
+  .gov-map-strip-badge {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+  }
+
   .gov-map-iframe-container {
-    height: 280px;
+    height: 310px;
+  }
+
+  .gov-map-location-tag {
+    top: 8px;
+    right: 8px;
+    padding: 5px 10px;
+    gap: 6px;
+  }
+
+  .gov-map-tag-text {
+    font-size: 0.72rem;
   }
 
   .gov-office-meta-bar {
