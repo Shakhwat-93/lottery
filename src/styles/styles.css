@@ -8735,13 +8735,13 @@ h3 {
   box-sizing: border-box;
 }
 
-/* Standalone form page — full viewport width edge-to-edge for top video hero */
+/* Standalone form page — clean centered Google Form layout */
 .form-page-main.form-page-standalone {
   display: block !important;
   width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-  padding: 0 0 4rem !important;
+  max-width: 760px !important;
+  margin: 0 auto !important;
+  padding: clamp(1.5rem, 3.5vw, 2.5rem) 14px 4rem !important;
   box-sizing: border-box !important;
   min-height: 100vh;
   overflow-x: hidden !important;
@@ -8833,8 +8833,8 @@ h3 {
   .form-page-main.form-page-standalone {
     width: 100% !important;
     max-width: 100% !important;
-    padding: 0 0 3rem !important;
-    margin: 0 !important;
+    padding: 1.2rem 10px 3rem !important;
+    margin: 0 auto !important;
   }
 
   .form-page-main:not(.form-page-standalone) {
