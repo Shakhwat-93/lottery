@@ -6873,128 +6873,713 @@ h3 {
   justify-content: center;
 }
 
-/* Success Card */
+/* ==========================================================================
+   ULTRA-PREMIUM SUBMISSION CONFIRMATION RECEIPT PAGE
+   ========================================================================== */
 .gform-success-card {
   background: #FFFFFF;
-  border-radius: 16px;
-  border: 1.5px solid #CBD5E1;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  border: 2px solid rgba(212, 175, 55, 0.45);
+  box-shadow: 0 20px 60px rgba(7, 23, 57, 0.12), 0 0 30px rgba(212, 175, 55, 0.15);
   overflow: hidden;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gform-success-top-stripe {
+  height: 8px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    #A51931 0%,
+    #A51931 16.6%,
+    #FFFFFF 16.6%,
+    #FFFFFF 33.3%,
+    #2D2A4A 33.3%,
+    #2D2A4A 66.6%,
+    #FFFFFF 66.6%,
+    #FFFFFF 83.3%,
+    #A51931 83.3%,
+    #A51931 100%
+  );
 }
 
 .gform-success-body {
-  padding: clamp(1.8rem, 4vw, 2.5rem);
-  text-align: left;
+  padding: clamp(1.6rem, 4vw, 2.8rem);
 }
 
-.gform-success-check-badge {
-  width: 52px;
-  height: 52px;
+/* 1. Official Brand Header with Logo */
+.gform-success-brand-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.gform-success-logo-wrapper {
+  position: relative;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
-  background: #DCFCE7;
-  color: #16A34A;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
+  background: radial-gradient(circle, #FFFDF5 0%, #FFF4D0 60%, #E6C875 100%);
+  border: 3px solid #D4AF37;
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4), 0 0 20px rgba(255, 215, 0, 0.25);
+}
+
+.gform-success-logo {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  display: block;
+}
+
+.gform-success-verified-check {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border: 2px solid #FFFFFF;
+}
+
+.gform-success-authority-badge {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.glo-seal-pill {
+  background: linear-gradient(135deg, #071739 0%, #0d2252 100%);
+  color: #FFD700;
+  font-family: var(--font-bengali);
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-pill, 9999px);
+  border: 1.5px solid rgba(212, 175, 55, 0.6);
+  box-shadow: 0 2px 8px rgba(7, 23, 57, 0.2);
+}
+
+.glo-verified-tag {
+  background: rgba(16, 185, 129, 0.14);
+  color: #059669;
+  font-family: var(--font-bengali);
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-pill, 9999px);
+  border: 1.5px solid rgba(16, 185, 129, 0.45);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+}
+
+/* 2. Success Celebration Heading */
+.gform-success-heading-block {
+  text-align: center;
+  margin-bottom: 1.6rem;
+}
+
+.gform-success-celebration-badge {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10B981 0%, #047857 100%);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.15rem;
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4), 0 0 20px rgba(16, 185, 129, 0.25);
+}
+
+.gform-success-check-icon {
+  font-size: 2.2rem;
   font-weight: 900;
-  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.gform-success-ring-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(16, 185, 129, 0.6);
+  animation: ringPulse 2s infinite ease-out;
+}
+
+@keyframes ringPulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.35); opacity: 0; }
 }
 
 .gform-success-title {
   font-family: var(--font-bengali);
-  font-size: clamp(1.3rem, 2.8vw, 1.7rem);
+  font-size: clamp(1.4rem, 3.2vw, 1.85rem);
   font-weight: 800;
-  color: #0F172A;
-  margin: 0 0 0.5rem 0;
+  color: #071739;
+  margin: 0 0 0.45rem 0;
+  line-height: 1.25;
 }
 
-.gform-success-thai-title {
+.gform-success-subtitle-bengali {
   font-family: var(--font-bengali);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  color: #16A34A;
-  margin-bottom: 0.5rem;
+  color: #059669;
+  margin-bottom: 0.65rem;
 }
 
-.gform-success-subtitle {
+.gform-success-desc {
   font-family: var(--font-bengali);
-  font-size: 0.94rem;
+  font-size: 0.92rem;
   color: #475569;
   line-height: 1.65;
-  margin: 0 0 1.5rem 0;
+  margin: 0 auto;
+  max-width: 580px;
 }
 
-.gform-receipt-summary {
-  background: #F8FAFC;
-  border: 1.5px solid #E2E8F0;
-  border-radius: 10px;
-  padding: 18px 20px;
-  margin-bottom: 1.5rem;
+/* 3. Official Tracking Bar */
+.gform-success-tracking-bar {
+  background: linear-gradient(135deg, #051026 0%, #071739 50%, #0B1D45 100%);
+  border-radius: 14px;
+  padding: 1.1rem 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.6rem;
+  border: 1.5px solid rgba(212, 175, 55, 0.55);
+  box-shadow: 0 10px 25px rgba(7, 23, 57, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.tracking-id-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.tracking-label {
+  font-family: var(--font-bengali);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #D4AF37;
+  letter-spacing: 0.08em;
+}
+
+.tracking-code-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.tracking-code {
+  font-family: 'Playfair Display', Georgia, monospace, serif;
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #FFD700;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.45);
+}
+
+.tracking-copy-btn {
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid #FFD700;
+  color: #FFD700;
+  font-family: var(--font-bengali);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-pill, 9999px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tracking-copy-btn:hover {
+  background: #FFD700;
+  color: #071739;
+}
+
+.tracking-meta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+
+.tracking-status-pill {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.6);
+  color: #34D399;
+  font-family: var(--font-bengali);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill, 9999px);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34D399;
+  box-shadow: 0 0 8px #34D399;
+  animation: dotPulse 1.5s infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.tracking-time-text {
+  font-family: var(--font-bengali);
+  font-size: 0.78rem;
+  color: #CBD5E1;
+}
+
+/* 4. Luxury Colorful Highlighted Official Submission Receipt */
+.gform-receipt-premium {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFDF8 100%);
+  border: 2px solid #E2D9BE;
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(7, 23, 57, 0.07);
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 1.6rem;
+  position: relative;
 }
 
 .gform-receipt-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: var(--font-bengali);
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: #0F172A;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #E2E8F0;
-  margin-bottom: 12px;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.95rem;
+  border-bottom: 1.5px solid #F1E9D2;
+  margin-bottom: 1.15rem;
 }
 
-.receipt-tag {
-  font-size: 0.72rem;
+.receipt-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.receipt-doc-icon {
+  font-size: 1.5rem;
+}
+
+.receipt-header-left strong {
+  display: block;
+  font-family: var(--font-bengali);
+  font-size: 0.96rem;
   font-weight: 800;
+  color: #071739;
+}
+
+.receipt-subline {
+  display: block;
+  font-size: 0.76rem;
+  color: #64748B;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.receipt-tag-verified {
   background: #FEF3C7;
+  border: 1px solid #F59E0B;
   color: #B45309;
-  padding: 2px 10px;
-  border-radius: 4px;
+  font-family: var(--font-bengali);
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-pill, 9999px);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tag-glow {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #F59E0B;
+  animation: dotPulse 1.5s infinite;
 }
 
 .gform-receipt-grid {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.75rem;
 }
 
 .receipt-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 10px;
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid #F1F5F9;
   font-family: var(--font-bengali);
-  font-size: 0.9rem;
-  gap: 12px;
-  padding: 4px 0;
+  font-size: 0.92rem;
+}
+
+.receipt-row-highlight {
+  background: #F8FAFC;
+  border-color: #E2E8F0;
+}
+
+.receipt-plan-row {
+  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+  border: 1.5px solid #FDE68A;
+}
+
+.receipt-agent-row {
+  background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+  border: 1.5px solid #BBF7D0;
 }
 
 .receipt-label {
-  color: #64748B;
+  color: #475569;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+}
+
+.receipt-icon {
+  font-size: 1rem;
 }
 
 .receipt-value {
   color: #0F172A;
-  font-weight: 600;
+  font-weight: 700;
   text-align: right;
 }
 
-.receipt-value.file-ok {
-  color: #16A34A;
-}
-
-.receipt-value.highlight-govt {
-  color: #1A73E8;
-}
-
-.receipt-value.highlight-trx {
-  color: #E2136E;
+.receipt-name-val {
+  color: #071739;
+  font-size: 1.05rem;
   font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
+.vip-crown {
+  font-size: 1.1rem;
+}
+
+.gender-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.gender-male {
+  background: #EFF6FF;
+  color: #1D4ED8;
+  border: 1px solid #BFDBFE;
+}
+
+.gender-female {
+  background: #FDF2F8;
+  color: #BE185D;
+  border: 1px solid #FBCFE8;
+}
+
+.phone-badge {
+  background: #ECFDF5;
+  color: #047857;
+  border: 1.5px solid #10B981;
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-weight: 800;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.15);
+}
+
+.phone-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+}
+
+.receipt-address-val {
+  max-width: 340px;
+  word-break: break-word;
+}
+
+.country-badge {
+  background: #F1F5F9;
+  color: #0F172A;
+  border: 1px solid #CBD5E1;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-weight: 700;
+  font-size: 0.84rem;
+}
+
+/* Colorful Plan Badges */
+.plan-badge-colorful {
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-weight: 800;
+  font-size: 0.88rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.plan-1-month {
+  background: linear-gradient(135deg, #FEF3C7 0%, #F59E0B 100%);
+  color: #78350F;
+  border: 1.5px solid #D97706;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.plan-3-month {
+  background: linear-gradient(135deg, #064E3B 0%, #047857 50%, #059669 100%);
+  color: #FFD700;
+  border: 1.5px solid #10B981;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4);
+}
+
+.plan-12-month {
+  background: linear-gradient(135deg, #881337 0%, #9F1239 50%, #BE123C 100%);
+  color: #FFD700;
+  border: 1.5px solid #FB7185;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 18px rgba(225, 29, 72, 0.4);
+}
+
+.doc-verified-pill {
+  background: #DCFCE7;
+  color: #15803D;
+  border: 1px solid #86EFAC;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.agent-badge-royal {
+  background: linear-gradient(135deg, #071739 0%, #0d2252 100%);
+  color: #FFD700;
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-weight: 800;
+  font-size: 0.86rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 2px 8px rgba(7, 23, 57, 0.25);
+}
+
+.agent-star {
+  color: #FFD700;
+}
+
+/* Security Ribbon inside Receipt */
+.receipt-security-footer {
+  margin-top: 1.15rem;
+  padding-top: 0.95rem;
+  border-top: 1.5px dashed #CBD5E1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.security-seal-mark {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.seal-emblem {
+  font-size: 1.4rem;
+}
+
+.seal-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.seal-main {
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #071739;
+  letter-spacing: 0.03em;
+}
+
+.seal-sub {
+  font-size: 0.7rem;
+  color: #64748B;
+}
+
+.seal-code {
+  font-family: monospace;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #059669;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
+/* 5. Senior Agent Contact WhatsApp Action Card */
+.gform-success-agent-contact-card {
+  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+  border: 2px solid #F59E0B;
+  border-radius: 16px;
+  padding: 1.3rem;
+  margin-bottom: 1.6rem;
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.15);
+}
+
+.agent-contact-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.agent-avatar-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #071739;
+  border: 2px solid #D4AF37;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(7, 23, 57, 0.25);
+}
+
+.agent-contact-info h4 {
+  font-family: var(--font-bengali);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #78350F;
+  margin: 0 0 0.35rem 0;
+}
+
+.agent-contact-info p {
+  font-family: var(--font-bengali);
+  font-size: 0.88rem;
+  color: #92400E;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.button-success-whatsapp {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #FFFFFF !important;
+  font-family: var(--font-bengali);
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 0.95rem 1.4rem;
+  border-radius: var(--radius-pill, 9999px);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.button-success-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.55);
+}
+
+.btn-icon {
+  font-size: 1.3rem;
+}
+
+.btn-arrow {
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.button-success-whatsapp:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* 6. Action Group */
 .gform-success-action-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
   margin-top: 1rem;
+}
+
+.button-print-receipt {
+  background: #FFFFFF;
+  color: #071739;
+  border: 1.5px solid #CBD5E1;
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-family: var(--font-bengali);
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.button-print-receipt:hover {
+  background: #F8FAFC;
+  border-color: #94A3B8;
+  transform: translateY(-1px);
 }
 
 .gform-reset-btn {
@@ -7005,8 +7590,62 @@ h3 {
   font-size: 0.92rem !important;
   font-weight: 700 !important;
   cursor: pointer;
-  padding: 0 !important;
+  padding: 0.4rem !important;
   text-decoration: underline;
+}
+
+.gform-back-home-link {
+  color: #64748B;
+  font-family: var(--font-bengali);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.gform-back-home-link:hover {
+  color: #071739;
+}
+
+@media (max-width: 600px) {
+  .gform-success-body {
+    padding: 1.35rem 1rem !important;
+  }
+
+  .gform-success-tracking-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .tracking-meta-group {
+    align-items: flex-start;
+  }
+
+  .gform-receipt-premium {
+    padding: 1.1rem 0.9rem;
+  }
+
+  .receipt-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .receipt-value {
+    text-align: left;
+  }
+
+  .receipt-address-val {
+    max-width: 100%;
+  }
+
+  .button-success-whatsapp {
+    font-size: 0.94rem;
+    padding: 0.85rem 1rem;
+  }
 }
 
 /* Responsive adjustments for mobile */

