@@ -5175,16 +5175,40 @@ h3 {
 }
 
 /* ==========================================================================
-   WINNER REGISTRATION FORMS SHOWCASE (Mohammad Zohurul Islam & MD Bahar)
+   WINNER REGISTRATION FORMS SHOWCASE & MOBILE SLIDER
    ========================================================================== */
+.winner-form-switcher-tabs {
+  display: none;
+}
 
+.winner-showcase-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto 0;
+}
+
+.winner-slider-nav-btn {
+  display: none;
+}
+
+.winner-slider-window {
+  width: 100%;
+  overflow: visible;
+}
+
+.winner-forms-track.winner-forms-grid,
 .winner-forms-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1.5rem, 3.5vw, 2.5rem);
-  margin-top: 2rem;
+  margin-top: 0;
   max-width: 1200px;
   margin-inline: auto;
+}
+
+.winner-slider-footer-controls {
+  display: none;
 }
 
 .winner-form-card {
@@ -5390,11 +5414,177 @@ h3 {
 }
 
 @media (max-width: 768px) {
-  .winner-forms-grid {
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
+  /* Winner Mobile Switcher Tabs */
+  .winner-form-switcher-tabs {
+    display: flex;
+    gap: 0.65rem;
+    justify-content: center;
+    margin: 1.5rem auto 0.85rem;
+    width: 100%;
+    max-width: 440px;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
   }
-  
+
+  .winner-form-switcher-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.6rem 0.85rem;
+    border-radius: var(--radius-pill, 9999px);
+    border: 1.5px solid rgba(212, 175, 55, 0.4);
+    background: #FFFFFF;
+    color: #071739;
+    font-family: var(--font-bengali);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(7, 23, 57, 0.08);
+  }
+
+  .winner-form-switcher-btn.active {
+    background: linear-gradient(135deg, #071739 0%, #0d2252 100%) !important;
+    border: 2px solid #D4AF37 !important;
+    color: #FFD700 !important;
+    box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35) !important;
+    transform: translateY(-2px);
+    font-weight: 800;
+  }
+
+  .winner-switcher-icon {
+    font-size: 1rem;
+  }
+
+  /* Winner Slider Showcase Container */
+  .winner-showcase-container {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0;
+    width: 100%;
+  }
+
+  .winner-slider-window {
+    overflow: hidden;
+    width: 100%;
+    border-radius: 16px;
+    position: relative;
+  }
+
+  .winner-forms-track.winner-forms-grid {
+    display: flex !important;
+    width: 100% !important;
+    grid-template-columns: none !important;
+    gap: 0 !important;
+    transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateX(calc(-100% * var(--slide-index, 0)));
+    will-change: transform;
+    margin: 0 !important;
+  }
+
+  .winner-form-card {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+  }
+
+  /* Floating Thumb Navigation Arrows on Mobile */
+  .winner-slider-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(7, 23, 57, 0.92);
+    border: 2px solid #FFD700;
+    color: #FFD700;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.55), 0 0 14px rgba(255, 215, 0, 0.4);
+    backdrop-filter: blur(8px);
+    transition: transform 0.2s ease, background 0.2s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .winner-slider-nav-btn:active {
+    transform: translateY(-50%) scale(0.92);
+    background: #0d2252;
+  }
+
+  .winner-slider-nav-btn.prev-btn {
+    left: 6px;
+  }
+
+  .winner-slider-nav-btn.next-btn {
+    right: 6px;
+  }
+
+  /* Slider Footer Controls (Dots & Hint) */
+  .winner-slider-footer-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .winner-slider-dots {
+    display: flex;
+    gap: 0.55rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .winner-slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.35);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .winner-slider-dot.active {
+    width: 28px;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #D4AF37, #FFDF73);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+  }
+
+  .winner-slider-hint {
+    font-family: var(--font-bengali);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #9E7412;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    letter-spacing: 0.02em;
+    user-select: none;
+  }
+
+  .winner-slider-hint .hint-arrow {
+    color: #D4AF37;
+    font-weight: 800;
+    font-size: 1rem;
+  }
+
   .winner-form-card-header {
     flex-direction: column;
     align-items: flex-start;
@@ -10162,7 +10352,7 @@ h3 {
   }
 
   /* Winner Registration Forms Mobile Polish */
-  .winner-forms-grid {
+  .winner-forms-grid:not(.winner-forms-track) {
     grid-template-columns: 1fr;
     gap: 1.4rem;
     margin-top: 1.4rem;
