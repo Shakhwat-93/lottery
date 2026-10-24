@@ -8,18 +8,14 @@ export default function OnlineForm({ isStandalonePage = false }) {
     address: '',
     country: 'Bangladesh',
     customCountry: '',
-    bkashSenderNumber: '',
-    bkashTrxId: ''
+    subscriptionPlan: '3 Month'
   });
 
   const [photoFile, setPhotoFile] = useState(null);
   const [nidFile, setNidFile] = useState(null);
   const [activeCard, setActiveCard] = useState('name');
-  const [copiedBkash, setCopiedBkash] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const bkashNumber = '01910243177';
 
   const countryList = [
     'Bangladesh',
@@ -62,14 +58,6 @@ export default function OnlineForm({ isStandalonePage = false }) {
     }
   };
 
-  const copyBkashNumber = () => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(bkashNumber);
-    }
-    setCopiedBkash(true);
-    setTimeout(() => setCopiedBkash(false), 2500);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.name.trim()) {
@@ -97,9 +85,9 @@ export default function OnlineForm({ isStandalonePage = false }) {
       setActiveCard('address');
       return;
     }
-    if (!formData.bkashSenderNumber || !formData.bkashTrxId) {
-      alert('Please provide your bKash Sender Number and Transaction ID (TrxID).');
-      setActiveCard('bkash');
+    if (!formData.subscriptionPlan) {
+      alert('Please select a Membership Subscription Plan.');
+      setActiveCard('subscription');
       return;
     }
 
@@ -119,8 +107,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
       address: '',
       country: 'Bangladesh',
       customCountry: '',
-      bkashSenderNumber: '',
-      bkashTrxId: ''
+      subscriptionPlan: '3 Month'
     });
     setPhotoFile(null);
     setNidFile(null);
@@ -284,12 +271,8 @@ export default function OnlineForm({ isStandalonePage = false }) {
                     <strong className="receipt-value">Md Fahim Chowdhury (TL-001)</strong>
                   </div>
                   <div className="receipt-row">
-                    <span className="receipt-label">bKash Sender Number:</span>
-                    <strong className="receipt-value">{formData.bkashSenderNumber}</strong>
-                  </div>
-                  <div className="receipt-row">
-                    <span className="receipt-label">bKash Transaction ID:</span>
-                    <strong className="receipt-value highlight-trx">{formData.bkashTrxId}</strong>
+                    <span className="receipt-label">Subscription Plan:</span>
+                    <strong className="receipt-value highlight-plan">👑 {formData.subscriptionPlan} Subscription</strong>
                   </div>
                 </div>
               </div>
@@ -650,87 +633,110 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
 
-            {/* Section Divider: FINAL BKASH MEMBERSHIP PAYMENT */}
-            <div className="gform-section-header-banner gform-bkash-banner">
+            {/* Section Divider: MEMBERSHIP SUBSCRIPTION PLAN */}
+            <div className="gform-section-header-banner gform-subscription-banner">
               <div className="gform-section-banner-title">
-                <span className="gform-section-icon" aria-hidden="true">📱</span>
+                <span className="gform-section-icon" aria-hidden="true">💎</span>
                 <span className="gform-section-text">
-                  FINAL MEMBERSHIP PAYMENT (বিকাশ ভেরিফিকেশন পেমেন্ট)
+                  MEMBERSHIP SUBSCRIPTION PLAN
                 </span>
               </div>
-              <span className="gform-section-pill">2,500 BDT ESCROW</span>
+              <span className="gform-section-pill">OFFICIAL VIP ACCESS</span>
             </div>
 
-            {/* 15. Final bKash Payment */}
+            {/* Subscription Plan Selection Card */}
             <div
-              className={`gform-question-card ${activeCard === 'bkash' ? 'is-active-card' : ''}`}
-              onClick={() => setActiveCard('bkash')}
+              className={`gform-question-card ${activeCard === 'subscription' ? 'is-active-card' : ''}`}
+              onClick={() => setActiveCard('subscription')}
             >
               <div className="gform-card-left-indicator" aria-hidden="true" />
-              <div className="gform-question-title">
-                Official bKash Payment for Final Membership Activation <span className="gform-req">*</span>
-              </div>
+              <label className="gform-question-title">
+                Membership Subscription Plan (মেম্বারশিপ প্ল্যান নির্বাচন করুন) <span className="gform-req">*</span>
+              </label>
               <p className="gform-question-desc">
-                আপনার মেম্বারশিপ চূড়ান্তভাবে কনফার্ম করতে নির্ধারিত সরকারি ফি (২,৫০০ টাকা) নিচের বিকাশ পার্সোনাল নম্বরে Send Money করুন এবং প্রেরক নম্বর ও TrxID ইনপুট দিন:
+                Select your desired membership duration for official VIP lottery access, sure paper, and results
               </p>
 
-              <div className="gform-bkash-card">
-                <div className="gform-bkash-top">
-                  <div className="gform-bkash-logo-title">
-                    <span className="bkash-badge-chip">bKash Personal</span>
-                    <span className="bkash-verified-indicator">✓ Official Authorized Number</span>
+              <div className="gform-subscription-cards-grid">
+                {/* 1 Month Option */}
+                <label
+                  className={`gform-sub-plan-card ${formData.subscriptionPlan === '1 Month' ? 'is-selected-plan' : ''}`}
+                >
+                  <input
+                    type="radio"
+                    name="subscriptionPlan"
+                    value="1 Month"
+                    checked={formData.subscriptionPlan === '1 Month'}
+                    onChange={handleChange}
+                    className="gform-sub-radio"
+                  />
+                  <div className="gform-sub-card-inner">
+                    <div className="gform-sub-header">
+                      <span className="gform-sub-icon">⚡</span>
+                      <span className="gform-sub-badge">Standard Plan</span>
+                    </div>
+                    <div className="gform-sub-duration">1 Month</div>
+                    <div className="gform-sub-duration-bn">১ মাস মেম্বারশিপ</div>
+                    <div className="gform-sub-desc">১ মাসের জন্য ফুল অফিসিয়াল ভিআইপি পেপার এক্সেস</div>
+                    <div className="gform-sub-check-indicator">
+                      <span className="gform-sub-checkmark">✓</span>
+                    </div>
                   </div>
-                  <div className="gform-bkash-number-row">
-                    <span className="gform-bkash-number">{bkashNumber}</span>
-                    <button
-                      type="button"
-                      className="gform-copy-btn"
-                      onClick={copyBkashNumber}
-                      title="Copy bKash Number"
-                    >
-                      {copiedBkash ? '✓ Copied' : 'Copy Number'}
-                    </button>
-                  </div>
-                  <p className="gform-bkash-instructions">
-                    bKash অ্যাপ বা *247# ডায়াল করে <strong>Send Money</strong> অপশন ব্যবহার করে ফি প্রেরণ করুন।
-                  </p>
-                </div>
+                </label>
 
-                <div className="gform-bkash-inputs-group">
-                  <div className="gform-subfield">
-                    <label htmlFor="gform-bkash-sender" className="gform-subfield-label">
-                      bKash Sender Mobile Number (প্রেরক মোবাইল নম্বর) <span className="gform-req">*</span>
-                    </label>
-                    <input
-                      id="gform-bkash-sender"
-                      name="bkashSenderNumber"
-                      type="tel"
-                      required
-                      className="gform-underline-input"
-                      placeholder="e.g. 01XXXXXXXXX"
-                      value={formData.bkashSenderNumber}
-                      onChange={handleChange}
-                      onFocus={() => setActiveCard('bkash')}
-                    />
+                {/* 3 Month Option (Popular) */}
+                <label
+                  className={`gform-sub-plan-card is-popular ${formData.subscriptionPlan === '3 Month' ? 'is-selected-plan' : ''}`}
+                >
+                  <div className="gform-sub-popular-ribbon">★ Popular</div>
+                  <input
+                    type="radio"
+                    name="subscriptionPlan"
+                    value="3 Month"
+                    checked={formData.subscriptionPlan === '3 Month'}
+                    onChange={handleChange}
+                    className="gform-sub-radio"
+                  />
+                  <div className="gform-sub-card-inner">
+                    <div className="gform-sub-header">
+                      <span className="gform-sub-icon">⭐</span>
+                      <span className="gform-sub-badge badge-popular">Recommended</span>
+                    </div>
+                    <div className="gform-sub-duration">3 Month</div>
+                    <div className="gform-sub-duration-bn">৩ মাস মেম্বারশিপ</div>
+                    <div className="gform-sub-desc">৩ মাসের নিয়মিত শিওর গেম ও সিনিয়র এজেন্ট সাপোর্ট</div>
+                    <div className="gform-sub-check-indicator">
+                      <span className="gform-sub-checkmark">✓</span>
+                    </div>
                   </div>
+                </label>
 
-                  <div className="gform-subfield">
-                    <label htmlFor="gform-bkash-trx" className="gform-subfield-label">
-                      bKash Transaction ID / TrxID (ট্রানজেকশন আইডি) <span className="gform-req">*</span>
-                    </label>
-                    <input
-                      id="gform-bkash-trx"
-                      name="bkashTrxId"
-                      type="text"
-                      required
-                      className="gform-underline-input"
-                      placeholder="e.g. BL9X3KD982"
-                      value={formData.bkashTrxId}
-                      onChange={handleChange}
-                      onFocus={() => setActiveCard('bkash')}
-                    />
+                {/* 12 Month Option (VIP Full Year) */}
+                <label
+                  className={`gform-sub-plan-card is-best-value ${formData.subscriptionPlan === '12 Month' ? 'is-selected-plan' : ''}`}
+                >
+                  <div className="gform-sub-value-ribbon">💎 VIP Year</div>
+                  <input
+                    type="radio"
+                    name="subscriptionPlan"
+                    value="12 Month"
+                    checked={formData.subscriptionPlan === '12 Month'}
+                    onChange={handleChange}
+                    className="gform-sub-radio"
+                  />
+                  <div className="gform-sub-card-inner">
+                    <div className="gform-sub-header">
+                      <span className="gform-sub-icon">🏆</span>
+                      <span className="gform-sub-badge badge-gold">Best Value</span>
+                    </div>
+                    <div className="gform-sub-duration">12 Month</div>
+                    <div className="gform-sub-duration-bn">১২ মাস (১ বছর VIP)</div>
+                    <div className="gform-sub-desc">সম্পূর্ণ ১ বছর আনলিমিটেড প্রিমিয়াম ভিআইপি মেম্বারশিপ</div>
+                    <div className="gform-sub-check-indicator">
+                      <span className="gform-sub-checkmark">✓</span>
+                    </div>
                   </div>
-                </div>
+                </label>
               </div>
             </div>
 

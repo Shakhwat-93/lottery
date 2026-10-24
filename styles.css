@@ -6405,123 +6405,218 @@ h3 {
   color: #B45309;
 }
 
-/* bKash Payment Box */
-.gform-bkash-card {
-  background: linear-gradient(145deg, #FFF5F9 0%, #FFFFFF 50%, #FFF8FA 100%);
-  border: 2px solid #E2136E;
-  border-radius: 14px;
-  padding: 20px 22px;
-  margin-top: 12px;
-  box-shadow: 0 6px 20px rgba(226, 19, 110, 0.12);
+/* ==========================================================================
+   SUBSCRIPTION PLAN SELECTION CARDS (1 MONTH, 3 MONTH, 12 MONTH)
+   ========================================================================== */
+.gform-section-header-banner.gform-subscription-banner {
+  background: linear-gradient(135deg, #071739 0%, #152A55 50%, #071739 100%);
+  border-color: #FFD700;
+  box-shadow: 0 6px 18px rgba(7, 23, 57, 0.25), 0 0 14px rgba(255, 215, 0, 0.2);
 }
 
-.gform-bkash-top {
-  margin-bottom: 14px;
-}
-
-.gform-bkash-logo-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.bkash-badge-chip {
-  background: #E2136E !important;
-  color: #FFFFFF !important;
-  font-size: 0.8rem;
-  font-weight: 800;
-  padding: 5px 14px;
-  border-radius: 6px;
-  letter-spacing: 0.04em;
-  display: inline-block;
-  box-shadow: 0 2px 8px rgba(226, 19, 110, 0.3);
-}
-
-.bkash-verified-indicator {
-  font-family: var(--font-bengali);
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #15803D !important;
-  background: #DCFCE7 !important;
-  border: 1px solid rgba(21, 128, 61, 0.3) !important;
-  padding: 4px 12px;
-  border-radius: 6px;
-  display: inline-block;
-}
-
-.gform-bkash-number-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  background: #FFFFFF;
-  border: 1.5px solid rgba(226, 19, 110, 0.4);
-  border-radius: 10px;
-  padding: 12px 18px;
-  margin-bottom: 12px;
-  box-shadow: 0 2px 8px rgba(226, 19, 110, 0.08);
-}
-
-.gform-bkash-number {
-  font-family: var(--font-bengali);
-  font-size: 1.55rem;
-  font-weight: 900;
-  color: #E2136E;
-  letter-spacing: 2px;
-}
-
-.gform-copy-btn {
-  background: linear-gradient(135deg, #E2136E 0%, #C20F5C 100%);
-  color: #FFFFFF;
-  border: none;
-  border-radius: 8px;
-  padding: 9px 18px;
-  font-family: var(--font-bengali);
-  font-size: 0.88rem;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 3px 10px rgba(226, 19, 110, 0.35);
-}
-
-.gform-copy-btn:hover {
-  transform: translateY(-1.5px);
-  box-shadow: 0 6px 16px rgba(226, 19, 110, 0.5);
-}
-
-.gform-bkash-instructions {
-  font-family: var(--font-bengali);
-  font-size: 0.88rem;
-  color: #475569;
-  line-height: 1.6;
-  margin: 0;
-  padding: 10px 14px;
-  background: rgba(226, 19, 110, 0.06);
-  border-radius: 8px;
-}
-
-.gform-bkash-inputs-group {
+.gform-subscription-cards-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.gform-subfield {
+.gform-sub-plan-card {
+  position: relative;
+  border-radius: 14px;
+  border: 2px solid #E2E8F0;
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  user-select: none;
 }
 
-.gform-subfield-label {
-  font-family: var(--font-bengali);
-  font-size: 0.9rem;
+.gform-sub-plan-card:hover {
+  transform: translateY(-2px);
+  border-color: #CBD5E1;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.gform-sub-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gform-sub-card-inner {
+  padding: 18px 14px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: center;
+}
+
+/* Ribbons for Popular & Best Value */
+.gform-sub-popular-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: linear-gradient(90deg, #D97706 0%, #F59E0B 100%);
+  color: #FFFFFF;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 3px 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.gform-sub-value-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: linear-gradient(90deg, #071739 0%, #1D4ED8 100%);
+  color: #FFD700;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 3px 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.gform-sub-plan-card.is-popular .gform-sub-card-inner,
+.gform-sub-plan-card.is-best-value .gform-sub-card-inner {
+  padding-top: 24px;
+}
+
+.gform-sub-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.gform-sub-icon {
+  font-size: 1.25rem;
+}
+
+.gform-sub-badge {
+  font-size: 0.68rem;
   font-weight: 700;
-  color: #0F172A;
-  margin-bottom: 6px;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  background: #F1F5F9;
+  color: #475569;
+}
+
+.gform-sub-badge.badge-popular {
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.gform-sub-badge.badge-gold {
+  background: #FFFBEB;
+  color: #B45309;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  font-weight: 800;
+}
+
+.gform-sub-duration {
+  font-family: var(--font-royal);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #071739;
+  line-height: 1.2;
+}
+
+.gform-sub-duration-bn {
+  font-family: var(--font-bengali);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #1D4ED8;
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+
+.gform-sub-desc {
+  font-family: var(--font-bengali);
+  font-size: 0.78rem;
+  color: #64748B;
+  line-height: 1.45;
+  margin-bottom: 12px;
+  flex: 1;
+}
+
+.gform-sub-check-indicator {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid #CBD5E1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: #FFFFFF;
+  margin-top: auto;
+}
+
+.gform-sub-checkmark {
+  font-size: 13px;
+  font-weight: 900;
+  color: transparent;
+  transition: color 0.2s ease;
+}
+
+/* Active Selected State */
+.gform-sub-plan-card.is-selected-plan {
+  border-color: #1A73E8;
+  background: linear-gradient(180deg, #F0F7FF 0%, #FFFFFF 100%);
+  box-shadow: 0 8px 25px rgba(26, 115, 232, 0.18), 0 0 0 1px #1A73E8;
+  transform: translateY(-2px);
+}
+
+.gform-sub-plan-card.is-popular.is-selected-plan {
+  border-color: #D4AF37;
+  background: linear-gradient(180deg, #FFFDF5 0%, #FFFFFF 100%);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.25), 0 0 0 1px #D4AF37;
+}
+
+.gform-sub-plan-card.is-best-value.is-selected-plan {
+  border-color: #071739;
+  background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+  box-shadow: 0 8px 25px rgba(7, 23, 57, 0.22), 0 0 0 1px #071739;
+}
+
+.gform-sub-plan-card.is-selected-plan .gform-sub-check-indicator {
+  border-color: #1A73E8;
+  background: #1A73E8;
+}
+
+.gform-sub-plan-card.is-popular.is-selected-plan .gform-sub-check-indicator {
+  border-color: #D4AF37;
+  background: #D4AF37;
+}
+
+.gform-sub-plan-card.is-best-value.is-selected-plan .gform-sub-check-indicator {
+  border-color: #071739;
+  background: #071739;
+}
+
+.gform-sub-plan-card.is-selected-plan .gform-sub-checkmark {
+  color: #FFFFFF;
+}
+
+.receipt-value.highlight-plan {
+  color: #1D4ED8;
+  font-weight: 800;
+  font-size: 0.98rem;
 }
 
 /* Footer Action Bar */
@@ -6882,21 +6977,7 @@ h3 {
     align-items: center;
   }
 
-  .gform-bkash-card {
-    padding: 14px 12px !important;
-    border-radius: 12px;
-  }
-
-  .gform-bkash-number {
-    font-size: 1.3rem;
-  }
-
-  .gform-copy-btn {
-    padding: 7px 14px;
-    font-size: 0.82rem;
-  }
-
-  .gform-bkash-inputs-group {
+  .gform-subscription-cards-grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
