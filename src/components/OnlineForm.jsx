@@ -120,26 +120,26 @@ export default function OnlineForm({ isStandalonePage = false }) {
       className={`section form-section ${isStandalonePage ? 'standalone-form-section' : 'reveal-on-scroll'}`}
       id="online-form"
     >
-      <div className="google-form-container" aria-label="Official Thailand Lottery Registration Form">
-        {/* Official Top Video Hero (Full Width, Shorter Height, Clean) */}
-        <div className="gform-top-video-card" aria-label="Official Thailand Lottery Video">
-          <video
-            className="gform-hero-video"
-            controls
-            playsInline
-            autoPlay
-            muted
-            loop
-            preload="metadata"
-            poster="/form-video-poster.jpg"
-            title="Official Thailand Lottery Video"
-          >
-            <source src="/form-video-optimized.mp4" type="video/mp4" />
-            <source src="/Video-Project-11.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
+      {/* Official Top Video Hero (Full Bleed Screen Width Edge-to-Edge) */}
+      <div className="gform-top-video-screen-banner" aria-label="Official Thailand Lottery Video">
+        <video
+          className="gform-hero-video"
+          controls
+          playsInline
+          autoPlay
+          muted
+          loop
+          preload="metadata"
+          poster="/form-video-poster.jpg"
+          title="Official Thailand Lottery Video"
+        >
+          <source src="/form-video-optimized.mp4" type="video/mp4" />
+          <source src="/Video-Project-11.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
 
+      <div className="google-form-container" aria-label="Official Thailand Lottery Registration Form">
         {/* Top Header Card */}
         <div className="gform-top-card">
           <div className="gform-color-stripe" />

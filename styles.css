@@ -5480,32 +5480,39 @@ h3 {
 }
 
 /* ==========================================================================
-   TOP VIDEO HERO (CLEAN, FULL WIDTH, SHORTER HEIGHT)
+   TOP VIDEO HERO (100% SCREEN FULL WIDTH, SHORTER HEIGHT)
    ========================================================================== */
+.gform-top-video-screen-banner,
 .gform-top-video-card {
   background: #000000;
-  border-radius: 16px;
-  border: 1.5px solid rgba(212, 175, 55, 0.45);
-  box-shadow: 0 10px 30px -5px rgba(7, 23, 57, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid rgba(212, 175, 55, 0.45);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
   overflow: hidden;
   position: relative;
   width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
   box-sizing: border-box;
   display: block;
   line-height: 0;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.gform-top-video-screen-banner:hover,
 .gform-top-video-card:hover {
-  box-shadow: 0 16px 40px -6px rgba(7, 23, 57, 0.16), 0 4px 14px rgba(212, 175, 55, 0.25);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
 }
 
 .gform-hero-video {
   width: 100%;
-  height: 260px;
-  max-height: 280px;
+  height: 280px;
+  max-height: 320px;
   display: block;
-  margin: 0;
+  margin: 0 auto;
+  border-radius: 0;
+  border: none;
   object-fit: cover;
   object-position: center 25%;
   background: #000000;
@@ -6817,22 +6824,36 @@ h3 {
   .google-form-container {
     width: 100%;
     max-width: 100%;
+    margin: 14px auto 0 !important;
+    padding: 0 10px !important;
     gap: 12px;
   }
 
-  /* Shorter Full-Width Video Hero on Mobile */
+  /* 100% Screen Full-Bleed Video Hero on Mobile */
+  .gform-top-video-screen-banner,
   .gform-top-video-card {
-    border-radius: 12px;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: 2px solid rgba(212, 175, 55, 0.45) !important;
     background: #000000;
     overflow: hidden;
     line-height: 0;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
   }
 
   .gform-hero-video {
-    width: 100% !important;
-    height: 210px !important;
-    max-height: 220px !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 220px !important;
+    max-height: 235px !important;
     aspect-ratio: auto !important;
+    border-radius: 0 !important;
     object-fit: cover !important;
     object-position: center 25% !important;
     display: block !important;
@@ -7885,13 +7906,13 @@ h3 {
   box-sizing: border-box;
 }
 
-/* Standalone form page — no header/footer, full viewport */
+/* Standalone form page — full viewport width edge-to-edge for top video hero */
 .form-page-main.form-page-standalone {
   display: block !important;
   width: 100% !important;
-  max-width: 700px !important;
-  margin: 0 auto !important;
-  padding: 1.5rem 12px 4rem !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 0 4rem !important;
   box-sizing: border-box !important;
   min-height: 100vh;
   overflow-x: hidden !important;
@@ -7980,7 +8001,14 @@ h3 {
 
 /* Mobile fine-tuning for standalone form page */
 @media (max-width: 600px) {
-  .form-page-main {
+  .form-page-main.form-page-standalone {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 0 3rem !important;
+    margin: 0 !important;
+  }
+
+  .form-page-main:not(.form-page-standalone) {
     width: calc(100% - 1rem);
     padding: 0.85rem 0 3rem;
   }
