@@ -4206,6 +4206,262 @@ h3 {
   display: none !important;
 }
 
+/* ==========================================================================
+   CUSTOMER FEEDBACK DRAW DATE GLOWING HIGHLIGHT BUTTONS
+   ========================================================================== */
+.review-glow-cta-container {
+  width: 100%;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  text-align: center;
+}
+
+.review-glow-cta-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.review-glow-pulsing-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(7, 23, 57, 0.9);
+  border: 1px solid var(--royal-gold, #D4AF37);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  font-family: var(--font-bengali);
+}
+
+.glow-radar-ping {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #EAB308;
+  box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.8);
+  animation: radarPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes radarPing {
+  70%, 100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.glow-badge-text {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #FDE047;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.review-glow-buttons-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(1rem, 2.5vw, 1.8rem);
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.review-super-glow-btn {
+  position: relative;
+  flex: 1 1 290px;
+  max-width: 460px;
+  min-height: 98px;
+  padding: 1.1rem 1.6rem;
+  border-radius: 20px;
+  cursor: pointer;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  font-family: var(--font-bengali);
+  text-align: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  will-change: transform, box-shadow;
+  display: flex;
+  align-items: center;
+}
+
+/* Button 1 (2/12/2069) — Royal Blue & Vivid Gold Neon Glow */
+.review-super-glow-btn.btn-date-1 {
+  background: linear-gradient(135deg, #071739 0%, #0F2D6B 45%, #071739 100%);
+  border: 2px solid #F59E0B;
+  box-shadow:
+    0 0 25px rgba(245, 158, 11, 0.45),
+    0 0 50px rgba(234, 179, 8, 0.2),
+    0 8px 32px rgba(7, 23, 57, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  animation: pulseGoldGlow 3s ease-in-out infinite alternate;
+}
+
+/* Button 2 (20/21/2069) — Deep Violet & Radiant Rose Neon Glow */
+.review-super-glow-btn.btn-date-2 {
+  background: linear-gradient(135deg, #1C0F38 0%, #3B125C 45%, #1C0F38 100%);
+  border: 2px solid #EC4899;
+  box-shadow:
+    0 0 25px rgba(236, 72, 153, 0.45),
+    0 0 50px rgba(217, 70, 239, 0.2),
+    0 8px 32px rgba(28, 15, 56, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  animation: pulsePinkGlow 3s ease-in-out 1.5s infinite alternate;
+}
+
+@keyframes pulseGoldGlow {
+  0% {
+    box-shadow:
+      0 0 20px rgba(245, 158, 11, 0.4),
+      0 0 40px rgba(234, 179, 8, 0.15),
+      0 8px 25px rgba(7, 23, 57, 0.5);
+    border-color: #F59E0B;
+  }
+  100% {
+    box-shadow:
+      0 0 35px rgba(245, 158, 11, 0.75),
+      0 0 65px rgba(234, 179, 8, 0.35),
+      0 12px 35px rgba(7, 23, 57, 0.7);
+    border-color: #FDE047;
+  }
+}
+
+@keyframes pulsePinkGlow {
+  0% {
+    box-shadow:
+      0 0 20px rgba(236, 72, 153, 0.4),
+      0 0 40px rgba(217, 70, 239, 0.15),
+      0 8px 25px rgba(28, 15, 56, 0.5);
+    border-color: #EC4899;
+  }
+  100% {
+    box-shadow:
+      0 0 35px rgba(236, 72, 153, 0.75),
+      0 0 65px rgba(217, 70, 239, 0.35),
+      0 12px 35px rgba(28, 15, 56, 0.7);
+    border-color: #F472B6;
+  }
+}
+
+.review-super-glow-btn:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.review-super-glow-btn:active,
+.review-super-glow-btn.is-active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.review-super-glow-btn.btn-date-1.is-active {
+  border-color: #FDE047;
+  box-shadow:
+    0 0 40px rgba(245, 158, 11, 0.9),
+    0 0 75px rgba(234, 179, 8, 0.5),
+    0 14px 40px rgba(7, 23, 57, 0.8),
+    inset 0 0 20px rgba(254, 240, 138, 0.2);
+}
+
+.review-super-glow-btn.btn-date-2.is-active {
+  border-color: #F472B6;
+  box-shadow:
+    0 0 40px rgba(236, 72, 153, 0.9),
+    0 0 75px rgba(217, 70, 239, 0.5),
+    0 14px 40px rgba(28, 15, 56, 0.8),
+    inset 0 0 20px rgba(251, 207, 232, 0.2);
+}
+
+/* Diagonal Shimmer Sweep Beam */
+.review-super-glow-btn .shimmer-sweep {
+  position: absolute;
+  top: 0;
+  left: -140%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 20%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0.04) 80%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  animation: laserShimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.review-super-glow-btn.btn-date-2 .shimmer-sweep {
+  animation-delay: 1.5s;
+}
+
+@keyframes laserShimmer {
+  0% {
+    left: -140%;
+  }
+  40%, 100% {
+    left: 180%;
+  }
+}
+
+.btn-content-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.btn-badge-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #CBD5E1;
+}
+
+.btn-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+}
+
+.btn-main-date {
+  font-size: clamp(1.45rem, 3.2vw, 1.95rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  font-family: var(--font-english, 'Cinzel', system-ui, sans-serif);
+}
+
+.btn-date-1 .btn-main-date {
+  color: #FFFFFF;
+  text-shadow: 0 0 15px rgba(253, 224, 71, 0.6);
+}
+
+.btn-date-2 .btn-main-date {
+  color: #FFFFFF;
+  text-shadow: 0 0 15px rgba(244, 114, 182, 0.6);
+}
+
+.btn-action-hint {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #94A3B8;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.review-super-glow-btn:hover .btn-action-hint,
+.review-super-glow-btn.is-active .btn-action-hint {
+  color: #FDE047;
+  transform: translateX(4px);
+}
+
 .review-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.18fr) minmax(18rem, 360px);
@@ -11683,6 +11939,29 @@ h3 {
     height: 2.2rem;
     margin-bottom: 0.75rem;
     font-size: 0.82rem;
+  }
+
+  /* Customer Feedback Glowing Draw Date Buttons Mobile */
+  .review-glow-cta-container {
+    margin-bottom: 1.6rem;
+  }
+  .review-glow-buttons-row {
+    gap: 0.85rem;
+  }
+  .review-super-glow-btn {
+    flex: 1 1 100%;
+    min-height: 84px;
+    padding: 0.9rem 1.25rem;
+    border-radius: 16px;
+  }
+  .btn-main-date {
+    font-size: 1.55rem;
+  }
+  .btn-badge-label {
+    font-size: 0.72rem;
+  }
+  .btn-action-hint {
+    font-size: 0.72rem;
   }
 
   /* Customer Reviews - Elite Responsive Rebuild */

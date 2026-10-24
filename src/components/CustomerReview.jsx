@@ -1,9 +1,67 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function CustomerReview({ videoRef }) {
+  const [activeDate, setActiveDate] = useState('2/12/2069');
+
+  const handleDateSelect = (date) => {
+    setActiveDate(date);
+    if (videoRef?.current) {
+      videoRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (videoRef.current.paused) {
+        videoRef.current.play().catch(() => {});
+      }
+    }
+  };
+
   return (
     <section className="section review-section reveal-on-scroll" id="customer-review">
+      {/* 2 Animated Glowing Highlight Buttons directly above Customer Feedback */}
+      <div className="review-glow-cta-container" aria-label="Customer Feedback Draw Date Selector">
+        <div className="review-glow-cta-header">
+          <span className="review-glow-pulsing-badge">
+            <span className="glow-radar-ping" aria-hidden="true" />
+            <span className="glow-badge-text">✦ অফিশিয়াল ভিআইপি ড্র রেজাল্ট ও ফিডব্যাক ✦</span>
+          </span>
+        </div>
+
+        <div className="review-glow-buttons-row">
+          <button
+            type="button"
+            className={`review-super-glow-btn btn-date-1 ${activeDate === '2/12/2069' ? 'is-active' : ''}`}
+            onClick={() => handleDateSelect('2/12/2069')}
+            aria-pressed={activeDate === '2/12/2069'}
+          >
+            <span className="shimmer-sweep" aria-hidden="true" />
+            <span className="btn-glow-aura" aria-hidden="true" />
+            <div className="btn-content-inner">
+              <span className="btn-badge-label">
+                <span className="btn-live-dot" /> VIP DRAW
+              </span>
+              <strong className="btn-main-date">2/12/2069</strong>
+              <span className="btn-action-hint">ক্লিক করে ভিডিও দেখুন ➔</span>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            className={`review-super-glow-btn btn-date-2 ${activeDate === '20/21/2069' ? 'is-active' : ''}`}
+            onClick={() => handleDateSelect('20/21/2069')}
+            aria-pressed={activeDate === '20/21/2069'}
+          >
+            <span className="shimmer-sweep" aria-hidden="true" />
+            <span className="btn-glow-aura" aria-hidden="true" />
+            <div className="btn-content-inner">
+              <span className="btn-badge-label">
+                <span className="btn-live-dot" /> SPECIAL DRAW
+              </span>
+              <strong className="btn-main-date">20/21/2069</strong>
+              <span className="btn-action-hint">ক্লিক করে ভিডিও দেখুন ➔</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
       <div className="review-layout">
         <div className="review-copy">
           <p className="eyebrow">ความคิดเห็นจากลูกค้า • GENUINE REVIEWS • সম্মানিত গ্রাহকদের সরাসরি রিভিউ</p>
@@ -62,7 +120,7 @@ export default function CustomerReview({ videoRef }) {
             <div className="phone-speaker" />
             <div className="phone-header">
               <span className="live-dot" />
-              <strong>CUSTOMER REVIEW</strong>
+              <strong>CUSTOMER REVIEW • {activeDate}</strong>
               <span className="thai-badge-mini">TH</span>
             </div>
             <video
@@ -78,7 +136,7 @@ export default function CustomerReview({ videoRef }) {
               Your browser does not support video playback.
             </video>
             <div className="phone-footer-bar">
-              <span>&#10003; 100% Verified Customer Feedback</span>
+              <span>&#10003; 100% Verified Customer Feedback ({activeDate})</span>
             </div>
           </div>
         </div>
