@@ -6940,6 +6940,87 @@ h3 {
   padding-top: 1rem;
 }
 
+/* bKash Payment Notice Strip (Directly Above Submit Button) */
+.gform-bkash-notice-strip {
+  width: 100%;
+  max-width: 540px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, #FFF5F8 0%, #FFFFFF 50%, #FFF8FA 100%);
+  border: 1.5px solid #FBCFE8;
+  border-left: 5px solid #E2126E;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(226, 18, 110, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
+  transition: all 0.25s ease;
+  margin-bottom: 2px;
+}
+
+.gform-bkash-notice-strip:hover {
+  border-color: #F472B6;
+  border-left-color: #E2126E;
+  box-shadow: 0 6px 22px rgba(226, 18, 110, 0.14);
+}
+
+.gform-bkash-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 4px 8px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(226, 18, 110, 0.15);
+}
+
+.gform-bkash-strip-logo {
+  height: 28px;
+  width: auto;
+  max-width: 60px;
+  object-fit: contain;
+  display: block;
+}
+
+.gform-bkash-notice-content {
+  flex: 1;
+  text-align: left;
+}
+
+.gform-bkash-notice-text {
+  font-family: var(--font-bengali, sans-serif);
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #1E293B;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.gform-bkash-notice-text strong {
+  color: #E2126E;
+  font-weight: 900;
+  text-shadow: 0 0 10px rgba(226, 18, 110, 0.15);
+}
+
+@media (max-width: 640px) {
+  .gform-bkash-notice-strip {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .gform-bkash-strip-logo {
+    height: 24px;
+    max-width: 52px;
+  }
+
+  .gform-bkash-notice-text {
+    font-size: 0.88rem;
+  }
+}
+
 .gform-submit-btn {
   width: 100%;
   max-width: 540px;

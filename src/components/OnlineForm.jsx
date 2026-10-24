@@ -729,6 +729,25 @@ export default function OnlineForm({ isStandalonePage = false }) {
 
             {/* Form Footer Action */}
             <div className="gform-footer-action-bar">
+              {/* bKash Payment Notice Strip (Right Before Submit) */}
+              <div className="gform-bkash-notice-strip" role="note" aria-label="bKash Payment Notice">
+                <div className="gform-bkash-logo-wrap">
+                  <img
+                    src="/assets/bkash-logo.svg"
+                    alt="bKash Logo"
+                    className="gform-bkash-strip-logo"
+                    width="68"
+                    height="32"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="gform-bkash-notice-content">
+                  <p className="gform-bkash-notice-text">
+                    ফাহিম চৌধুরীকে মেম্বারশিপ কনফার্ম করতে <strong>বিকাশে পেমেন্ট করুন</strong>
+                  </p>
+                </div>
+              </div>
+
               <button
                 type="submit"
                 className="button primary gform-submit-btn"
