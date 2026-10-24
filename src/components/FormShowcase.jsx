@@ -68,30 +68,6 @@ export default function FormShowcase() {
                   </div>
                 </div>
 
-                {/* Direct Agent Contact Strip */}
-                <div className="form-showcase-agent-contact">
-                  <span className="showcase-contact-kicker">ফাহিম চৌধুরীর সাথে সরাসরি IMO বা WhatsApp-এ যোগাযোগ করুন:</span>
-                  <div className="showcase-contact-actions">
-                    <a
-                      href="https://wa.me/8801309802224?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%AB%E0%A6%BE%E0%A6%B9%E0%A6%BF%E0%A6%AE%20%E0%A6%B8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0%20%E0%A6%B8%E0%A6%BE%E0%A6%A5%E0%A7%87%20%E0%A6%95%E0%A6%A5%E0%A6%BE%20%E0%A6%AC%E0%A6%B2%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="showcase-contact-btn showcase-wa-btn"
-                      title="WhatsApp: +8801309802224"
-                    >
-                      <span className="showcase-btn-icon">💬</span>
-                      <span>WhatsApp (+8801309802224)</span>
-                    </a>
-                    <a
-                      href="tel:+8801309802224"
-                      className="showcase-contact-btn showcase-imo-btn"
-                      title="IMO: +8801309802224"
-                    >
-                      <span className="showcase-btn-icon">imo</span>
-                      <span>IMO (+8801309802224)</span>
-                    </a>
-                  </div>
-                </div>
                 <p>
                   থাইল্যান্ড সরকারের অফিসিয়াল সিলমোহর ও ওয়াটারমার্ক যুক্ত মেম্বারশিপ ফর্ম।
                 </p>
