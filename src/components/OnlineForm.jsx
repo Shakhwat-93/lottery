@@ -998,33 +998,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </div>
             </div>
 
-            {/* 5. Senior Agent Contact Direct WhatsApp Action Card */}
-            <div className="gform-success-agent-contact-card">
-              <div className="agent-contact-header">
-                <div className="agent-avatar-badge">
-                  <span className="agent-badge-icon">👨‍💼</span>
-                </div>
-                <div className="agent-contact-info">
-                  <h4>সরাসরি এজেন্টের সাথে যোগাযোগ করে ফর্ম কনফার্ম করুন</h4>
-                  <p>আপনার ফর্ম সাবমিট হয়েছে। দ্রুত মেম্বারশিপ অ্যাক্টিভ করতে সিনিয়র এজেন্ট মোঃ ফাহিম চৌধুরীর সাথে যোগাযোগ করুন:</p>
-                </div>
-              </div>
-
-              <div className="agent-direct-actions">
-                <a
-                  href={getWhatsAppConfirmUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="button-success-whatsapp"
-                >
-                  <span className="btn-icon">💬</span>
-                  <span>WhatsApp-এ কনফার্মেশন পাঠান (+8801309802224)</span>
-                  <span className="btn-arrow">➔</span>
-                </a>
-              </div>
-            </div>
-
-            {/* 6. Secondary Actions: Print Receipt & Submit Another */}
+            {/* Success Actions: Print Receipt & Submit Another */}
             <div className="gform-success-action-group">
               <button
                 type="button"
@@ -1036,7 +1010,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
 
               <button
                 type="button"
-                className="button secondary gform-reset-btn"
+                className="gform-reset-btn"
                 onClick={resetForm}
               >
                 Submit another response (আরেকটি আবেদন করুন)
