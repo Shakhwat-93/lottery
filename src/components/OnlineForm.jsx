@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
+import FormSubmitAnimation from './FormSubmitAnimation';
 
 export default function OnlineForm({ isStandalonePage = false }) {
   const isTestSuccess = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('submitted') === 'true';
+  const isTestAnim = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('anim') === 'true';
 
   const [formData, setFormData] = useState({
-    name: isTestSuccess ? 'Arman' : '',
+    name: isTestSuccess || isTestAnim ? 'Arman' : '',
     gender: 'Male',
-    phone: isTestSuccess ? '9666665843548' : '',
-    address: isTestSuccess ? 'Riyadh, Saudi Arabia' : '',
-    country: isTestSuccess ? 'Saudi Arabia' : 'Bangladesh',
+    phone: isTestSuccess || isTestAnim ? '9666665843548' : '',
+    address: isTestSuccess || isTestAnim ? 'Riyadh, Saudi Arabia' : '',
+    country: isTestSuccess || isTestAnim ? 'Saudi Arabia' : 'Bangladesh',
     customCountry: '',
     subscriptionPlan: '3 Month'
   });
 
-  const [photoFile, setPhotoFile] = useState(isTestSuccess ? { name: 'arman_photo.jpg' } : null);
-  const [nidFile, setNidFile] = useState(isTestSuccess ? { name: 'arman_passport.jpg' } : null);
+  const [photoFile, setPhotoFile] = useState(isTestSuccess || isTestAnim ? { name: 'arman_photo.jpg' } : null);
+  const [nidFile, setNidFile] = useState(isTestSuccess || isTestAnim ? { name: 'arman_passport.jpg' } : null);
   const [activeCard, setActiveCard] = useState('name');
   const [submitted, setSubmitted] = useState(isTestSuccess);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSubmitAnimation, setShowSubmitAnimation] = useState(isTestAnim);
   const [registrationId, setRegistrationId] = useState('GLO-TL-784291');
   const [submissionTime, setSubmissionTime] = useState('24 Oct 2026, 02:35 PM');
   const [copiedId, setCopiedId] = useState(false);
@@ -106,26 +109,33 @@ export default function OnlineForm({ isStandalonePage = false }) {
       return;
     }
 
+    // Generate unique Registration ID & timestamp
+    const randomNum = Math.floor(100000 + Math.random() * 900000);
+    const newId = `GLO-TL-${randomNum}`;
+    setRegistrationId(newId);
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    });
+    const formattedTime = now.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
+    setSubmissionTime(`${formattedDate}, ${formattedTime}`);
+
+    // Trigger HyperFrames cinematic submit animation
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      const randomNum = Math.floor(100000 + Math.random() * 900000);
-      setRegistrationId(`GLO-TL-${randomNum}`);
-      const now = new Date();
-      const formattedDate = now.toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric'
-      });
-      const formattedTime = now.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true
-      });
-      setSubmissionTime(`${formattedDate}, ${formattedTime}`);
-      setSubmitted(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 1200);
+    setShowSubmitAnimation(true);
+  };
+
+  const handleAnimationComplete = () => {
+    setShowSubmitAnimation(false);
+    setIsSubmitting(false);
+    setSubmitted(true);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   const copyRegistrationId = () => {
@@ -167,6 +177,8 @@ export default function OnlineForm({ isStandalonePage = false }) {
     setActiveCard('name');
     setCopiedId(false);
     setSubmitted(false);
+    setShowSubmitAnimation(false);
+    setIsSubmitting(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -175,6 +187,14 @@ export default function OnlineForm({ isStandalonePage = false }) {
       className={`section form-section ${isStandalonePage ? 'standalone-form-section' : 'reveal-on-scroll'}`}
       id="online-form"
     >
+      {showSubmitAnimation && (
+        <FormSubmitAnimation
+          registrationId={registrationId}
+          applicantName={formData.name || 'Arman'}
+          plan={formData.subscriptionPlan || '3 Month'}
+          onComplete={handleAnimationComplete}
+        />
+      )}
       <div className="google-form-container" aria-label="Official Thailand Lottery Registration Form">
         {!submitted ? (
           <>
