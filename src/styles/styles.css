@@ -6739,7 +6739,121 @@ h3 {
   font-weight: 800;
   color: #1D4ED8;
   margin-top: 2px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+}
+
+/* Pricing Highlight Block */
+.gform-sub-pricing-block {
+  width: 100%;
+  margin: 6px 0 10px;
+  padding: 10px 8px;
+  background: linear-gradient(180deg, #F8FAFC 0%, #EEF2F6 100%);
+  border-radius: 10px;
+  border: 1.5px solid #E2E8F0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.gform-sub-price-wrapper {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+}
+
+.gform-sub-price-currency {
+  font-family: var(--font-royal, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #047857;
+  letter-spacing: 0.05em;
+  background: #DCFCE7;
+  padding: 2px 7px;
+  border-radius: 6px;
+  border: 1px solid #86EFAC;
+  line-height: 1.2;
+}
+
+.gform-sub-price-number {
+  font-family: var(--font-royal, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 1.85rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #071739;
+  letter-spacing: -0.02em;
+}
+
+.gform-sub-price-label {
+  font-family: var(--font-bengali, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748B;
+  margin-top: 4px;
+}
+
+/* Plan Card Specific Pricing Themes */
+/* 1. 3 Month VIP */
+.gform-sub-plan-card.plan-card-3m .gform-sub-price-currency {
+  color: #047857;
+  background: #DCFCE7;
+  border-color: #86EFAC;
+}
+.gform-sub-plan-card.plan-card-3m .gform-sub-price-number {
+  color: #065F46;
+}
+.gform-sub-plan-card.plan-card-3m:hover .gform-sub-pricing-block {
+  border-color: #10B981;
+  background: #ECFDF5;
+}
+.gform-sub-plan-card.plan-card-3m.is-selected-plan .gform-sub-pricing-block {
+  background: linear-gradient(180deg, #ECFDF5 0%, #D1FAE5 100%);
+  border-color: #059669;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+}
+
+/* 2. 6 Month VIP (Popular) */
+.gform-sub-plan-card.plan-card-6m .gform-sub-price-currency {
+  color: #92400E;
+  background: #FEF3C7;
+  border-color: #FCD34D;
+}
+.gform-sub-plan-card.plan-card-6m .gform-sub-price-number {
+  color: #B45309;
+}
+.gform-sub-plan-card.plan-card-6m:hover .gform-sub-pricing-block {
+  border-color: #F59E0B;
+  background: #FFFDF5;
+}
+.gform-sub-plan-card.plan-card-6m.is-selected-plan .gform-sub-pricing-block {
+  background: linear-gradient(180deg, #FEF3C7 0%, #FDE68A 100%);
+  border-color: #D97706;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.32);
+}
+
+/* 3. 12 Month VIP (Best Value) */
+.gform-sub-plan-card.plan-card-12m .gform-sub-price-currency {
+  color: #1E3A8A;
+  background: #DBEAFE;
+  border-color: #93C5FD;
+}
+.gform-sub-plan-card.plan-card-12m .gform-sub-price-number {
+  color: #0F172A;
+  background: linear-gradient(135deg, #071739 0%, #1D4ED8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.gform-sub-plan-card.plan-card-12m:hover .gform-sub-pricing-block {
+  border-color: #3B82F6;
+  background: #EFF6FF;
+}
+.gform-sub-plan-card.plan-card-12m.is-selected-plan .gform-sub-pricing-block {
+  background: linear-gradient(180deg, #EFF6FF 0%, #DBEAFE 100%);
+  border-color: #2563EB;
+  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.28);
 }
 
 .gform-sub-desc {
@@ -7375,12 +7489,35 @@ h3 {
   box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4);
 }
 
+.plan-6-month {
+  background: linear-gradient(135deg, #78350F 0%, #D97706 50%, #F59E0B 100%);
+  color: #FFFFFF;
+  border: 1.5px solid #FCD34D;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 18px rgba(245, 158, 11, 0.4);
+}
+
 .plan-12-month {
-  background: linear-gradient(135deg, #881337 0%, #9F1239 50%, #BE123C 100%);
+  background: linear-gradient(135deg, #071739 0%, #1D4ED8 50%, #2563EB 100%);
   color: #FFD700;
-  border: 1.5px solid #FB7185;
+  border: 1.5px solid #60A5FA;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 4px 18px rgba(225, 29, 72, 0.4);
+  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.4);
+}
+
+.receipt-fee-badge-gold {
+  background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+  color: #78350F;
+  border: 1.5px solid #F59E0B;
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-weight: 800;
+  font-size: 0.92rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 3px 12px rgba(245, 158, 11, 0.25);
+  letter-spacing: 0.01em;
 }
 
 .doc-verified-pill {

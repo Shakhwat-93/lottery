@@ -130,8 +130,14 @@ export default function OnlineForm({ isStandalonePage = false }) {
   const getWhatsAppConfirmUrl = () => {
     const id = registrationId || 'GLO-TL-784291';
     const country = formData.country === 'Other Country' ? formData.customCountry : formData.country || 'Bangladesh';
+    const planFeeMap = {
+      '3 Month': '250 SAR',
+      '6 Month': '750 SAR',
+      '12 Month': '1,250 SAR'
+    };
+    const feeText = planFeeMap[formData.subscriptionPlan] || '250 SAR';
     const text = encodeURIComponent(
-      `Hello Senior Agent Md Fahim Chowdhury,\n\nI have submitted my Official Thailand Lottery Membership Registration Form.\n\n📄 Registration ID: ${id}\n👤 Full Name: ${formData.name || 'Arman'}\n📞 Contact Phone: ${formData.phone || ''}\n👑 Plan: ${formData.subscriptionPlan || '3 Month'} Subscription\n📍 Country: ${country}\n\nPlease verify and activate my official VIP membership.`
+      `Hello Senior Agent Md Fahim Chowdhury,\n\nI have submitted my Official Thailand Lottery Membership Registration Form.\n\n📄 Registration ID: ${id}\n👤 Full Name: ${formData.name || 'Arman'}\n📞 Contact Phone: ${formData.phone || ''}\n👑 Plan: ${formData.subscriptionPlan || '3 Month'} Subscription (${feeText})\n💰 Fee: ${feeText}\n📍 Country: ${country}\n\nPlease verify and activate my official VIP membership.`
     );
     return `https://wa.me/8801309802224?text=${text}`;
   };
@@ -602,44 +608,17 @@ export default function OnlineForm({ isStandalonePage = false }) {
             >
               <div className="gform-card-left-indicator" aria-hidden="true" />
               <label className="gform-question-title">
-                Membership Subscription Plan (মেম্বারশিপ প্ল্যান নির্বাচন করুন) <span className="gform-req">*</span>
+                Membership Subscription Plan (মেম্বারশিপ প্ল্যান ও প্রাইজ নির্বাচন করুন) <span className="gform-req">*</span>
               </label>
               <p className="gform-question-desc">
                 Select your desired membership duration for official VIP lottery access, sure paper, and results
               </p>
 
               <div className="gform-subscription-cards-grid">
-                {/* 1 Month Option */}
+                {/* 3 Month Option (250 SAR) */}
                 <label
-                  className={`gform-sub-plan-card ${formData.subscriptionPlan === '1 Month' ? 'is-selected-plan' : ''}`}
+                  className={`gform-sub-plan-card plan-card-3m ${formData.subscriptionPlan === '3 Month' ? 'is-selected-plan' : ''}`}
                 >
-                  <input
-                    type="radio"
-                    name="subscriptionPlan"
-                    value="1 Month"
-                    checked={formData.subscriptionPlan === '1 Month'}
-                    onChange={handleChange}
-                    className="gform-sub-radio"
-                  />
-                  <div className="gform-sub-card-inner">
-                    <div className="gform-sub-header">
-                      <span className="gform-sub-icon">⚡</span>
-                      <span className="gform-sub-badge">Standard Plan</span>
-                    </div>
-                    <div className="gform-sub-duration">1 Month</div>
-                    <div className="gform-sub-duration-bn">১ মাস মেম্বারশিপ</div>
-                    <div className="gform-sub-desc">১ মাসের জন্য ফুল অফিসিয়াল ভিআইপি পেপার এক্সেস</div>
-                    <div className="gform-sub-check-indicator">
-                      <span className="gform-sub-checkmark">✓</span>
-                    </div>
-                  </div>
-                </label>
-
-                {/* 3 Month Option (Popular) */}
-                <label
-                  className={`gform-sub-plan-card is-popular ${formData.subscriptionPlan === '3 Month' ? 'is-selected-plan' : ''}`}
-                >
-                  <div className="gform-sub-popular-ribbon">★ Popular</div>
                   <input
                     type="radio"
                     name="subscriptionPlan"
@@ -650,21 +629,68 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   />
                   <div className="gform-sub-card-inner">
                     <div className="gform-sub-header">
-                      <span className="gform-sub-icon">⭐</span>
-                      <span className="gform-sub-badge badge-popular">Recommended</span>
+                      <span className="gform-sub-icon">⚡</span>
+                      <span className="gform-sub-badge">Standard VIP</span>
                     </div>
                     <div className="gform-sub-duration">3 Month</div>
                     <div className="gform-sub-duration-bn">৩ মাস মেম্বারশিপ</div>
-                    <div className="gform-sub-desc">৩ মাসের নিয়মিত শিওর গেম ও সিনিয়র এজেন্ট সাপোর্ট</div>
+
+                    {/* Pricing Highlight Box */}
+                    <div className="gform-sub-pricing-block">
+                      <div className="gform-sub-price-wrapper">
+                        <span className="gform-sub-price-currency">SAR</span>
+                        <span className="gform-sub-price-number">250</span>
+                      </div>
+                      <span className="gform-sub-price-label">সৌদি রিয়াল (SAR)</span>
+                    </div>
+
+                    <div className="gform-sub-desc">৩ মাসের নিয়মিত ভিআইপি শিওর পেপার ও গেম এক্সেস</div>
                     <div className="gform-sub-check-indicator">
                       <span className="gform-sub-checkmark">✓</span>
                     </div>
                   </div>
                 </label>
 
-                {/* 12 Month Option (VIP Full Year) */}
+                {/* 6 Month Option (750 SAR - Most Popular) */}
                 <label
-                  className={`gform-sub-plan-card is-best-value ${formData.subscriptionPlan === '12 Month' ? 'is-selected-plan' : ''}`}
+                  className={`gform-sub-plan-card plan-card-6m is-popular ${formData.subscriptionPlan === '6 Month' ? 'is-selected-plan' : ''}`}
+                >
+                  <div className="gform-sub-popular-ribbon">★ Most Popular</div>
+                  <input
+                    type="radio"
+                    name="subscriptionPlan"
+                    value="6 Month"
+                    checked={formData.subscriptionPlan === '6 Month'}
+                    onChange={handleChange}
+                    className="gform-sub-radio"
+                  />
+                  <div className="gform-sub-card-inner">
+                    <div className="gform-sub-header">
+                      <span className="gform-sub-icon">⭐</span>
+                      <span className="gform-sub-badge badge-popular">Recommended</span>
+                    </div>
+                    <div className="gform-sub-duration">6 Month</div>
+                    <div className="gform-sub-duration-bn">৬ মাস মেম্বারশিপ</div>
+
+                    {/* Pricing Highlight Box */}
+                    <div className="gform-sub-pricing-block">
+                      <div className="gform-sub-price-wrapper">
+                        <span className="gform-sub-price-currency">SAR</span>
+                        <span className="gform-sub-price-number">750</span>
+                      </div>
+                      <span className="gform-sub-price-label">সৌদি রিয়াল (SAR)</span>
+                    </div>
+
+                    <div className="gform-sub-desc">৬ মাসের নিয়মিত ভিআইপি এক্সেস ও সিনিয়র এজেন্ট সরাসরি সাপোর্ট</div>
+                    <div className="gform-sub-check-indicator">
+                      <span className="gform-sub-checkmark">✓</span>
+                    </div>
+                  </div>
+                </label>
+
+                {/* 12 Month Option (1250 SAR - VIP Full Year) */}
+                <label
+                  className={`gform-sub-plan-card plan-card-12m is-best-value ${formData.subscriptionPlan === '12 Month' ? 'is-selected-plan' : ''}`}
                 >
                   <div className="gform-sub-value-ribbon">💎 VIP Year</div>
                   <input
@@ -677,12 +703,22 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   />
                   <div className="gform-sub-card-inner">
                     <div className="gform-sub-header">
-                      <span className="gform-sub-icon">🏆</span>
+                      <span className="gform-sub-icon">👑</span>
                       <span className="gform-sub-badge badge-gold">Best Value</span>
                     </div>
                     <div className="gform-sub-duration">12 Month</div>
                     <div className="gform-sub-duration-bn">১২ মাস (১ বছর VIP)</div>
-                    <div className="gform-sub-desc">সম্পূর্ণ ১ বছর আনলিমিটেড প্রিমিয়াম ভিআইপি মেম্বারশিপ</div>
+
+                    {/* Pricing Highlight Box */}
+                    <div className="gform-sub-pricing-block">
+                      <div className="gform-sub-price-wrapper">
+                        <span className="gform-sub-price-currency">SAR</span>
+                        <span className="gform-sub-price-number">1,250</span>
+                      </div>
+                      <span className="gform-sub-price-label">সৌদি রিয়াল (SAR)</span>
+                    </div>
+
+                    <div className="gform-sub-desc">সম্পূর্ণ ১ বছর আনলিমিটেড প্রিমিয়াম মেম্বারশিপ ও সর্বোচ্চ সুবিধা</div>
                     <div className="gform-sub-check-indicator">
                       <span className="gform-sub-checkmark">✓</span>
                     </div>
@@ -870,10 +906,25 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   </span>
                   <strong className="receipt-value">
                     <span className={`plan-badge-colorful plan-${(formData.subscriptionPlan || '3 Month').toLowerCase().replace(' ', '-')}`}>
-                      {formData.subscriptionPlan === '1 Month' && '⭐ 1 Month VIP Membership'}
-                      {formData.subscriptionPlan === '3 Month' && '🔥 3 Month VIP Membership (Most Popular)'}
-                      {formData.subscriptionPlan === '12 Month' && '👑 12 Month MEGA VIP Membership'}
-                      {!formData.subscriptionPlan && '🔥 3 Month VIP Membership'}
+                      {formData.subscriptionPlan === '3 Month' && '⚡ 3 Month VIP Membership (250 SAR)'}
+                      {formData.subscriptionPlan === '6 Month' && '⭐ 6 Month VIP Membership (750 SAR - Popular)'}
+                      {formData.subscriptionPlan === '12 Month' && '👑 12 Month MEGA VIP Membership (1,250 SAR - Best Value)'}
+                      {!formData.subscriptionPlan && '⚡ 3 Month VIP Membership (250 SAR)'}
+                    </span>
+                  </strong>
+                </div>
+
+                {/* Membership Fee Highlighted Badge */}
+                <div className="receipt-row receipt-fee-row receipt-row-highlight">
+                  <span className="receipt-label">
+                    <span className="receipt-icon">💰</span> Membership Fee:
+                  </span>
+                  <strong className="receipt-value">
+                    <span className="receipt-fee-badge-gold">
+                      {formData.subscriptionPlan === '3 Month' && '250 SAR (সৌদি রিয়াল)'}
+                      {formData.subscriptionPlan === '6 Month' && '750 SAR (সৌদি রিয়াল)'}
+                      {formData.subscriptionPlan === '12 Month' && '1,250 SAR (সৌদি রিয়াল)'}
+                      {!formData.subscriptionPlan && '250 SAR (সৌদি রিয়াল)'}
                     </span>
                   </strong>
                 </div>
