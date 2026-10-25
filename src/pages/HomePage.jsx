@@ -27,9 +27,9 @@ export default function HomePage() {
         <TrustHero />
         <Certificates />
         <VipOfferTimer />
+        <FormShowcase />
         <PaymentMethods />
         <CustomerReview videoRef={reviewVideoRef} />
-        <FormShowcase />
         <PreviousWinners />
         <section className="section three-set-home-strip reveal-on-scroll" id="three-set-game-section">
           <div className="three-set-home-card">
