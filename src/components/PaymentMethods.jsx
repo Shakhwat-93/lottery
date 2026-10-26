@@ -224,10 +224,6 @@ export default function PaymentMethods() {
                 <strong>Mon - Fri 08:30 - 16:30 ICT</strong>
               </div>
               <div className="meta-item">
-                <span className="meta-label">HOTLINE:</span>
-                <strong>+66 2 528 9999</strong>
-              </div>
-              <div className="meta-item">
                 <span className="meta-label">STATUS:</span>
                 <strong className="status-live">● GLO ACTIVE</strong>
               </div>
