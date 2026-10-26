@@ -6,13 +6,13 @@ export default function GamePanelCta() {
     <section className="game-panel reveal-on-scroll" id="game-open">
       <div>
         <p className="eyebrow">VIP ACCESS</p>
-        <h2>থাইল্যান্ড লটারি মাস্টার পেপার্স</h2>
+        <h2>থাইল্যান্ড লটারি VIP Agency Code</h2>
         <p>
-          <strong className="clarity-digit">100%</strong> নিশ্চিত পেপার ও নম্বর চার্ট দেখতে ভিআইপি গ্যালারিতে প্রবেশ করুন।
+          <strong className="clarity-digit">100%</strong> নিশ্চিত ১ বছরের ২৪ সেট ক্যালকুলেশন পেপার ও ভিআইপি এজেন্সি কোড দেখতে প্রবেশ করুন।
         </p>
       </div>
-      <Link className="button primary" to="/game">
-        ভিআইপি পেপার ↗
+      <Link className="button primary" to="/vip-agency-code">
+        ভিআইপি এজেন্সি কোড ↗
       </Link>
     </section>
   );

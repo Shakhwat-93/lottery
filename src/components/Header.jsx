@@ -186,6 +186,25 @@ export default function Header({ page = 'home' }) {
                 </Link>
               </>
             )}
+            {page === 'vip-agency-code' && (
+              <>
+                <Link to="/" onClick={() => setMobileMenuOpen(false)}>
+                  <span className="nav-icon">🏠</span> Home
+                </Link>
+                <Link to="/form" onClick={() => setMobileMenuOpen(false)}>
+                  <span className="nav-icon">📝</span> মেম্বারশিপ ফর্ম
+                </Link>
+                <Link to="/3-set-game" onClick={() => setMobileMenuOpen(false)}>
+                  <span className="nav-icon">🎲</span> 3 Set Game
+                </Link>
+                <Link to="/game" onClick={() => setMobileMenuOpen(false)}>
+                  <span className="nav-icon">📄</span> VIP Sure Papers
+                </Link>
+                <Link to="/vip-agency-code" className="nav-cta" onClick={() => setMobileMenuOpen(false)}>
+                  VIP Agency Code 👑
+                </Link>
+              </>
+            )}
           </nav>
 
           <div className="nav-panel-footer">
