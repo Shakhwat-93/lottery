@@ -178,12 +178,9 @@ export default function ThreeSetGamePage() {
             <h1 className="jackpot-stage-title">
               ★ OFFICIAL VIP DRAW DATES ★
             </h1>
-            <p className="three-set-date-hint">
-              অফিসিয়াল ৩ সেট গেম পেপার দেখতে নিচের ড্র তারিখে ক্লিক করুন:
-            </p>
           </div>
 
-          {/* THE 2 GLOWING DATE BUTTONS */}
+          {/* THE 2 GLOWING DATE BUTTONS — CENTER ALIGNED & JUST DATE ONLY */}
           <div className="review-glow-buttons-row three-set-glow-row" aria-label="3 Set Game VIP Draw Dates">
             {/* Date Button 1: 2/12/2069 */}
             <button
@@ -194,11 +191,7 @@ export default function ThreeSetGamePage() {
             >
               <span className="shimmer-sweep" aria-hidden="true" />
               <div className="btn-content-inner">
-                <span className="btn-badge-label">
-                  <span className="btn-live-dot" /> VIP DRAW
-                </span>
                 <strong className="btn-main-date">2/12/2069</strong>
-                <span className="btn-action-hint">ক্লিক করে ৩ সেট পেপার দেখুন ➔</span>
               </div>
             </button>
 
@@ -211,11 +204,7 @@ export default function ThreeSetGamePage() {
             >
               <span className="shimmer-sweep" aria-hidden="true" />
               <div className="btn-content-inner">
-                <span className="btn-badge-label">
-                  <span className="btn-live-dot" /> SPECIAL DRAW
-                </span>
                 <strong className="btn-main-date">20/21/2069</strong>
-                <span className="btn-action-hint">ক্লিক করে ৩ সেট পেপার দেখুন ➔</span>
               </div>
             </button>
           </div>
