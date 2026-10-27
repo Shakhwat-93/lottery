@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-export default function LogoPageTransition({ onComplete, duration = 1600 }) {
+export default function LogoPageTransition({
+  onComplete,
+  duration = 1600,
+  badgeText = 'OFFICIAL GLO PORTAL',
+  title = 'THAILAND OFFICIAL LOTTERY',
+  subtitle = 'GOVERNMENT LOTTERY OFFICE BANGKOK • 2026',
+  statusText = 'VERIFYING SECURE GLO GATEWAY...'
+}) {
   const [progress, setProgress] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -102,15 +109,15 @@ export default function LogoPageTransition({ onComplete, duration = 1600 }) {
         <div className="logo-transition-text-wrap">
           <div className="logo-transition-crown-badge">
             <span className="crown-icon" aria-hidden="true">👑</span>
-            <span>OFFICIAL GLO PORTAL</span>
+            <span>{badgeText}</span>
           </div>
 
           <h1 className="logo-transition-title">
-            THAILAND OFFICIAL LOTTERY
+            {title}
           </h1>
 
           <div className="logo-transition-subtitle">
-            GOVERNMENT LOTTERY OFFICE BANGKOK • 2026
+            {subtitle}
           </div>
 
           {/* Progress Bar & Percentage */}
@@ -124,7 +131,7 @@ export default function LogoPageTransition({ onComplete, duration = 1600 }) {
             <div className="logo-progress-meta">
               <span className="logo-progress-status">
                 <span className="logo-status-pulse" aria-hidden="true" />
-                VERIFYING SECURE GLO GATEWAY...
+                {statusText}
               </span>
               <span className="logo-progress-counter">{progress}%</span>
             </div>

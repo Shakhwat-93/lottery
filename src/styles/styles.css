@@ -14995,3 +14995,570 @@ a.button:active,
     font-size: 0.75rem;
   }
 }
+
+
+/* ==========================================================================
+   20. VIP AGENCY CODE 5-DIGIT JACKPOT WIN FULLSCREEN REVEAL
+   ========================================================================== */
+body.jackpot-page-active {
+  overflow: hidden !important;
+  background-color: #02050E !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.jackpot-fullscreen-chamber {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 99999;
+  background: radial-gradient(circle at 50% 50%, #081129 0%, #04091A 45%, #02050E 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  color: #FFFFFF;
+}
+
+/* Canvas Confetti */
+.jackpot-confetti-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 30;
+}
+
+/* Ambient Layer with Radial Burst & Corona Rays */
+.jackpot-ambient-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.jackpot-radial-burst {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.16) 0%, rgba(212, 175, 55, 0.05) 50%, transparent 75%);
+  filter: blur(60px);
+  animation: burstBreath 4s ease-in-out infinite alternate;
+}
+
+@keyframes burstBreath {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+}
+
+.jackpot-corona-rays {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  animation: coronaSpinRays 36s linear infinite;
+}
+
+@keyframes coronaSpinRays {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.jackpot-ray {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 480px;
+  background: linear-gradient(to bottom, rgba(255, 215, 0, 0.45) 0%, rgba(255, 215, 0, 0.08) 50%, transparent 100%);
+  transform-origin: top center;
+  border-radius: 3px;
+  filter: blur(1px);
+}
+
+.jackpot-shimmer-aurora {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 100%, rgba(230, 0, 0, 0.14) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Floating Sparkle Particles */
+.jackpot-floating-sparkles {
+  position: absolute;
+  inset: 0;
+}
+
+.sparkle-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: #FFD700;
+  box-shadow: 0 0 10px #FFD700, 0 0 20px #FFA500;
+  opacity: 0;
+  animation: sparkleFloat 5s ease-in-out infinite;
+}
+
+.sparkle-1 { top: 20%; left: 15%; width: 4px; height: 4px; animation-delay: 0.2s; }
+.sparkle-2 { top: 70%; left: 80%; width: 6px; height: 6px; animation-delay: 1.4s; }
+.sparkle-3 { top: 35%; left: 85%; width: 5px; height: 5px; animation-delay: 2.1s; }
+.sparkle-4 { top: 80%; left: 20%; width: 4px; height: 4px; animation-delay: 0.8s; }
+.sparkle-5 { top: 15%; left: 65%; width: 6px; height: 6px; animation-delay: 2.8s; }
+
+@keyframes sparkleFloat {
+  0% { transform: translateY(20px) scale(0.5); opacity: 0; }
+  50% { transform: translateY(-30px) scale(1.2); opacity: 0.9; }
+  100% { transform: translateY(-70px) scale(0.6); opacity: 0; }
+}
+
+/* Top Navigation Controls */
+.jackpot-top-controls {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top, 16px));
+  left: 0;
+  right: 0;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 40;
+}
+
+.jackpot-ctrl-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  color: #FFD700;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 200ms ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+.jackpot-ctrl-btn:hover {
+  background: rgba(255, 215, 0, 0.22);
+  border-color: #FFD700;
+  color: #FFFFFF;
+  transform: scale(1.08);
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.5);
+}
+
+.jackpot-top-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(7, 15, 36, 0.75);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #FFE58F;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+}
+
+.jackpot-top-badge .live-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #00FF88;
+  box-shadow: 0 0 10px #00FF88;
+  animation: pulseGreen 1.5s infinite;
+}
+
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+/* Center Stage */
+.jackpot-center-stage {
+  position: relative;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 760px;
+  padding: 20px;
+}
+
+/* Eyebrow & Crown */
+.jackpot-eyebrow-wrap {
+  margin-bottom: 24px;
+  animation: eyebrowEntrance 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes eyebrowEntrance {
+  0% { opacity: 0; transform: translateY(-16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.jackpot-crown-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 60, 60, 0.15) 100%);
+  border: 1px solid rgba(255, 215, 0, 0.45);
+  border-radius: 9999px;
+  margin-bottom: 12px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.jackpot-crown-pill .crown-emoji {
+  font-size: 1.15rem;
+}
+
+.jackpot-crown-pill .crown-text {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #FFD700;
+  text-transform: uppercase;
+}
+
+.jackpot-stage-title {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+  font-size: clamp(1.2rem, 3.5vw, 1.85rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin: 0;
+  color: #FFFFFF;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+/* THE 5 DIGITS ROW */
+.jackpot-digits-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 16px);
+  margin: 16px 0 28px 0;
+  padding: clamp(14px, 3vw, 24px);
+  background: rgba(7, 14, 34, 0.65);
+  border: 2px solid rgba(255, 215, 0, 0.35);
+  border-radius: 28px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.jackpot-digits-row:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 215, 0, 0.7);
+  box-shadow: 0 16px 54px rgba(0, 0, 0, 0.8), 0 0 45px rgba(255, 215, 0, 0.35);
+}
+
+.jackpot-digits-row.is-jackpot-revealed {
+  border-color: #FFD700;
+  box-shadow: 0 0 50px rgba(255, 215, 0, 0.5), 0 0 100px rgba(255, 170, 0, 0.25), inset 0 0 24px rgba(255, 215, 0, 0.2);
+  animation: jackpotRowPulse 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes jackpotRowPulse {
+  0% { transform: scale(1); box-shadow: 0 0 40px rgba(255, 215, 0, 0.45); }
+  100% { transform: scale(1.018); box-shadow: 0 0 70px rgba(255, 215, 0, 0.75), 0 0 120px rgba(255, 140, 0, 0.35); }
+}
+
+/* Individual Digit Card */
+.jackpot-digit-card {
+  position: relative;
+  width: clamp(52px, 14vw, 105px);
+  height: clamp(74px, 18vw, 145px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: clamp(12px, 2.5vw, 20px);
+  background: linear-gradient(180deg, rgba(255, 215, 0, 0.14) 0%, rgba(13, 22, 48, 0.95) 45%, #050B1B 100%);
+  border: 2px solid rgba(255, 215, 0, 0.55);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), inset 0 2px 2px rgba(255, 255, 255, 0.45), inset 0 -3px 8px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  transition: all 250ms ease;
+}
+
+.jackpot-digit-card.is-spinning {
+  border-color: rgba(255, 215, 0, 0.4);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.25);
+}
+
+.jackpot-digit-card.is-spinning .jackpot-digit-val {
+  filter: blur(1.5px);
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+.jackpot-digit-card.is-locked {
+  border-color: #FFD700;
+  box-shadow: 0 0 35px rgba(255, 215, 0, 0.7), inset 0 0 15px rgba(255, 215, 0, 0.35);
+  animation: digitLockSnap 420ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes digitLockSnap {
+  0% { transform: scale(1.28); filter: brightness(1.8); }
+  50% { transform: scale(0.94); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* Metallic Bezel Lines */
+.card-gold-bezel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #FFFFFF 40%, #FFD700 70%, transparent 100%);
+  opacity: 0.8;
+}
+
+.card-glass-specular {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, transparent 100%);
+  pointer-events: none;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.card-radial-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Continuous Shimmer Light Sweep */
+.card-shimmer-sweep {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    transparent 42%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 58%,
+    transparent 100%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
+  animation: cardShimmerSweep 3.2s ease-in-out infinite;
+}
+
+@keyframes cardShimmerSweep {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  35%, 100% { transform: translateX(150%) skewX(-20deg); }
+}
+
+/* The Digit Value */
+.jackpot-digit-val {
+  font-family: var(--font-cinzel), 'Cinzel', 'Playfair Display', serif;
+  font-size: clamp(2.6rem, 7.5vw, 5.2rem);
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF3B0 22%, #FFD700 50%, #E69D00 78%, #9E5B00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.9)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.9));
+  position: relative;
+  z-index: 5;
+  transition: all 180ms ease;
+}
+
+/* Feedback & Copy Action */
+.jackpot-feedback-wrap {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.jackpot-action-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  border: none;
+  border-radius: 9999px;
+  color: #071026;
+  font-family: var(--font-bengali), system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 0 24px rgba(255, 215, 0, 0.6), 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: all 200ms ease;
+}
+
+.jackpot-action-copy-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 35px rgba(255, 215, 0, 0.85), 0 6px 20px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFD700 60%, #FFA500 100%);
+}
+
+.jackpot-action-copy-btn .copy-icon {
+  font-size: 1.15rem;
+}
+
+.jackpot-copied-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: rgba(0, 255, 136, 0.18);
+  border: 1px solid #00FF88;
+  border-radius: 9999px;
+  color: #00FF88;
+  font-family: var(--font-bengali), system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+  animation: pillPop 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pillPop {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.jackpot-copied-pill .copied-icon {
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+/* Subtle Bottom Links */
+.jackpot-bottom-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 9999px;
+  backdrop-filter: blur(10px);
+}
+
+.jackpot-subtle-link {
+  background: none;
+  border: none;
+  color: #FFE699;
+  font-family: var(--font-bengali), system-ui, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 150ms ease, transform 150ms ease;
+  padding: 2px 4px;
+}
+
+.jackpot-subtle-link:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+  transform: translateY(-1px);
+}
+
+.link-divider {
+  color: rgba(255, 215, 0, 0.35);
+  font-size: 0.75rem;
+}
+
+/* Vignette Texture */
+.jackpot-vignette-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.75) 100%);
+  z-index: 10;
+}
+
+@media (max-width: 480px) {
+  .jackpot-top-controls {
+    padding: 0 14px;
+  }
+
+  .jackpot-top-badge span:last-child {
+    display: none;
+  }
+
+  .jackpot-digits-row {
+    padding: 12px 10px;
+    gap: 6px;
+    border-radius: 18px;
+  }
+
+  .jackpot-digit-card {
+    border-radius: 10px;
+  }
+
+  .jackpot-action-copy-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .jackpot-bottom-links {
+    gap: 8px;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+}
+
+
+/* 3 Set Game Fullscreen Chamber Tweaks */
+.three-set-dates-stage {
+  max-width: 860px;
+}
+
+.three-set-date-hint {
+  font-family: var(--font-bengali), system-ui, sans-serif;
+  font-size: clamp(0.92rem, 2.4vw, 1.12rem);
+  font-weight: 600;
+  color: #CBD5E1;
+  margin: 10px 0 0 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.three-set-glow-row {
+  margin-top: 24px;
+  max-width: 780px;
+}
+
+.three-set-glow-row .review-super-glow-btn {
+  flex: 1 1 300px;
+  min-height: 110px;
+  padding: 1.25rem 1.75rem;
+}

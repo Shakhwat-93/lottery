@@ -1,248 +1,466 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import LogoPageTransition from '../components/LogoPageTransition';
+
+// Web Audio API Synthesizer (zero network requests, instantaneous tactile jackpot audio)
+class JackpotAudioController {
+  constructor() {
+    this.ctx = null;
+    this.muted = false;
+  }
+
+  init() {
+    if (!this.ctx && typeof window !== 'undefined') {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) {
+        this.ctx = new AudioCtx();
+      }
+    }
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.ctx.resume().catch(() => {});
+    }
+  }
+
+  playTick() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(650, now);
+      osc.frequency.exponentialRampToValueAtTime(180, now + 0.025);
+      gain.gain.setValueAtTime(0.04, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.025);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.025);
+    } catch (_) {}
+  }
+
+  playLock(index = 0) {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      const freqs = [523.25, 659.25, 783.99, 1046.50, 1318.51]; // C5, E5, G5, C6, E6
+      const freq = freqs[index % freqs.length];
+
+      // Bell chime fundamental
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now);
+      gain.gain.setValueAtTime(0.18, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.35);
+
+      // Shimmering overtone
+      const osc2 = this.ctx.createOscillator();
+      const gain2 = this.ctx.createGain();
+      osc2.type = 'triangle';
+      osc2.frequency.setValueAtTime(freq * 2, now);
+      gain2.gain.setValueAtTime(0.06, now);
+      gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.16);
+      osc2.connect(gain2);
+      gain2.connect(this.ctx.destination);
+      osc2.start(now);
+      osc2.stop(now + 0.16);
+    } catch (_) {}
+  }
+
+  playJackpotWin() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const notes = [
+        { f: 523.25, t: 0.00, d: 0.4 }, // C5
+        { f: 659.25, t: 0.09, d: 0.4 }, // E5
+        { f: 783.99, t: 0.18, d: 0.4 }, // G5
+        { f: 1046.50, t: 0.28, d: 0.6 }, // C6
+        { f: 1318.51, t: 0.40, d: 0.8 }, // E6
+        { f: 1567.98, t: 0.54, d: 1.4 }  // G6
+      ];
+
+      const start = this.ctx.currentTime;
+      notes.forEach(({ f, t, d }) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(f, start + t);
+        gain.gain.setValueAtTime(0.2, start + t);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + t + d);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(start + t);
+        osc.stop(start + t + d);
+      });
+    } catch (_) {}
+  }
+}
+
+const audioCtrl = new JackpotAudioController();
 
 export default function VipAgencyCodePage() {
-  const [activeDate, setActiveDate] = useState('2/12/2069');
-  const [modalOpen, setModalOpen] = useState(false);
-  const paperRef = useRef(null);
-  useScrollReveal();
+  const navigate = useNavigate();
+  const [showLogoTransition, setShowLogoTransition] = useState(true);
+  const [targetDigits] = useState(['1', '6', '8', '1', '6']);
+  const [displayedDigits, setDisplayedDigits] = useState(['0', '0', '0', '0', '0']);
+  const [lockedStates, setLockedStates] = useState([false, false, false, false, false]);
+  const [isJackpotWon, setIsJackpotWon] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
 
+  const canvasRef = useRef(null);
+  const animationFrameRef = useRef(null);
+  const spinIntervalsRef = useRef([]);
+
+  // Fullscreen body lock
   useEffect(() => {
-    document.body.classList.add('vip-agency-code-page');
+    document.body.classList.add('jackpot-page-active');
     window.scrollTo(0, 0);
-    return () => {
-      document.body.classList.remove('vip-agency-code-page');
-    };
-  }, []);
 
-  const handleDateSelect = (date) => {
-    setActiveDate(date);
-    if (paperRef.current) {
-      paperRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        navigate('/');
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.classList.remove('jackpot-page-active');
+      window.removeEventListener('keydown', handleKeyDown);
+      spinIntervalsRef.current.forEach((id) => clearInterval(id));
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [navigate]);
+
+  // Handle Mute toggle
+  const toggleMute = () => {
+    const nextState = !isMuted;
+    setIsMuted(nextState);
+    audioCtrl.muted = nextState;
+  };
+
+  // Launch the Slot Reel Jackpot Spin Animation
+  const startJackpotSpin = useCallback(() => {
+    setIsJackpotWon(false);
+    setLockedStates([false, false, false, false, false]);
+    setDisplayedDigits(['0', '0', '0', '0', '0']);
+
+    // Clear any previous intervals
+    spinIntervalsRef.current.forEach((id) => clearInterval(id));
+    spinIntervalsRef.current = [];
+
+    // Spinning random numbers interval for each reel
+    targetDigits.forEach((_, i) => {
+      const intervalId = setInterval(() => {
+        setDisplayedDigits((prev) => {
+          const next = [...prev];
+          next[i] = Math.floor(Math.random() * 10).toString();
+          return next;
+        });
+        if (i === 0) {
+          audioCtrl.playTick();
+        }
+      }, 55);
+      spinIntervalsRef.current[i] = intervalId;
+    });
+
+    // Sequential locks (Reels 0 -> 4)
+    const lockDelays = [450, 850, 1250, 1650, 2050];
+
+    lockDelays.forEach((delay, idx) => {
+      setTimeout(() => {
+        clearInterval(spinIntervalsRef.current[idx]);
+        setDisplayedDigits((prev) => {
+          const next = [...prev];
+          next[idx] = targetDigits[idx];
+          return next;
+        });
+        setLockedStates((prev) => {
+          const next = [...prev];
+          next[idx] = true;
+          return next;
+        });
+        audioCtrl.playLock(idx);
+
+        // When the final digit locks in
+        if (idx === targetDigits.length - 1) {
+          setTimeout(() => {
+            setIsJackpotWon(true);
+            audioCtrl.playJackpotWin();
+            launchConfetti();
+          }, 120);
+        }
+      }, delay);
+    });
+  }, [targetDigits]);
+
+  // When Logo transition finishes, immediately trigger the jackpot sequence
+  const handleLogoComplete = () => {
+    setShowLogoTransition(false);
+    setTimeout(() => {
+      startJackpotSpin();
+    }, 150);
+  };
+
+  // Copy code to clipboard
+  const handleCopyCode = () => {
+    const fullCode = targetDigits.join('');
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(fullCode).then(() => {
+        setCopied(true);
+        audioCtrl.playLock(4);
+        setTimeout(() => setCopied(false), 2400);
+      });
     }
+  };
+
+  // HTML5 High-Performance Gold Sparkles & Confetti Canvas
+  const launchConfetti = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const width = (canvas.width = window.innerWidth);
+    const height = (canvas.height = window.innerHeight);
+
+    const colors = ['#FFD700', '#FFE600', '#FFA500', '#FFF5B8', '#FFFFFF', '#D4AF37'];
+    const particles = [];
+    const particleCount = Math.min(100, Math.floor(width / 12));
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: width / 2 + (Math.random() - 0.5) * 80,
+        y: height / 2 + (Math.random() - 0.5) * 50,
+        vx: (Math.random() - 0.5) * 16,
+        vy: -Math.random() * 14 - 4,
+        size: Math.random() * 8 + 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 360,
+        rotationSpeed: (Math.random() - 0.5) * 10,
+        opacity: 1,
+        gravity: 0.38,
+        shape: Math.random() > 0.5 ? 'rect' : 'circle'
+      });
+    }
+
+    let startTime = performance.now();
+
+    const render = (now) => {
+      const elapsed = now - startTime;
+      ctx.clearRect(0, 0, width, height);
+
+      let activeCount = 0;
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += p.gravity;
+        p.vx *= 0.985;
+        p.rotation += p.rotationSpeed;
+        p.opacity = Math.max(0, 1 - elapsed / 3600);
+
+        if (p.opacity > 0 && p.y < height + 40) {
+          activeCount++;
+          ctx.save();
+          ctx.globalAlpha = p.opacity;
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.shadowColor = '#FFD700';
+          ctx.shadowBlur = 8;
+
+          if (p.shape === 'rect') {
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          } else {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      });
+
+      if (activeCount > 0 && elapsed < 3800) {
+        animationFrameRef.current = requestAnimationFrame(render);
+      } else {
+        ctx.clearRect(0, 0, width, height);
+      }
+    };
+
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+    }
+    animationFrameRef.current = requestAnimationFrame(render);
   };
 
   return (
     <>
-      <Header page="vip-agency-code" />
-      <main className="three-set-main vip-agency-main">
-        {/* Topbar navigation */}
-        <div className="three-set-topbar">
-          <div className="three-set-topbar-inner">
-            <div className="three-set-back-group">
-              <Link to="/" className="three-set-home-btn" aria-label="Go to Homepage">
-                <span>← হোমপেজ</span>
-              </Link>
-              <Link to="/form" className="three-set-back-btn" aria-label="Go to Membership Form">
-                <span>মেম্বারশিপ ফর্ম ✍️</span>
-              </Link>
-            </div>
-            <div className="three-set-verified-tag">
-              <span className="live-dot" />
-              <span>100% GLO Official VIP Document</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Hero Section */}
-        <section className="three-set-hero reveal-on-scroll">
-          <div className="three-set-hero-header">
-            <span className="premium-tag">
-              ราชอาณาจักรไทย • GLO VIP 2026 • 24 SET CALCULATION PAPER
-            </span>
-            <h1 className="three-set-title">Thailand Lottery VIP Agency Code</h1>
-            <p className="three-set-desc">
-              থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) অনুমোদিত ১ বছরের ২৪ সেট ক্যালকুলেশন পেপার (1 Year 24 Set Calculation Paper 2026) ও অফিসিয়াল ভিআইপি এজেন্সি কোড।
-            </p>
-
-            <div className="three-set-badges">
-              <span className="premium-badge badge-gold">
-                <span className="badge-symbol">★</span>
-                <span>
-                  <strong>VIP AGENCY CODE</strong>
-                  <small>অফিসিয়াল ক্যালকুলেশন নথি</small>
-                </span>
-              </span>
-              <span className="premium-badge badge-green">
-                <span className="badge-symbol">✓</span>
-                <span>
-                  <strong>GOVERNMENT VERIFIED</strong>
-                  <small>100% খাঁটি পেপার ও কোড</small>
-                </span>
-              </span>
-            </div>
-          </div>
-
-          {/* The 2 Glowing Highlight Buttons */}
-          <div className="review-glow-cta-container vip-agency-glow-cta" aria-label="VIP Draw Date Selector">
-            <div className="review-glow-cta-header">
-              <span className="review-glow-pulsing-badge">
-                <span className="glow-radar-ping" aria-hidden="true" />
-                <span className="glow-badge-text">✦ অফিশিয়াল ভিআইপি ড্র রেজাল্ট ও কোড ✦</span>
-              </span>
-            </div>
-
-            <div className="review-glow-buttons-row">
-              <button
-                type="button"
-                className={`review-super-glow-btn btn-date-1 ${activeDate === '2/12/2069' ? 'is-active' : ''}`}
-                onClick={() => handleDateSelect('2/12/2069')}
-                aria-pressed={activeDate === '2/12/2069'}
-                aria-label="Draw Date 2/12/2069 VIP Draw"
-              >
-                <span className="shimmer-sweep" aria-hidden="true" />
-                <span className="btn-glow-aura" aria-hidden="true" />
-                <div className="btn-content-inner">
-                  <span className="btn-badge-label">
-                    <span className="btn-live-dot" /> VIP DRAW
-                  </span>
-                  <strong className="btn-main-date">2/12/2069</strong>
-                  <span className="btn-action-hint">ক্লিক করে ক্যালকুলেশন পেপার দেখুন ➔</span>
-                </div>
-              </button>
-
-              <button
-                type="button"
-                className={`review-super-glow-btn btn-date-2 ${activeDate === '20/21/2069' ? 'is-active' : ''}`}
-                onClick={() => handleDateSelect('20/21/2069')}
-                aria-pressed={activeDate === '20/21/2069'}
-                aria-label="Draw Date 20/21/2069 Special Draw"
-              >
-                <span className="shimmer-sweep" aria-hidden="true" />
-                <span className="btn-glow-aura" aria-hidden="true" />
-                <div className="btn-content-inner">
-                  <span className="btn-badge-label">
-                    <span className="btn-live-dot" /> SPECIAL DRAW
-                  </span>
-                  <strong className="btn-main-date">20/21/2069</strong>
-                  <span className="btn-action-hint">ক্লিক করে ক্যালকুলেশন পেপার দেখুন ➔</span>
-                </div>
-              </button>
-            </div>
-          </div>
-
-          {/* 2nd Image Document Card: 1 Year 24 Set Calculation Paper 2026 */}
-          <div className="three-set-card-wrap vip-agency-paper-wrap" ref={paperRef}>
-            <figure
-              className="three-set-document-card"
-              onClick={() => setModalOpen(true)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') setModalOpen(true);
-              }}
-              title="সম্পূর্ণ বড় করে দেখতে ক্লিক করুন"
-            >
-              <span className="document-badge">
-                👑 1 Year 24 Set Calculation Paper 2026 • VIP Agency Code ({activeDate})
-              </span>
-              <div className="three-set-img-container">
-                <img
-                  src="/assets/site/vip-agency-code-calculation-paper.jpg"
-                  alt="Thailand Lottery VIP Agency Code 1 Year 24 Set Calculation Paper 2026"
-                  className="three-set-img"
-                  loading="eager"
-                />
-                <span className="three-set-zoom-hint">🔍 ক্লিক করে ফুল স্ক্রিন দেখুন</span>
-              </div>
-            </figure>
-
-            {/* Quick Actions Bar */}
-            <div className="form-actions-row" style={{ marginTop: '1.25rem', justifyContent: 'center' }}>
-              <button
-                type="button"
-                className="button primary"
-                onClick={() => setModalOpen(true)}
-              >
-                🔍 বড় করে দেখুন
-              </button>
-              <Link className="button primary cta-pulse-btn" to="/form">
-                অনলাইন ফর্ম পূরণ করুন ✍️
-              </Link>
-              <a
-                className="button secondary"
-                href="/assets/site/vip-agency-code-calculation-paper.jpg"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                ফুল ভিউ ↗
-              </a>
-            </div>
-          </div>
-
-          {/* Action Call to Action */}
-          <div className="three-set-actions-panel" style={{ marginTop: '2.5rem' }}>
-            <div className="three-set-actions-inner">
-              <h3>ভিআইপি মেম্বারশিপ ফর্ম নিয়ে সরাসরি যুক্ত হতে চান?</h3>
-              <p>
-                সীমিত কোটায় এখনই আপনার ফর্ম পূরণ করুন অথবা হোমপেজের অফিশিয়াল তথ্যসমূহ দেখুন:
-              </p>
-              <div className="three-set-cta-buttons">
-                <Link to="/form" className="button primary pulse-glow">
-                  <span>অনলাইন ফর্ম পূরণ করুন →</span>
-                </Link>
-                <Link to="/" className="button secondary">
-                  <span>হোমপেজে ফিরে যান 🏠</span>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      {/* Lightbox Modal */}
-      {modalOpen && (
-        <div
-          className="modal-backdrop"
-          onClick={() => setModalOpen(false)}
-          role="dialog"
-          aria-modal="true"
-          aria-label="1 Year 24 Set Calculation Paper 2026 Lightbox"
-        >
-          <div
-            className="modal-content three-set-modal-content"
-            onClick={(e) => e.stopPropagation()}
-            style={{ maxWidth: '780px' }}
-          >
-            <div className="modal-header">
-              <h3>1 Year 24 Set Calculation Paper 2026 • VIP Agency Code</h3>
-              <button
-                type="button"
-                className="modal-close-btn"
-                onClick={() => setModalOpen(false)}
-                aria-label="Close"
-              >
-                ✕
-              </button>
-            </div>
-            <div className="modal-body three-set-modal-body" style={{ textAlign: 'center', background: '#071739', padding: '1rem' }}>
-              <img
-                src="/assets/site/vip-agency-code-calculation-paper.jpg"
-                alt="Thailand Lottery VIP Agency Code 1 Year 24 Set Calculation Paper 2026 Full View"
-                className="three-set-modal-img"
-                style={{ maxHeight: '85vh', width: 'auto', maxWidth: '100%', objectFit: 'contain', borderRadius: '8px' }}
-              />
-            </div>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', padding: '1rem', background: '#05112B' }}>
-              <Link to="/form" className="button primary" onClick={() => setModalOpen(false)}>
-                মেম্বারশিপ ফর্ম পূরণ করুন ✍️
-              </Link>
-              <button
-                type="button"
-                className="button secondary"
-                onClick={() => setModalOpen(false)}
-              >
-                বন্ধ করুন
-              </button>
-            </div>
-          </div>
-        </div>
+      {/* 1. Cinematic Logo Motion Graphic Transition */}
+      {showLogoTransition && (
+        <LogoPageTransition
+          badgeText="👑 VIP AGENCY CODE 2026"
+          title="THAILAND OFFICIAL LOTTERY"
+          subtitle="GOVERNMENT LOTTERY OFFICE • VIP ACCESS"
+          statusText="DECRYPTING VIP 5-DIGIT AGENCY CODE..."
+          duration={1700}
+          onComplete={handleLogoComplete}
+        />
       )}
 
-      <Footer page="vip-agency-code" />
+      {/* 2. Fullscreen Jackpot 5-Digit Chamber */}
+      <main
+        className={`jackpot-fullscreen-chamber ${isJackpotWon ? 'jackpot-won' : ''}`}
+        aria-label="VIP Agency Code 5 Digit Jackpot Screen"
+      >
+        {/* Canvas for High-End Gold Confetti */}
+        <canvas ref={canvasRef} className="jackpot-confetti-canvas" />
+
+        {/* Ambient Animated Gold Glow Mesh & Radial Corona Rays */}
+        <div className="jackpot-ambient-layer" aria-hidden="true">
+          <div className="jackpot-radial-burst" />
+          <div className="jackpot-corona-rays">
+            {Array.from({ length: 24 }).map((_, i) => (
+              <span
+                key={i}
+                className="jackpot-ray"
+                style={{ transform: `rotate(${i * 15}deg)` }}
+              />
+            ))}
+          </div>
+          <div className="jackpot-shimmer-aurora" />
+          <div className="jackpot-floating-sparkles">
+            {Array.from({ length: 18 }).map((_, i) => (
+              <span key={i} className={`sparkle-dot sparkle-${(i % 5) + 1}`} />
+            ))}
+          </div>
+        </div>
+
+        {/* Top Minimal Navigation Bar */}
+        <header className="jackpot-top-controls">
+          <button
+            type="button"
+            className="jackpot-ctrl-btn jackpot-audio-btn"
+            onClick={toggleMute}
+            aria-label={isMuted ? 'Unmute Sound' : 'Mute Sound'}
+            title={isMuted ? 'সাউন্ড চালু করুন' : 'সাউন্ড বন্ধ করুন'}
+          >
+            <span>{isMuted ? '🔇' : '🔊'}</span>
+          </button>
+
+          <div className="jackpot-top-badge">
+            <span className="live-pulse-dot" />
+            <span>GLO VIP AGENCY JACKPOT CODE</span>
+          </div>
+
+          <button
+            type="button"
+            className="jackpot-ctrl-btn jackpot-close-btn"
+            onClick={() => navigate('/')}
+            aria-label="Close and return to homepage"
+            title="হোমপেজে ফিরে যান (Esc)"
+          >
+            <span>✕</span>
+          </button>
+        </header>
+
+        {/* Center Stage: Pure 5-Digit Jackpot Reveal */}
+        <div className="jackpot-center-stage">
+          {/* Header Crown Eyebrow */}
+          <div className="jackpot-eyebrow-wrap">
+            <div className="jackpot-crown-pill">
+              <span className="crown-emoji">👑</span>
+              <span className="crown-text">VIP AGENCY CODE</span>
+            </div>
+            <h1 className="jackpot-stage-title">
+              {isJackpotWon ? '★ VIP JACKPOT REVEALED ★' : 'DECRYPTING VIP CODE...'}
+            </h1>
+          </div>
+
+          {/* THE 5 DIGITS CONTAINER */}
+          <div
+            className={`jackpot-digits-row ${isJackpotWon ? 'is-jackpot-revealed' : ''}`}
+            onClick={handleCopyCode}
+            role="button"
+            tabIndex={0}
+            title="ক্লিক করে কোড কপি করুন (16816)"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') handleCopyCode();
+            }}
+          >
+            {displayedDigits.map((digit, idx) => (
+              <div
+                key={idx}
+                className={`jackpot-digit-card ${lockedStates[idx] ? 'is-locked' : 'is-spinning'}`}
+              >
+                {/* Metallic Card Border Accents */}
+                <div className="card-gold-bezel" aria-hidden="true" />
+                <div className="card-glass-specular" aria-hidden="true" />
+                <div className="card-radial-glow" aria-hidden="true" />
+
+                {/* The Digit */}
+                <span className="jackpot-digit-val" data-digit={digit}>
+                  {digit}
+                </span>
+
+                {/* Shimmer light sweep */}
+                <div className="card-shimmer-sweep" aria-hidden="true" />
+              </div>
+            ))}
+          </div>
+
+          {/* Status & Copy Action */}
+          <div className="jackpot-feedback-wrap">
+            {copied ? (
+              <div className="jackpot-copied-pill">
+                <span className="copied-icon">✓</span>
+                <span>কোড কপি হয়েছে: <strong>16816</strong></span>
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="jackpot-action-copy-btn"
+                onClick={handleCopyCode}
+              >
+                <span className="copy-icon">📋</span>
+                <span>কোড কপি করুন (16816)</span>
+              </button>
+            )}
+          </div>
+
+          {/* Minimal Bottom Actions */}
+          <div className="jackpot-bottom-links">
+            <button
+              type="button"
+              className="jackpot-subtle-link"
+              onClick={startJackpotSpin}
+            >
+              <span>আবার চালান ↺</span>
+            </button>
+            <span className="link-divider">•</span>
+            <Link to="/form" className="jackpot-subtle-link">
+              <span>মেম্বারশিপ ফর্ম ✍️</span>
+            </Link>
+            <span className="link-divider">•</span>
+            <Link to="/" className="jackpot-subtle-link">
+              <span>হোমপেজ 🏠</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* Film Texture & Edge Vignette */}
+        <div className="jackpot-vignette-overlay" aria-hidden="true" />
+      </main>
     </>
   );
 }
