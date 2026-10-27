@@ -28,8 +28,7 @@ export default function HomePage() {
         <VipOfferTimer />
         <FormShowcase />
         <PaymentMethods />
-        <CustomerReview videoRef={reviewVideoRef} />
-        <PreviousWinners />
+        <GamePanelCta />
         <section className="section three-set-home-strip reveal-on-scroll" id="three-set-game-section">
           <div className="three-set-home-card">
             <div className="three-set-glow-ring" aria-hidden="true" />
@@ -46,7 +45,8 @@ export default function HomePage() {
             </Link>
           </div>
         </section>
-        <GamePanelCta />
+        <PreviousWinners />
+        <CustomerReview videoRef={reviewVideoRef} />
       </main>
       <Footer page="home" />
     </>
