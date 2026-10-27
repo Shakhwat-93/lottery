@@ -10,7 +10,6 @@ import FormShowcase from '../components/FormShowcase';
 import PaymentMethods from '../components/PaymentMethods';
 import CustomerReview from '../components/CustomerReview';
 import PreviousWinners from '../components/PreviousWinners';
-import SurePaperSlider from '../components/SurePaperSlider';
 import GamePanelCta from '../components/GamePanelCta';
 import { useMediaCoordinator } from '../hooks/useMediaCoordinator';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -47,7 +46,6 @@ export default function HomePage() {
             </Link>
           </div>
         </section>
-        <SurePaperSlider />
         <GamePanelCta />
       </main>
       <Footer page="home" />
