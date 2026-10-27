@@ -15538,67 +15538,124 @@ body.jackpot-page-active {
 }
 
 
-/* 3 Set Game Fullscreen Chamber Tweaks — Center-Aligned Date Only */
+/* 3 Set Game Fullscreen Chamber — Strictly Vertical Stacked, Center-Aligned Date Only */
 .three-set-dates-stage {
-  max-width: 680px;
-}
-
-.three-set-glow-row {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(14px, 2.5vh, 22px);
-  width: 100%;
-  max-width: 540px;
-  margin: 24px auto 0 auto;
-}
-
-.three-set-glow-row .review-super-glow-btn {
-  width: 100%;
-  max-width: 520px;
-  min-height: 96px;
-  padding: 1.25rem 2rem;
-  border-radius: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.three-set-glow-row .btn-content-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  max-width: 600px;
   width: 100%;
 }
 
-.three-set-glow-row .btn-main-date {
-  font-family: var(--font-cinzel), 'Cinzel', 'Playfair Display', system-ui, sans-serif;
-  font-size: clamp(2.2rem, 5.5vw, 3.1rem);
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-align: center;
-  display: block;
-  width: 100%;
-  line-height: 1;
+.three-set-vertical-dates-container {
+  display: flex !important;
+  flex-direction: column !important; /* Forces 2nd date to always be underneath (never slider) */
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(14px, 2.5vh, 20px) !important;
+  width: 100% !important;
+  max-width: 500px !important;
+  margin: 20px auto 0 auto !important;
+  padding: 0 12px !important;
+  box-sizing: border-box !important;
 }
 
-.three-set-glow-row .btn-date-1 .btn-main-date {
-  color: #FFFFFF;
+.three-set-single-date-card {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 480px !important;
+  min-height: 92px !important;
+  padding: 1.15rem 1.8rem !important;
+  border-radius: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  border: none !important;
+  background: transparent !important;
+  flex: none !important;
+  margin: 0 !important;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease !important;
+}
+
+.three-set-single-date-card:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+}
+
+/* Card 1 (2/12/2069) - Royal Blue & Vivid Gold Neon Glow */
+.three-set-single-date-card.date-card-gold {
+  background: linear-gradient(135deg, #071739 0%, #0F2D6B 45%, #071739 100%) !important;
+  border: 2px solid #F59E0B !important;
+  box-shadow:
+    0 0 25px rgba(245, 158, 11, 0.45),
+    0 0 50px rgba(234, 179, 8, 0.2),
+    0 8px 32px rgba(7, 23, 57, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  animation: pulseGoldGlow 3s ease-in-out infinite alternate !important;
+}
+
+/* Card 2 (20/21/2069) - Deep Violet & Radiant Rose Neon Glow */
+.three-set-single-date-card.date-card-pink {
+  background: linear-gradient(135deg, #1C0F38 0%, #3B125C 45%, #1C0F38 100%) !important;
+  border: 2px solid #EC4899 !important;
+  box-shadow:
+    0 0 25px rgba(236, 72, 153, 0.45),
+    0 0 50px rgba(217, 70, 239, 0.2),
+    0 8px 32px rgba(28, 15, 56, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  animation: pulsePinkGlow 3s ease-in-out 1.5s infinite alternate !important;
+}
+
+.three-set-single-date-card .shimmer-sweep {
+  position: absolute;
+  top: 0;
+  left: -140%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 20%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0.04) 80%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  animation: laserShimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.three-set-single-date-card.date-card-pink .shimmer-sweep {
+  animation-delay: 1.5s;
+}
+
+.three-set-date-text {
+  font-family: var(--font-cinzel), 'Cinzel', 'Playfair Display', system-ui, sans-serif !important;
+  font-size: clamp(2rem, 5.5vw, 2.9rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.08em !important;
+  text-align: center !important;
+  display: block !important;
+  width: 100% !important;
+  line-height: 1 !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.date-card-gold .three-set-date-text {
+  color: #FFFFFF !important;
   text-shadow:
-    0 0 15px rgba(255, 215, 0, 0.9),
-    0 0 35px rgba(245, 158, 11, 0.7),
-    0 0 60px rgba(234, 179, 8, 0.4),
-    0 4px 14px rgba(0, 0, 0, 0.85);
+    0 0 16px rgba(255, 215, 0, 0.95),
+    0 0 35px rgba(245, 158, 11, 0.75),
+    0 0 60px rgba(234, 179, 8, 0.45),
+    0 4px 14px rgba(0, 0, 0, 0.9) !important;
 }
 
-.three-set-glow-row .btn-date-2 .btn-main-date {
-  color: #FFFFFF;
+.date-card-pink .three-set-date-text {
+  color: #FFFFFF !important;
   text-shadow:
-    0 0 15px rgba(244, 114, 182, 0.9),
-    0 0 35px rgba(236, 72, 153, 0.7),
-    0 0 60px rgba(217, 70, 239, 0.4),
-    0 4px 14px rgba(0, 0, 0, 0.85);
+    0 0 16px rgba(244, 114, 182, 0.95),
+    0 0 35px rgba(236, 72, 153, 0.75),
+    0 0 60px rgba(217, 70, 239, 0.45),
+    0 4px 14px rgba(0, 0, 0, 0.9) !important;
 }

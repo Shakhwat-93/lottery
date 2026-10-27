@@ -180,32 +180,28 @@ export default function ThreeSetGamePage() {
             </h1>
           </div>
 
-          {/* THE 2 GLOWING DATE BUTTONS — CENTER ALIGNED & JUST DATE ONLY */}
-          <div className="review-glow-buttons-row three-set-glow-row" aria-label="3 Set Game VIP Draw Dates">
-            {/* Date Button 1: 2/12/2069 */}
+          {/* THE 2 GLOWING DATE BUTTONS — STRICTLY VERTICAL STACKED (ONE ON TOP, ONE UNDERNEATH), CENTER ALIGNED */}
+          <div className="three-set-vertical-dates-container" aria-label="3 Set Game VIP Draw Dates">
+            {/* Date Button 1: 2/12/2069 (Top) */}
             <button
               type="button"
-              className={`review-super-glow-btn btn-date-1 ${activeDate === '2/12/2069' ? 'is-active' : ''}`}
+              className={`three-set-single-date-card date-card-gold ${activeDate === '2/12/2069' ? 'is-active' : ''}`}
               onClick={() => handleDateClick('2/12/2069', 1)}
               aria-label="VIP Draw Date 2/12/2069"
             >
               <span className="shimmer-sweep" aria-hidden="true" />
-              <div className="btn-content-inner">
-                <strong className="btn-main-date">2/12/2069</strong>
-              </div>
+              <strong className="three-set-date-text">2/12/2069</strong>
             </button>
 
-            {/* Date Button 2: 20/21/2069 */}
+            {/* Date Button 2: 20/21/2069 (Underneath) */}
             <button
               type="button"
-              className={`review-super-glow-btn btn-date-2 ${activeDate === '20/21/2069' ? 'is-active' : ''}`}
+              className={`three-set-single-date-card date-card-pink ${activeDate === '20/21/2069' ? 'is-active' : ''}`}
               onClick={() => handleDateClick('20/21/2069', 2)}
               aria-label="Special Draw Date 20/21/2069"
             >
               <span className="shimmer-sweep" aria-hidden="true" />
-              <div className="btn-content-inner">
-                <strong className="btn-main-date">20/21/2069</strong>
-              </div>
+              <strong className="three-set-date-text">20/21/2069</strong>
             </button>
           </div>
 
