@@ -40,19 +40,19 @@ export default function GamePaperPage() {
       {/* 1. Cinematic Logo Motion Graphic Transition */}
       {showLogoTransition && (
         <LogoPageTransition
-          badgeText="👑 OFFICIAL VIP PAPER 2026"
+          badgeText="👑 100% CONFIRM • NO GAME MISS"
           title="THAILAND OFFICIAL LOTTERY"
-          subtitle={`OFFICIAL DRAW PAPER • ${dateParam}`}
-          statusText="DECRYPTING OFFICIAL GLO PAPER..."
+          subtitle={`VERIFIED GLO DRAW PAPER • ${dateParam}`}
+          statusText="DECRYPTING VERIFIED OFFICIAL PAPER..."
           duration={1600}
           onComplete={handleLogoComplete}
         />
       )}
 
-      {/* 2. Pure Fullscreen Paper View — Just the paper, nothing else */}
+      {/* 2. Fullscreen Royal Sapphire Paper Chamber */}
       <main
         className="game-paper-fullscreen-view"
-        aria-label="Official Thailand Lottery Paper Fullscreen"
+        aria-label="Official Thailand Lottery Verified Paper Fullscreen"
       >
         {/* Ambient Background Gold Glow & Corona Rays */}
         <div className="jackpot-ambient-layer" aria-hidden="true">
@@ -73,11 +73,23 @@ export default function GamePaperPage() {
           </div>
         </div>
 
-        {/* Top Minimal Navigation Bar */}
-        <header className="jackpot-top-controls">
-          <div className="jackpot-top-badge">
-            <span className="live-pulse-dot" />
-            <span>GLO OFFICIAL DRAW PAPER • {dateParam}</span>
+        {/* Top Official Verified Header */}
+        <header className="paper-reveal-top-bar">
+          <div className="paper-brand-verified">
+            <img
+              src="/assets/logo-verified.png"
+              alt="GLO Verified Official Seal"
+              className="paper-verified-logo-img"
+            />
+            <div className="paper-brand-text">
+              <div className="paper-brand-title">
+                <span>THAILAND OFFICIAL LOTTERY</span>
+                <span className="paper-badge-check" title="Verified Government Seal">✓</span>
+              </div>
+              <span className="paper-brand-sub">
+                สำนักงานสลากกินแบ่งรัฐบาล • GLO BANGKOK 2026
+              </span>
+            </div>
           </div>
 
           <button
@@ -91,13 +103,40 @@ export default function GamePaperPage() {
           </button>
         </header>
 
-        {/* Center Stage: Just the paper, nothing else */}
+        {/* Center Stage: Trust Chips + The Verified Paper */}
         <div className="game-paper-stage">
-          <img
-            src={paperSrc}
-            alt={`Thailand Lottery Official Paper - Draw Date ${dateParam}`}
-            className="game-paper-fullscreen-img"
-          />
+          {/* 3 High-Impact Trust Chips */}
+          <div className="paper-trust-chips-row" aria-label="Official Trust Guarantee Badges">
+            <span className="paper-trust-pill pill-confirm">
+              <span className="pill-icon">★</span>
+              <strong>100% CONFIRM</strong>
+            </span>
+
+            <span className="paper-trust-pill pill-nomiss">
+              <span className="pill-dot-pulse" />
+              <strong>NO GAME MISS</strong>
+            </span>
+
+            <span className="paper-trust-pill pill-verified">
+              <span className="pill-check-icon">✓</span>
+              <strong>GOVERNMENT VERIFIED</strong>
+            </span>
+          </div>
+
+          {/* The High-Resolution Official Paper */}
+          <div className="paper-img-frame-wrap">
+            <img
+              src={paperSrc}
+              alt={`Thailand Lottery 100% Confirm Official Paper - Draw Date ${dateParam}`}
+              className="game-paper-fullscreen-img"
+            />
+          </div>
+
+          {/* Bottom Trust Guarantee Footnote */}
+          <div className="paper-bottom-guarantee">
+            <span className="guarantee-shield">🛡️</span>
+            <span>১০০% নিশ্চিত উইনিং পেপার • 100% SURE GUARANTEED • OFFICIAL VIP DRAW ({dateParam})</span>
+          </div>
         </div>
 
         {/* Edge Vignette Overlay */}
