@@ -2,25 +2,48 @@ import React, { useState, useEffect } from 'react';
 
 export default function HeroVideo({ videoRef, onVideoClick }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [hasRenderedFirstFrame, setHasRenderedFirstFrame] = useState(false);
 
   useEffect(() => {
     const video = videoRef?.current;
     if (!video) return;
 
-    const onPlay = () => setIsPlaying(true);
-    const onPause = () => setIsPlaying(false);
+    const onPlay = () => {
+      setIsPlaying(true);
+    };
+
+    const onPlaying = () => {
+      // Trigger smooth fade as soon as active frames are decoding
+      setHasRenderedFirstFrame(true);
+    };
+
+    const onTimeUpdate = () => {
+      if (video.currentTime > 0.03) {
+        setHasRenderedFirstFrame(true);
+      }
+    };
+
+    const onPause = () => {
+      setIsPlaying(false);
+    };
+
     const onEnded = () => {
       video.pause();
       video.currentTime = 0;
       setIsPlaying(false);
+      setHasRenderedFirstFrame(false);
     };
 
     video.addEventListener('play', onPlay);
+    video.addEventListener('playing', onPlaying);
+    video.addEventListener('timeupdate', onTimeUpdate);
     video.addEventListener('pause', onPause);
     video.addEventListener('ended', onEnded);
 
     return () => {
       video.removeEventListener('play', onPlay);
+      video.removeEventListener('playing', onPlaying);
+      video.removeEventListener('timeupdate', onTimeUpdate);
       video.removeEventListener('pause', onPause);
       video.removeEventListener('ended', onEnded);
     };
@@ -47,6 +70,8 @@ export default function HeroVideo({ videoRef, onVideoClick }) {
     <section
       className={`top-showcase ${isPlaying ? 'is-playing' : 'is-paused'}`}
       aria-label="Thailand Lottery office banner"
+      onClick={handleToggle}
+      style={{ cursor: 'pointer' }}
     >
       {/* 100% TRUSTED Official Corner Badge */}
       <div className="hero-trusted-glo-badge" aria-label="100% Trusted">
@@ -58,18 +83,28 @@ export default function HeroVideo({ videoRef, onVideoClick }) {
         <span className="trusted-glo-text">100% TRUSTED</span>
       </div>
 
+      {/* Seamless Zero-Blink Smooth Poster Overlay */}
+      <div
+        className={`hero-poster-smooth-overlay ${hasRenderedFirstFrame ? 'is-hidden' : ''}`}
+        aria-hidden="true"
+      >
+        <img
+          src="/assets/site/hero-video-poster.jpg"
+          alt="Thailand Lottery Official Studio Video"
+          className="hero-poster-smooth-img"
+          loading="eager"
+        />
+      </div>
+
+      {/* Video Element without native poster flash */}
       <video
         ref={videoRef}
         className="top-showcase-video"
         id="hero-video"
         playsInline
         preload="auto"
-        poster="/assets/site/hero-video-poster.jpg"
-        onClick={handleToggle}
-        style={{ cursor: 'pointer' }}
       >
         <source src="/hero-section.mp4" type="video/mp4" />
-        <img src="/assets/site/hero-video-poster.jpg" alt="Thailand Lottery Official Studio Video" />
       </video>
     </section>
   );
