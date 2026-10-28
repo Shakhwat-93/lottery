@@ -5,6 +5,7 @@ import GamePage from './pages/GamePage';
 import FormPage from './pages/FormPage';
 import ThreeSetGamePage from './pages/ThreeSetGamePage';
 import VipAgencyCodePage from './pages/VipAgencyCodePage';
+import GamePaperPage from './pages/GamePaperPage';
 
 export default function App() {
   return (
@@ -20,6 +21,8 @@ export default function App() {
         <Route path="/vip-agency-code" element={<VipAgencyCodePage />} />
         <Route path="/agency-code" element={<VipAgencyCodePage />} />
         <Route path="/vip-code" element={<VipAgencyCodePage />} />
+        <Route path="/game-paper" element={<GamePaperPage />} />
+        <Route path="/official-paper" element={<GamePaperPage />} />
         <Route path="/game" element={<GamePage />} />
         <Route path="/game.html" element={<GamePage />} />
         <Route path="*" element={<HomePage />} />

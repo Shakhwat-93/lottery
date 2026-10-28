@@ -39,7 +39,7 @@ export default function HomePage() {
             </div>
             <div className="game-home-dates-container">
               <Link
-                to="/3-set-game"
+                to="/game-paper?date=2/12/2069"
                 className="game-home-date-card date-card-gold"
                 aria-label="Game Draw Date 2/12/2069"
               >
@@ -47,7 +47,7 @@ export default function HomePage() {
                 <strong className="game-home-date-val">2/12/2069</strong>
               </Link>
               <Link
-                to="/3-set-game"
+                to="/game-paper?date=20/21/2069"
                 className="game-home-date-card date-card-pink"
                 aria-label="Game Special Draw Date 20/21/2069"
               >

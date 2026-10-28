@@ -255,7 +255,7 @@ export default function ThreeSetGamePage() {
               style={{ textAlign: 'center', background: '#071739', padding: '1rem' }}
             >
               <img
-                src="/assets/site/3-set-game.jpg"
+                src={activeDate === '20/21/2069' ? '/assets/site/3-set-game.jpg' : '/assets/site/game-paper-2-12-2069.jpg'}
                 alt={`Thailand Official 3 Set Game - Draw Date ${activeDate}`}
                 className="three-set-modal-img"
                 style={{ maxHeight: '80vh', width: 'auto', maxWidth: '100%', objectFit: 'contain', borderRadius: '8px' }}
