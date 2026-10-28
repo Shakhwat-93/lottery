@@ -29,6 +29,34 @@ export default function HomePage() {
         <FormShowcase />
         <PaymentMethods />
         <GamePanelCta />
+        {/* Game Box with 2 Dates directly above 3 Set Game section */}
+        <section className="section game-dates-home-strip reveal-on-scroll" id="game-strip-section">
+          <div className="three-set-home-card game-dates-home-card">
+            <div className="three-set-glow-ring" aria-hidden="true" />
+            <div className="three-set-home-text" style={{ textAlign: 'center' }}>
+              <span className="three-set-badge-tag">✦ VIP OFFICIAL ✦</span>
+              <h3 className="game-card-main-title">Game</h3>
+            </div>
+            <div className="game-home-dates-container">
+              <Link
+                to="/3-set-game"
+                className="game-home-date-card date-card-gold"
+                aria-label="Game Draw Date 2/12/2069"
+              >
+                <span className="shimmer-sweep" aria-hidden="true" />
+                <strong className="game-home-date-val">2/12/2069</strong>
+              </Link>
+              <Link
+                to="/3-set-game"
+                className="game-home-date-card date-card-pink"
+                aria-label="Game Special Draw Date 20/21/2069"
+              >
+                <span className="shimmer-sweep" aria-hidden="true" />
+                <strong className="game-home-date-val">20/21/2069</strong>
+              </Link>
+            </div>
+          </div>
+        </section>
         <section className="section three-set-home-strip reveal-on-scroll" id="three-set-game-section">
           <div className="three-set-home-card">
             <div className="three-set-glow-ring" aria-hidden="true" />
