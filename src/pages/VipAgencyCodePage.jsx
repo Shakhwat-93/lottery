@@ -321,7 +321,7 @@ export default function VipAgencyCodePage() {
       {/* 2. Fullscreen Jackpot 5-Digit Chamber */}
       <main
         className={`jackpot-fullscreen-chamber ${isJackpotWon ? 'jackpot-won' : ''}`}
-        aria-label="VIP Agency Code 5 Digit Jackpot Screen"
+        aria-label="VIP Agency Code 5 Digit Reveal Screen"
       >
         {/* Canvas for High-End Gold Confetti */}
         <canvas ref={canvasRef} className="jackpot-confetti-canvas" />
@@ -360,7 +360,7 @@ export default function VipAgencyCodePage() {
 
           <div className="jackpot-top-badge">
             <span className="live-pulse-dot" />
-            <span>GLO VIP AGENCY JACKPOT CODE</span>
+            <span>GLO VIP AGENCY CODE</span>
           </div>
 
           <button
@@ -383,7 +383,7 @@ export default function VipAgencyCodePage() {
               <span className="crown-text">VIP AGENCY CODE</span>
             </div>
             <h1 className="jackpot-stage-title">
-              {isJackpotWon ? '★ VIP JACKPOT REVEALED ★' : 'DECRYPTING VIP CODE...'}
+              {isJackpotWon ? '★ VIP AGENCY CODE REVEALED ★' : 'DECRYPTING VIP AGENCY CODE...'}
             </h1>
           </div>
 
