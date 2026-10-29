@@ -11,9 +11,9 @@ export default function GamePaperPage() {
   const isLockedDate = dateParam === '20/21/2069';
   const whatsappUrl = `https://wa.me/8801309802224?text=${encodeURIComponent('আসসালামু আলাইকুম, আমি থাইল্যান্ড লটারি ২০/২১/২০৬৯ গেম আনলক করতে এবং মেম্বারশিপ নিতে যোগাযোগ করছি।')}`;
 
-  // Fullscreen body lock & Escape key listener
+  // Escape key listener & Body styling
   useEffect(() => {
-    document.body.classList.add('jackpot-page-active');
+    document.body.classList.add('game-paper-body');
     window.scrollTo(0, 0);
 
     const handleKeyDown = (e) => {
@@ -24,7 +24,7 @@ export default function GamePaperPage() {
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      document.body.classList.remove('jackpot-page-active');
+      document.body.classList.remove('game-paper-body');
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [navigate]);
@@ -52,31 +52,12 @@ export default function GamePaperPage() {
         />
       )}
 
-      {/* 2. Fullscreen Royal Sapphire Paper Chamber */}
+      {/* 2. Fullscreen Official Paper View */}
       <main
         className="game-paper-fullscreen-view"
         aria-label="Official Thailand Lottery Verified Paper Fullscreen"
       >
-        {/* Ambient Background Gold Glow & Corona Rays */}
-        <div className="jackpot-ambient-layer" aria-hidden="true">
-          <div className="jackpot-radial-burst" />
-          <div className="jackpot-corona-rays">
-            {Array.from({ length: 24 }).map((_, i) => (
-              <span
-                key={i}
-                className="jackpot-ray"
-                style={{ transform: `rotate(${i * 15}deg)` }}
-              />
-            ))}
-          </div>
-          <div className="jackpot-floating-sparkles">
-            {Array.from({ length: 18 }).map((_, i) => (
-              <span key={i} className={`sparkle-dot sparkle-${(i % 5) + 1}`} />
-            ))}
-          </div>
-        </div>
-
-        {/* Top Official Verified Header */}
+        {/* Sticky Top Official Verified Header */}
         <header className="paper-reveal-top-bar">
           <div className="paper-brand-verified">
             <img
@@ -177,9 +158,6 @@ export default function GamePaperPage() {
             </div>
           )}
         </div>
-
-        {/* Edge Vignette Overlay */}
-        <div className="jackpot-vignette-overlay" aria-hidden="true" />
       </main>
     </>
   );
