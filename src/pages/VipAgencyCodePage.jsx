@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import LogoPageTransition from '../components/LogoPageTransition';
 
 // Web Audio API Synthesizer (zero network requests, instantaneous tactile jackpot audio)
@@ -111,6 +111,8 @@ const audioCtrl = new JackpotAudioController();
 
 export default function VipAgencyCodePage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const dateParam = searchParams.get('date');
   const [showLogoTransition, setShowLogoTransition] = useState(true);
   const [targetDigits] = useState(['1', '6', '8', '1', '6']);
   const [displayedDigits, setDisplayedDigits] = useState(['0', '0', '0', '0', '0']);
@@ -311,7 +313,7 @@ export default function VipAgencyCodePage() {
         <LogoPageTransition
           badgeText="👑 VIP AGENCY CODE 2026"
           title="THAILAND OFFICIAL LOTTERY"
-          subtitle="GOVERNMENT LOTTERY OFFICE • VIP ACCESS"
+          subtitle={dateParam ? `VIP AGENCY ACCESS • ${dateParam}` : 'GOVERNMENT LOTTERY OFFICE • VIP ACCESS'}
           statusText="DECRYPTING VIP 5-DIGIT AGENCY CODE..."
           duration={1700}
           onComplete={handleLogoComplete}
@@ -360,7 +362,7 @@ export default function VipAgencyCodePage() {
 
           <div className="jackpot-top-badge">
             <span className="live-pulse-dot" />
-            <span>GLO VIP AGENCY CODE</span>
+            <span>GLO VIP AGENCY CODE{dateParam ? ` • ${dateParam}` : ''}</span>
           </div>
 
           <button

@@ -9652,6 +9652,61 @@ h3 {
   box-shadow: 0 12px 30px rgba(196, 21, 28, 0.75);
 }
 
+/* Vertically Stacked VIP Agency Code Date Buttons */
+.game-panel-buttons-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.95rem;
+  width: 100%;
+  max-width: 380px;
+  margin: 0.4rem auto 0;
+}
+
+.game-panel .vip-agency-date-btn {
+  width: 100%;
+  max-width: 360px;
+  min-height: 3.15rem;
+  padding: 0.7rem 1.8rem;
+  border-radius: 9999px;
+  border: 2px solid #FFD700;
+  background: linear-gradient(180deg, #D4141E 0%, #8A0B12 100%);
+  color: #ffffff;
+  font-family: var(--font-royal), system-ui, -apple-system, sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  box-shadow: 0 0 24px rgba(220, 20, 30, 0.55), 0 8px 20px rgba(138, 11, 18, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease, border-color 220ms ease;
+}
+
+.game-panel .vip-agency-date-btn:hover {
+  transform: translateY(-2px) scale(1.015);
+  background: linear-gradient(180deg, #E61E28 0%, #9E0D15 100%);
+  border-color: #FFF2A8;
+  box-shadow: 0 0 32px rgba(220, 20, 30, 0.8), 0 12px 28px rgba(138, 11, 18, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.game-panel .vip-agency-date-btn .vip-btn-arrow {
+  color: #FFE76A;
+  font-size: 1.15rem;
+  font-weight: 900;
+  display: inline-block;
+  transition: transform 200ms ease;
+}
+
+.game-panel .vip-agency-date-btn:hover .vip-btn-arrow {
+  transform: translate(2px, -2px);
+}
+
 /* ==========================================================================
    16. GAME PAGE (game.html)
    ========================================================================== */
