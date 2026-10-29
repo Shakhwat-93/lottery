@@ -15561,6 +15561,223 @@ body.jackpot-page-active {
   z-index: 10;
 }
 
+/* ==========================================================================
+   VIP AGENCY CODE — MEMBERSHIP LOCKED & TRUSTED STATE (30/02/2069)
+   ========================================================================== */
+
+.chamber-is-membership-locked .jackpot-radial-burst {
+  background: radial-gradient(circle, rgba(220, 20, 30, 0.22) 0%, rgba(212, 175, 55, 0.15) 45%, transparent 70%);
+}
+
+.is-locked-dot {
+  background: #FF3B30 !important;
+  box-shadow: 0 0 10px #FF3B30 !important;
+}
+
+.jackpot-crown-pill.is-locked-pill {
+  background: linear-gradient(90deg, rgba(255, 59, 48, 0.22) 0%, rgba(255, 215, 0, 0.2) 100%);
+  border-color: rgba(255, 100, 100, 0.6);
+  box-shadow: 0 0 20px rgba(255, 59, 48, 0.35);
+}
+
+.jackpot-crown-pill.is-locked-pill .crown-text {
+  color: #FFA59E;
+}
+
+.jackpot-locked-requirement-text {
+  font-family: var(--font-bengali), system-ui, sans-serif;
+  color: #FFDE82;
+  font-size: clamp(0.92rem, 2.5vw, 1.1rem);
+  font-weight: 700;
+  margin: 8px 0 0 0;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Trusted Badges Bar */
+.vip-trusted-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+  margin: 14px auto 10px;
+  max-width: 650px;
+  width: 100%;
+}
+
+.vip-trust-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(7, 20, 52, 0.85);
+  border: 1px solid rgba(255, 215, 0, 0.45);
+  border-radius: 9999px;
+  font-family: var(--font-bengali), system-ui, sans-serif;
+  font-size: clamp(0.75rem, 2vw, 0.84rem);
+  font-weight: 700;
+  color: #FFF2B8;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.vip-trust-badge-pill .vip-trust-icon {
+  font-size: 0.95rem;
+  color: #FFD700;
+}
+
+/* The Locked & Covered Digits Row */
+.jackpot-digits-row.is-membership-locked {
+  border-color: rgba(255, 59, 48, 0.55);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 59, 48, 0.25), inset 0 0 20px rgba(255, 59, 48, 0.12);
+  cursor: default;
+  margin-bottom: 20px;
+}
+
+.jackpot-digits-row.is-membership-locked:hover {
+  transform: none;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 59, 48, 0.35);
+}
+
+.jackpot-digit-card.is-locked-hidden {
+  border-color: rgba(255, 215, 0, 0.5);
+  background: linear-gradient(180deg, rgba(220, 20, 30, 0.2) 0%, rgba(13, 22, 48, 0.96) 50%, #060B1A 100%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), inset 0 2px 2px rgba(255, 255, 255, 0.3), inset 0 -3px 8px rgba(0, 0, 0, 0.85);
+}
+
+.jackpot-digit-lock-icon {
+  font-size: clamp(2rem, 5.5vw, 3.2rem);
+  filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.75));
+  animation: lockIconBreathe 2.6s ease-in-out infinite alternate;
+  user-select: none;
+}
+
+@keyframes lockIconBreathe {
+  0% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.6)); }
+  100% { transform: scale(1.08); filter: drop-shadow(0 0 22px rgba(255, 215, 0, 0.95)) drop-shadow(0 0 8px rgba(255, 59, 48, 0.5)); }
+}
+
+/* Membership Conversion Prompt Card */
+.vip-membership-locked-card {
+  width: 100%;
+  max-width: 520px;
+  margin: 4px auto 0;
+  padding: clamp(18px, 4vw, 26px) clamp(16px, 4vw, 28px);
+  background: linear-gradient(180deg, rgba(16, 28, 65, 0.95) 0%, rgba(8, 15, 36, 0.98) 100%);
+  border: 2px solid #FFD700;
+  border-radius: 24px;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.75), 0 0 35px rgba(255, 215, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: eyebrowEntrance 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.vip-membership-locked-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #FFD700, #FF3B30, #FFD700);
+}
+
+.locked-card-header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.locked-card-pulse-icon {
+  font-size: 1.25rem;
+  color: #FFD700;
+  animation: spinSlow 6s linear infinite;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.locked-card-title {
+  font-family: var(--font-bengali), system-ui, sans-serif;
+  color: #FFD700;
+  font-size: clamp(1.15rem, 3.2vw, 1.42rem);
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 18px rgba(255, 215, 0, 0.4);
+}
+
+.locked-card-desc {
+  font-family: var(--font-bengali), system-ui, sans-serif;
+  color: #E2E8F0;
+  font-size: clamp(0.88rem, 2.2vw, 0.98rem);
+  line-height: 1.6;
+  margin: 0 auto 18px;
+  max-width: 440px;
+  font-weight: 500;
+}
+
+.vip-membership-cta-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  max-width: 360px !important;
+  min-height: 3.35rem !important;
+  padding: 0.75rem 1.8rem !important;
+  border-radius: 9999px !important;
+  background: linear-gradient(180deg, #E61E28 0%, #9E0D15 100%) !important;
+  border: 2.5px solid #FFD700 !important;
+  color: #FFFFFF !important;
+  font-family: var(--font-bengali), system-ui, sans-serif !important;
+  font-size: clamp(1.05rem, 2.8vw, 1.22rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.02em !important;
+  text-decoration: none !important;
+  box-shadow: 0 0 28px rgba(220, 20, 30, 0.7), 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+}
+
+.vip-membership-cta-btn:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  background: linear-gradient(180deg, #FF2B35 0%, #B8101A 100%) !important;
+  border-color: #FFF2A8 !important;
+  box-shadow: 0 0 38px rgba(220, 20, 30, 0.9), 0 12px 30px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+.vip-membership-cta-btn .vip-cta-crown {
+  font-size: 1.25rem;
+}
+
+.vip-membership-cta-btn .vip-cta-arrow {
+  font-size: 1.15rem;
+  color: #FFE66D;
+  transition: transform 200ms ease;
+}
+
+.vip-membership-cta-btn:hover .vip-cta-arrow {
+  transform: translateX(4px);
+}
+
+.locked-card-footnote {
+  margin: 12px auto 0;
+  font-family: var(--font-bengali), system-ui, sans-serif;
+  color: #94A3B8;
+  font-size: clamp(0.72rem, 1.8vw, 0.8rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
 @media (max-width: 480px) {
   .jackpot-top-controls {
     padding: 0 14px;

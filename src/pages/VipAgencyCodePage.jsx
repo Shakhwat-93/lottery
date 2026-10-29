@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import LogoPageTransition from '../components/LogoPageTransition';
 
 // Web Audio API Synthesizer (zero network requests, instantaneous tactile jackpot audio)
@@ -113,6 +113,9 @@ export default function VipAgencyCodePage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const dateParam = searchParams.get('date');
+  const isLockedForMembership = Boolean(
+    dateParam && (dateParam.startsWith('30') || dateParam.includes('30'))
+  );
   const [showLogoTransition, setShowLogoTransition] = useState(true);
   const [targetDigits] = useState(['1', '6', '8', '1', '6']);
   const [displayedDigits, setDisplayedDigits] = useState(['0', '0', '0', '0', '0']);
@@ -212,9 +215,11 @@ export default function VipAgencyCodePage() {
   // When Logo transition finishes, immediately trigger the jackpot sequence
   const handleLogoComplete = () => {
     setShowLogoTransition(false);
-    setTimeout(() => {
-      startJackpotSpin();
-    }, 150);
+    if (!isLockedForMembership) {
+      setTimeout(() => {
+        startJackpotSpin();
+      }, 150);
+    }
   };
 
   // Copy code to clipboard
@@ -311,10 +316,10 @@ export default function VipAgencyCodePage() {
       {/* 1. Cinematic Logo Motion Graphic Transition */}
       {showLogoTransition && (
         <LogoPageTransition
-          badgeText="👑 VIP AGENCY CODE 2026"
+          badgeText={isLockedForMembership ? '🔒 VIP MEMBERSHIP REQUIRED' : '👑 VIP AGENCY CODE 2026'}
           title="THAILAND OFFICIAL LOTTERY"
           subtitle={dateParam ? `VIP AGENCY ACCESS • ${dateParam}` : 'GOVERNMENT LOTTERY OFFICE • VIP ACCESS'}
-          statusText="DECRYPTING VIP 5-DIGIT AGENCY CODE..."
+          statusText={isLockedForMembership ? 'CHECKING VIP MEMBERSHIP CLEARANCE...' : 'DECRYPTING VIP 5-DIGIT AGENCY CODE...'}
           duration={1700}
           onComplete={handleLogoComplete}
         />
@@ -322,7 +327,7 @@ export default function VipAgencyCodePage() {
 
       {/* 2. Fullscreen Jackpot 5-Digit Chamber */}
       <main
-        className={`jackpot-fullscreen-chamber ${isJackpotWon ? 'jackpot-won' : ''}`}
+        className={`jackpot-fullscreen-chamber ${isJackpotWon ? 'jackpot-won' : ''} ${isLockedForMembership ? 'chamber-is-membership-locked' : ''}`}
         aria-label="VIP Agency Code 5 Digit Reveal Screen"
       >
         {/* Canvas for High-End Gold Confetti */}
@@ -361,7 +366,7 @@ export default function VipAgencyCodePage() {
           </button>
 
           <div className="jackpot-top-badge">
-            <span className="live-pulse-dot" />
+            <span className={`live-pulse-dot ${isLockedForMembership ? 'is-locked-dot' : ''}`} />
             <span>GLO VIP AGENCY CODE{dateParam ? ` • ${dateParam}` : ''}</span>
           </div>
 
@@ -380,65 +385,130 @@ export default function VipAgencyCodePage() {
         <div className="jackpot-center-stage">
           {/* Header Crown Eyebrow */}
           <div className="jackpot-eyebrow-wrap">
-            <div className="jackpot-crown-pill">
-              <span className="crown-emoji">👑</span>
-              <span className="crown-text">VIP AGENCY CODE</span>
+            <div className={`jackpot-crown-pill ${isLockedForMembership ? 'is-locked-pill' : ''}`}>
+              <span className="crown-emoji">{isLockedForMembership ? '🔒' : '👑'}</span>
+              <span className="crown-text">
+                {isLockedForMembership ? 'VIP MEMBERSHIP ACCESS' : 'VIP AGENCY CODE'}
+              </span>
             </div>
             <h1 className="jackpot-stage-title">
-              {isJackpotWon ? '★ VIP AGENCY CODE REVEALED ★' : 'DECRYPTING VIP AGENCY CODE...'}
+              {isLockedForMembership
+                ? '★ VIP AGENCY CODE (LOCKED) ★'
+                : (isJackpotWon ? '★ VIP AGENCY CODE REVEALED ★' : 'DECRYPTING VIP AGENCY CODE...')}
             </h1>
+            {isLockedForMembership && (
+              <p className="jackpot-locked-requirement-text">
+                এজেন্সি কোড দেখতে মেম্বারশিপ প্রয়োজন
+              </p>
+            )}
+          </div>
+
+          {/* Trusted Badges Bar */}
+          <div className="vip-trusted-badges-row" aria-label="Official Trust Badges">
+            <div className="vip-trust-badge-pill">
+              <span className="vip-trust-icon">🛡️</span>
+              <span>১০০% নিশ্চিত নো মিস</span>
+            </div>
+            <div className="vip-trust-badge-pill">
+              <span className="vip-trust-icon">✓</span>
+              <span>100% TRUSTED &amp; VERIFIED</span>
+            </div>
+            <div className="vip-trust-badge-pill">
+              <span className="vip-trust-icon">★</span>
+              <span>গভর্নমেন্ট লাইসেন্সপ্রাপ্ত</span>
+            </div>
           </div>
 
           {/* THE 5 DIGITS CONTAINER */}
           <div
-            className={`jackpot-digits-row ${isJackpotWon ? 'is-jackpot-revealed' : ''}`}
-            onClick={handleCopyCode}
-            role="button"
-            tabIndex={0}
-            title="ক্লিক করে কোড কপি করুন (16816)"
-            onKeyDown={(e) => {
+            className={`jackpot-digits-row ${isLockedForMembership ? 'is-membership-locked' : (isJackpotWon ? 'is-jackpot-revealed' : '')}`}
+            role={isLockedForMembership ? 'region' : 'button'}
+            tabIndex={isLockedForMembership ? -1 : 0}
+            title={isLockedForMembership ? 'এই কোডটি মেম্বারদের জন্য লক করা' : 'ক্লিক করে কোড কপি করুন (16816)'}
+            onClick={isLockedForMembership ? undefined : handleCopyCode}
+            onKeyDown={isLockedForMembership ? undefined : (e) => {
               if (e.key === 'Enter' || e.key === ' ') handleCopyCode();
             }}
           >
-            {displayedDigits.map((digit, idx) => (
-              <div
-                key={idx}
-                className={`jackpot-digit-card ${lockedStates[idx] ? 'is-locked' : 'is-spinning'}`}
-              >
-                {/* Metallic Card Border Accents */}
-                <div className="card-gold-bezel" aria-hidden="true" />
-                <div className="card-glass-specular" aria-hidden="true" />
-                <div className="card-radial-glow" aria-hidden="true" />
+            {isLockedForMembership ? (
+              // 5 LOCKED & COVERED CARDS (Code reveal hobe na)
+              Array.from({ length: 5 }).map((_, idx) => (
+                <div key={idx} className="jackpot-digit-card is-locked-hidden">
+                  <div className="card-gold-bezel" aria-hidden="true" />
+                  <div className="card-glass-specular" aria-hidden="true" />
+                  <div className="card-radial-glow" aria-hidden="true" />
 
-                {/* The Digit */}
-                <span className="jackpot-digit-val" data-digit={digit}>
-                  {digit}
-                </span>
+                  {/* Lock symbol instead of number */}
+                  <span className="jackpot-digit-lock-icon" aria-hidden="true">
+                    🔒
+                  </span>
 
-                {/* Shimmer light sweep */}
-                <div className="card-shimmer-sweep" aria-hidden="true" />
-              </div>
-            ))}
-          </div>
-
-          {/* Status & Copy Action */}
-          <div className="jackpot-feedback-wrap">
-            {copied ? (
-              <div className="jackpot-copied-pill">
-                <span className="copied-icon">✓</span>
-                <span>কোড কপি হয়েছে: <strong>16816</strong></span>
-              </div>
+                  <div className="card-shimmer-sweep" aria-hidden="true" />
+                </div>
+              ))
             ) : (
-              <button
-                type="button"
-                className="jackpot-action-copy-btn"
-                onClick={handleCopyCode}
-              >
-                <span className="copy-icon">📋</span>
-                <span>কোড কপি করুন (16816)</span>
-              </button>
+              // REVEALED DIGITS FOR 16/02/2069
+              displayedDigits.map((digit, idx) => (
+                <div
+                  key={idx}
+                  className={`jackpot-digit-card ${lockedStates[idx] ? 'is-locked' : 'is-spinning'}`}
+                >
+                  <div className="card-gold-bezel" aria-hidden="true" />
+                  <div className="card-glass-specular" aria-hidden="true" />
+                  <div className="card-radial-glow" aria-hidden="true" />
+
+                  <span className="jackpot-digit-val" data-digit={digit}>
+                    {digit}
+                  </span>
+
+                  <div className="card-shimmer-sweep" aria-hidden="true" />
+                </div>
+              ))
             )}
           </div>
+
+          {/* Action Box: Membership Card for 30/02/2069, Copy for 16/02/2069 */}
+          {isLockedForMembership ? (
+            <div className="vip-membership-locked-card">
+              <div className="locked-card-header">
+                <span className="locked-card-pulse-icon">✨</span>
+                <h2 className="locked-card-title">এজেন্সি কোড নিতে মেম্বারশিপ নিতে হবে</h2>
+              </div>
+              <p className="locked-card-desc">
+                {dateParam ? `${dateParam} তারিখের ` : ''}১০০% নিশ্চিত ভিআইপি ৫-ডিজিট এজেন্সি কোড ও পেপার আনলক করতে এখনই অফিসিয়াল মেম্বারশিপ ফর্ম পূরণ করুন।
+              </p>
+              <Link
+                to="/form"
+                className="button primary vip-membership-cta-btn"
+                aria-label="এখনই মেম্বারশিপ নিন"
+              >
+                <span className="vip-cta-crown">👑</span>
+                <span>এখনই মেম্বারশিপ নিন</span>
+                <span className="vip-cta-arrow">➔</span>
+              </Link>
+              <p className="locked-card-footnote">
+                🔒 ১০০% বিশ্বস্ত ও শতভাগ নিশ্চিত গ্যারান্টি • তাৎক্ষণিক মেম্বারশিপ অনুমোদন
+              </p>
+            </div>
+          ) : (
+            <div className="jackpot-feedback-wrap">
+              {copied ? (
+                <div className="jackpot-copied-pill">
+                  <span className="copied-icon">✓</span>
+                  <span>কোড কপি হয়েছে: <strong>16816</strong></span>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  className="jackpot-action-copy-btn"
+                  onClick={handleCopyCode}
+                >
+                  <span className="copy-icon">📋</span>
+                  <span>কোড কপি করুন (16816)</span>
+                </button>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Film Texture & Edge Vignette */}
