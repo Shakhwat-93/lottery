@@ -16154,7 +16154,7 @@ body.jackpot-page-active {
 
 
 /* ==========================================================================
-   23. GAME OFFICIAL PAPER FULLSCREEN VIEW (Royal Sapphire Trust Edition)
+   23. GAME OFFICIAL PAPER FULLSCREEN VIEW (Clean White Official Trust Edition)
    ========================================================================== */
 .game-paper-fullscreen-view {
   position: fixed;
@@ -16163,7 +16163,7 @@ body.jackpot-page-active {
   height: 100vh;
   height: 100dvh;
   z-index: 99999;
-  background: radial-gradient(circle at 50% 28%, #1A3E85 0%, #102A60 38%, #091A3E 75%, #051028 100%) !important;
+  background: #FFFFFF !important;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16171,46 +16171,56 @@ body.jackpot-page-active {
   overflow: hidden;
   user-select: none;
   font-family: var(--font-inter), system-ui, sans-serif;
-  color: #FFFFFF;
+  color: #071739 !important;
 }
 
-/* Top Official Bar */
-.paper-reveal-top-bar {
+.game-paper-fullscreen-view .jackpot-corona-rays,
+.game-paper-fullscreen-view .jackpot-vignette-overlay {
+  display: none !important;
+}
+
+.game-paper-fullscreen-view .jackpot-radial-burst {
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(255, 255, 255, 0) 70%) !important;
+}
+
+/* Top Official Bar on White Background */
+.game-paper-fullscreen-view .paper-reveal-top-bar {
   position: relative;
   z-index: 30;
   width: 100%;
-  padding: max(12px, env(safe-area-inset-top, 12px)) clamp(14px, 3vw, 28px) 8px;
+  padding: max(12px, env(safe-area-inset-top, 12px)) clamp(14px, 3vw, 28px) 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  background: linear-gradient(180deg, rgba(7, 20, 52, 0.85) 0%, rgba(7, 20, 52, 0.4) 75%, transparent 100%);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 80%, rgba(255, 255, 255, 0) 100%) !important;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-sizing: border-box;
 }
 
-.paper-brand-verified {
+.game-paper-fullscreen-view .paper-brand-verified {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.paper-verified-logo-img {
+.game-paper-fullscreen-view .paper-verified-logo-img {
   width: clamp(34px, 4.5vw, 44px);
   height: clamp(34px, 4.5vw, 44px);
   object-fit: contain;
-  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.65));
+  filter: drop-shadow(0 2px 6px rgba(212, 175, 55, 0.45));
 }
 
-.paper-brand-text {
+.game-paper-fullscreen-view .paper-brand-text {
   display: flex;
   flex-direction: column;
   gap: 2px;
   text-align: left;
 }
 
-.paper-brand-title {
+.game-paper-fullscreen-view .paper-brand-title {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -16218,10 +16228,10 @@ body.jackpot-page-active {
   font-size: clamp(0.78rem, 2vw, 0.95rem);
   font-weight: 800;
   letter-spacing: 0.06em;
-  color: #FFE699;
+  color: #071739 !important;
 }
 
-.paper-badge-check {
+.game-paper-fullscreen-view .paper-badge-check {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -16232,17 +16242,30 @@ body.jackpot-page-active {
   color: #FFFFFF;
   font-size: 0.65rem;
   font-weight: 900;
-  box-shadow: 0 0 8px #1D9BF0;
+  box-shadow: 0 0 6px rgba(29, 155, 240, 0.6);
 }
 
-.paper-brand-sub {
+.game-paper-fullscreen-view .paper-brand-sub {
   font-size: clamp(0.65rem, 1.6vw, 0.72rem);
-  color: #94A3B8;
-  letter-spacing: 0.04em;
+  color: #64748B !important;
+  letter-spacing: 0.03em;
+}
+
+.game-paper-fullscreen-view .jackpot-close-btn {
+  background: #F1F5F9 !important;
+  border: 1.5px solid #CBD5E1 !important;
+  color: #071739 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+.game-paper-fullscreen-view .jackpot-close-btn:hover {
+  background: #E2E8F0 !important;
+  color: #000000 !important;
+  border-color: #94A3B8 !important;
 }
 
 /* Center Stage */
-.game-paper-stage {
+.game-paper-fullscreen-view .game-paper-stage {
   position: relative;
   z-index: 20;
   display: flex;
@@ -16257,8 +16280,8 @@ body.jackpot-page-active {
   min-height: 0;
 }
 
-/* 3 High Impact Trust Chips */
-.paper-trust-chips-row {
+/* 3 High Impact Trust Chips on White */
+.game-paper-fullscreen-view .paper-trust-chips-row {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16267,7 +16290,7 @@ body.jackpot-page-active {
   z-index: 5;
 }
 
-.paper-trust-pill {
+.game-paper-fullscreen-view .paper-trust-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -16277,57 +16300,56 @@ body.jackpot-page-active {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: transform 0.2s ease;
 }
 
-.paper-trust-pill:hover {
+.game-paper-fullscreen-view .paper-trust-pill:hover {
   transform: translateY(-1px);
 }
 
-.pill-confirm {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.22) 0%, rgba(212, 175, 55, 0.08) 100%);
-  border: 1.5px solid #FFD700;
-  color: #FFE680;
-  box-shadow: 0 0 16px rgba(255, 215, 0, 0.35);
+.game-paper-fullscreen-view .pill-confirm {
+  background: #FFFBEB !important;
+  border: 1.5px solid #F59E0B !important;
+  color: #B45309 !important;
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.15) !important;
 }
 
-.pill-confirm .pill-icon {
-  color: #FFD700;
+.game-paper-fullscreen-view .pill-confirm .pill-icon {
+  color: #D97706 !important;
   font-size: 0.85rem;
 }
 
-.pill-nomiss {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.24) 0%, rgba(5, 150, 105, 0.08) 100%);
-  border: 1.5px solid #10B981;
-  color: #6EE7B7;
-  box-shadow: 0 0 16px rgba(16, 185, 129, 0.35);
+.game-paper-fullscreen-view .pill-nomiss {
+  background: #ECFDF5 !important;
+  border: 1.5px solid #10B981 !important;
+  color: #047857 !important;
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.15) !important;
 }
 
-.pill-dot-pulse {
+.game-paper-fullscreen-view .pill-dot-pulse {
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background-color: #10B981;
-  box-shadow: 0 0 8px #10B981;
+  box-shadow: 0 0 6px #10B981;
   animation: pulseGreen 1.4s infinite;
 }
 
-.pill-verified {
-  background: linear-gradient(135deg, rgba(29, 155, 240, 0.22) 0%, rgba(14, 116, 144, 0.08) 100%);
-  border: 1.5px solid #1D9BF0;
-  color: #7DD3FC;
-  box-shadow: 0 0 16px rgba(29, 155, 240, 0.35);
+.game-paper-fullscreen-view .pill-verified {
+  background: #F0F9FF !important;
+  border: 1.5px solid #0284C7 !important;
+  color: #0369A1 !important;
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.15) !important;
 }
 
-.pill-check-icon {
+.game-paper-fullscreen-view .pill-check-icon {
   font-weight: 900;
   font-size: 0.75rem;
 }
 
-/* Paper Frame Wrap */
-.paper-img-frame-wrap {
+/* Paper Frame Wrap & Image */
+.game-paper-fullscreen-view .paper-img-frame-wrap {
   position: relative;
   display: flex;
   align-items: center;
@@ -16336,7 +16358,7 @@ body.jackpot-page-active {
   max-width: 95vw;
 }
 
-.game-paper-fullscreen-img {
+.game-paper-fullscreen-view .game-paper-fullscreen-img {
   max-height: calc(100dvh - 165px);
   max-width: 94vw;
   width: auto;
@@ -16345,78 +16367,68 @@ body.jackpot-page-active {
   border-radius: 12px;
   border: 2.5px solid #FFD700;
   box-shadow:
-    0 0 32px rgba(255, 215, 0, 0.45),
-    0 16px 50px rgba(0, 0, 0, 0.65),
-    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+    0 0 25px rgba(255, 215, 0, 0.35),
+    0 16px 45px rgba(7, 23, 57, 0.16),
+    0 4px 14px rgba(0, 0, 0, 0.08);
   animation: paperAppear 420ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes paperAppear {
-  0% {
-    opacity: 0;
-    transform: scale(0.92) translateY(12px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-/* Bottom Guarantee Bar */
-.paper-bottom-guarantee {
+/* Bottom Guarantee Bar on White */
+.game-paper-fullscreen-view .paper-bottom-guarantee {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 5px 16px;
-  background: rgba(7, 20, 52, 0.75);
-  border: 1px solid rgba(255, 215, 0, 0.35);
+  padding: 6px 18px;
+  background: #FFFFFF !important;
+  border: 1.5px solid rgba(212, 175, 55, 0.5) !important;
   border-radius: 9999px;
   font-family: var(--font-bengali), system-ui, sans-serif;
   font-size: clamp(0.7rem, 1.8vw, 0.82rem);
-  font-weight: 600;
-  color: #FFE699;
+  font-weight: 700;
+  color: #071739 !important;
   letter-spacing: 0.02em;
-  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 18px rgba(7, 23, 57, 0.08) !important;
 }
 
-.guarantee-shield {
-  font-size: 0.9rem;
+.game-paper-fullscreen-view .guarantee-shield {
+  font-size: 0.95rem;
+  color: #B45309;
 }
 
 @media (max-width: 600px) {
-  .paper-reveal-top-bar {
-    padding: 8px 12px 4px;
+  .game-paper-fullscreen-view .paper-reveal-top-bar {
+    padding: 8px 12px 6px;
   }
 
-  .paper-brand-sub {
+  .game-paper-fullscreen-view .paper-brand-sub {
     display: none;
   }
 
-  .paper-trust-chips-row {
+  .game-paper-fullscreen-view .paper-trust-chips-row {
     gap: 6px;
   }
 
-  .paper-trust-pill {
+  .game-paper-fullscreen-view .paper-trust-pill {
     padding: 4px 10px;
     font-size: 0.68rem;
   }
 
-  .game-paper-stage {
+  .game-paper-fullscreen-view .game-paper-stage {
     padding-bottom: 8px;
     gap: 6px;
   }
 
-  .paper-img-frame-wrap {
+  .game-paper-fullscreen-view .paper-img-frame-wrap {
     max-height: calc(100dvh - 140px);
   }
 
-  .game-paper-fullscreen-img {
+  .game-paper-fullscreen-view .game-paper-fullscreen-img {
     max-height: calc(100dvh - 145px);
     max-width: 96vw;
     border-width: 2px;
   }
 
-  .paper-bottom-guarantee {
+  .game-paper-fullscreen-view .paper-bottom-guarantee {
     font-size: 0.66rem;
     padding: 3px 10px;
   }
