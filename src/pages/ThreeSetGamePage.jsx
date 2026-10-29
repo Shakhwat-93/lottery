@@ -185,23 +185,23 @@ export default function ThreeSetGamePage() {
             {/* Date Button 1: 2/12/2069 (Top) */}
             <button
               type="button"
-              className={`three-set-single-date-card date-card-gold ${activeDate === '2/12/2069' ? 'is-active' : ''}`}
+              className={`button primary vip-agency-date-btn three-set-date-pill ${activeDate === '2/12/2069' ? 'is-active' : ''}`}
               onClick={() => handleDateClick('2/12/2069', 1)}
               aria-label="VIP Draw Date 2/12/2069"
             >
-              <span className="shimmer-sweep" aria-hidden="true" />
-              <strong className="three-set-date-text">2/12/2069</strong>
+              <span>2/12/2069</span>
+              <span className="vip-btn-arrow" aria-hidden="true">↗</span>
             </button>
 
             {/* Date Button 2: 20/21/2069 (Underneath) */}
             <button
               type="button"
-              className={`three-set-single-date-card date-card-pink ${activeDate === '20/21/2069' ? 'is-active' : ''}`}
+              className={`button primary vip-agency-date-btn three-set-date-pill ${activeDate === '20/21/2069' ? 'is-active' : ''}`}
               onClick={() => handleDateClick('20/21/2069', 2)}
               aria-label="Special Draw Date 20/21/2069"
             >
-              <span className="shimmer-sweep" aria-hidden="true" />
-              <strong className="three-set-date-text">20/21/2069</strong>
+              <span>20/21/2069</span>
+              <span className="vip-btn-arrow" aria-hidden="true">↗</span>
             </button>
           </div>
 

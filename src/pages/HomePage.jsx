@@ -37,22 +37,22 @@ export default function HomePage() {
               <span className="three-set-badge-tag">✦ VIP OFFICIAL ✦</span>
               <h3 className="game-card-main-title">Game</h3>
             </div>
-            <div className="game-home-dates-container">
+            <div className="game-home-dates-container" aria-label="Game Dates">
               <Link
                 to="/game-paper?date=2/12/2069"
-                className="game-home-date-card date-card-gold"
+                className="button primary vip-agency-date-btn"
                 aria-label="Game Draw Date 2/12/2069"
               >
-                <span className="shimmer-sweep" aria-hidden="true" />
-                <strong className="game-home-date-val">2/12/2069</strong>
+                <span>2/12/2069</span>
+                <span className="vip-btn-arrow" aria-hidden="true">↗</span>
               </Link>
               <Link
                 to="/game-paper?date=20/21/2069"
-                className="game-home-date-card date-card-pink"
+                className="button primary vip-agency-date-btn"
                 aria-label="Game Special Draw Date 20/21/2069"
               >
-                <span className="shimmer-sweep" aria-hidden="true" />
-                <strong className="game-home-date-val">20/21/2069</strong>
+                <span>20/21/2069</span>
+                <span className="vip-btn-arrow" aria-hidden="true">↗</span>
               </Link>
             </div>
           </div>
