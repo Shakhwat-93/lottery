@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import LogoPageTransition from '../components/LogoPageTransition';
 
 export default function GamePaperPage() {
@@ -7,6 +7,9 @@ export default function GamePaperPage() {
   const [searchParams] = useSearchParams();
   const dateParam = searchParams.get('date') || '2/12/2069';
   const [showLogoTransition, setShowLogoTransition] = useState(true);
+
+  const isLockedDate = dateParam === '20/21/2069';
+  const whatsappUrl = `https://wa.me/8801309802224?text=${encodeURIComponent('আসসালামু আলাইকুম, আমি থাইল্যান্ড লটারি ২০/২১/২০৬৯ গেম আনলক করতে এবং মেম্বারশিপ নিতে যোগাযোগ করছি।')}`;
 
   // Fullscreen body lock & Escape key listener
   useEffect(() => {
@@ -31,8 +34,8 @@ export default function GamePaperPage() {
   };
 
   // Determine paper source based on date
-  const paperSrc = dateParam === '20/21/2069'
-    ? '/assets/site/3-set-game.jpg'
+  const paperSrc = isLockedDate
+    ? '/assets/site/game-paper-20-21-2069.jpg'
     : '/assets/site/game-paper-2-12-2069.jpg';
 
   return (
@@ -40,10 +43,10 @@ export default function GamePaperPage() {
       {/* 1. Cinematic Logo Motion Graphic Transition */}
       {showLogoTransition && (
         <LogoPageTransition
-          badgeText="👑 100% CONFIRM • NO GAME MISS"
+          badgeText={isLockedDate ? "🔒 1 YEAR 24 SET VIP PAPER" : "👑 100% CONFIRM • NO GAME MISS"}
           title="THAILAND OFFICIAL LOTTERY"
           subtitle={`VERIFIED GLO DRAW PAPER • ${dateParam}`}
-          statusText="DECRYPTING VERIFIED OFFICIAL PAPER..."
+          statusText={isLockedDate ? "LOADING 1 YEAR 24 SET VIP CALCULATION PAPER..." : "DECRYPTING VERIFIED OFFICIAL PAPER..."}
           duration={1600}
           onComplete={handleLogoComplete}
         />
@@ -124,19 +127,55 @@ export default function GamePaperPage() {
           </div>
 
           {/* The High-Resolution Official Paper */}
-          <div className="paper-img-frame-wrap">
+          <div className={`paper-img-frame-wrap ${isLockedDate ? 'is-calc-paper-wrap' : ''}`}>
             <img
               src={paperSrc}
               alt={`Thailand Lottery 100% Confirm Official Paper - Draw Date ${dateParam}`}
-              className="game-paper-fullscreen-img"
+              className={`game-paper-fullscreen-img ${isLockedDate ? 'is-calc-paper-img' : ''}`}
             />
           </div>
 
-          {/* Bottom Trust Guarantee Footnote */}
-          <div className="paper-bottom-guarantee">
-            <span className="guarantee-shield">🛡️</span>
-            <span>১০০% নিশ্চিত উইনিং পেপার • 100% SURE GUARANTEED • OFFICIAL VIP DRAW ({dateParam})</span>
-          </div>
+          {/* Bottom Trust Guarantee Footnote / Unlock Prompt Card */}
+          {isLockedDate ? (
+            <div className="game-unlock-prompt-card">
+              <div className="game-unlock-header">
+                <span className="unlock-crown-badge">👑</span>
+                <h3 className="game-unlock-heading">গেম আনলক করতে মেম্বারশিপ নিতে হবে</h3>
+              </div>
+              <p className="game-unlock-subtext">
+                পরবর্তী ড্র-এর ১০০% নিশ্চিত ৩ সেট উইনিং পেপার ও ফুল সেট আনলক করতে এখনই আমাদের সাথে যোগাযোগ করুন।
+              </p>
+              <div className="game-unlock-actions-row">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button primary game-unlock-whatsapp-btn"
+                  aria-label="হোয়াটসঅ্যাপে যোগাযোগ করুন"
+                >
+                  <span className="unlock-btn-icon">💬</span>
+                  <span>এখনই যোগাযোগ করুন</span>
+                  <span className="vip-btn-arrow" aria-hidden="true">↗</span>
+                </a>
+                <Link
+                  to="/form"
+                  className="button secondary game-unlock-form-btn"
+                  aria-label="মেম্বারশিপ ফর্ম পূরণ করুন"
+                >
+                  <span className="unlock-btn-icon">✍️</span>
+                  <span>মেম্বারশিপ ফর্ম</span>
+                </Link>
+              </div>
+              <div className="game-unlock-security-note">
+                <span>🛡️ ১০০% বিশ্বস্ত ও শতভাগ নিশ্চিত উইনিং গ্যারান্টি • GLO BANGKOK 2026</span>
+              </div>
+            </div>
+          ) : (
+            <div className="paper-bottom-guarantee">
+              <span className="guarantee-shield">🛡️</span>
+              <span>১০০% নিশ্চিত উইনিং পেপার • 100% SURE GUARANTEED • OFFICIAL VIP DRAW ({dateParam})</span>
+            </div>
+          )}
         </div>
 
         {/* Edge Vignette Overlay */}
