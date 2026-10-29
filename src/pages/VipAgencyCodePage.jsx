@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useNavigate, useSearchParams, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import LogoPageTransition from '../components/LogoPageTransition';
 
 // Web Audio API Synthesizer (zero network requests, instantaneous tactile jackpot audio)
@@ -438,25 +438,6 @@ export default function VipAgencyCodePage() {
                 <span>কোড কপি করুন (16816)</span>
               </button>
             )}
-          </div>
-
-          {/* Minimal Bottom Actions */}
-          <div className="jackpot-bottom-links">
-            <button
-              type="button"
-              className="jackpot-subtle-link"
-              onClick={startJackpotSpin}
-            >
-              <span>আবার চালান ↺</span>
-            </button>
-            <span className="link-divider">•</span>
-            <Link to="/form" className="jackpot-subtle-link">
-              <span>মেম্বারশিপ ফর্ম ✍️</span>
-            </Link>
-            <span className="link-divider">•</span>
-            <Link to="/" className="jackpot-subtle-link">
-              <span>হোমপেজ 🏠</span>
-            </Link>
           </div>
         </div>
 
