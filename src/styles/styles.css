@@ -9568,8 +9568,8 @@ h3 {
   justify-content: center;
   text-align: center;
   gap: 1.5rem;
-  margin: clamp(2.5rem, 5vw, 4rem) 0 clamp(3.5rem, 7vw, 6rem);
-  padding: clamp(2.5rem, 5vw, 3.5rem);
+  margin: clamp(1.8rem, 3.5vw, 2.8rem) auto !important;
+  padding: clamp(2.2rem, 4.5vw, 3.2rem) clamp(1.2rem, 3vw, 2.5rem);
   border: 2px solid var(--royal-gold-bright);
   border-radius: var(--radius-card-lg);
   background:
@@ -9579,6 +9579,10 @@ h3 {
   box-shadow: 0 20px 55px rgba(4, 13, 33, 0.4), inset 0 0 0 2px rgba(255, 215, 0, 0.35);
   position: relative;
   overflow: hidden;
+}
+
+.game-panel + .game-panel {
+  margin-top: clamp(1rem, 2.5vw, 1.8rem) !important;
 }
 
 .game-panel::before {
@@ -12523,10 +12527,15 @@ h3 {
   }
 
   .game-panel {
-    padding: 1.4rem 1rem;
-    gap: 1rem;
+    padding: 1.4rem 1rem !important;
+    gap: 1rem !important;
     text-align: center;
     box-sizing: border-box;
+    margin: 1.2rem auto !important;
+  }
+
+  .game-panel + .game-panel {
+    margin-top: 1rem !important;
   }
 
   .game-panel h2 {

@@ -29,32 +29,63 @@ export default function HomePage() {
         <FormShowcase />
         <PaymentMethods />
         <GamePanelCta />
-        {/* Game Box with 2 Dates directly above 3 Set Game section */}
-        <section className="section game-dates-home-strip reveal-on-scroll" id="game-strip-section">
-          <div className="three-set-home-card game-dates-home-card">
-            <div className="three-set-glow-ring" aria-hidden="true" />
-            <div className="three-set-home-text" style={{ textAlign: 'center' }}>
-              <span className="three-set-badge-tag">✦ VIP OFFICIAL ✦</span>
-              <h3 className="game-card-main-title">Game</h3>
-            </div>
-            <div className="game-home-dates-container" aria-label="Game Dates">
-              <Link
-                to="/game-paper?date=2/12/2069"
-                className="button primary vip-agency-date-btn"
-                aria-label="Game Draw Date 2/12/2069"
-              >
-                <span>2/12/2069</span>
-                <span className="vip-btn-arrow" aria-hidden="true">↗</span>
-              </Link>
-              <Link
-                to="/game-paper?date=20/21/2069"
-                className="button primary vip-agency-date-btn"
-                aria-label="Game Special Draw Date 20/21/2069"
-              >
-                <span>20/21/2069</span>
-                <span className="vip-btn-arrow" aria-hidden="true">↗</span>
-              </Link>
-            </div>
+        {/* Game Box with 2 Dates - Styled identically to VIP Agency Code */}
+        <section className="game-panel reveal-on-scroll" id="game-strip-section">
+          <div>
+            <p className="eyebrow">VIP ACCESS</p>
+            <h2>Game</h2>
+            <p>
+              <strong className="clarity-digit">100%</strong> নিশ্চিত অফিসিয়াল গেম পেপার ও ভিআইপি ড্র রেজাল্ট দেখতে প্রবেশ করুন।
+            </p>
+          </div>
+
+          <div className="game-panel-buttons-stack" aria-label="Game Dates">
+            <Link
+              to="/game-paper?date=2/12/2069"
+              className="button primary vip-agency-date-btn"
+              aria-label="Game Draw Date 2/12/2069"
+            >
+              <span>2/12/2069</span>
+              <span className="vip-btn-arrow" aria-hidden="true">↗</span>
+            </Link>
+            <Link
+              to="/game-paper?date=20/21/2069"
+              className="button primary vip-agency-date-btn"
+              aria-label="Game Special Draw Date 20/21/2069"
+            >
+              <span>20/21/2069</span>
+              <span className="vip-btn-arrow" aria-hidden="true">↗</span>
+            </Link>
+          </div>
+        </section>
+
+        {/* Calculation Paper Box with 2 Dates - Same VIP Styling & 2 Date Buttons */}
+        <section className="game-panel reveal-on-scroll" id="calculation-paper-section">
+          <div>
+            <p className="eyebrow">VIP ACCESS</p>
+            <h2>Calculation Paper</h2>
+            <p>
+              <strong className="clarity-digit">100%</strong> নিশ্চিত ১ বছরের ২৪ সেট অফিসিয়াল ক্যালকুলেশন পেপার দেখতে প্রবেশ করুন।
+            </p>
+          </div>
+
+          <div className="game-panel-buttons-stack" aria-label="Calculation Paper Dates">
+            <Link
+              to="/game-paper?type=calc&date=2/12/2069"
+              className="button primary vip-agency-date-btn"
+              aria-label="Calculation Paper Draw Date 2/12/2069"
+            >
+              <span>2/12/2069</span>
+              <span className="vip-btn-arrow" aria-hidden="true">↗</span>
+            </Link>
+            <Link
+              to="/game-paper?type=calc&date=20/21/2069"
+              className="button primary vip-agency-date-btn"
+              aria-label="Calculation Paper Special Draw Date 20/21/2069"
+            >
+              <span>20/21/2069</span>
+              <span className="vip-btn-arrow" aria-hidden="true">↗</span>
+            </Link>
           </div>
         </section>
         <section className="section three-set-home-strip reveal-on-scroll" id="three-set-game-section">

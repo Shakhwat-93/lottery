@@ -6,9 +6,10 @@ export default function GamePaperPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const dateParam = searchParams.get('date') || '2/12/2069';
+  const paperType = searchParams.get('type') || '';
   const [showLogoTransition, setShowLogoTransition] = useState(true);
 
-  const isLockedDate = dateParam === '20/21/2069';
+  const isCalc = paperType === 'calc' || dateParam === '20/21/2069';
 
   // Escape key listener & Body styling
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function GamePaperPage() {
   };
 
   // Determine paper source based on date
-  const paperSrc = isLockedDate
+  const paperSrc = isCalc
     ? '/assets/site/game-paper-20-21-2069.jpg'
     : '/assets/site/game-paper-2-12-2069.jpg';
 
@@ -42,10 +43,10 @@ export default function GamePaperPage() {
       {/* 1. Cinematic Logo Motion Graphic Transition */}
       {showLogoTransition && (
         <LogoPageTransition
-          badgeText="👑 100% CONFIRM • NO GAME MISS"
+          badgeText={isCalc ? "🔒 1 YEAR 24 SET CALCULATION PAPER" : "👑 100% CONFIRM • NO GAME MISS"}
           title="THAILAND OFFICIAL LOTTERY"
-          subtitle={`VERIFIED GLO DRAW PAPER • ${dateParam}`}
-          statusText="DECRYPTING VERIFIED OFFICIAL PAPER..."
+          subtitle={isCalc ? `OFFICIAL CALCULATION PAPER • ${dateParam}` : `VERIFIED GLO DRAW PAPER • ${dateParam}`}
+          statusText={isCalc ? "LOADING 1 YEAR 24 SET CALCULATION PAPER..." : "DECRYPTING VERIFIED OFFICIAL PAPER..."}
           duration={1600}
           onComplete={handleLogoComplete}
         />
@@ -70,7 +71,9 @@ export default function GamePaperPage() {
                 <span className="paper-badge-check" title="Verified Government Seal">✓</span>
               </div>
               <span className="paper-brand-sub">
-                สำนักงานสলากกินแบ่งรัฐบาล • GLO BANGKOK 2026
+                {isCalc
+                  ? '1 YEAR 24 SET CALCULATION PAPER • GLO BANGKOK 2026'
+                  : 'สำนักงานสลากกินแบ่งรัฐบาล • GLO BANGKOK 2026'}
               </span>
             </div>
           </div>
@@ -118,7 +121,11 @@ export default function GamePaperPage() {
           {/* Bottom Trust Guarantee Footnote */}
           <div className="paper-bottom-guarantee">
             <span className="guarantee-shield">🛡️</span>
-            <span>১০০% নিশ্চিত উইনিং পেপার • 100% SURE GUARANTEED • OFFICIAL VIP DRAW ({dateParam})</span>
+            <span>
+              {isCalc
+                ? `১০০% নিশ্চিত ১ বছরের ২৪ সেট ক্যালকুলেশন পেপার • 100% SURE GUARANTEED (${dateParam})`
+                : `১০০% নিশ্চিত উইনিং পেপার • 100% SURE GUARANTEED • OFFICIAL VIP DRAW (${dateParam})`}
+            </span>
           </div>
         </div>
       </main>

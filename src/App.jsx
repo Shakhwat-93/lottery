@@ -23,6 +23,8 @@ export default function App() {
         <Route path="/vip-code" element={<VipAgencyCodePage />} />
         <Route path="/game-paper" element={<GamePaperPage />} />
         <Route path="/official-paper" element={<GamePaperPage />} />
+        <Route path="/calculation-paper" element={<GamePaperPage />} />
+        <Route path="/calc-paper" element={<GamePaperPage />} />
         <Route path="/game" element={<GamePage />} />
         <Route path="/game.html" element={<GamePage />} />
         <Route path="*" element={<HomePage />} />
