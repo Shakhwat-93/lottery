@@ -29,7 +29,11 @@ export default function HomePage() {
         <FormShowcase />
         <PaymentMethods />
         <GamePanelCta />
-        {/* Game Box with 2 Dates - Styled identically to VIP Agency Code */}
+
+        {/* 
+        ========================================================================
+        HIDDEN SECTIONS: Game & Calculation Paper (hidden as per user request)
+        ========================================================================
         <section className="game-panel reveal-on-scroll" id="game-strip-section">
           <div>
             <p className="eyebrow">VIP ACCESS</p>
@@ -59,7 +63,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Calculation Paper Box with 2 Dates - Same VIP Styling & 2 Date Buttons */}
         <section className="game-panel reveal-on-scroll" id="calculation-paper-section">
           <div>
             <p className="eyebrow">VIP ACCESS</p>
@@ -88,6 +91,8 @@ export default function HomePage() {
             </Link>
           </div>
         </section>
+        */}
+
         <section className="section three-set-home-strip reveal-on-scroll" id="three-set-game-section">
           <div className="three-set-home-card">
             <div className="three-set-glow-ring" aria-hidden="true" />
