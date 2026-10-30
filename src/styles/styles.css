@@ -16435,7 +16435,7 @@ body.game-paper-body #root {
   }
 }
 
-/* Bottom Guarantee Bar on White (for 2/12/2069) */
+/* Bottom Guarantee Bar on White */
 .game-paper-fullscreen-view .paper-bottom-guarantee {
   display: inline-flex !important;
   align-items: center !important;
@@ -16460,136 +16460,6 @@ body.game-paper-body #root {
 .game-paper-fullscreen-view .guarantee-shield {
   font-size: 0.95rem !important;
   color: #B45309 !important;
-}
-
-/* Premium Game Unlock & Contact Conversion Card (20/21/2069) */
-.game-unlock-prompt-card {
-  width: 100% !important;
-  max-width: 460px !important;
-  margin: 10px auto 0 !important;
-  padding: 22px clamp(14px, 4vw, 24px) !important;
-  background: linear-gradient(135deg, #071739 0%, #0F2D6B 55%, #071739 100%) !important;
-  border: 2px solid #FFD700 !important;
-  border-radius: 20px !important;
-  box-shadow:
-    0 12px 36px rgba(7, 23, 57, 0.3),
-    0 0 25px rgba(255, 215, 0, 0.25),
-    inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
-  text-align: center !important;
-  position: relative !important;
-  z-index: 25 !important;
-  box-sizing: border-box !important;
-}
-
-.game-unlock-header {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  margin-bottom: 8px !important;
-}
-
-.unlock-crown-badge {
-  font-size: 1.35rem !important;
-}
-
-.game-unlock-heading {
-  font-family: var(--font-bengali), system-ui, sans-serif !important;
-  color: #FFD700 !important;
-  font-size: clamp(1.1rem, 3.4vw, 1.38rem) !important;
-  font-weight: 800 !important;
-  margin: 0 !important;
-  letter-spacing: 0.01em !important;
-  text-shadow: 0 0 16px rgba(255, 215, 0, 0.45) !important;
-}
-
-.game-unlock-subtext {
-  font-family: var(--font-bengali), system-ui, sans-serif !important;
-  color: #E2E8F0 !important;
-  font-size: clamp(0.85rem, 2.4vw, 0.94rem) !important;
-  line-height: 1.55 !important;
-  margin: 0 auto 16px !important;
-  max-width: 420px !important;
-  font-weight: 500 !important;
-}
-
-.game-unlock-actions-row {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 12px !important;
-  flex-wrap: wrap !important;
-  width: 100% !important;
-}
-
-.game-unlock-whatsapp-btn {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  background: linear-gradient(180deg, #25D366 0%, #128C7E 100%) !important;
-  border: 2px solid #FFD700 !important;
-  border-radius: 9999px !important;
-  color: #FFFFFF !important;
-  font-family: var(--font-bengali), system-ui, sans-serif !important;
-  font-size: clamp(0.95rem, 2.6vw, 1.05rem) !important;
-  font-weight: 800 !important;
-  padding: 0.75rem 1.8rem !important;
-  min-height: 3rem !important;
-  text-decoration: none !important;
-  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45) !important;
-  transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1) !important;
-  cursor: pointer !important;
-  box-sizing: border-box !important;
-  flex: 1 1 200px !important;
-}
-
-.game-unlock-whatsapp-btn:hover {
-  transform: translateY(-2px) scale(1.02) !important;
-  background: linear-gradient(180deg, #2EE070 0%, #149D8E 100%) !important;
-  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.65) !important;
-  border-color: #FFF2A8 !important;
-}
-
-.game-unlock-form-btn {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  background: linear-gradient(180deg, #D4141E 0%, #8A0B12 100%) !important;
-  border: 2px solid #FFD700 !important;
-  border-radius: 9999px !important;
-  color: #FFFFFF !important;
-  font-family: var(--font-bengali), system-ui, sans-serif !important;
-  font-size: clamp(0.95rem, 2.6vw, 1.05rem) !important;
-  font-weight: 800 !important;
-  padding: 0.75rem 1.8rem !important;
-  min-height: 3rem !important;
-  text-decoration: none !important;
-  box-shadow: 0 4px 18px rgba(220, 20, 30, 0.45) !important;
-  transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1) !important;
-  cursor: pointer !important;
-  box-sizing: border-box !important;
-  flex: 1 1 180px !important;
-}
-
-.game-unlock-form-btn:hover {
-  transform: translateY(-2px) scale(1.02) !important;
-  background: linear-gradient(180deg, #E61E28 0%, #9E0D15 100%) !important;
-  box-shadow: 0 6px 24px rgba(220, 20, 30, 0.65) !important;
-  border-color: #FFF2A8 !important;
-}
-
-.unlock-btn-icon {
-  font-size: 1.15rem !important;
-}
-
-.game-unlock-security-note {
-  margin-top: 12px !important;
-  font-family: var(--font-bengali), system-ui, sans-serif !important;
-  font-size: clamp(0.72rem, 1.9vw, 0.8rem) !important;
-  color: #CBD5E1 !important;
-  letter-spacing: 0.01em !important;
 }
 
 /* Mobile Specific Optimizations */
@@ -16620,34 +16490,6 @@ body.game-paper-body #root {
   .game-paper-fullscreen-view .game-paper-fullscreen-img {
     border-width: 2.5px !important;
     border-radius: 12px !important;
-  }
-
-  .game-unlock-prompt-card {
-    padding: 18px 14px !important;
-    border-radius: 16px !important;
-    margin-top: 8px !important;
-  }
-
-  .game-unlock-heading {
-    font-size: 1.12rem !important;
-  }
-
-  .game-unlock-subtext {
-    font-size: 0.8rem !important;
-    margin-bottom: 12px !important;
-  }
-
-  .game-unlock-actions-row {
-    flex-direction: column !important;
-    gap: 10px !important;
-  }
-
-  .game-unlock-whatsapp-btn,
-  .game-unlock-form-btn {
-    width: 100% !important;
-    min-height: 2.9rem !important;
-    font-size: 0.95rem !important;
-    padding: 0.65rem 1.2rem !important;
   }
 
   .game-paper-fullscreen-view .paper-bottom-guarantee {
