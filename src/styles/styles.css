@@ -4557,6 +4557,80 @@ h3 {
   font-weight: 700;
 }
 
+/* Customer Review Elite Features List (Matching Official Proof Style) */
+.review-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.6vw, 1.75rem);
+  margin: 0 auto clamp(1.6rem, 3.2vw, 2.2rem);
+  width: 100%;
+  max-width: 34rem;
+  text-align: left;
+}
+
+.review-feature-row {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(0.85rem, 2vw, 1.15rem);
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.feature-check-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #EF4444 0%, #B91C1C 55%, #7F1D1D 100%);
+  border: 2px solid #D4AF37;
+  color: #FFD700;
+  box-shadow:
+    0 4px 14px rgba(185, 28, 28, 0.45),
+    0 0 10px rgba(212, 175, 55, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.feature-check-badge svg {
+  width: 19px;
+  height: 19px;
+  stroke: #FFD700;
+  stroke-width: 3.5;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+
+.feature-text-block {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.feature-title {
+  margin: 0;
+  color: #071739;
+  font-family: var(--font-royal), 'Cinzel', var(--font-bengali), serif;
+  font-size: clamp(1.05rem, 2.2vw, 1.22rem);
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.feature-desc {
+  margin: 6px 0 0 0;
+  color: #374151;
+  font-family: var(--font-bengali), sans-serif;
+  font-size: clamp(0.88rem, 1.8vw, 0.98rem);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
 .review-features {
   display: flex;
   flex-direction: column;
@@ -11105,7 +11179,6 @@ h3 {
   .review-features {
     text-align: left;
     margin-inline: auto;
-    width: 100%;
   }
 
   .review-actions {
@@ -12371,6 +12444,50 @@ h3 {
   .review-stats-note {
     font-size: 0.78rem;
     text-align: center;
+  }
+
+  .review-features-list {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto 1.5rem;
+    gap: 1.25rem;
+    text-align: left;
+  }
+
+  .review-feature-row {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    gap: 0.85rem;
+    text-align: left;
+  }
+
+  .feature-check-badge {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    margin-top: 2px;
+  }
+
+  .feature-check-badge svg {
+    width: 17px;
+    height: 17px;
+    stroke-width: 3.5;
+  }
+
+  .feature-title {
+    font-size: 0.98rem;
+    line-height: 1.35;
+    color: #071739;
+  }
+
+  .feature-desc {
+    font-size: 0.84rem;
+    line-height: 1.52;
+    margin-top: 4px;
+    color: #374151;
   }
 
   .review-features {

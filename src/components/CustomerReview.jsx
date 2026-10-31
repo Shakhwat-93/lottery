@@ -133,29 +133,43 @@ export default function CustomerReview({ videoRef }) {
             </p>
           </div>
 
-          <ul className="review-points-list">
-            <li>
-              <span className="point-icon" aria-hidden="true">✓</span>
-              <div>
-                <strong>1. গ্রাহকদের বাস্তব ভিডিও (Genuine Member Experience)</strong>
-                <p>ลูกค้าตัวจริง 100% • কোনো কৃত্রিম বিজ্ঞাপন বা এডিটিং ছাড়া গ্রাহকের নিজস্ব ভিডিও বার্তা।</p>
+          <div className="review-features-list">
+            <div className="review-feature-row">
+              <span className="feature-check-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </span>
+              <div className="feature-text-block">
+                <h4 className="feature-title">১. গ্রাহকদের বাস্তব ভিডিও (Genuine Member Experience)</h4>
+                <p className="feature-desc">ลูกค้าตัวจริง 100% • কোনো কৃত্রিম বিজ্ঞাপন বা এডিটিং ছাড়া গ্রাহকের নিজস্ব ভিডিও বার্তা।</p>
               </div>
-            </li>
-            <li>
-              <span className="point-icon" aria-hidden="true">✓</span>
-              <div>
-                <strong>2. সঠিক ফলাফল ও পে-আউট নিশ্চয়তা (Guaranteed Payout)</strong>
-                <p>ได้รับเงินรางวัลจริง • থাইল্যান্ড সরকারের নির্ধারিত রেজাল্টের সাথে হুবহু মিল ও দ্রুত পেমেন্ট।</p>
+            </div>
+
+            <div className="review-feature-row">
+              <span className="feature-check-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </span>
+              <div className="feature-text-block">
+                <h4 className="feature-title">২. সঠিক ফলাফল ও পে-আউট নিশ্চয়তা (Guaranteed Payout)</h4>
+                <p className="feature-desc">ได้รับเงินรางวัลจริง • থাইল্যান্ড সরকারের নির্ধারিত রেজাল্টের সাথে হুবহু মিল ও দ্রুত পেমেন্ট।</p>
               </div>
-            </li>
-            <li>
-              <span className="point-icon" aria-hidden="true">✓</span>
-              <div>
-                <strong>3. অফিসিয়াল সিকিউরিটি ও নিশ্চয়তা (Official Security)</strong>
-                <p>ปลอดภัย มีเอกสารรับรอง • 24 ঘণ্টা সার্বক্ষণিক কাস্টমার কেয়ার ও ভেরিফাইড ডকুমেন্ট সাপোর্ট।</p>
+            </div>
+
+            <div className="review-feature-row">
+              <span className="feature-check-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </span>
+              <div className="feature-text-block">
+                <h4 className="feature-title">৩. অফিসিয়াল নিরাপত্তা ও সহায়তা (Official Security)</h4>
+                <p className="feature-desc">ปลอดภัย มีเอกสารรับรอง • ২৪ ঘণ্টা সার্বক্ষণিক কাস্টমার কেয়ার ও ভেরিফাইড ডকুমেন্ট সাপোর্ট।</p>
               </div>
-            </li>
-          </ul>
+            </div>
+          </div>
 
           <div className="hero-actions review-actions">
             <Link className="button primary" to="/form">
