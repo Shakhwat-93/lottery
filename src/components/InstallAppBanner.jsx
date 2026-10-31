@@ -5,12 +5,16 @@ export default function InstallAppBanner() {
   const {
     isStandalone,
     isIOS,
-    showIOSModal,
-    setShowIOSModal,
+    isAndroid,
+    isInAppBrowser,
+    hasPrompt,
+    showInstallModal,
+    setShowInstallModal,
     bannerDismissed,
     setBannerDismissed,
     installSuccess,
     triggerInstall,
+    openInChrome,
     canInstall
   } = usePWAInstall();
 
@@ -21,7 +25,7 @@ export default function InstallAppBanner() {
 
   return (
     <>
-      {/* 1. TOP FLOATING INSTANT APP INSTALL BANNER ("web a dhukar sathe sathe") */}
+      {/* 1. TOP FLOATING INSTANT APP INSTALL BANNER */}
       {!bannerDismissed && canInstall && (
         <aside className="pwa-install-top-banner" aria-label="Official Web App Install">
           <div className="pwa-banner-inner">
@@ -50,7 +54,7 @@ export default function InstallAppBanner() {
                 </span>
               </div>
               <p className="pwa-app-sub">
-                অফিসিয়াল অ্যাপ ইনস্টল করুন • নোটিফিকেশন ও ১ ক্লিকে দ্রুত ওপেন
+                অফিসিয়াল অ্যাপ সরাসরি ফোনে ইনস্টল করুন • ১ ক্লিকে ওপেন ও রেজাল্ট
               </p>
             </div>
 
@@ -64,7 +68,7 @@ export default function InstallAppBanner() {
               >
                 <span className="pwa-btn-shimmer" aria-hidden="true" />
                 <span className="pwa-btn-icon">📲</span>
-                <span className="pwa-btn-text">ইনস্টল করুন</span>
+                <span className="pwa-btn-text">সরাসরি ইনস্টল</span>
               </button>
 
               <button
@@ -80,7 +84,7 @@ export default function InstallAppBanner() {
         </aside>
       )}
 
-      {/* 2. PERSISTENT FLOATING QUICK INSTALL PILL (Visible if banner dismissed) */}
+      {/* 2. PERSISTENT FLOATING QUICK INSTALL PILL */}
       {bannerDismissed && canInstall && (
         <button
           type="button"
@@ -95,7 +99,7 @@ export default function InstallAppBanner() {
             width="22"
             height="22"
           />
-          <span className="pwa-pill-text">📲 অ্যাপ ইনস্টল</span>
+          <span className="pwa-pill-text">📲 সরাসরি ইনস্টল</span>
           <span className="pwa-pill-glow" aria-hidden="true" />
         </button>
       )}
@@ -108,9 +112,9 @@ export default function InstallAppBanner() {
         </div>
       )}
 
-      {/* 4. MODAL FOR IOS & GENERAL INSTALL INSTRUCTIONS */}
-      {showIOSModal && (
-        <div className="pwa-modal-backdrop" onClick={() => setShowIOSModal(false)}>
+      {/* 4. SMART DIRECT INSTALL MODAL / ACTION SHEET */}
+      {showInstallModal && (
+        <div className="pwa-modal-backdrop" onClick={() => setShowInstallModal(false)}>
           <div
             className="pwa-modal-card"
             onClick={(e) => e.stopPropagation()}
@@ -121,7 +125,7 @@ export default function InstallAppBanner() {
             <button
               type="button"
               className="pwa-modal-close"
-              onClick={() => setShowIOSModal(false)}
+              onClick={() => setShowInstallModal(false)}
               aria-label="Close"
             >
               ✕
@@ -142,60 +146,64 @@ export default function InstallAppBanner() {
             </div>
 
             <div className="pwa-modal-body">
-              {isIOS ? (
+              {/* IF IN-APP BROWSER (WhatsApp, Facebook, Messenger) */}
+              {isInAppBrowser ? (
+                <div className="in-app-browser-card">
+                  <div className="in-app-badge">⚠️ ব্রাউজার নোটিশ</div>
+                  <p className="in-app-text">
+                    আপনি <strong>হোয়াটসঅ্যাপ/ফেসবুক</strong> ব্রাউজারে আছেন। সরাসরি ফোনে ইনস্টল করতে নিচের বাটনে চাপ দিয়ে ক্রোম ব্রাউজারে খুলুন:
+                  </p>
+                  <button
+                    type="button"
+                    className="open-chrome-btn"
+                    onClick={openInChrome}
+                  >
+                    <span className="chrome-icon">🌐</span>
+                    <span>Chrome ব্রাউজারে খুলুন ও ইনস্টল করুন ➔</span>
+                  </button>
+                </div>
+              ) : isIOS ? (
+                /* IF IPHONE / IPAD (Apple Safari) */
                 <>
                   <p className="pwa-modal-intro">
-                    আইফোন বা আইপ্যাডে অফিসিয়াল অ্যাপ ইনস্টল করতে নিচের সহজ ধাপগুলো অনুসরণ করুন:
+                    আইফোনে অফিসিয়াল অ্যাপটি সরাসরি যুক্ত করতে নিচের ২টি সহজ কাজ করুন:
                   </p>
                   <ol className="pwa-steps-list">
                     <li>
                       <span className="step-num">১</span>
                       <div className="step-content">
-                        <strong>সাফারি ব্রাউজারের শেয়ার বাটনে চাপুন</strong>
-                        <p>স্ক্রিনের নিচে মাঝখানে থাকা <strong>Share [⎋]</strong> আইকনে ট্যাপ করুন।</p>
+                        <strong>সাফারি ব্রাউজারের নিচে শেয়ার বাটনে চাপুন</strong>
+                        <p>স্ক্রিনের নিচে মাঝখানে থাকা <strong>Share [⎋]</strong> আইকনে চাপুন।</p>
                       </div>
                     </li>
                     <li>
                       <span className="step-num">২</span>
                       <div className="step-content">
-                        <strong>'Add to Home Screen' সিলেক্ট করুন</strong>
-                        <p>একটু নিচে স্ক্রল করে <strong>[➕ Add to Home Screen]</strong> অপশনে চাপুন।</p>
-                      </div>
-                    </li>
-                    <li>
-                      <span className="step-num">৩</span>
-                      <div className="step-content">
-                        <strong>'Add' বাটনে ক্লিক করুন</strong>
-                        <p>উপরে ডান কোণায় থাকা <strong>'Add'</strong> বাটনে চাপলেই আপনার হোম স্ক্রিনে অফিসিয়াল অ্যাপ আইকন চলে আসবে!</p>
+                        <strong>'Add to Home Screen' চাপুন</strong>
+                        <p>একটু নিচে স্ক্রল করে <strong>[➕ Add to Home Screen]</strong> অপশনে ট্যাপ করলেই হোম স্ক্রিনে অ্যাপ যুক্ত হবে।</p>
                       </div>
                     </li>
                   </ol>
                 </>
               ) : (
+                /* ANDROID CHROME OR DESKTOP */
                 <>
                   <p className="pwa-modal-intro">
-                    আপনার ফোনে বা কম্পিউটারে অফিসিয়াল অ্যাপটি সরাসরি ইনস্টল করতে:
+                    সরাসরি ১-ক্লিকে ফোনে ইনস্টল করতে:
                   </p>
                   <ol className="pwa-steps-list">
                     <li>
                       <span className="step-num">১</span>
                       <div className="step-content">
-                        <strong>ব্রাউজার মেনু খুলুন</strong>
-                        <p>উপরে ডানপাশে থাকা <strong>৩টি ডট (⋮)</strong> বাটনে চাপুন।</p>
+                        <strong>ব্রাউজারের ৩টি ডটে (⋮) চাপুন</strong>
+                        <p>আপনার ফোনের ব্রাউজারের একদম উপরে ডান কোণায় থাকা <strong>মেনু (⋮)</strong> বাটনে চাপ দিন।</p>
                       </div>
                     </li>
                     <li>
                       <span className="step-num">২</span>
                       <div className="step-content">
-                        <strong>'Install app' অথবা 'Add to Home screen' চাপুন</strong>
-                        <p>মেনু থেকে <strong>Install Thailand Lottery</strong> সিলেক্ট করুন।</p>
-                      </div>
-                    </li>
-                    <li>
-                      <span className="step-num">৩</span>
-                      <div className="step-content">
-                        <strong>ইনস্টল কনফার্ম করুন</strong>
-                        <p>কনফার্ম করলেই ফোনের হোম স্ক্রিনে অ্যাপ আইকন চলে আসবে এবং দ্রুত ব্যবহার করা যাবে।</p>
+                        <strong>'Install App' বা 'Add to Home screen' চাপুন</strong>
+                        <p>তালিকায় <strong>'Install App' (বা অ্যাপ ইনস্টল)</strong> অপশনটিতে চাপলেই সাথে সাথে অ্যাপ আপনার ফোনে ইনস্টল হয়ে যাবে!</p>
                       </div>
                     </li>
                   </ol>
@@ -207,7 +215,7 @@ export default function InstallAppBanner() {
               <button
                 type="button"
                 className="pwa-modal-confirm-btn"
-                onClick={() => setShowIOSModal(false)}
+                onClick={() => setShowInstallModal(false)}
               >
                 বুঝেছি / ঠিক আছে ✓
               </button>

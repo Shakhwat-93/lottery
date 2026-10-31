@@ -1,9 +1,9 @@
 {
-  "id": "/?source=pwa",
-  "name": "Thailand Official Lottery 2026",
+  "id": "/",
+  "name": "Thailand Official Lottery",
   "short_name": "Thai Lottery",
   "description": "থাইল্যান্ড অফিসিয়াল লটারি ২০২৬ — লাইসেন্সকৃত ভিআইপি পেপার, ৩ সেট গেম ও সরকারি ফলাফল।",
-  "start_url": "/?source=pwa",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui", "browser"],
@@ -12,6 +12,7 @@
   "orientation": "portrait",
   "lang": "bn",
   "dir": "ltr",
+  "prefer_related_applications": false,
   "categories": ["entertainment", "finance", "utilities"],
   "icons": [
     {
@@ -31,6 +32,12 @@
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "/icons/icon-512.png",

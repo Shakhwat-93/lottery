@@ -19,6 +19,25 @@
     <link rel="icon" href="/favicon.png?v=4" type="image/png" />
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+
+    <!-- Early PWA Capture & Service Worker Engine -->
+    <script>
+      window.deferredPWAInstallPrompt = null;
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        window.deferredPWAInstallPrompt = e;
+        window.dispatchEvent(new CustomEvent('pwa-prompt-ready', { detail: e }));
+        console.log('[PWA-Early] Native install prompt captured in <head>');
+      });
+
+      if ('serviceWorker' in navigator && (window.location.protocol.startsWith('http') || window.location.hostname === 'localhost')) {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function (reg) {
+          console.log('[PWA-Early] Service worker registered early:', reg.scope);
+        }).catch(function (err) {
+          console.warn('[PWA-Early] Service worker registration error:', err);
+        });
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

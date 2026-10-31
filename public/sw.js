@@ -1,5 +1,5 @@
 // Thailand Official Lottery 2026 - Progressive Web App Service Worker
-const CACHE_NAME = 'thai-lottery-v1';
+const CACHE_NAME = 'thai-lottery-v2';
 
 const PRECACHE_ASSETS = [
   '/',
@@ -7,7 +7,10 @@ const PRECACHE_ASSETS = [
   '/manifest.json',
   '/favicon.svg',
   '/favicon.png',
+  '/icons/icon-96.png',
+  '/icons/icon-144.png',
   '/icons/icon-192.png',
+  '/icons/icon-maskable-192.png',
   '/icons/icon-512.png',
   '/icons/icon-maskable-512.png',
   '/icons/apple-touch-icon.png',
@@ -15,14 +18,19 @@ const PRECACHE_ASSETS = [
   '/assets/logo-verified.png'
 ];
 
-// Install: precache essential shell assets
+// Install: precache essential shell assets safely
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(PRECACHE_ASSETS).catch((err) => {
-        console.warn('[SW] Precache non-fatal error:', err);
-      });
-    }).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then(async (cache) => {
+      for (const asset of PRECACHE_ASSETS) {
+        try {
+          await cache.add(asset);
+        } catch (e) {
+          console.warn('[SW] Precache asset skipped:', asset);
+        }
+      }
+    })
   );
 });
 
@@ -50,7 +58,7 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
 
-  // Ignore video media stream requests or external non-http
+  // Ignore video media stream requests or non-http protocols
   if (url.pathname.endsWith('.mp4') || !url.protocol.startsWith('http')) {
     return;
   }
