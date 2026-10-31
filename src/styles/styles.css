@@ -17600,3 +17600,631 @@ body.game-paper-body #root {
     font-size: 0.82rem;
   }
 }
+
+/* ==========================================================================
+   21. CINEMATIC APP ENTRY MOTION GRAPHICS SPLASH SCREEN & LOGO REVEAL
+   ========================================================================== */
+
+.app-intro-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000000;
+  background-color: #030611;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  opacity: 1;
+  transition:
+    opacity 450ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 450ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 450ms ease;
+  will-change: opacity, transform, filter;
+}
+
+.app-intro-backdrop.is-exiting {
+  opacity: 0;
+  transform: scale(1.1);
+  filter: blur(14px);
+  pointer-events: none;
+}
+
+/* Ambient Deep Nebula Mesh & Stars */
+.app-intro-mesh-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(13, 30, 61, 0.95) 0%, rgba(5, 12, 28, 0.98) 60%, #02040A 100%);
+  overflow: hidden;
+}
+
+.intro-nebula-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  animation: introOrbFloat 7s ease-in-out infinite alternate;
+}
+
+.intro-nebula-orb.orb-1 {
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 460px;
+  height: 460px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.32) 0%, rgba(212, 175, 55, 0.1) 50%, transparent 75%);
+}
+
+.intro-nebula-orb.orb-2 {
+  bottom: 18%;
+  right: 20%;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(220, 38, 38, 0.22) 0%, rgba(185, 28, 28, 0.05) 55%, transparent 75%);
+  animation-duration: 9s;
+}
+
+.intro-nebula-orb.orb-3 {
+  top: 20%;
+  left: 15%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+  animation-duration: 8s;
+}
+
+@keyframes introOrbFloat {
+  0% { transform: translate(-50%, -50%) scale(0.92); opacity: 0.6; }
+  100% { transform: translate(-48%, -52%) scale(1.12); opacity: 0.9; }
+}
+
+.intro-stars-layer {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, #FFD700, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 100px 150px, #FFFFFF, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 220px 80px, #FDE047, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 320px 240px, #FFFFFF, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 450px 120px, #F59E0B, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 180px 310px, #FFD700, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 500px 500px;
+  opacity: 0.45;
+  animation: introStarsTwinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes introStarsTwinkle {
+  0% { opacity: 0.25; }
+  100% { opacity: 0.55; }
+}
+
+/* Fast Direct Skip Button */
+.app-intro-skip-btn {
+  position: absolute;
+  top: max(22px, env(safe-area-inset-top, 22px));
+  right: 22px;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(7, 23, 57, 0.85);
+  border: 1.5px solid var(--royal-gold, #D4AF37);
+  border-radius: 9999px;
+  color: #FDE047;
+  font-family: var(--font-bengali);
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), 0 0 12px rgba(245, 158, 11, 0.3);
+  transition: all 0.22s ease;
+}
+
+.app-intro-skip-btn:hover {
+  background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+  border-color: #FDE047;
+  color: #FFFFFF;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 24px rgba(245, 158, 11, 0.6);
+}
+
+.app-intro-skip-btn .skip-arrow {
+  font-size: 0.95rem;
+  transition: transform 0.2s ease;
+}
+
+.app-intro-skip-btn:hover .skip-arrow {
+  transform: translateX(3px);
+}
+
+/* Central Motion Scene */
+.app-intro-scene {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  max-width: 620px;
+  width: 100%;
+  animation: introSceneEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes introSceneEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Sacred Dual Counter-Rotating Rings */
+.intro-sacred-rings {
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.sacred-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.sacred-ring.outer-ring {
+  width: 310px;
+  height: 310px;
+  border: 1.5px dashed rgba(245, 158, 11, 0.45);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+  animation: spinClockwise 26s linear infinite;
+}
+
+.ring-tick {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #FDE047;
+  box-shadow: 0 0 8px #FDE047;
+  transform-origin: center center;
+}
+
+.sacred-ring.inner-ring {
+  width: 240px;
+  height: 240px;
+  border: 1.5px solid rgba(212, 175, 55, 0.55);
+  box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.25);
+  animation: spinCounterClockwise 18s linear infinite;
+}
+
+.sacred-ring.pulsing-ring {
+  width: 180px;
+  height: 180px;
+  border: 2px solid rgba(245, 158, 11, 0.7);
+  box-shadow: 0 0 35px rgba(245, 158, 11, 0.5);
+  animation: ringPulseScale 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes spinClockwise {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes spinCounterClockwise {
+  from { transform: translate(-50%, -50%) rotate(360deg); }
+  to { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+@keyframes ringPulseScale {
+  0% { transform: translate(-50%, -50%) scale(0.94); opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.95; }
+}
+
+/* Volumetric Corona Light Rays */
+.intro-corona-rays {
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  animation: coronaSpinRays 32s linear infinite;
+}
+
+@keyframes coronaSpinRays {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.corona-ray {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.5px;
+  height: 140px;
+  background: linear-gradient(to bottom, rgba(253, 224, 71, 0.65), rgba(245, 158, 11, 0.25) 55%, transparent 100%);
+  transform-origin: top center;
+  border-radius: 999px;
+  filter: blur(0.6px);
+  animation: rayPulseGlow 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes rayPulseGlow {
+  0% { opacity: 0.35; height: 110px; }
+  100% { opacity: 0.95; height: 155px; }
+}
+
+/* Central Official Seal Emblem */
+.intro-logo-container {
+  position: relative;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-logo-halo {
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.5) 0%, rgba(212, 175, 55, 0.22) 45%, transparent 75%);
+  filter: blur(30px);
+  animation: logoHaloBreath 2.6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes logoHaloBreath {
+  0% { transform: scale(0.9); opacity: 0.55; }
+  100% { transform: scale(1.25); opacity: 1; }
+}
+
+.intro-logo-card {
+  position: relative;
+  width: 155px;
+  height: 155px;
+  border-radius: 38px;
+  background: radial-gradient(circle at 40% 35%, rgba(15, 38, 82, 0.95) 0%, rgba(7, 23, 57, 0.98) 70%, #030a1c 100%);
+  border: 2.5px solid #F59E0B;
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.75),
+    0 0 40px rgba(245, 158, 11, 0.55),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  animation: logoCardBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes logoCardBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) rotate(-8deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.intro-logo-image {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 8px rgba(255, 215, 0, 0.85))
+    drop-shadow(0 4px 14px rgba(0, 0, 0, 0.7));
+  animation: logoBreathFloat 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes logoBreathFloat {
+  0% { transform: scale(0.98); }
+  100% { transform: scale(1.05); }
+}
+
+/* Hologram Scanning Line across Official Emblem */
+.intro-hologram-scanner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #10B981 20%, #6EE7B7 50%, #10B981 80%, transparent 100%);
+  box-shadow: 0 0 12px #10B981;
+  pointer-events: none;
+  animation: hologramLaserScan 2.4s ease-in-out infinite alternate;
+  z-index: 5;
+}
+
+@keyframes hologramLaserScan {
+  0% { top: 0%; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { top: 98%; opacity: 0; }
+}
+
+/* Specular Shimmer Sweep across the Logo Card */
+.intro-shimmer-sweep {
+  position: absolute;
+  top: -45%;
+  left: -130%;
+  width: 75%;
+  height: 190%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 20%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.05) 80%,
+    transparent 100%
+  );
+  transform: rotate(28deg);
+  pointer-events: none;
+  animation: introLaserSweep 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  z-index: 6;
+}
+
+@keyframes introLaserSweep {
+  0% { left: -130%; }
+  45%, 100% { left: 170%; }
+}
+
+/* Staggered Motion Graphics Typography */
+.intro-text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.intro-royal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 16px;
+  border-radius: 9999px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1.5px solid rgba(245, 158, 11, 0.5);
+  color: #FDE047;
+  font-family: var(--font-royal);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 0 18px rgba(245, 158, 11, 0.25);
+  animation: introBadgeDrop 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+@keyframes introBadgeDrop {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.intro-royal-badge .badge-crown-icon {
+  font-size: 0.88rem;
+  filter: drop-shadow(0 0 5px #F59E0B);
+}
+
+.intro-main-title {
+  margin: 6px 0 0;
+  font-family: var(--font-royal), 'Cinzel', serif;
+  font-size: clamp(1.45rem, 5vw, 2.25rem);
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  line-height: 1.25;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FEF08A 25%, #F59E0B 60%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 20px rgba(245, 158, 11, 0.45));
+  animation: introTitleRise 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both;
+}
+
+@keyframes introTitleRise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.intro-bengali-sub {
+  margin: 0;
+  font-family: var(--font-bengali);
+  font-size: clamp(0.88rem, 2.5vw, 1.05rem);
+  font-weight: 700;
+  color: #E2E8F0;
+  letter-spacing: 0.02em;
+  animation: introSubRise 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+@keyframes introSubRise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.intro-verified-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: rgba(29, 155, 240, 0.12);
+  border: 1px solid rgba(29, 155, 240, 0.35);
+  color: #70C5FD;
+  font-family: var(--font-royal);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+  animation: introSubRise 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.36s both;
+}
+
+/* Progress Bar & Real-Time Percentage */
+.intro-progress-wrapper {
+  width: 100%;
+  max-width: 380px;
+  margin-top: 18px;
+  animation: introProgressRise 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.42s both;
+}
+
+@keyframes introProgressRise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.intro-progress-track {
+  width: 100%;
+  height: 7px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.intro-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #DC2626 0%, #F59E0B 50%, #10B981 100%);
+  border-radius: 9999px;
+  position: relative;
+  transition: width 0.12s linear;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.8);
+}
+
+.intro-progress-head-glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 100%;
+  background: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #FFFFFF, 0 0 20px #10B981;
+}
+
+.intro-progress-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 0.8rem;
+}
+
+.intro-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.indicator-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 10px #10B981;
+  animation: radarPing 1.8s infinite;
+}
+
+.indicator-status-text {
+  color: #94A3B8;
+  font-family: var(--font-bengali);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.intro-counter-number {
+  color: #FDE047;
+  font-family: var(--font-royal);
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px rgba(253, 224, 71, 0.5);
+}
+
+.intro-tap-hint {
+  margin: 18px 0 0 0;
+  font-size: 0.74rem;
+  color: #64748B;
+  font-family: var(--font-bengali);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  animation: introSubRise 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+/* Layer 4: Cinematic Vignette */
+.app-intro-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+/* Responsive adjustments for mobile screens */
+@media (max-width: 640px) {
+  .sacred-ring.outer-ring {
+    width: 250px;
+    height: 250px;
+  }
+
+  .sacred-ring.inner-ring {
+    width: 190px;
+    height: 190px;
+  }
+
+  .sacred-ring.pulsing-ring {
+    width: 140px;
+    height: 140px;
+  }
+
+  .intro-logo-card {
+    width: 125px;
+    height: 125px;
+    border-radius: 30px;
+  }
+
+  .intro-logo-image {
+    width: 95px;
+    height: 95px;
+  }
+
+  .intro-main-title {
+    font-size: 1.35rem;
+  }
+
+  .intro-bengali-sub {
+    font-size: 0.85rem;
+  }
+
+  .intro-progress-wrapper {
+    max-width: 310px;
+  }
+
+  .app-intro-skip-btn {
+    top: max(16px, env(safe-area-inset-top, 16px));
+    right: 16px;
+    padding: 6px 14px;
+    font-size: 0.78rem;
+  }
+}

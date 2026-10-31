@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PWAInstallProvider } from './context/PWAInstallContext';
 import InstallAppBanner from './components/InstallAppBanner';
+import AppIntroSplash from './components/AppIntroSplash';
 import HomePage from './pages/HomePage';
 import GamePage from './pages/GamePage';
 import FormPage from './pages/FormPage';
@@ -10,8 +11,28 @@ import VipAgencyCodePage from './pages/VipAgencyCodePage';
 import GamePaperPage from './pages/GamePaperPage';
 
 export default function App() {
+  const [showIntro, setShowIntro] = useState(() => {
+    try {
+      if (window.location.search.includes('intro=1')) return true;
+      const seen = sessionStorage.getItem('thai_lottery_intro_seen');
+      return !seen;
+    } catch {
+      return true;
+    }
+  });
+
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+    try {
+      sessionStorage.setItem('thai_lottery_intro_seen', 'true');
+    } catch (e) {
+      // ignore
+    }
+  };
+
   return (
     <PWAInstallProvider>
+      {showIntro && <AppIntroSplash onComplete={handleIntroComplete} />}
       <BrowserRouter>
         <InstallAppBanner />
         <Routes>
