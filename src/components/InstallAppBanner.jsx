@@ -7,6 +7,8 @@ export default function InstallAppBanner() {
     isIOS,
     isAndroid,
     isInAppBrowser,
+    isInstalling,
+    swActive,
     hasPrompt,
     showInstallModal,
     setShowInstallModal,
@@ -64,11 +66,14 @@ export default function InstallAppBanner() {
                 type="button"
                 className="pwa-install-btn primary-glow"
                 onClick={triggerInstall}
+                disabled={isInstalling}
                 aria-label="Install official app"
               >
                 <span className="pwa-btn-shimmer" aria-hidden="true" />
-                <span className="pwa-btn-icon">📲</span>
-                <span className="pwa-btn-text">সরাসরি ইনস্টল</span>
+                <span className="pwa-btn-icon">{isInstalling ? '⏳' : '📲'}</span>
+                <span className="pwa-btn-text">
+                  {isInstalling ? 'ইনস্টলার শুরু হচ্ছে...' : 'সরাসরি ইনস্টল'}
+                </span>
               </button>
 
               <button
@@ -112,7 +117,7 @@ export default function InstallAppBanner() {
         </div>
       )}
 
-      {/* 4. SMART DIRECT INSTALL MODAL / ACTION SHEET */}
+      {/* 4. SMART DIRECT ACTION SHEET & DIAGNOSTIC MODAL */}
       {showInstallModal && (
         <div className="pwa-modal-backdrop" onClick={() => setShowInstallModal(false)}>
           <div
@@ -141,17 +146,29 @@ export default function InstallAppBanner() {
               />
               <div className="pwa-modal-title-wrap">
                 <h3 id="pwa-modal-title">Thailand Official Lottery App</h3>
-                <span className="pwa-modal-tag">สำนักงานสลากกินแบ่งรัฐบาล • সরকারি অনুমোদিত</span>
+                <span className="pwa-modal-tag">สำนักงานสลากกินแบ่งรัฐบาล • সরকারি অনুমোদিত PWA</span>
               </div>
             </div>
 
+            {/* Diagnostic Status Pill */}
+            <div className="pwa-diagnostic-bar">
+              <span className="diag-item">
+                <span className="diag-dot green" />
+                <span>সার্ভিস ইঞ্জিন: {swActive ? 'সক্রিয় (Active)' : 'প্রস্তুত'}</span>
+              </span>
+              <span className="diag-item">
+                <span className="diag-dot blue" />
+                <span>ব্রাউজার: {isIOS ? 'Apple Safari' : isAndroid ? 'Android Chrome' : 'Chrome/Edge'}</span>
+              </span>
+            </div>
+
             <div className="pwa-modal-body">
-              {/* IF IN-APP BROWSER (WhatsApp, Facebook, Messenger) */}
+              {/* CASE 1: IN-APP BROWSER (WhatsApp, Facebook, Messenger) */}
               {isInAppBrowser ? (
                 <div className="in-app-browser-card">
                   <div className="in-app-badge">⚠️ ব্রাউজার নোটিশ</div>
                   <p className="in-app-text">
-                    আপনি <strong>হোয়াটসঅ্যাপ/ফেসবুক</strong> ব্রাউজারে আছেন। সরাসরি ফোনে ইনস্টল করতে নিচের বাটনে চাপ দিয়ে ক্রোম ব্রাউজারে খুলুন:
+                    আপনি <strong>হোয়াটসঅ্যাপ / ফেসবুক</strong> অ্যাপের ভেতরে আছেন, যেখানে গুগল ইনস্টল ব্লক রাখে। সরাসরি ফোনে ইনস্টল করতে নিচের বাটনে চাপ দিন:
                   </p>
                   <button
                     type="button"
@@ -159,11 +176,11 @@ export default function InstallAppBanner() {
                     onClick={openInChrome}
                   >
                     <span className="chrome-icon">🌐</span>
-                    <span>Chrome ব্রাউজারে খুলুন ও ইনস্টল করুন ➔</span>
+                    <span>সরাসরি Chrome ব্রাউজারে খুলুন ➔</span>
                   </button>
                 </div>
               ) : isIOS ? (
-                /* IF IPHONE / IPAD (Apple Safari) */
+                /* CASE 2: APPLE IPHONE / IPAD */
                 <>
                   <p className="pwa-modal-intro">
                     আইফোনে অফিসিয়াল অ্যাপটি সরাসরি যুক্ত করতে নিচের ২টি সহজ কাজ করুন:
@@ -186,28 +203,41 @@ export default function InstallAppBanner() {
                   </ol>
                 </>
               ) : (
-                /* ANDROID CHROME OR DESKTOP */
-                <>
+                /* CASE 3: ANDROID CHROME OR DESKTOP */
+                <div className="android-direct-install-box">
                   <p className="pwa-modal-intro">
-                    সরাসরি ১-ক্লিকে ফোনে ইনস্টল করতে:
+                    আপনার গুগল ক্রোম ব্রাউজারে সরাসরি অ্যাপ ইনস্টল অপশন:
                   </p>
-                  <ol className="pwa-steps-list">
-                    <li>
-                      <span className="step-num">১</span>
-                      <div className="step-content">
-                        <strong>ব্রাউজারের ৩টি ডটে (⋮) চাপুন</strong>
-                        <p>আপনার ফোনের ব্রাউজারের একদম উপরে ডান কোণায় থাকা <strong>মেনু (⋮)</strong> বাটনে চাপ দিন।</p>
+                  
+                  <div className="chrome-menu-visual-card">
+                    <div className="visual-step-row">
+                      <span className="visual-badge">১</span>
+                      <div className="visual-text">
+                        <strong>ব্রাউজারের ৩টি ডটে (⋮) চাপ দিন</strong>
+                        <p>স্ক্রিনের একদম উপরে ডান কোণায় থাকা ক্রোম মেনু বাটনে ট্যাপ করুন।</p>
                       </div>
-                    </li>
-                    <li>
-                      <span className="step-num">২</span>
-                      <div className="step-content">
+                    </div>
+
+                    <div className="visual-step-divider" />
+
+                    <div className="visual-step-row">
+                      <span className="visual-badge gold">২</span>
+                      <div className="visual-text">
                         <strong>'Install App' বা 'Add to Home screen' চাপুন</strong>
-                        <p>তালিকায় <strong>'Install App' (বা অ্যাপ ইনস্টল)</strong> অপশনটিতে চাপলেই সাথে সাথে অ্যাপ আপনার ফোনে ইনস্টল হয়ে যাবে!</p>
+                        <p>মেনু থেকে ইনস্টল অপশনটিতে চাপলেই সরাসরি আপনার ফোনের হোম স্ক্রিনে অ্যাপটি ডাউনলোড ও ইনস্টল হয়ে যাবে!</p>
                       </div>
-                    </li>
-                  </ol>
-                </>
+                    </div>
+                  </div>
+
+                  {/* Retry Native Prompt Button */}
+                  <button
+                    type="button"
+                    className="retry-native-prompt-btn"
+                    onClick={triggerInstall}
+                  >
+                    <span>🔄 পুনরায় সরাসরি ইনস্টল চেষ্টা করুন</span>
+                  </button>
+                </div>
               )}
             </div>
 

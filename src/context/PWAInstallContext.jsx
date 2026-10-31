@@ -6,6 +6,8 @@ const PWAInstallContext = createContext({
   isAndroid: false,
   isInAppBrowser: false,
   hasPrompt: false,
+  isInstalling: false,
+  swActive: false,
   showInstallModal: false,
   setShowInstallModal: () => {},
   bannerDismissed: false,
@@ -24,12 +26,14 @@ export function PWAInstallProvider({ children }) {
   const [isIOS, setIsIOS] = useState(false);
   const [isAndroid, setIsAndroid] = useState(false);
   const [isInAppBrowser, setIsInAppBrowser] = useState(false);
+  const [isInstalling, setIsInstalling] = useState(false);
+  const [swActive, setSwActive] = useState(false);
   const [showInstallModal, setShowInstallModal] = useState(false);
   const [bannerDismissed, setBannerDismissed] = useState(false);
   const [installSuccess, setInstallSuccess] = useState(false);
 
   useEffect(() => {
-    // 1. Check if already installed and running in standalone app mode
+    // 1. Standalone / installed detection
     const checkStandalone = () => {
       const isStandaloneMode =
         window.matchMedia('(display-mode: standalone)').matches ||
@@ -42,7 +46,7 @@ export function PWAInstallProvider({ children }) {
 
     checkStandalone();
 
-    // 2. Platform & In-app Browser detection
+    // 2. Platform & In-app Webview detection
     const userAgent = (window.navigator.userAgent || '').toLowerCase();
     const isIosDevice = /iphone|ipad|ipod/.test(userAgent) && !window.MSStream;
     const isAndroidDevice = /android/.test(userAgent);
@@ -52,18 +56,28 @@ export function PWAInstallProvider({ children }) {
     setIsAndroid(isAndroidDevice);
     setIsInAppBrowser(inApp);
 
-    // 3. Check if early captured prompt exists
-    if (window.deferredPWAInstallPrompt) {
-      setDeferredPrompt(window.deferredPWAInstallPrompt);
-      console.log('[PWA] Hooked early captured prompt');
+    // 3. Service worker status check
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.ready.then(() => {
+        setSwActive(true);
+        console.log('[PWA] Service Worker active and ready');
+      }).catch(() => {
+        setSwActive(false);
+      });
     }
 
-    // 4. Listen for prompt events
+    // 4. Hook early captured prompt
+    if (window.deferredPWAInstallPrompt) {
+      setDeferredPrompt(window.deferredPWAInstallPrompt);
+      console.log('[PWA] Found early captured prompt on mount');
+    }
+
+    // 5. Event listeners for install prompt
     const handleEarlyReady = (e) => {
-      const promptObj = e.detail || window.deferredPWAInstallPrompt;
+      const promptObj = (e && e.detail) || window.deferredPWAInstallPrompt;
       if (promptObj) {
         setDeferredPrompt(promptObj);
-        console.log('[PWA] Hooked pwa-prompt-ready event');
+        console.log('[PWA] Hooked pwa-prompt-ready custom event');
       }
     };
 
@@ -71,11 +85,11 @@ export function PWAInstallProvider({ children }) {
       e.preventDefault();
       window.deferredPWAInstallPrompt = e;
       setDeferredPrompt(e);
-      console.log('[PWA] Native beforeinstallprompt captured directly in React');
+      console.log('[PWA] Captured beforeinstallprompt event');
     };
 
     const handleAppInstalled = () => {
-      console.log('[PWA] App installed successfully');
+      console.log('[PWA] Application successfully installed');
       setDeferredPrompt(null);
       window.deferredPWAInstallPrompt = null;
       setIsStandalone(true);
@@ -96,7 +110,7 @@ export function PWAInstallProvider({ children }) {
     };
   }, []);
 
-  // 1-Tap Open in Real Chrome for Android In-App Browsers (WhatsApp, Facebook, etc.)
+  // Open in real Google Chrome for Android in-app browsers
   const openInChrome = useCallback(() => {
     const currentUrl = window.location.href;
     if (isAndroid) {
@@ -110,11 +124,13 @@ export function PWAInstallProvider({ children }) {
   // Main Direct Install Trigger
   const triggerInstall = async () => {
     if (isStandalone) {
-      alert('অফিসিয়াল অ্যাপটি ইতোমধ্যে ইনস্টল করা আছে!');
+      alert('অফিসিয়াল অ্যাপটি ইতোমধ্যে ইনস্টল করা আছে এবং অ্যাপ মোডে চলছে!');
       return;
     }
 
-    // Request Notification permission if requested
+    setIsInstalling(true);
+
+    // Step 1: Request Notification permission
     if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'default') {
       try {
         await Notification.requestPermission();
@@ -123,29 +139,54 @@ export function PWAInstallProvider({ children }) {
       }
     }
 
-    // Check prompt availability
-    const promptEvent = deferredPrompt || window.deferredPWAInstallPrompt;
+    // Step 2: Check if prompt is already captured
+    let promptEvent = deferredPrompt || (typeof window !== 'undefined' && window.deferredPWAInstallPrompt);
 
+    // If not captured yet, give browser up to 1.5 seconds to dispatch it
+    if (!promptEvent && !isIOS && !isInAppBrowser) {
+      console.log('[PWA] Prompt not ready yet, waiting 1.5s for browser check...');
+      promptEvent = await new Promise((resolve) => {
+        let timer = null;
+        const checkHandler = (e) => {
+          clearTimeout(timer);
+          window.removeEventListener('beforeinstallprompt', checkHandler);
+          window.removeEventListener('pwa-prompt-ready', checkHandler);
+          resolve((e && e.detail) || window.deferredPWAInstallPrompt);
+        };
+        window.addEventListener('beforeinstallprompt', checkHandler);
+        window.addEventListener('pwa-prompt-ready', checkHandler);
+
+        timer = setTimeout(() => {
+          window.removeEventListener('beforeinstallprompt', checkHandler);
+          window.removeEventListener('pwa-prompt-ready', checkHandler);
+          resolve(window.deferredPWAInstallPrompt || null);
+        }, 1500);
+      });
+    }
+
+    setIsInstalling(false);
+
+    // Step 3: Trigger native prompt if available
     if (promptEvent) {
       try {
-        console.log('[PWA] Triggering native prompt dialog...');
+        console.log('[PWA] Directly launching native install prompt dialog...');
         await promptEvent.prompt();
         const { outcome } = await promptEvent.userChoice;
-        console.log('[PWA] Install prompt outcome:', outcome);
+        console.log('[PWA] User choice outcome:', outcome);
         if (outcome === 'accepted') {
           setDeferredPrompt(null);
           window.deferredPWAInstallPrompt = null;
           setInstallSuccess(true);
           setBannerDismissed(true);
           setShowInstallModal(false);
+          return;
         }
-        return;
       } catch (err) {
-        console.warn('[PWA] Error launching native install prompt:', err);
+        console.warn('[PWA] Native prompt trigger error:', err);
       }
     }
 
-    // If native prompt not directly available: show smart platform action sheet
+    // Step 4: If native prompt wasn't triggered, show the Action Sheet with exact device diagnostic
     setShowInstallModal(true);
   };
 
@@ -157,6 +198,8 @@ export function PWAInstallProvider({ children }) {
         isAndroid,
         isInAppBrowser,
         hasPrompt: Boolean(deferredPrompt || (typeof window !== 'undefined' && window.deferredPWAInstallPrompt)),
+        isInstalling,
+        swActive,
         showInstallModal,
         setShowInstallModal,
         bannerDismissed,

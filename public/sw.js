@@ -1,32 +1,25 @@
-// Thailand Official Lottery 2026 - Progressive Web App Service Worker
-const CACHE_NAME = 'thai-lottery-v2';
+// Thailand Official Lottery 2026 - PWA Service Worker
+const CACHE_NAME = 'thai-lottery-v3';
 
-const PRECACHE_ASSETS = [
+const ESSENTIAL_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/favicon.svg',
-  '/favicon.png',
-  '/icons/icon-96.png',
-  '/icons/icon-144.png',
   '/icons/icon-192.png',
-  '/icons/icon-maskable-192.png',
   '/icons/icon-512.png',
+  '/icons/icon-maskable-192.png',
   '/icons/icon-maskable-512.png',
-  '/icons/apple-touch-icon.png',
-  '/assets/logo.png',
-  '/assets/logo-verified.png'
+  '/assets/logo.png'
 ];
 
-// Install: precache essential shell assets safely
 self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
-      for (const asset of PRECACHE_ASSETS) {
+      for (const asset of ESSENTIAL_ASSETS) {
         try {
           await cache.add(asset);
-        } catch (e) {
+        } catch (err) {
           console.warn('[SW] Precache asset skipped:', asset);
         }
       }
@@ -34,87 +27,58 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate: purge stale caches and claim clients immediately
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then((keys) => {
       return Promise.all(
-        cacheNames.map((name) => {
-          if (name !== CACHE_NAME) {
-            return caches.delete(name);
-          }
-        })
+        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
       );
     }).then(() => self.clients.claim())
   );
 });
 
-// Fetch: Network-first for navigation, Cache-first for static icons/assets
 self.addEventListener('fetch', (event) => {
   const { request } = event;
-
-  // Only handle GET requests
   if (request.method !== 'GET') return;
 
   const url = new URL(request.url);
+  if (url.pathname.endsWith('.mp4') || !url.protocol.startsWith('http')) return;
 
-  // Ignore video media stream requests or non-http protocols
-  if (url.pathname.endsWith('.mp4') || !url.protocol.startsWith('http')) {
-    return;
-  }
-
-  // Navigation requests (HTML pages): Network-first with cache fallback
+  // Navigation requests: Network-first with cache fallback
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
-        .then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            const responseClone = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(request, responseClone);
-            });
+        .then((res) => {
+          if (res && res.status === 200) {
+            const clone = res.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
           }
-          return networkResponse;
+          return res;
         })
-        .catch(() => {
-          return caches.match('/index.html') || caches.match('/');
-        })
+        .catch(() => caches.match('/index.html') || caches.match('/'))
     );
     return;
   }
 
-  // Static images, fonts, icons: Cache-first, fallback to network
-  if (
-    url.pathname.startsWith('/icons/') ||
-    url.pathname.startsWith('/assets/') ||
-    url.hostname.includes('fonts.googleapis.com') ||
-    url.hostname.includes('fonts.gstatic.com')
-  ) {
+  // Cache-first for icons and static assets
+  if (url.pathname.startsWith('/icons/') || url.pathname.startsWith('/assets/')) {
     event.respondWith(
-      caches.match(request).then((cachedResponse) => {
-        if (cachedResponse) return cachedResponse;
-        return fetch(request).then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            const responseClone = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(request, responseClone);
-            });
+      caches.match(request).then((cached) => {
+        if (cached) return cached;
+        return fetch(request).then((res) => {
+          if (res && res.status === 200) {
+            const clone = res.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
           }
-          return networkResponse;
+          return res;
         });
       })
     );
     return;
   }
 
-  // Default: Network with cache fallback
+  // Network with cache fallback
   event.respondWith(
-    fetch(request)
-      .then((networkResponse) => {
-        return networkResponse;
-      })
-      .catch(() => {
-        return caches.match(request);
-      })
+    fetch(request).catch(() => caches.match(request))
   );
 });
