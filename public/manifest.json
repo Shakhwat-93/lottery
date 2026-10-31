@@ -1,0 +1,89 @@
+{
+  "id": "/?source=pwa",
+  "name": "Thailand Official Lottery 2026",
+  "short_name": "Thai Lottery",
+  "description": "থাইল্যান্ড অফিসিয়াল লটারি ২০২৬ — লাইসেন্সকৃত ভিআইপি পেপার, ৩ সেট গেম ও সরকারি ফলাফল।",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "background_color": "#071739",
+  "theme_color": "#071739",
+  "orientation": "portrait",
+  "lang": "bn",
+  "dir": "ltr",
+  "categories": ["entertainment", "finance", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "অনলাইন মেম্বারশিপ ফর্ম",
+      "short_name": "ফর্ম পূরণ",
+      "description": "অফিসিয়াল রেজিস্ট্রেশন ও মেম্বারশিপ ফর্ম",
+      "url": "/form",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "ভিআইপি সিওর গেম পেপার",
+      "short_name": "সিওর পেপার",
+      "description": "অফিসিয়াল সিওর পেপার ও ফলাফল",
+      "url": "/game",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "৩ সেট গেম পেপার",
+      "short_name": "৩ সেট গেম",
+      "description": "অফিসিয়াল ৩ সেট গেম পেপার",
+      "url": "/3-set-game",
+      "icons": [
+        {
+          "src": "/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

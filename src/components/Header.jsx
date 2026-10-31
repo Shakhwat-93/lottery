@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { usePWAInstall } from '../context/PWAInstallContext';
 
 export default function Header({ page = 'home' }) {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const { triggerInstall, isStandalone } = usePWAInstall();
 
   // Close menu on ESC key and prevent body scroll when open
   React.useEffect(() => {
@@ -67,18 +69,33 @@ export default function Header({ page = 'home' }) {
           </span>
         </Link>
 
-        {/* Mobile Hamburger Button with Gold Pill Outline */}
-        <button
-          type="button"
-          className={`header-hamburger-btn ${mobileMenuOpen ? 'is-active' : ''}`}
-          onClick={() => setMobileMenuOpen((prev) => !prev)}
-          aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-          aria-expanded={mobileMenuOpen}
-        >
-          <span className="hamburger-bar"></span>
-          <span className="hamburger-bar"></span>
-          <span className="hamburger-bar"></span>
-        </button>
+        <div className="header-right-actions">
+          {!isStandalone && (
+            <button
+              type="button"
+              className="header-install-btn"
+              onClick={triggerInstall}
+              aria-label="Install official app"
+            >
+              <span className="header-install-pulse" aria-hidden="true" />
+              <span className="header-install-icon">📲</span>
+              <span className="header-install-text">ইনস্টল</span>
+            </button>
+          )}
+
+          {/* Mobile Hamburger Button with Gold Pill Outline */}
+          <button
+            type="button"
+            className={`header-hamburger-btn ${mobileMenuOpen ? 'is-active' : ''}`}
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={mobileMenuOpen}
+          >
+            <span className="hamburger-bar"></span>
+            <span className="hamburger-bar"></span>
+            <span className="hamburger-bar"></span>
+          </button>
+        </div>
 
         {/* Backdrop for Mobile Sidebar Drawer */}
         <div
@@ -113,6 +130,20 @@ export default function Header({ page = 'home' }) {
           </div>
 
           <nav className="nav-links" aria-label="Primary navigation">
+            {!isStandalone && (
+              <button
+                type="button"
+                className="nav-panel-install-btn"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  triggerInstall();
+                }}
+              >
+                <span className="nav-install-icon">📲</span>
+                <span className="nav-install-text">অফিসিয়াল অ্যাপ ইনস্টল করুন</span>
+                <span className="nav-install-pill">APP</span>
+              </button>
+            )}
             {page === 'home' && (
               <>
                 <a href="#certificate" onClick={() => setMobileMenuOpen(false)}>
