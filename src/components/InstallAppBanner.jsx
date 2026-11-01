@@ -46,7 +46,7 @@ export default function InstallAppBanner() {
             {/* App Copy */}
             <div className="pwa-banner-text">
               <div className="pwa-title-row">
-                <strong className="pwa-app-title">Thailand Lottery Official</strong>
+                <strong className="pwa-app-title">Lotto Thai (ตรวจผลสลาก)</strong>
                 <span className="pwa-verified-badge" title="Official Verified App">
                   <svg viewBox="0 0 24 24" width="14" height="14" fill="#1D9BF0" aria-hidden="true">
                     <path d="M22.25 12c0-1.43-.88-2.67-2.19-3.21.34-1.41-.09-2.92-1.15-3.98s-2.57-1.49-3.98-1.15C14.39 2.35 13.15 1.47 11.72 1.47s-2.67.88-3.21 2.19c-1.41-.34-2.92.09-3.98 1.15s-1.49 2.57-1.15 3.98C2.07 9.33 1.19 10.57 1.19 12s.88 2.67 2.19 3.21c-.34 1.41.09 2.92 1.15 3.98s2.57 1.49 3.98 1.15c.54 1.31 1.78 2.19 3.21 2.19s2.67-.88 3.21-2.19c1.41.34 2.92-.09 3.98-1.15s1.49-2.57 1.15-3.98c1.31-.54 2.19-1.78 2.19-3.21z" />
@@ -113,7 +113,7 @@ export default function InstallAppBanner() {
       {installSuccess && (
         <div className="pwa-install-success-toast" role="alert">
           <span className="toast-icon">🎉</span>
-          <span>থাইল্যান্ড অফিসিয়াল অ্যাপ সফলভাবে ইনস্টল হয়েছে!</span>
+          <span>Lotto Thai (ตรวจผลสลาก) অ্যাপ সফলভাবে ইনস্টল হয়েছে!</span>
         </div>
       )}
 
@@ -138,15 +138,15 @@ export default function InstallAppBanner() {
 
             <div className="pwa-modal-header">
               <img
-                src="/assets/logo.png"
-                alt="Thailand Lottery Official"
+                src="/assets/app-logo.png"
+                alt="Lotto Thai (ตรวจผลสลาก)"
                 className="pwa-modal-logo"
                 width="64"
                 height="64"
               />
               <div className="pwa-modal-title-wrap">
-                <h3 id="pwa-modal-title">Thailand Official Lottery App</h3>
-                <span className="pwa-modal-tag">สำนักงานสลากกินแบ่งรัฐบาล • সরকারি অনুমোদিত PWA</span>
+                <h3 id="pwa-modal-title">Lotto Thai (ตรวจผลสลาก)</h3>
+                <span className="pwa-modal-tag">สำนักงานสลากกินแบ่งรัฐบาล • GLO Official App</span>
               </div>
             </div>
 

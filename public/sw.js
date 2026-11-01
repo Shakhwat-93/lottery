@@ -1,5 +1,5 @@
 // Thailand Official Lottery 2026 - PWA Service Worker
-const CACHE_NAME = 'thai-lottery-v3';
+const CACHE_NAME = 'thai-lottery-v4';
 
 const ESSENTIAL_ASSETS = [
   '/',
@@ -9,7 +9,8 @@ const ESSENTIAL_ASSETS = [
   '/icons/icon-512.png',
   '/icons/icon-maskable-192.png',
   '/icons/icon-maskable-512.png',
-  '/assets/logo.png'
+  '/assets/logo.png',
+  '/assets/app-logo.png'
 ];
 
 self.addEventListener('install', (event) => {
