@@ -117,7 +117,7 @@ export default function VipAgencyCodePage() {
     dateParam && (dateParam.startsWith('16') || dateParam.includes('16-11') || dateParam.startsWith('30') || dateParam.includes('30'))
   );
   const [showLogoTransition, setShowLogoTransition] = useState(true);
-  const [targetDigits] = useState(['1', '6', '8', '1', '6']);
+  const [targetDigits] = useState(['1', '7', '2', '4', '8']);
   const [displayedDigits, setDisplayedDigits] = useState(['0', '0', '0', '0', '0']);
   const [lockedStates, setLockedStates] = useState([false, false, false, false, false]);
   const [isJackpotWon, setIsJackpotWon] = useState(false);
@@ -424,7 +424,7 @@ export default function VipAgencyCodePage() {
             className={`jackpot-digits-row ${isLockedForMembership ? 'is-membership-locked' : (isJackpotWon ? 'is-jackpot-revealed' : '')}`}
             role={isLockedForMembership ? 'region' : 'button'}
             tabIndex={isLockedForMembership ? -1 : 0}
-            title={isLockedForMembership ? 'এই কোডটি মেম্বারদের জন্য লক করা' : 'ক্লিক করে কোড কপি করুন (16816)'}
+            title={isLockedForMembership ? 'এই কোডটি মেম্বারদের জন্য লক করা' : 'ক্লিক করে কোড কপি করুন (17248)'}
             onClick={isLockedForMembership ? undefined : handleCopyCode}
             onKeyDown={isLockedForMembership ? undefined : (e) => {
               if (e.key === 'Enter' || e.key === ' ') handleCopyCode();
@@ -447,7 +447,7 @@ export default function VipAgencyCodePage() {
                 </div>
               ))
             ) : (
-              // REVEALED DIGITS FOR 16/02/2069
+              // REVEALED DIGITS FOR 01-11-2026
               displayedDigits.map((digit, idx) => (
                 <div
                   key={idx}
@@ -467,7 +467,7 @@ export default function VipAgencyCodePage() {
             )}
           </div>
 
-          {/* Action Box: Membership Card for 30/02/2069, Copy for 16/02/2069 */}
+          {/* Action Box: Membership Card for 16-11-2026, Copy for 01-11-2026 */}
           {isLockedForMembership ? (
             <div className="vip-membership-locked-card">
               <div className="locked-card-header">
@@ -495,7 +495,7 @@ export default function VipAgencyCodePage() {
               {copied ? (
                 <div className="jackpot-copied-pill">
                   <span className="copied-icon">✓</span>
-                  <span>কোড কপি হয়েছে: <strong>16816</strong></span>
+                  <span>কোড কপি হয়েছে: <strong>17248</strong></span>
                 </div>
               ) : (
                 <button
@@ -504,7 +504,7 @@ export default function VipAgencyCodePage() {
                   onClick={handleCopyCode}
                 >
                   <span className="copy-icon">📋</span>
-                  <span>কোড কপি করুন (16816)</span>
+                  <span>কোড কপি করুন (17248)</span>
                 </button>
               )}
             </div>
