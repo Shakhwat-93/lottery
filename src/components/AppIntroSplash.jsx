@@ -144,12 +144,12 @@ export default function AppIntroSplash({ onComplete }) {
 
           {/* Main Title with Metallic Liquid Gold Gradient */}
           <h1 className="intro-main-title">
-            <span className="title-letter-shine">LOTTO THAI (ตรวจผลสลาก)</span>
+            <span className="title-letter-shine">THAILAND OFFICIAL LOTTERY</span>
           </h1>
 
           {/* Bengali Subtitle with Soft Glow */}
           <p className="intro-bengali-sub">
-            অফিসিয়াল থাইল্যান্ড লটারি ও ভেরিফাইড রেজাল্ট পোর্টাল ২০২৬
+            থাইল্যান্ড সরকারি অফিসিয়াল লটারি পোর্টাল ২০২৬
           </p>
 
           {/* Verified Security Tag */}
