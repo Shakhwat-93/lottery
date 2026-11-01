@@ -182,25 +182,25 @@ export default function ThreeSetGamePage() {
 
           {/* THE 2 GLOWING DATE BUTTONS — STRICTLY VERTICAL STACKED (ONE ON TOP, ONE UNDERNEATH), CENTER ALIGNED */}
           <div className="three-set-vertical-dates-container" aria-label="3 Set Game VIP Draw Dates">
-            {/* Date Button 1: 2/12/2069 (Top) */}
+            {/* Date Button 1: 01-11-2026 (Top) */}
             <button
               type="button"
-              className={`button primary vip-agency-date-btn three-set-date-pill ${activeDate === '2/12/2069' ? 'is-active' : ''}`}
-              onClick={() => handleDateClick('2/12/2069', 1)}
-              aria-label="VIP Draw Date 2/12/2069"
+              className={`button primary vip-agency-date-btn three-set-date-pill ${activeDate === '01-11-2026' ? 'is-active' : ''}`}
+              onClick={() => handleDateClick('01-11-2026', 1)}
+              aria-label="VIP Draw Date 01-11-2026"
             >
-              <span>2/12/2069</span>
+              <span>01-11-2026</span>
               <span className="vip-btn-arrow" aria-hidden="true">↗</span>
             </button>
 
-            {/* Date Button 2: 20/21/2069 (Underneath) */}
+            {/* Date Button 2: 16-11-2026 (Underneath) */}
             <button
               type="button"
-              className={`button primary vip-agency-date-btn three-set-date-pill ${activeDate === '20/21/2069' ? 'is-active' : ''}`}
-              onClick={() => handleDateClick('20/21/2069', 2)}
-              aria-label="Special Draw Date 20/21/2069"
+              className={`button primary vip-agency-date-btn three-set-date-pill ${activeDate === '16-11-2026' ? 'is-active' : ''}`}
+              onClick={() => handleDateClick('16-11-2026', 2)}
+              aria-label="Special Draw Date 16-11-2026"
             >
-              <span>20/21/2069</span>
+              <span>16-11-2026</span>
               <span className="vip-btn-arrow" aria-hidden="true">↗</span>
             </button>
           </div>
@@ -255,7 +255,7 @@ export default function ThreeSetGamePage() {
               style={{ textAlign: 'center', background: '#071739', padding: '1rem' }}
             >
               <img
-                src={activeDate === '20/21/2069' ? '/assets/site/3-set-game.jpg' : '/assets/site/game-paper-2-12-2069.jpg'}
+                src={activeDate === '16-11-2026' || activeDate === '20/21/2069' ? '/assets/site/3-set-game.jpg' : '/assets/site/game-paper-2-12-2069.jpg'}
                 alt={`Thailand Official 3 Set Game - Draw Date ${activeDate}`}
                 className="three-set-modal-img"
                 style={{ maxHeight: '80vh', width: 'auto', maxWidth: '100%', objectFit: 'contain', borderRadius: '8px' }}

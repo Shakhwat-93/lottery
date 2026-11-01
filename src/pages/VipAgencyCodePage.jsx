@@ -114,7 +114,7 @@ export default function VipAgencyCodePage() {
   const [searchParams] = useSearchParams();
   const dateParam = searchParams.get('date');
   const isLockedForMembership = Boolean(
-    dateParam && (dateParam.startsWith('30') || dateParam.includes('30'))
+    dateParam && (dateParam.startsWith('16') || dateParam.includes('16-11') || dateParam.startsWith('30') || dateParam.includes('30'))
   );
   const [showLogoTransition, setShowLogoTransition] = useState(true);
   const [targetDigits] = useState(['1', '6', '8', '1', '6']);

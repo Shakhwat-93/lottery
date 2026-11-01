@@ -14,23 +14,23 @@ export default function GamePanelCta() {
 
       {/* 2 Vertically Stacked VIP Agency Code Date Buttons */}
       <div className="game-panel-buttons-stack" aria-label="VIP Agency Code Dates">
-        {/* Button 1: 16/02/2069 */}
+        {/* Button 1: 01-11-2026 */}
         <Link
           className="button primary vip-agency-date-btn"
-          to="/vip-agency-code?date=16/02/2069"
-          aria-label="VIP Agency Code Date 16/02/2069"
+          to="/vip-agency-code?date=01-11-2026"
+          aria-label="VIP Agency Code Date 01-11-2026"
         >
-          <span>16/02/2069</span>
+          <span>01-11-2026</span>
           <span className="vip-btn-arrow" aria-hidden="true">↗</span>
         </Link>
 
-        {/* Button 2: 30/02/2069 */}
+        {/* Button 2: 16-11-2026 */}
         <Link
           className="button primary vip-agency-date-btn"
-          to="/vip-agency-code?date=30/02/2069"
-          aria-label="VIP Agency Code Date 30/02/2069"
+          to="/vip-agency-code?date=16-11-2026"
+          aria-label="VIP Agency Code Date 16-11-2026"
         >
-          <span>30/02/2069</span>
+          <span>16-11-2026</span>
           <span className="vip-btn-arrow" aria-hidden="true">↗</span>
         </Link>
       </div>

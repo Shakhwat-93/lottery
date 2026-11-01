@@ -45,19 +45,19 @@ export default function HomePage() {
 
           <div className="game-panel-buttons-stack" aria-label="Game Dates">
             <Link
-              to="/game-paper?date=2/12/2069"
+              to="/game-paper?date=01-11-2026"
               className="button primary vip-agency-date-btn"
-              aria-label="Game Draw Date 2/12/2069"
+              aria-label="Game Draw Date 01-11-2026"
             >
-              <span>2/12/2069</span>
+              <span>01-11-2026</span>
               <span className="vip-btn-arrow" aria-hidden="true">↗</span>
             </Link>
             <Link
-              to="/game-paper?date=20/21/2069"
+              to="/game-paper?date=16-11-2026"
               className="button primary vip-agency-date-btn"
-              aria-label="Game Special Draw Date 20/21/2069"
+              aria-label="Game Special Draw Date 16-11-2026"
             >
-              <span>20/21/2069</span>
+              <span>16-11-2026</span>
               <span className="vip-btn-arrow" aria-hidden="true">↗</span>
             </Link>
           </div>
@@ -74,19 +74,19 @@ export default function HomePage() {
 
           <div className="game-panel-buttons-stack" aria-label="Calculation Paper Dates">
             <Link
-              to="/game-paper?type=calc&date=2/12/2069"
+              to="/game-paper?type=calc&date=01-11-2026"
               className="button primary vip-agency-date-btn"
-              aria-label="Calculation Paper Draw Date 2/12/2069"
+              aria-label="Calculation Paper Draw Date 01-11-2026"
             >
-              <span>2/12/2069</span>
+              <span>01-11-2026</span>
               <span className="vip-btn-arrow" aria-hidden="true">↗</span>
             </Link>
             <Link
-              to="/game-paper?type=calc&date=20/21/2069"
+              to="/game-paper?type=calc&date=16-11-2026"
               className="button primary vip-agency-date-btn"
-              aria-label="Calculation Paper Special Draw Date 20/21/2069"
+              aria-label="Calculation Paper Special Draw Date 16-11-2026"
             >
-              <span>20/21/2069</span>
+              <span>16-11-2026</span>
               <span className="vip-btn-arrow" aria-hidden="true">↗</span>
             </Link>
           </div>

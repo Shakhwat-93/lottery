@@ -5,11 +5,11 @@ import LogoPageTransition from '../components/LogoPageTransition';
 export default function GamePaperPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const dateParam = searchParams.get('date') || '2/12/2069';
+  const dateParam = searchParams.get('date') || '01-11-2026';
   const paperType = searchParams.get('type') || '';
   const [showLogoTransition, setShowLogoTransition] = useState(true);
 
-  const isCalc = paperType === 'calc' || dateParam === '20/21/2069';
+  const isCalc = paperType === 'calc' || dateParam === '16-11-2026' || dateParam === '20/21/2069';
 
   // Escape key listener & Body styling
   useEffect(() => {
