@@ -34,17 +34,6 @@ const REVIEW_SLIDES = [
     videoSrc: '/reviews/review-3.mp4',
     poster: '/assets/site/review-poster-3.jpg',
     highlight: 'থাই সরকারি অনুমোদিত লাইসেন্সড পেপার'
-  },
-  {
-    id: 4,
-    numberLabel: '০৪',
-    title: 'Customer Review 04',
-    badge: 'VIP MEMBER PROOF',
-    customerName: 'গ্রাহকের সরাসরি অভিজ্ঞতা',
-    tag: 'রিয়েল পেপার উইনিং গ্যারান্টি',
-    videoSrc: '/reviews/review-4.mp4',
-    poster: '/assets/site/review-poster-4.jpg',
-    highlight: '১০০% সততা ও ২৪ ঘণ্টা বিশ্বস্ত সহায়তা'
   }
 ];
 
