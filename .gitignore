@@ -4,9 +4,12 @@
 *.bak
 node_modules/
 dist/
+.env.local
+.env.*.local
 .vscode/
 .idea/
 scratch/
+supabase/.temp/
 Downloads/
 *.mp4
 !public/form-intro-video.mp4

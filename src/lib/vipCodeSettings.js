@@ -1,4 +1,7 @@
+import { getSupabaseClient, isSupabaseConfigured } from './supabase';
+
 const STORAGE_KEY = 'lottery-vip-code-settings-v1';
+const SETTINGS_COLUMNS = 'id, first_date, second_date, vip_code, updated_at';
 
 export const DEFAULT_VIP_CODE_SETTINGS = Object.freeze({
   firstDate: '2026-11-01',
@@ -30,13 +33,56 @@ export function readVipCodeSettings() {
   }
 }
 
-export function saveVipCodeSettings(settings) {
+function mapDatabaseSettings(row) {
+  return {
+    firstDate: row.first_date,
+    secondDate: row.second_date,
+    code: row.vip_code
+  };
+}
+
+export async function loadVipCodeSettings() {
+  if (!isSupabaseConfigured) return readVipCodeSettings();
+
+  const client = await getSupabaseClient();
+  const { data, error } = await client
+    .from('vip_code_settings')
+    .select(SETTINGS_COLUMNS)
+    .eq('id', 'main')
+    .single();
+
+  if (error) throw new Error(`Supabase থেকে সেটিংস লোড হয়নি: ${error.message}`);
+  return mapDatabaseSettings(data);
+}
+
+export async function saveVipCodeSettings(settings) {
   if (!isValidSettings(settings)) {
     throw new Error('তারিখ এবং ৫ ডিজিটের কোডটি যাচাই করুন।');
   }
 
+  if (isSupabaseConfigured) {
+    const client = await getSupabaseClient();
+    const { data, error } = await client
+      .from('vip_code_settings')
+      .update({
+        first_date: settings.firstDate,
+        second_date: settings.secondDate,
+        vip_code: settings.code,
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', 'main')
+      .select(SETTINGS_COLUMNS)
+      .single();
+
+    if (error) throw new Error(`Supabase-এ সেভ হয়নি: ${error.message}`);
+    const savedSettings = mapDatabaseSettings(data);
+    window.dispatchEvent(new CustomEvent('vip-code-settings-updated', { detail: savedSettings }));
+    return savedSettings;
+  }
+
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-  window.dispatchEvent(new Event('vip-code-settings-updated'));
+  window.dispatchEvent(new CustomEvent('vip-code-settings-updated', { detail: settings }));
+  return settings;
 }
 
 export function formatVipDate(date) {

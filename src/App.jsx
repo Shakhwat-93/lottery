@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PWAInstallProvider } from './context/PWAInstallContext';
 import InstallAppBanner from './components/InstallAppBanner';
@@ -9,7 +9,8 @@ import FormPage from './pages/FormPage';
 import ThreeSetGamePage from './pages/ThreeSetGamePage';
 import VipAgencyCodePage from './pages/VipAgencyCodePage';
 import GamePaperPage from './pages/GamePaperPage';
-import AdminVipCodePage from './pages/AdminVipCodePage';
+
+const AdminVipCodePage = lazy(() => import('./pages/AdminVipCodePage'));
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(() => {
@@ -38,7 +39,7 @@ export default function App() {
         <InstallAppBanner />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/admin/vip-code" element={<AdminVipCodePage />} />
+          <Route path="/admin/vip-code" element={<Suspense fallback={<div className="admin-page">Admin panel loading…</div>}><AdminVipCodePage /></Suspense>} />
           <Route path="/form" element={<FormPage />} />
           <Route path="/form.html" element={<FormPage />} />
           <Route path="/registration" element={<FormPage />} />
