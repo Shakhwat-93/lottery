@@ -9,6 +9,7 @@ import FormPage from './pages/FormPage';
 import ThreeSetGamePage from './pages/ThreeSetGamePage';
 import VipAgencyCodePage from './pages/VipAgencyCodePage';
 import GamePaperPage from './pages/GamePaperPage';
+import AdminVipCodePage from './pages/AdminVipCodePage';
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(() => {
@@ -37,6 +38,7 @@ export default function App() {
         <InstallAppBanner />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/admin/vip-code" element={<AdminVipCodePage />} />
           <Route path="/form" element={<FormPage />} />
           <Route path="/form.html" element={<FormPage />} />
           <Route path="/registration" element={<FormPage />} />

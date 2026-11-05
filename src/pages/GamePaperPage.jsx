@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import LogoPageTransition from '../components/LogoPageTransition';
+import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
+import { formatVipDate } from '../lib/vipCodeSettings';
 
 export default function GamePaperPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const dateParam = searchParams.get('date') || '01-11-2026';
+  const settings = useVipCodeSettings();
+  const firstDate = formatVipDate(settings.firstDate);
+  const secondDate = formatVipDate(settings.secondDate);
+  const dateParam = searchParams.get('date') || firstDate;
   const paperType = searchParams.get('type') || '';
   const [showLogoTransition, setShowLogoTransition] = useState(true);
 
-  const isCalc = paperType === 'calc' || dateParam === '16-11-2026' || dateParam === '20/21/2069';
+  const isCalc = paperType === 'calc' || dateParam === secondDate || dateParam === '20/21/2069';
 
   // Escape key listener & Body styling
   useEffect(() => {

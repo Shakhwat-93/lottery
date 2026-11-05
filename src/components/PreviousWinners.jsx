@@ -20,6 +20,46 @@ const WINNER_FORMS = [
     country: 'সৌদি আরব (Saudi Arabia)',
     agent: 'Md Fahim Chowdhury (TL-001)',
     price: '250 SAR'
+  },
+  {
+    id: 'winner-anowar-ayub-ali',
+    nameBn: 'আনোয়ার আয়ুব আলী',
+    nameEn: 'ANOWAR AYUB ALI',
+    formImg: '/assets/site/winners/winner-form-anowar-ayub-ali.jpeg',
+    badge: 'সদস্যপদ ফরম',
+    country: 'সৌদি আরব (Saudi Arabia)',
+    agent: 'Md Fahim Chowdhury (TL-001)',
+    price: '250 SAR'
+  },
+  {
+    id: 'winner-md-jalal-miyah',
+    nameBn: 'মোঃ জালাল মিয়া',
+    nameEn: 'MD JALAL MIYAH',
+    formImg: '/assets/site/winners/winner-form-md-jalal-miyah.jpeg',
+    badge: 'সদস্যপদ ফরম',
+    country: 'সৌদি আরব (Saudi Arabia)',
+    agent: 'Md Fahim Chowdhury (TL-001)',
+    price: '250 SAR'
+  },
+  {
+    id: 'winner-md-nazim-mia',
+    nameBn: 'মোঃ নাজিম মিয়া',
+    nameEn: 'MD NAZIM MIA',
+    formImg: '/assets/site/winners/winner-form-md-nazim-mia.jpeg',
+    badge: 'সদস্যপদ ফরম',
+    country: 'সৌদি আরব (Saudi Arabia)',
+    agent: 'Md Fahim Chowdhury (TL-001)',
+    price: '250 SAR'
+  },
+  {
+    id: 'winner-akhter-hossain',
+    nameBn: 'আখতার হোসেন',
+    nameEn: 'AKHTER HOSSAIN',
+    formImg: '/assets/site/winners/winner-form-akhter-hossain.jpeg',
+    badge: 'সদস্যপদ ফরম',
+    country: 'সৌদি আরব (Saudi Arabia)',
+    agent: 'Md Fahim Chowdhury (TL-001)',
+    price: '250 SAR'
   }
 ];
 

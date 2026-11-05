@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
+import { formatVipDate } from '../lib/vipCodeSettings';
 
 export default function GamePanelCta() {
+  const settings = useVipCodeSettings();
+  const dates = [settings.firstDate, settings.secondDate];
+
   return (
     <section className="game-panel reveal-on-scroll" id="game-open">
       <div>
@@ -14,25 +19,20 @@ export default function GamePanelCta() {
 
       {/* 2 Vertically Stacked VIP Agency Code Date Buttons */}
       <div className="game-panel-buttons-stack" aria-label="VIP Agency Code Dates">
-        {/* Button 1: 01-11-2026 */}
-        <Link
-          className="button primary vip-agency-date-btn"
-          to="/vip-agency-code?date=01-11-2026"
-          aria-label="VIP Agency Code Date 01-11-2026"
-        >
-          <span>01-11-2026</span>
-          <span className="vip-btn-arrow" aria-hidden="true">↗</span>
-        </Link>
-
-        {/* Button 2: 16-11-2026 */}
-        <Link
-          className="button primary vip-agency-date-btn"
-          to="/vip-agency-code?date=16-11-2026"
-          aria-label="VIP Agency Code Date 16-11-2026"
-        >
-          <span>16-11-2026</span>
-          <span className="vip-btn-arrow" aria-hidden="true">↗</span>
-        </Link>
+        {dates.map((date) => {
+          const displayDate = formatVipDate(date);
+          return (
+            <Link
+              key={date}
+              className="button primary vip-agency-date-btn"
+              to={`/vip-agency-code?date=${displayDate}`}
+              aria-label={`VIP Agency Code Date ${displayDate}`}
+            >
+              <span>{displayDate}</span>
+              <span className="vip-btn-arrow" aria-hidden="true">↗</span>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );
