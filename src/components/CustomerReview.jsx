@@ -31,7 +31,7 @@ const REVIEW_SLIDES = [
     badge: 'PRIZE RECEIVED',
     customerName: 'প্রবাসী সদস্যের ফিডব্যাক',
     tag: '১০০% বিশ্বস্ত ড্র রেজাল্ট',
-    videoSrc: '/reviews/review-3.mp4',
+    videoSrc: '/reviews/review-3.mp4?v=20261107',
     poster: '/assets/site/review-poster-3.jpg',
     highlight: 'থাই সরকারি অনুমোদিত লাইসেন্সড পেপার'
   }
