@@ -15,7 +15,7 @@ import { useMediaCoordinator } from '../hooks/useMediaCoordinator';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export default function HomePage() {
-  const { heroVideoRef, reviewVideoRef, handleHeroClick } = useMediaCoordinator();
+  const { heroVideoRef, reviewVideoRef, handleHeroClick, handleReviewVideoPlay } = useMediaCoordinator();
   useScrollReveal();
 
   return (
@@ -110,7 +110,7 @@ export default function HomePage() {
           </div>
         </section>
         <PreviousWinners />
-        <CustomerReview videoRef={reviewVideoRef} />
+        <CustomerReview videoRef={reviewVideoRef} onReviewVideoPlay={handleReviewVideoPlay} />
       </main>
       <Footer page="home" />
     </>

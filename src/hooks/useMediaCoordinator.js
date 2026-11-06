@@ -4,46 +4,25 @@ export function useMediaCoordinator() {
   const heroVideoRef = useRef(null);
   const reviewVideoRef = useRef(null);
 
-  useEffect(() => {
+  const handleReviewVideoPlay = () => {
+    const reviewVideo = reviewVideoRef.current;
+    const heroVideo = heroVideoRef.current;
+    if (reviewVideo) reviewVideo.volume = 1;
+    if (heroVideo && !heroVideo.paused) heroVideo.pause();
+  };
+
+  const handleHeroVideoPlay = () => {
     const heroVideo = heroVideoRef.current;
     const reviewVideo = reviewVideoRef.current;
+    if (heroVideo) heroVideo.volume = 1;
+    if (reviewVideo && !reviewVideo.paused) reviewVideo.pause();
+  };
 
-    // --- PLAYBACK COORDINATION BETWEEN HERO AND REVIEW VIDEOS ---
-    const handleReviewPlay = () => {
-      if (reviewVideo) {
-        reviewVideo.muted = false;
-        reviewVideo.volume = 1.0;
-      }
-      if (heroVideo && !heroVideo.paused) {
-        heroVideo.pause();
-      }
-    };
-
-    const handleHeroPlay = () => {
-      if (heroVideo) {
-        heroVideo.muted = false;
-        heroVideo.volume = 1.0;
-      }
-      if (reviewVideo && !reviewVideo.paused) {
-        reviewVideo.pause();
-      }
-    };
-
-    if (reviewVideo) {
-      reviewVideo.addEventListener('play', handleReviewPlay);
-    }
-    if (heroVideo) {
-      heroVideo.addEventListener('play', handleHeroPlay);
-    }
-
-    return () => {
-      if (reviewVideo) {
-        reviewVideo.removeEventListener('play', handleReviewPlay);
-      }
-      if (heroVideo) {
-        heroVideo.removeEventListener('play', handleHeroPlay);
-      }
-    };
+  useEffect(() => {
+    const heroVideo = heroVideoRef.current;
+    if (!heroVideo) return undefined;
+    heroVideo.addEventListener('play', handleHeroVideoPlay);
+    return () => heroVideo.removeEventListener('play', handleHeroVideoPlay);
   }, []);
 
   const handleHeroClick = () => {
@@ -63,6 +42,7 @@ export function useMediaCoordinator() {
   return {
     heroVideoRef,
     reviewVideoRef,
-    handleHeroClick
+    handleHeroClick,
+    handleReviewVideoPlay
   };
 }

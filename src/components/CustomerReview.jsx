@@ -37,7 +37,7 @@ const REVIEW_SLIDES = [
   }
 ];
 
-export default function CustomerReview({ videoRef }) {
+export default function CustomerReview({ videoRef, onReviewVideoPlay }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
@@ -48,9 +48,7 @@ export default function CustomerReview({ videoRef }) {
 
   const goToSlide = (index) => {
     if (index === currentIndex) return;
-    if (videoRef && videoRef.current) {
-      videoRef.current.pause();
-    }
+    videoRef?.current?.pause();
     setCurrentIndex(index);
   };
 
@@ -64,13 +62,8 @@ export default function CustomerReview({ videoRef }) {
     goToSlide(prev);
   };
 
-  // Reload video source cleanly on slide switch without breaking the DOM ref
-  useEffect(() => {
-    if (videoRef && videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.load();
-    }
-  }, [currentIndex, videoRef]);
+  // Each slide gets a fresh keyed video node, so the browser loads its source
+  // once without carrying buffering or playback state across slides.
 
   // Touch Swipe handlers for mobile smooth flick
   const handleTouchStart = (e) => {
@@ -206,6 +199,7 @@ export default function CustomerReview({ videoRef }) {
               {/* Video Player */}
               <div className="review-video-box">
                 <video
+                  key={currentSlide.id}
                   ref={videoRef}
                   className="review-video-player"
                   id="review-video"
@@ -213,6 +207,7 @@ export default function CustomerReview({ videoRef }) {
                   playsInline
                   preload="metadata"
                   poster={currentSlide.poster}
+                  onPlay={onReviewVideoPlay}
                 >
                   <source src={currentSlide.videoSrc} type="video/mp4" />
                   Your browser does not support video playback.
