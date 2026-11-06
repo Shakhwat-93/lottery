@@ -61,25 +61,18 @@ export async function saveVipCodeSettings(settings) {
   }
 
   if (isSupabaseConfigured) {
-    const client = await getSupabaseClient();
-    const { data, error } = await client
-      .from('vip_code_settings')
-      .update({
-        first_date: settings.firstDate,
-        second_date: settings.secondDate,
-        vip_code: settings.code,
-        updated_at: new Date().toISOString()
-      })
-      .eq('id', 'main')
-      .select(SETTINGS_COLUMNS)
-      .single();
-
-    if (error) throw new Error(`Supabase-এ সেভ হয়নি: ${error.message}`);
-    const savedSettings = mapDatabaseSettings(data);
+    const response = await fetch('/api/admin/settings', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(settings)
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || 'Admin settings save failed.');
+    const savedSettings = result;
     window.dispatchEvent(new CustomEvent('vip-code-settings-updated', { detail: savedSettings }));
     return savedSettings;
   }
-
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
   window.dispatchEvent(new CustomEvent('vip-code-settings-updated', { detail: settings }));
   return settings;
