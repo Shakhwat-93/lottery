@@ -55,12 +55,12 @@ export async function loadVipCodeSettings() {
   return mapDatabaseSettings(data);
 }
 
-export async function saveVipCodeSettings(settings) {
+export async function saveVipCodeSettings(settings, { localOnly = false } = {}) {
   if (!isValidSettings(settings)) {
     throw new Error('তারিখ এবং ৫ ডিজিটের কোডটি যাচাই করুন।');
   }
 
-  if (isSupabaseConfigured) {
+  if (isSupabaseConfigured && !localOnly) {
     const response = await fetch('/api/admin/settings', {
       method: 'POST',
       credentials: 'same-origin',

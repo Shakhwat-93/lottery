@@ -5,12 +5,16 @@ import { isSupabaseConfigured } from '../lib/supabase';
 import { loadVipCodeSettings, readVipCodeSettings, saveVipCodeSettings } from '../lib/vipCodeSettings';
 import '../styles/admin.css';
 
+const DEMO_SESSION_KEY = 'vip-code-demo-session';
+const DEMO_ADMIN_EMAIL = 'armanali420@gmail.com';
+const DEMO_ADMIN_PASSWORD = 'armanali420@gmail.com';
+
 export default function AdminVipCodePage() {
   const publicSettings = useVipCodeSettings();
   const [settings, setSettings] = useState(publicSettings);
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState('armanali420@gmail.com');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState(DEMO_ADMIN_PASSWORD);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(isSupabaseConfigured);
@@ -20,9 +24,19 @@ export default function AdminVipCodePage() {
   const isAdmin = Boolean(user);
 
   useEffect(() => {
-    if (!isSupabaseConfigured) return undefined;
-
     let active = true;
+    if (window.localStorage.getItem(DEMO_SESSION_KEY) === 'true') {
+      setUser({ email: DEMO_ADMIN_EMAIL, isDemo: true });
+      setSettings(readVipCodeSettings());
+      setIsLoading(false);
+      return () => { active = false; };
+    }
+
+    if (!isSupabaseConfigured) {
+      setIsLoading(false);
+      return () => { active = false; };
+    }
+
     fetch('/api/admin/session', { credentials: 'same-origin', cache: 'no-store' })
       .then(async (response) => response.ok ? response.json() : null)
       .then((session) => {
@@ -40,8 +54,8 @@ export default function AdminVipCodePage() {
     return () => { active = false; };
   }, []);
   useEffect(() => {
-    setSettings(publicSettings);
-  }, [publicSettings]);
+    if (!user?.isDemo) setSettings(publicSettings);
+  }, [publicSettings, user?.isDemo]);
 
   const updateField = (field) => (event) => {
     setSettings((current) => ({ ...current, [field]: event.target.value }));
@@ -54,6 +68,21 @@ export default function AdminVipCodePage() {
     setIsSigningIn(true);
     setError('');
     setMessage('');
+
+    if (email.trim().toLowerCase() === DEMO_ADMIN_EMAIL && password === DEMO_ADMIN_PASSWORD) {
+      window.localStorage.setItem(DEMO_SESSION_KEY, 'true');
+      setUser({ email: DEMO_ADMIN_EMAIL, isDemo: true });
+      setSettings(readVipCodeSettings());
+      setPassword('');
+      setIsSigningIn(false);
+      return;
+    }
+
+    if (!isSupabaseConfigured) {
+      setError('Demo email অথবা password সঠিক নয়।');
+      setIsSigningIn(false);
+      return;
+    }
 
     try {
       const response = await fetch('/api/admin/login', {
@@ -84,8 +113,10 @@ export default function AdminVipCodePage() {
 
     setIsSaving(true);
     try {
-      await saveVipCodeSettings(settings);
-      setMessage(isSupabaseConfigured
+      await saveVipCodeSettings(settings, { localOnly: user?.isDemo });
+      setMessage(user?.isDemo
+        ? 'Demo পরিবর্তন শুধু এই browser-এ সেভ হয়েছে; live site বা database বদলায়নি.'
+        : isSupabaseConfigured
         ? 'Supabase database-এ পরিবর্তন সেভ হয়েছে।'
         : 'পরিবর্তনগুলো এই ব্রাউজারে সেভ হয়েছে।');
     } catch (saveError) {
@@ -99,14 +130,15 @@ export default function AdminVipCodePage() {
     setError('');
     setMessage('');
     try {
-      setSettings(isSupabaseConfigured ? await loadVipCodeSettings() : readVipCodeSettings());
+      setSettings(isSupabaseConfigured && !user?.isDemo ? await loadVipCodeSettings() : readVipCodeSettings());
     } catch (loadError) {
       setError(loadError.message);
     }
   };
 
   const handleSignOut = async () => {
-    await fetch('/api/admin/session', { method: 'DELETE', credentials: 'same-origin' });
+    if (user?.isDemo) window.localStorage.removeItem(DEMO_SESSION_KEY);
+    else await fetch('/api/admin/session', { method: 'DELETE', credentials: 'same-origin' });
     setUser(null);
   };
 
@@ -139,9 +171,16 @@ export default function AdminVipCodePage() {
             </div>
           )}
 
+          {user?.isDemo && (
+            <div className="admin-draft-notice" role="status">
+              <strong>Demo mode · this browser only</strong>
+              <span>Demo login কাজ করে Supabase Auth বা Vercel login ছাড়াই। এখানে save করা পরিবর্তন শুধু এই browser-এ থাকবে, live database বদলাবে না।</span>
+            </div>
+          )}
+
           {isLoading ? (
             <p className="admin-feedback" role="status">Supabase থেকে settings load হচ্ছে…</p>
-          ) : (isSupabaseConfigured && !isAdmin) ? (
+          ) : !isAdmin ? (
             <div className="admin-auth-block">
               <h2>Admin sign-in</h2>
               <p>Admin account দিয়ে প্রবেশ করুন।</p>
