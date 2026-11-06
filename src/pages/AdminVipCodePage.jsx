@@ -9,8 +9,10 @@ export default function AdminVipCodePage() {
   const publicSettings = useVipCodeSettings();
   const [settings, setSettings] = useState(publicSettings);
   const [user, setUser] = useState(null);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('armanali420@gmail.com');
   const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [isPasswordRecovery, setIsPasswordRecovery] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(isSupabaseConfigured);
@@ -42,8 +44,9 @@ export default function AdminVipCodePage() {
         if (authError) setError(authError.message);
         setUser(data.user);
       });
-      const { data: { subscription: authSubscription } } = client.auth.onAuthStateChange((_event, session) => {
+      const { data: { subscription: authSubscription } } = client.auth.onAuthStateChange((event, session) => {
         setUser(session?.user ?? null);
+        if (event === 'PASSWORD_RECOVERY') setIsPasswordRecovery(true);
       });
       subscription = authSubscription;
     });
@@ -85,6 +88,53 @@ export default function AdminVipCodePage() {
     if (data.user?.app_metadata?.role !== 'admin') {
       setError('এই account-এ admin access নেই। Supabase Auth user-এর app_metadata-তে role=admin সেট করতে হবে।');
     }
+  };
+
+  const handlePasswordResetRequest = async () => {
+    setError('');
+    setMessage('');
+    const normalizedEmail = email.trim();
+    if (!normalizedEmail) {
+      setError('Password reset email পাঠানোর আগে email address লিখুন।');
+      return;
+    }
+
+    setIsSigningIn(true);
+    const client = await getSupabaseClient();
+    const { error: resetError } = await client.auth.resetPasswordForEmail(normalizedEmail, {
+      redirectTo: `${window.location.origin}/admin`
+    });
+    setIsSigningIn(false);
+
+    if (resetError) {
+      setError(`Password reset email পাঠানো যায়নি: ${resetError.message}`);
+      return;
+    }
+    setMessage('Account থাকলে password reset link email-এ পাঠানো হয়েছে। Link খুলে নতুন password সেট করুন।');
+  };
+
+  const handlePasswordUpdate = async (event) => {
+    event.preventDefault();
+    setError('');
+    setMessage('');
+    if (newPassword.length < 8) {
+      setError('নতুন password কমপক্ষে ৮ অক্ষরের হতে হবে।');
+      return;
+    }
+
+    setIsSigningIn(true);
+    const client = await getSupabaseClient();
+    const { data, error: updateError } = await client.auth.updateUser({ password: newPassword });
+    setIsSigningIn(false);
+    if (updateError) {
+      setError(`Password update করা যায়নি: ${updateError.message}`);
+      return;
+    }
+
+    setUser(data.user);
+    setNewPassword('');
+    setIsPasswordRecovery(false);
+    setMessage('Password আপডেট হয়েছে। এখন এই password দিয়ে sign in করতে পারবেন।');
   };
 
   const handleSubmit = async (event) => {
@@ -158,6 +208,21 @@ export default function AdminVipCodePage() {
 
           {isLoading ? (
             <p className="admin-feedback" role="status">Supabase থেকে সেটিংস লোড হচ্ছে…</p>
+          ) : isPasswordRecovery ? (
+            <div className="admin-auth-block">
+              <h2>নতুন password সেট করুন</h2>
+              <p>Email-এ পাওয়া recovery link দিয়ে আপনি প্রবেশ করেছেন। নতুন password দিন।</p>
+              <form className="admin-form" onSubmit={handlePasswordUpdate}>
+                <label className="admin-field">
+                  <span>নতুন password</span>
+                  <input type="password" autoComplete="new-password" minLength={8} value={newPassword} onChange={(event) => setNewPassword(event.target.value)} required />
+                </label>
+                {error && <p className="admin-feedback is-error" role="alert">{error}</p>}
+                <button className="admin-save-button" type="submit" disabled={isSigningIn}>
+                  {isSigningIn ? 'আপডেট হচ্ছে…' : 'নতুন password সেভ করুন'}
+                </button>
+              </form>
+            </div>
           ) : (isSupabaseConfigured && !isAdmin) ? (
             user ? (
               <div className="admin-auth-block">
@@ -179,6 +244,10 @@ export default function AdminVipCodePage() {
                     <span>Password</span>
                     <input type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} required />
                   </label>
+                  <button className="admin-reset-button" type="button" onClick={handlePasswordResetRequest} disabled={isSigningIn}>
+                    {isSigningIn ? 'অপেক্ষা করুন…' : 'পাসওয়ার্ড ভুলে গেছেন? Reset email পাঠান'}
+                  </button>
+                  {message && <p className="admin-feedback is-success" role="status">{message}</p>}
                   {error && <p className="admin-feedback is-error" role="alert">{error}</p>}
                   <button className="admin-save-button" type="submit" disabled={isSigningIn}>
                     {isSigningIn ? 'প্রবেশ করা হচ্ছে…' : 'Admin sign-in'}
