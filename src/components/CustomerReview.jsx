@@ -34,6 +34,17 @@ const REVIEW_SLIDES = [
     videoSrc: '/reviews/review-3.mp4?v=20261107',
     poster: '/assets/site/review-poster-3.jpg',
     highlight: 'থাই সরকারি অনুমোদিত লাইসেন্সড পেপার'
+  },
+  {
+    id: 4,
+    numberLabel: '০৪',
+    title: 'Customer Review 04',
+    badge: 'CUSTOMER STORY',
+    customerName: 'নতুন সদস্যের অভিজ্ঞতা',
+    tag: 'সরাসরি ভিডিও রিভিউ',
+    videoSrc: '/reviews/review-4-20261107.mp4?v=20261107',
+    poster: '/assets/site/review-poster-4-20261107.jpg',
+    highlight: 'নতুন সদস্যের ভিডিও অভিজ্ঞতা'
   }
 ];
 
