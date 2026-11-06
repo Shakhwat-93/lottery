@@ -39,6 +39,7 @@ export default function App() {
         <InstallAppBanner />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/admin" element={<Suspense fallback={<div className="admin-page">Admin panel loading…</div>}><AdminVipCodePage /></Suspense>} />
           <Route path="/admin/vip-code" element={<Suspense fallback={<div className="admin-page">Admin panel loading…</div>}><AdminVipCodePage /></Suspense>} />
           <Route path="/form" element={<FormPage />} />
           <Route path="/form.html" element={<FormPage />} />
