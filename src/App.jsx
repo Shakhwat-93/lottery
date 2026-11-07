@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PWAInstallProvider } from './context/PWAInstallContext';
 import InstallAppBanner from './components/InstallAppBanner';
@@ -9,17 +9,20 @@ import FormPage from './pages/FormPage';
 import ThreeSetGamePage from './pages/ThreeSetGamePage';
 import VipAgencyCodePage from './pages/VipAgencyCodePage';
 import GamePaperPage from './pages/GamePaperPage';
-
-const AdminVipCodePage = lazy(() => import('./pages/AdminVipCodePage'));
+import AdminVipCodePage from './pages/AdminVipCodePage';
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(() => {
     try {
+      // Never show intro splash on admin routes
+      if (typeof window !== 'undefined' && window.location.pathname.startsWith('/admin')) {
+        return false;
+      }
       if (window.location.search.includes('intro=1')) return true;
       const seen = sessionStorage.getItem('thai_lottery_intro_seen');
       return !seen;
     } catch {
-      return true;
+      return false;
     }
   });
 
@@ -39,8 +42,11 @@ export default function App() {
         <InstallAppBanner />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/admin" element={<Suspense fallback={<div className="admin-page">Admin panel loading…</div>}><AdminVipCodePage /></Suspense>} />
-          <Route path="/admin/vip-code" element={<Suspense fallback={<div className="admin-page">Admin panel loading…</div>}><AdminVipCodePage /></Suspense>} />
+          <Route path="/admin" element={<AdminVipCodePage />} />
+          <Route path="/admin/" element={<AdminVipCodePage />} />
+          <Route path="/admin/vip-code" element={<AdminVipCodePage />} />
+          <Route path="/admin/vip-code/" element={<AdminVipCodePage />} />
+          <Route path="/admin/*" element={<AdminVipCodePage />} />
           <Route path="/form" element={<FormPage />} />
           <Route path="/form.html" element={<FormPage />} />
           <Route path="/registration" element={<FormPage />} />

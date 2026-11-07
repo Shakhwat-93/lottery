@@ -73,7 +73,15 @@ export default function AdminVipCodePage() {
         if (active) setIsLoading(false);
       });
 
-    return () => { active = false; };
+    // Safety timeout so panel never hangs on loading screen
+    const safetyTimer = setTimeout(() => {
+      if (active) setIsLoading(false);
+    }, 2000);
+
+    return () => {
+      active = false;
+      clearTimeout(safetyTimer);
+    };
   }, []);
 
   // Synchronize when public settings change if not editing locally

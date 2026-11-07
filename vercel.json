@@ -34,7 +34,19 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!assets/|icons/|reviews/|manifest\\.json|sw\\.js|favicon|.*\\..*).*)",
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/admin",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/((?!api/|assets/|icons/|reviews/|manifest\\.json|sw\\.js|favicon|.*\\..*).*)",
       "destination": "/index.html"
     }
   ]
