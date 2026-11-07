@@ -218,7 +218,15 @@ export default function ThreeSetGamePage() {
           </div>
 
           {/* Full Screen Image Showcase — 100% visible, sharp, zero obstruction */}
-          <div className="three-up-image-viewport">
+          <div className="three-up-image-viewport" onClick={(e) => e.stopPropagation()}>
+            <div className="three-up-paper-highlight-badge">
+              <span className="three-up-highlight-sparkle" aria-hidden="true">✦</span>
+              <span className="three-up-highlight-text">
+                {fullscreenImage.paperType === 2 ? 'OFFICIAL VIP CALCULATION PAPER' : 'OFFICIAL VIP GAME PAPER'}
+              </span>
+              <span className="three-up-highlight-sparkle" aria-hidden="true">✦</span>
+            </div>
+
             <img
               src={fullscreenImage.src}
               alt={fullscreenImage.title}

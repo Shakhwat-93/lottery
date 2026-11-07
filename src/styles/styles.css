@@ -10920,18 +10920,62 @@ h3 {
   width: 100%;
   height: calc(100dvh - 60px);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: clamp(0.35rem, 1.5vw, 1rem);
+  padding: clamp(0.35rem, 1.5vw, 0.75rem);
   box-sizing: border-box;
   overflow: hidden;
 }
 
+.three-up-paper-highlight-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1.15rem;
+  background: linear-gradient(135deg, rgba(28, 20, 6, 0.9), rgba(46, 32, 9, 0.9));
+  border: 1.5px solid rgba(255, 215, 0, 0.8);
+  border-radius: 9999px;
+  box-shadow: 0 0 22px rgba(255, 215, 0, 0.4), 0 4px 15px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  margin-bottom: clamp(0.25rem, 1vh, 0.5rem);
+  flex-shrink: 0;
+  animation: threeUpBadgeGlow 2.5s ease-in-out infinite alternate;
+}
+
+.three-up-highlight-sparkle {
+  color: #FFD700;
+  font-size: 0.85rem;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+}
+
+.three-up-highlight-text {
+  font-family: var(--font-royal, var(--font-heading, inherit));
+  font-size: clamp(0.75rem, 2vw, 0.92rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #FFF3A8;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+@keyframes threeUpBadgeGlow {
+  0% {
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 215, 0, 0.65);
+  }
+  100% {
+    box-shadow: 0 0 26px rgba(255, 215, 0, 0.55), 0 4px 18px rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 235, 130, 0.95);
+  }
+}
+
 .three-up-paper-hero-img {
-  max-height: calc(100dvh - 76px);
+  max-height: calc(100dvh - 120px);
   max-width: min(98vw, 860px);
   width: auto;
-  height: 100%;
+  height: auto;
   object-fit: contain;
   border-radius: 12px;
   border: 2px solid rgba(242, 201, 66, 0.45);
@@ -10953,21 +10997,17 @@ h3 {
 @media (max-width: 520px) {
   .three-up-top-bar {
     padding: 0.4rem 0.65rem;
-    height: 54px;
+    height: 52px;
   }
   .three-up-main-logo {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
   }
   .three-up-brand-title {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
   .three-up-brand-sub {
-    font-size: 0.62rem;
-  }
-  .three-up-switch-pill {
-    padding: 0.25rem 0.6rem;
-    font-size: 0.75rem;
+    font-size: 0.6rem;
   }
   .three-up-close-btn {
     width: 32px;
@@ -10975,11 +11015,19 @@ h3 {
     font-size: 1rem;
   }
   .three-up-image-viewport {
-    height: calc(100dvh - 54px);
-    padding: 0.35rem;
+    height: calc(100dvh - 52px);
+    padding: 0.25rem;
+  }
+  .three-up-paper-highlight-badge {
+    padding: 0.22rem 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+  .three-up-highlight-text {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
   }
   .three-up-paper-hero-img {
-    max-height: calc(100dvh - 64px);
+    max-height: calc(100dvh - 105px);
     max-width: 99vw;
     border-radius: 8px;
   }
