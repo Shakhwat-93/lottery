@@ -21,6 +21,7 @@ export default function AdminVipCodePage() {
   const [isLoading, setIsLoading] = useState(isSupabaseConfigured);
   const [isSaving, setIsSaving] = useState(false);
   const [isSigningIn, setIsSigningIn] = useState(false);
+  const [isDirty, setIsDirty] = useState(false);
 
   const isAdmin = Boolean(user);
 
@@ -86,12 +87,13 @@ export default function AdminVipCodePage() {
 
   // Synchronize when public settings change if not editing locally
   useEffect(() => {
-    if (!user?.isDemo && !isSaving) {
+    if (!user?.isDemo && !isSaving && !isDirty) {
       setSettings((prev) => ({ ...prev, ...publicSettings }));
     }
-  }, [publicSettings, user?.isDemo, isSaving]);
+  }, [publicSettings, user?.isDemo, isSaving, isDirty]);
 
   const updateField = (field) => (event) => {
+    setIsDirty(true);
     setSettings((current) => ({ ...current, [field]: event.target.value }));
     setMessage('');
     setError('');
@@ -174,6 +176,7 @@ export default function AdminVipCodePage() {
     try {
       const client = await getSupabaseClient();
       await saveVipCodeSettings(settings, { localOnly: user?.isDemo, client });
+      setIsDirty(false);
       setMessage(
         user?.isDemo
           ? 'Demo পরিবর্তন এই browser-এ সেভ হয়েছে।'
@@ -191,6 +194,7 @@ export default function AdminVipCodePage() {
   const discardChanges = async () => {
     setError('');
     setMessage('');
+    setIsDirty(false);
     try {
       setSettings(isSupabaseConfigured && !user?.isDemo ? await loadVipCodeSettings() : readVipCodeSettings());
       setMessage('পরিবর্তন বাতিল করা হয়েছে।');

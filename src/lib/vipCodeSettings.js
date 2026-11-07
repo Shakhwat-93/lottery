@@ -19,18 +19,42 @@ export const DEFAULT_VIP_CODE_SETTINGS = Object.freeze({
   urgentNotice: 'আর মাত্র 5টি ফর্ম বাকি আছে শুধু!'
 });
 
-function isValidDate(value) {
-  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-  const date = new Date(`${value}T00:00:00`);
-  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+export function normalizeDateString(val) {
+  if (!val || typeof val !== 'string') return '';
+  const s = val.trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const dmy = s.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
+  if (dmy) {
+    const [, d, m, y] = dmy;
+    return `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+  }
+  return s;
+}
+
+export function isValidDate(value) {
+  const normalized = normalizeDateString(value);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(normalized)) return false;
+  const [y, m, d] = normalized.split('-').map(Number);
+  if (m < 1 || m > 12 || d < 1 || d > 31) return false;
+  const date = new Date(Date.UTC(y, m - 1, d));
+  return (
+    date.getUTCFullYear() === y &&
+    date.getUTCMonth() === m - 1 &&
+    date.getUTCDate() === d
+  );
 }
 
 export function isValidSettings(value) {
+  if (!value) return false;
+  const firstDate = normalizeDateString(value.firstDate);
+  const secondDate = normalizeDateString(value.secondDate);
+  const code = String(value.code || '').trim();
   return (
-    value &&
-    isValidDate(value.firstDate) &&
-    isValidDate(value.secondDate) &&
-    /^\d{5}$/.test(value.code)
+    Boolean(firstDate) &&
+    Boolean(secondDate) &&
+    isValidDate(firstDate) &&
+    isValidDate(secondDate) &&
+    /^\d{5}$/.test(code)
   );
 }
 
@@ -93,33 +117,39 @@ export async function loadVipCodeSettings() {
 }
 
 export async function saveVipCodeSettings(settings, { localOnly = false, client = null } = {}) {
-  if (!isValidSettings(settings)) {
+  const normalized = {
+    ...settings,
+    firstDate: normalizeDateString(settings?.firstDate),
+    secondDate: normalizeDateString(settings?.secondDate),
+    code: String(settings?.code || '').trim()
+  };
+
+  if (!isValidSettings(normalized)) {
     throw new Error('তারিখ এবং ৫ ডিজিটের কোডটি সঠিক কিনা যাচাই করুন।');
   }
 
   // 1. If Supabase configured and not localOnly, try direct Supabase update
   if (isSupabaseConfigured && !localOnly) {
     const sbClient = client || (await getSupabaseClient());
-    let directSaved = false;
 
     if (sbClient) {
       try {
         const { data, error } = await sbClient
           .from('vip_code_settings')
           .update({
-            first_date: settings.firstDate,
-            second_date: settings.secondDate,
-            vip_code: settings.code,
-            header_title: settings.headerTitle ?? DEFAULT_VIP_CODE_SETTINGS.headerTitle,
-            header_subtitle: settings.headerSubtitle ?? DEFAULT_VIP_CODE_SETTINGS.headerSubtitle,
-            top_notice: settings.topNotice ?? DEFAULT_VIP_CODE_SETTINGS.topNotice,
-            phone_number: settings.phoneNumber ?? DEFAULT_VIP_CODE_SETTINGS.phoneNumber,
-            whatsapp_number: settings.whatsappNumber ?? DEFAULT_VIP_CODE_SETTINGS.whatsappNumber,
-            imo_number: settings.imoNumber ?? DEFAULT_VIP_CODE_SETTINGS.imoNumber,
-            agent_name: settings.agentName ?? DEFAULT_VIP_CODE_SETTINGS.agentName,
-            license_number: settings.licenseNumber ?? DEFAULT_VIP_CODE_SETTINGS.licenseNumber,
-            urgent_forms_left: settings.urgentFormsLeft ?? DEFAULT_VIP_CODE_SETTINGS.urgentFormsLeft,
-            urgent_notice: settings.urgentNotice ?? DEFAULT_VIP_CODE_SETTINGS.urgentNotice,
+            first_date: normalized.firstDate,
+            second_date: normalized.secondDate,
+            vip_code: normalized.code,
+            header_title: normalized.headerTitle ?? DEFAULT_VIP_CODE_SETTINGS.headerTitle,
+            header_subtitle: normalized.headerSubtitle ?? DEFAULT_VIP_CODE_SETTINGS.headerSubtitle,
+            top_notice: normalized.topNotice ?? DEFAULT_VIP_CODE_SETTINGS.topNotice,
+            phone_number: normalized.phoneNumber ?? DEFAULT_VIP_CODE_SETTINGS.phoneNumber,
+            whatsapp_number: normalized.whatsappNumber ?? DEFAULT_VIP_CODE_SETTINGS.whatsappNumber,
+            imo_number: normalized.imoNumber ?? DEFAULT_VIP_CODE_SETTINGS.imoNumber,
+            agent_name: normalized.agentName ?? DEFAULT_VIP_CODE_SETTINGS.agentName,
+            license_number: normalized.licenseNumber ?? DEFAULT_VIP_CODE_SETTINGS.licenseNumber,
+            urgent_forms_left: normalized.urgentFormsLeft ?? DEFAULT_VIP_CODE_SETTINGS.urgentFormsLeft,
+            urgent_notice: normalized.urgentNotice ?? DEFAULT_VIP_CODE_SETTINGS.urgentNotice,
             updated_at: new Date().toISOString()
           })
           .eq('id', 'main')
@@ -145,11 +175,11 @@ export async function saveVipCodeSettings(settings, { localOnly = false, client 
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(settings)
+        body: JSON.stringify(normalized)
       });
       if (response.ok) {
         const result = await response.json();
-        const savedSettings = { ...settings, ...result };
+        const savedSettings = { ...normalized, ...result };
         try {
           window.localStorage.setItem(STORAGE_KEY, JSON.stringify(savedSettings));
         } catch {}
@@ -161,10 +191,10 @@ export async function saveVipCodeSettings(settings, { localOnly = false, client 
 
   // 3. Fallback to localStorage (demo or local draft)
   try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
   } catch {}
-  window.dispatchEvent(new CustomEvent('vip-code-settings-updated', { detail: settings }));
-  return settings;
+  window.dispatchEvent(new CustomEvent('vip-code-settings-updated', { detail: normalized }));
+  return normalized;
 }
 
 export function formatVipDate(date) {

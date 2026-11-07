@@ -16,13 +16,43 @@ function getAdminClient() {
   return supabase;
 }
 
+function normalizeDateString(val) {
+  if (!val || typeof val !== 'string') return '';
+  const s = val.trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const dmy = s.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
+  if (dmy) {
+    const [, d, m, y] = dmy;
+    return `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+  }
+  return s;
+}
+
+function isValidDate(value) {
+  const normalized = normalizeDateString(value);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(normalized)) return false;
+  const [y, m, d] = normalized.split('-').map(Number);
+  if (m < 1 || m > 12 || d < 1 || d > 31) return false;
+  const date = new Date(Date.UTC(y, m - 1, d));
+  return (
+    date.getUTCFullYear() === y &&
+    date.getUTCMonth() === m - 1 &&
+    date.getUTCDate() === d
+  );
+}
+
 function isValidSettings(value) {
-  const validDate = (date) => {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return false;
-    const parsed = new Date(`${date}T00:00:00.000Z`);
-    return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === date;
-  };
-  return value && validDate(value.firstDate) && validDate(value.secondDate) && /^\d{5}$/.test(value.code);
+  if (!value) return false;
+  const firstDate = normalizeDateString(value.firstDate);
+  const secondDate = normalizeDateString(value.secondDate);
+  const code = String(value.code || '').trim();
+  return (
+    Boolean(firstDate) &&
+    Boolean(secondDate) &&
+    isValidDate(firstDate) &&
+    isValidDate(secondDate) &&
+    /^\d{5}$/.test(code)
+  );
 }
 
 export default async function handler(req, res) {
@@ -31,7 +61,14 @@ export default async function handler(req, res) {
   const session = verifyAdminSession(req);
   if (!session) return res.status(401).json({ error: 'Admin sign-in প্রয়োজন।' });
 
-  const settings = req.body || {};
+  const raw = req.body || {};
+  const settings = {
+    ...raw,
+    firstDate: normalizeDateString(raw.firstDate),
+    secondDate: normalizeDateString(raw.secondDate),
+    code: String(raw.code || '').trim()
+  };
+
   if (!isValidSettings(settings) || settings.firstDate === settings.secondDate) {
     return res.status(400).json({ error: 'দুটি আলাদা তারিখ এবং ৫ সংখ্যার code দিন।' });
   }
