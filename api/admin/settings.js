@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { verifyAdminSession } from '../../server/adminAuth.js';
 
-const columns = 'id, first_date, second_date, vip_code, updated_at';
+const columns = 'id, first_date, second_date, vip_code, header_title, header_subtitle, top_notice, phone_number, whatsapp_number, imo_number, agent_name, license_number, urgent_forms_left, urgent_notice, updated_at';
 let supabase;
 
 function getAdminClient() {
@@ -43,6 +43,16 @@ export default async function handler(req, res) {
         first_date: settings.firstDate,
         second_date: settings.secondDate,
         vip_code: settings.code,
+        header_title: settings.headerTitle || 'Thailand Lottery',
+        header_subtitle: settings.headerSubtitle || 'สำนักงานสลากกินแบ่งรัฐบาล • সরকারি অনুমোদিত',
+        top_notice: settings.topNotice !== undefined ? settings.topNotice : '',
+        phone_number: settings.phoneNumber || '+8801309802224',
+        whatsapp_number: settings.whatsappNumber || '+8801309802224',
+        imo_number: settings.imoNumber || '+8801309802224',
+        agent_name: settings.agentName || 'মোঃ ফাহিম চৌধুরী',
+        license_number: settings.licenseNumber || 'TGL-2025-001784',
+        urgent_forms_left: settings.urgentFormsLeft || '5টি',
+        urgent_notice: settings.urgentNotice || 'আর মাত্র 5টি ফর্ম বাকি আছে শুধু!',
         updated_at: new Date().toISOString()
       })
       .eq('id', 'main')
@@ -53,7 +63,17 @@ export default async function handler(req, res) {
     return res.status(200).json({
       firstDate: data.first_date,
       secondDate: data.second_date,
-      code: data.vip_code
+      code: data.vip_code,
+      headerTitle: data.header_title,
+      headerSubtitle: data.header_subtitle,
+      topNotice: data.top_notice,
+      phoneNumber: data.phone_number,
+      whatsappNumber: data.whatsapp_number,
+      imoNumber: data.imo_number,
+      agentName: data.agent_name,
+      licenseNumber: data.license_number,
+      urgentFormsLeft: data.urgent_forms_left,
+      urgentNotice: data.urgent_notice
     });
   } catch (error) {
     return res.status(503).json({ error: error.message });

@@ -11,6 +11,7 @@ import PaymentMethods from '../components/PaymentMethods';
 import CustomerReview from '../components/CustomerReview';
 import PreviousWinners from '../components/PreviousWinners';
 import GamePanelCta from '../components/GamePanelCta';
+import ThreeUpGameBox from '../components/ThreeUpGameBox';
 import { useMediaCoordinator } from '../hooks/useMediaCoordinator';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -93,22 +94,7 @@ export default function HomePage() {
         </section>
         */}
 
-        <section className="section three-set-home-strip reveal-on-scroll" id="three-set-game-section">
-          <div className="three-set-home-card">
-            <div className="three-set-glow-ring" aria-hidden="true" />
-            <div className="three-set-home-text">
-              <span className="three-set-badge-tag">✦ VIP OFFICIAL DOCUMENT ✦</span>
-              <h3>থাইল্যান্ড লটারি 3 সেট গেম পেপার 2026</h3>
-              <p>অফিসিয়াল 3 সেট গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:</p>
-            </div>
-            <Link to="/3-set-game" className="three-set-glowing-btn" aria-label="Open 3 set game document">
-              <span className="three-set-shimmer" aria-hidden="true" />
-              <span className="three-set-icon" aria-hidden="true">👑</span>
-              <span className="three-set-text">3 set game</span>
-              <span className="three-set-arrow" aria-hidden="true">➔</span>
-            </Link>
-          </div>
-        </section>
+        <ThreeUpGameBox />
         <PreviousWinners />
         <CustomerReview videoRef={reviewVideoRef} onReviewVideoPlay={handleReviewVideoPlay} />
       </main>

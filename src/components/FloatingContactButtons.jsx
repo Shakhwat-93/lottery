@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
+import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
 
 export default function FloatingContactButtons() {
   const [showImoModal, setShowImoModal] = useState(false);
   const [copied, setCopied] = useState(false);
+  const settings = useVipCodeSettings();
 
-  const phoneNumber = '+8801309802224';
-  const cleanPhone = '8801309802224';
-  const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent('আসসালামু আলাইকুম, আমি থাইল্যান্ড অফিশিয়াল লটারি (GLO) সম্পর্কে জানতে চাই।')}`;
-  const imoAppUrl = `imo://chat?phone=${cleanPhone}`;
+  const rawPhone = settings.phoneNumber || '+8801309802224';
+  const rawWa = settings.whatsappNumber || rawPhone;
+  const rawImo = settings.imoNumber || rawPhone;
+
+  const phoneNumber = rawPhone;
+  const cleanWaPhone = rawWa.replace(/[^0-9]/g, '');
+  const cleanImoPhone = rawImo.replace(/[^0-9]/g, '');
+
+  const whatsappUrl = `https://wa.me/${cleanWaPhone}?text=${encodeURIComponent('আসসালামু আলাইকুম, আমি থাইল্যান্ড অফিশিয়াল লটারি (GLO) সম্পর্কে জানতে চাই।')}`;
+  const imoAppUrl = `imo://chat?phone=${cleanImoPhone}`;
   const telUrl = `tel:${phoneNumber}`;
 
   const handleCopy = (e) => {

@@ -1,31 +1,43 @@
 import { getSupabaseClient, isSupabaseConfigured } from './supabase';
 
 const STORAGE_KEY = 'lottery-vip-code-settings-v1';
-const SETTINGS_COLUMNS = 'id, first_date, second_date, vip_code, updated_at';
+export const SETTINGS_COLUMNS = 'id, first_date, second_date, vip_code, header_title, header_subtitle, top_notice, phone_number, whatsapp_number, imo_number, agent_name, license_number, urgent_forms_left, urgent_notice, updated_at';
 
 export const DEFAULT_VIP_CODE_SETTINGS = Object.freeze({
   firstDate: '2026-11-01',
   secondDate: '2026-11-16',
-  code: '17248'
+  code: '17248',
+  headerTitle: 'Thailand Lottery',
+  headerSubtitle: 'สำนักงานสลากกินแบ่งรัฐบาล • সরকারি অনুমোদিত',
+  topNotice: '🎉 থাইল্যান্ড লটারি অফিসিয়াল রেজাল্ট ও নিশ্চিত ৩-সেট পেপার আপডেট সম্পন্ন! এখনই মেম্বারশিপ নিশ্চিত করুন।',
+  phoneNumber: '+8801309802224',
+  whatsappNumber: '+8801309802224',
+  imoNumber: '+8801309802224',
+  agentName: 'মোঃ ফাহিম চৌধুরী',
+  licenseNumber: 'TGL-2025-001784',
+  urgentFormsLeft: '5টি',
+  urgentNotice: 'আর মাত্র 5টি ফর্ম বাকি আছে শুধু!'
 });
 
 function isValidDate(value) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
   const date = new Date(`${value}T00:00:00`);
   return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
 }
 
-function isValidSettings(value) {
-  return value &&
+export function isValidSettings(value) {
+  return (
+    value &&
     isValidDate(value.firstDate) &&
     isValidDate(value.secondDate) &&
-    /^\d{5}$/.test(value.code);
+    /^\d{5}$/.test(value.code)
+  );
 }
 
 export function readVipCodeSettings() {
   try {
     const saved = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || 'null');
-    return isValidSettings(saved)
+    return saved
       ? { ...DEFAULT_VIP_CODE_SETTINGS, ...saved }
       : DEFAULT_VIP_CODE_SETTINGS;
   } catch {
@@ -33,52 +45,130 @@ export function readVipCodeSettings() {
   }
 }
 
-function mapDatabaseSettings(row) {
+export function mapDatabaseSettings(row) {
+  if (!row) return DEFAULT_VIP_CODE_SETTINGS;
   return {
-    firstDate: row.first_date,
-    secondDate: row.second_date,
-    code: row.vip_code
+    firstDate: row.first_date || DEFAULT_VIP_CODE_SETTINGS.firstDate,
+    secondDate: row.second_date || DEFAULT_VIP_CODE_SETTINGS.secondDate,
+    code: row.vip_code || DEFAULT_VIP_CODE_SETTINGS.code,
+    headerTitle: row.header_title || DEFAULT_VIP_CODE_SETTINGS.headerTitle,
+    headerSubtitle: row.header_subtitle || DEFAULT_VIP_CODE_SETTINGS.headerSubtitle,
+    topNotice: row.top_notice !== undefined ? row.top_notice : DEFAULT_VIP_CODE_SETTINGS.topNotice,
+    phoneNumber: row.phone_number || DEFAULT_VIP_CODE_SETTINGS.phoneNumber,
+    whatsappNumber: row.whatsapp_number || DEFAULT_VIP_CODE_SETTINGS.whatsappNumber,
+    imoNumber: row.imo_number || DEFAULT_VIP_CODE_SETTINGS.imoNumber,
+    agentName: row.agent_name || DEFAULT_VIP_CODE_SETTINGS.agentName,
+    licenseNumber: row.license_number || DEFAULT_VIP_CODE_SETTINGS.licenseNumber,
+    urgentFormsLeft: row.urgent_forms_left || DEFAULT_VIP_CODE_SETTINGS.urgentFormsLeft,
+    urgentNotice: row.urgent_notice || DEFAULT_VIP_CODE_SETTINGS.urgentNotice
   };
 }
 
 export async function loadVipCodeSettings() {
   if (!isSupabaseConfigured) return readVipCodeSettings();
 
-  const client = await getSupabaseClient();
-  const { data, error } = await client
-    .from('vip_code_settings')
-    .select(SETTINGS_COLUMNS)
-    .eq('id', 'main')
-    .single();
+  try {
+    const client = await getSupabaseClient();
+    if (!client) return readVipCodeSettings();
 
-  if (error) throw new Error(`Supabase থেকে সেটিংস লোড হয়নি: ${error.message}`);
-  return mapDatabaseSettings(data);
+    const { data, error } = await client
+      .from('vip_code_settings')
+      .select(SETTINGS_COLUMNS)
+      .eq('id', 'main')
+      .single();
+
+    if (error) {
+      console.warn('[VIP settings] Supabase load warning:', error.message);
+      return readVipCodeSettings();
+    }
+    const settings = mapDatabaseSettings(data);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+    } catch {}
+    return settings;
+  } catch (err) {
+    console.warn('[VIP settings] Network or client error:', err.message);
+    return readVipCodeSettings();
+  }
 }
 
-export async function saveVipCodeSettings(settings, { localOnly = false } = {}) {
+export async function saveVipCodeSettings(settings, { localOnly = false, client = null } = {}) {
   if (!isValidSettings(settings)) {
-    throw new Error('তারিখ এবং ৫ ডিজিটের কোডটি যাচাই করুন।');
+    throw new Error('তারিখ এবং ৫ ডিজিটের কোডটি সঠিক কিনা যাচাই করুন।');
   }
 
+  // 1. If Supabase configured and not localOnly, try direct Supabase update
   if (isSupabaseConfigured && !localOnly) {
-    const response = await fetch('/api/admin/settings', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(settings)
-    });
-    const result = await response.json();
-    if (!response.ok) throw new Error(result.error || 'Admin settings save failed.');
-    const savedSettings = result;
-    window.dispatchEvent(new CustomEvent('vip-code-settings-updated', { detail: savedSettings }));
-    return savedSettings;
+    const sbClient = client || (await getSupabaseClient());
+    let directSaved = false;
+
+    if (sbClient) {
+      try {
+        const { data, error } = await sbClient
+          .from('vip_code_settings')
+          .update({
+            first_date: settings.firstDate,
+            second_date: settings.secondDate,
+            vip_code: settings.code,
+            header_title: settings.headerTitle ?? DEFAULT_VIP_CODE_SETTINGS.headerTitle,
+            header_subtitle: settings.headerSubtitle ?? DEFAULT_VIP_CODE_SETTINGS.headerSubtitle,
+            top_notice: settings.topNotice ?? DEFAULT_VIP_CODE_SETTINGS.topNotice,
+            phone_number: settings.phoneNumber ?? DEFAULT_VIP_CODE_SETTINGS.phoneNumber,
+            whatsapp_number: settings.whatsappNumber ?? DEFAULT_VIP_CODE_SETTINGS.whatsappNumber,
+            imo_number: settings.imoNumber ?? DEFAULT_VIP_CODE_SETTINGS.imoNumber,
+            agent_name: settings.agentName ?? DEFAULT_VIP_CODE_SETTINGS.agentName,
+            license_number: settings.licenseNumber ?? DEFAULT_VIP_CODE_SETTINGS.licenseNumber,
+            urgent_forms_left: settings.urgentFormsLeft ?? DEFAULT_VIP_CODE_SETTINGS.urgentFormsLeft,
+            urgent_notice: settings.urgentNotice ?? DEFAULT_VIP_CODE_SETTINGS.urgentNotice,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', 'main')
+          .select(SETTINGS_COLUMNS)
+          .single();
+
+        if (!error && data) {
+          const savedSettings = mapDatabaseSettings(data);
+          try {
+            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(savedSettings));
+          } catch {}
+          window.dispatchEvent(new CustomEvent('vip-code-settings-updated', { detail: savedSettings }));
+          return savedSettings;
+        }
+      } catch (directErr) {
+        console.warn('[VIP settings] Direct Supabase update attempt:', directErr);
+      }
+    }
+
+    // 2. Fallback to /api/admin/settings for Vercel deployment
+    try {
+      const response = await fetch('/api/admin/settings', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(settings)
+      });
+      if (response.ok) {
+        const result = await response.json();
+        const savedSettings = { ...settings, ...result };
+        try {
+          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(savedSettings));
+        } catch {}
+        window.dispatchEvent(new CustomEvent('vip-code-settings-updated', { detail: savedSettings }));
+        return savedSettings;
+      }
+    } catch (_) {}
   }
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+
+  // 3. Fallback to localStorage (demo or local draft)
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+  } catch {}
   window.dispatchEvent(new CustomEvent('vip-code-settings-updated', { detail: settings }));
   return settings;
 }
 
 export function formatVipDate(date) {
+  if (!date) return '';
   const [year, month, day] = date.split('-');
   return `${day}-${month}-${year}`;
 }

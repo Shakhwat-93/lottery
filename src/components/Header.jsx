@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { usePWAInstall } from '../context/PWAInstallContext';
+import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
 
 export default function Header({ page = 'home' }) {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const { triggerInstall, isStandalone } = usePWAInstall();
+  const settings = useVipCodeSettings();
+
+  const brandTitle = settings.headerTitle || 'Thailand Lottery';
+  const brandSubtitle = settings.headerSubtitle || 'สำนักงานสลากกินแบ่งรัฐบาล • সরকারি অনুমোদিত';
+  const topNotice = settings.topNotice;
+  const cleanPhone = (settings.phoneNumber || '+8801309802224').replace(/[^0-9]/g, '');
 
   // Close menu on ESC key and prevent body scroll when open
   React.useEffect(() => {
@@ -26,12 +33,25 @@ export default function Header({ page = 'home' }) {
   return (
     <>
       <div className="thai-flag-top-strip" aria-hidden="true" />
+      {topNotice && (
+        <div className="site-top-announcement-bar" role="alert" aria-label="জরুরি ঘোষণা">
+          <div className="site-top-announcement-inner">
+            <span className="site-top-announcement-badge">
+              <span className="site-top-pulse-dot" aria-hidden="true" />
+              ঘোষণা
+            </span>
+            <div className="site-top-announcement-ticker">
+              <span className="site-top-announcement-text">{topNotice}</span>
+            </div>
+          </div>
+        </div>
+      )}
       <header className="site-header">
-        <Link to="/" className="brand" aria-label="Thailand Lottery home">
+        <Link to="/" className="brand" aria-label={`${brandTitle} home`}>
           <span className="brand-mark" aria-hidden="true">
             <img
               src="/assets/logo.png?v=4"
-              alt="Thailand Lottery Official Logo"
+              alt={`${brandTitle} Official Logo`}
               className="brand-logo"
               width="52"
               height="52"
@@ -39,7 +59,7 @@ export default function Header({ page = 'home' }) {
           </span>
           <span className="brand-text">
             <span className="brand-title-wrap">
-              <strong className="brand-title">Thailand Lottery</strong>
+              <strong className="brand-title">{brandTitle}</strong>
               {/* Blue Verified Check Badge */}
               <svg
                 className="brand-verified-badge"
@@ -60,10 +80,10 @@ export default function Header({ page = 'home' }) {
               </svg>
             </span>
             {/* Automatic Seamless Marquee for Thai Subtitle */}
-            <div className="brand-subtitle-marquee-wrap" aria-label="สำนักงานสลากกินแบ่งรัฐบาล • সরকারি অনুমোদিত">
+            <div className="brand-subtitle-marquee-wrap" aria-label={brandSubtitle}>
               <div className="brand-subtitle-marquee-track">
-                <span className="brand-subtitle-item">สำนักงานสลากกินแบ่งรัฐบาล • সরকারি অনুমোদিত</span>
-                <span className="brand-subtitle-item" aria-hidden="true">สำนักงานสลากกินแบ่งรัฐบาล • সরকারি অনুমোদিত</span>
+                <span className="brand-subtitle-item">{brandSubtitle}</span>
+                <span className="brand-subtitle-item" aria-hidden="true">{brandSubtitle}</span>
               </div>
             </div>
           </span>
@@ -238,9 +258,21 @@ export default function Header({ page = 'home' }) {
             )}
           </nav>
 
+          <div className="nav-panel-contact-quick">
+            <a
+              href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent('আসসালামু আলাইকুম, আমি থাইল্যান্ড লটারি সম্পর্কে জানতে চাই।')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-panel-wa-chip"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <span>💬 হেল্পলাইন WhatsApp: <strong>{settings.phoneNumber || '+8801309802224'}</strong></span>
+            </a>
+          </div>
+
           <div className="nav-panel-footer">
             <span className="nav-panel-footer-text">
-              สำนักงานสลากกินแบ่งรัฐบาล • GLO Official 2026
+              {brandSubtitle} • GLO Official 2026
             </span>
           </div>
         </div>

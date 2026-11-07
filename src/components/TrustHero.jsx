@@ -1,8 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import FacebookLiveStream from './FacebookLiveStream';
+import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
 
 export default function TrustHero() {
+  const settings = useVipCodeSettings();
+  const agentName = settings.agentName || 'মোঃ ফাহিম চৌধুরী';
+  const licenseNumber = settings.licenseNumber || 'TGL-2025-001784';
+  const headerTitle = settings.headerTitle || 'Thailand Lottery';
+
   return (
     <section className="hero reveal-on-scroll">
       <div className="hero-content">
@@ -11,7 +17,7 @@ export default function TrustHero() {
         </p>
         <h1 className="hero-main-title">
           <span className="hero-title-welcome">Welcome To</span>
-          <span className="hero-title-main">Thailand Lottery</span>
+          <span className="hero-title-main">{headerTitle}</span>
           <span className="hero-title-year">2026</span>
         </h1>
         <p className="hero-copy hero-copy-paragraph">
@@ -19,7 +25,7 @@ export default function TrustHero() {
         </p>
 
         <div className="trust-list" aria-label="Trust signals">
-          <span>লাইসেন্স নং TGL-2025-001784</span>
+          <span>লাইসেন্স নং {licenseNumber}</span>
           <span>সেরা এজেন্ট 2026 (Best Agent)</span>
         </div>
 
@@ -70,7 +76,7 @@ export default function TrustHero() {
                 <span>GLO BANGKOK ACCREDITED AGENT</span>
               </div>
               <div className="agent-name-display">
-                <h3 className="agent-name-bengali">মোঃ ফাহিম চৌধুরী</h3>
+                <h3 className="agent-name-bengali">{agentName}</h3>
                 <span className="agent-verified-badge" title="Government Verified Official Agent">
                   <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
                     <path

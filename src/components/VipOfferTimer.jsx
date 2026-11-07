@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
 
 const STORAGE_KEY = 'thai_lottery_vip_deadline_12h_v3';
 const DEFAULT_DURATION = (11 * 3600 + 59 * 60 + 59) * 1000; // 12 Hours Duration
 const RESET_DURATION = 12 * 3600 * 1000;
 
 export default function VipOfferTimer() {
+  const settings = useVipCodeSettings();
+  const formsLeft = settings.urgentFormsLeft || '5টি';
+  const urgentNotice = settings.urgentNotice || `আর মাত্র ${formsLeft} ফর্ম বাকি আছে শুধু!`;
   const [timeLeft, setTimeLeft] = useState({
     hours: '12',
     minutes: '00',
@@ -67,12 +71,12 @@ export default function VipOfferTimer() {
           <div className="urgent-main-highlight">
             <span className="urgent-siren" aria-hidden="true">🚨</span>
             <span className="urgent-message">
-              আর মাত্র <strong className="golden-urgent-number">5টি</strong> ফর্ম বাকি আছে শুধু!
+              {urgentNotice}
             </span>
           </div>
 
           <div className="urgent-quota-chip">
-            <span>কোটা: <strong>95% বুকড</strong> • অবশিষ্ট: <strong className="chip-gold-num">5টি</strong></span>
+            <span>কোটা: <strong>95% বুকড</strong> • অবশিষ্ট: <strong className="chip-gold-num">{formsLeft}</strong></span>
           </div>
         </div>
 
@@ -80,7 +84,7 @@ export default function VipOfferTimer() {
         <div className="offer-main-content">
           <div className="offer-title-group">
             <h2 className="golden-timer-headline">
-              আর মাত্র <span className="title-count-highlight">5টি</span> ফর্ম বাকি আছে — দ্রুত আপনার ফর্মটি বুক করুন!
+              আর মাত্র <span className="title-count-highlight">{formsLeft}</span> ফর্ম বাকি আছে — দ্রুত আপনার ফর্মটি বুক করুন!
             </h2>
             <p className="offer-desc">
               থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) অনুমোদিত মেম্বারশিপ কোটায় সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (TL-001)</strong> এর অধীনে আর <strong>মাত্র 5টি অফিসিয়াল মেম্বারশিপ ফর্ম</strong> খালি রয়েছে। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার কনফার্ম করুন!
