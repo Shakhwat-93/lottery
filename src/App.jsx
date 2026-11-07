@@ -47,6 +47,8 @@ export default function App() {
           <Route path="/3-set-game" element={<ThreeSetGamePage />} />
           <Route path="/three-set-game" element={<ThreeSetGamePage />} />
           <Route path="/3setgame" element={<ThreeSetGamePage />} />
+          <Route path="/3-up-game" element={<ThreeSetGamePage />} />
+          <Route path="/3upgame" element={<ThreeSetGamePage />} />
           <Route path="/vip-agency-code" element={<VipAgencyCodePage />} />
           <Route path="/agency-code" element={<VipAgencyCodePage />} />
           <Route path="/vip-code" element={<VipAgencyCodePage />} />
