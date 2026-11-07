@@ -205,16 +205,6 @@ export default function ThreeSetGamePage() {
             </div>
 
             <div className="three-up-top-actions">
-              {/* Quick switch between Game Paper and Calculation Paper */}
-              <button
-                type="button"
-                className="three-up-switch-pill"
-                onClick={() => openPaper(fullscreenImage.paperType === 1 ? 2 : 1, fullscreenImage.date)}
-                title="অন্য পেপার দেখুন"
-              >
-                <span>{fullscreenImage.paperType === 1 ? 'ক্যালকুলেশন পেপার ➔' : '← গেম পেপার'}</span>
-              </button>
-
               <button
                 type="button"
                 className="three-up-close-btn"
