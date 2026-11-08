@@ -628,7 +628,7 @@ export default function AdminVipCodePage() {
                         type="text"
                         value={settings.threeUpTitle || ''}
                         onChange={updateField('threeUpTitle')}
-                        placeholder={`থাইল্যান্ড লটারি 3 সেট গেম পেপার ${settings.activeYear || '2026'}`}
+                        placeholder={`থাইল্যান্ড লটারি 3 Up গেম পেপার ${settings.activeYear || '2026'}`}
                         required
                       />
                       <small>হোমপেজের ৩-আপ সেকশনের প্রধান শিরোনাম।</small>
@@ -651,7 +651,7 @@ export default function AdminVipCodePage() {
                       <textarea
                         value={settings.threeUpSubtitle || ''}
                         onChange={updateField('threeUpSubtitle')}
-                        placeholder="অফিসিয়াল 3 সেট / 3 আপ গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:"
+                        placeholder="অফিসিয়াল 3 আপ গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:"
                         rows={2}
                       />
                       <small>বাটনের ঠিক উপরে নির্দেশনামূলক টেক্সট।</small>
@@ -659,7 +659,7 @@ export default function AdminVipCodePage() {
 
                     {/* Paper 1 (Game Paper Date 1) */}
                     <div className="admin-field admin-paper-upload-box">
-                      <span><b>04</b> ১ সেট ৩ডি গেম পেপার — ১ম ড্র ({formatVipDate(settings.firstDate)})</span>
+                      <span><b>04</b> ৩-আপ গেম পেপার — ১ম ড্র ({formatVipDate(settings.firstDate)})</span>
                       <div className="admin-paper-upload-row">
                         <label className="admin-file-btn">
                           <span>{uploadingField === 'gamePaperImage' ? '⏳ আপলোড হচ্ছে…' : '📁 ফাইল থেকে ছবি আপলোড করুন'}</span>
@@ -702,7 +702,7 @@ export default function AdminVipCodePage() {
 
                     {/* Paper 2 (Game Paper Date 2) */}
                     <div className="admin-field admin-paper-upload-box">
-                      <span><b>05</b> ১ সেট ৩ডি গেম পেপার — ২য় ড্র ({formatVipDate(settings.secondDate)}) (ঐচ্ছিক)</span>
+                      <span><b>05</b> ৩-আপ গেম পেপার — ২য় ড্র ({formatVipDate(settings.secondDate)}) (ঐচ্ছিক)</span>
                       <div className="admin-paper-upload-row">
                         <label className="admin-file-btn">
                           <span>{uploadingField === 'gamePaperImageDate2' ? '⏳ আপলোড হচ্ছে…' : '📁 ফাইল থেকে ছবি আপলোড করুন'}</span>

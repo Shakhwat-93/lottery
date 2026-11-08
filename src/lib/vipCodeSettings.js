@@ -9,7 +9,7 @@ export const DEFAULT_VIP_CODE_SETTINGS = Object.freeze({
   code: '17248',
   headerTitle: 'Thailand Lottery',
   headerSubtitle: 'สำนักงานสลากกินแบ่งรัฐบาล • সরকারি অনুমোদিত',
-  topNotice: '🎉 থাইল্যান্ড লটারি অফিসিয়াল রেজাল্ট ও নিশ্চিত ৩-সেট পেপার আপডেট সম্পন্ন! এখনই মেম্বারশিপ নিশ্চিত করুন।',
+  topNotice: '🎉 থাইল্যান্ড লটারি অফিসিয়াল রেজাল্ট ও নিশ্চিত ৩-আপ পেপার আপডেট সম্পন্ন! এখনই মেম্বারশিপ নিশ্চিত করুন।',
   showTopNotice: true,
   activeYear: '2026',
   phoneNumber: '+8801309802224',
@@ -21,8 +21,8 @@ export const DEFAULT_VIP_CODE_SETTINGS = Object.freeze({
   urgentNotice: 'আর মাত্র 5টি ফর্ম বাকি আছে শুধু!',
 
   // 3-Up Game & Paper Controls
-  threeUpTitle: 'থাইল্যান্ড লটারি 3 সেট গেম পেপার 2026',
-  threeUpSubtitle: 'অফিসিয়াল 3 সেট / 3 আপ গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:',
+  threeUpTitle: 'থাইল্যান্ড লটারি 3 Up গেম পেপার 2026',
+  threeUpSubtitle: 'অফিসিয়াল 3 আপ গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:',
   threeUpButtonText: '3 UP GAME',
   gamePaperImage: '/assets/site/3-up-game-paper-1.jpg',
   gamePaperImageDate2: '',

@@ -8,7 +8,7 @@ const REVIEW_SLIDES = [
     title: 'Customer Review 01',
     badge: '100% VERIFIED',
     customerName: 'সরাসরি বিজয়ী গ্রাহক',
-    tag: '৩ সেট গেম উইনিং প্রুফ',
+    tag: '৩ আপ গেম উইনিং প্রুফ',
     videoSrc: '/reviews/review-1.mp4',
     poster: '/assets/site/review-poster.jpg',
     highlight: 'প্রথম পুরস্কার নিশ্চিত পে-আউট প্রমাণ'

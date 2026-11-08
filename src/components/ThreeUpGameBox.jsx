@@ -5,8 +5,8 @@ import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
 export default function ThreeUpGameBox() {
   const settings = useVipCodeSettings();
   const activeYear = settings.activeYear || '2026';
-  const title = settings.threeUpTitle || `থাইল্যান্ড লটারি 3 সেট গেম পেপার ${activeYear}`;
-  const subtitle = settings.threeUpSubtitle || 'অফিসিয়াল 3 সেট / 3 আপ গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:';
+  const title = settings.threeUpTitle || `থাইল্যান্ড লটারি 3 Up গেম পেপার ${activeYear}`;
+  const subtitle = settings.threeUpSubtitle || 'অফিসিয়াল 3 আপ গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:';
   const buttonText = settings.threeUpButtonText || '3 UP GAME';
 
   return (

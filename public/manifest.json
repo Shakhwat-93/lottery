@@ -80,10 +80,10 @@
       ]
     },
     {
-      "name": "৩ সেট গেম পেপার",
-      "short_name": "৩ সেট গেম",
-      "description": "অফিসিয়াল ৩ সেট গেম পেপার",
-      "url": "/3-set-game",
+      "name": "৩ আপ গেম পেপার",
+      "short_name": "৩ আপ গেম",
+      "description": "অফিসিয়াল ৩ আপ গেম পেপার",
+      "url": "/3-up-game",
       "icons": [
         {
           "src": "/icons/icon-192.png",

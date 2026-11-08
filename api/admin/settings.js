@@ -76,8 +76,8 @@ export default async function handler(req, res) {
   const extraData = raw.extraData || {
     showTopNotice: raw.showTopNotice !== undefined ? Boolean(raw.showTopNotice) : true,
     activeYear: raw.activeYear || '2026',
-    threeUpTitle: raw.threeUpTitle || 'থাইল্যান্ড লটারি 3 সেট গেম পেপার 2026',
-    threeUpSubtitle: raw.threeUpSubtitle || 'অফিসিয়াল 3 সেট / 3 আপ গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:',
+    threeUpTitle: raw.threeUpTitle || 'থাইল্যান্ড লটারি 3 Up গেম পেপার 2026',
+    threeUpSubtitle: raw.threeUpSubtitle || 'অফিসিয়াল 3 আপ গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:',
     threeUpButtonText: raw.threeUpButtonText || '3 UP GAME',
     gamePaperImage: raw.gamePaperImage || '/assets/site/3-up-game-paper-1.jpg',
     gamePaperImageDate2: raw.gamePaperImageDate2 || '',

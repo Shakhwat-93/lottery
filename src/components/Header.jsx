@@ -210,8 +210,8 @@ export default function Header({ page = 'home' }) {
                 <Link to="/" onClick={() => setMobileMenuOpen(false)}>
                   <span className="nav-icon">🏠</span> Home
                 </Link>
-                <Link to="/3-set-game" onClick={() => setMobileMenuOpen(false)}>
-                  <span className="nav-icon">🎲</span> 3 Set Game
+                <Link to="/3-up-game" onClick={() => setMobileMenuOpen(false)}>
+                  <span className="nav-icon">🎲</span> 3 Up Game
                 </Link>
                 <Link to="/game" onClick={() => setMobileMenuOpen(false)}>
                   <span className="nav-icon">📄</span> VIP Sure Papers
@@ -232,8 +232,8 @@ export default function Header({ page = 'home' }) {
                 <Link to="/game" onClick={() => setMobileMenuOpen(false)}>
                   <span className="nav-icon">📄</span> VIP Sure Papers
                 </Link>
-                <Link to="/3-set-game" className="nav-cta" onClick={() => setMobileMenuOpen(false)}>
-                  3 Set Game 🎯
+                <Link to="/3-up-game" className="nav-cta" onClick={() => setMobileMenuOpen(false)}>
+                  3 Up Game 🎯
                 </Link>
               </>
             )}
@@ -245,8 +245,8 @@ export default function Header({ page = 'home' }) {
                 <Link to="/form" onClick={() => setMobileMenuOpen(false)}>
                   <span className="nav-icon">📝</span> মেম্বারশিপ ফর্ম
                 </Link>
-                <Link to="/3-set-game" onClick={() => setMobileMenuOpen(false)}>
-                  <span className="nav-icon">🎲</span> 3 Set Game
+                <Link to="/3-up-game" onClick={() => setMobileMenuOpen(false)}>
+                  <span className="nav-icon">🎲</span> 3 Up Game
                 </Link>
                 <Link to="/game" onClick={() => setMobileMenuOpen(false)}>
                   <span className="nav-icon">📄</span> VIP Sure Papers

@@ -39,13 +39,13 @@ export default function ThreeSetGamePage() {
   const openPaper = (paperType, selectedDate) => {
     const isDate2 = selectedDate === date2;
     if (paperType === 1) {
-      // 1 Set 3D Game Paper (Date 1 or Date 2)
+      // 3 Up Game Paper (Date 1 or Date 2)
       const src = (isDate2 && settings.gamePaperImageDate2)
         ? settings.gamePaperImageDate2
         : (settings.gamePaperImage || '/assets/site/3-up-game-paper-1.jpg');
       setFullscreenImage({
         src,
-        title: `Thailand Lottery Official Paper • 1 Set 3D Game (${selectedDate})`,
+        title: `Thailand Lottery Official Paper • 3 Up Game (${selectedDate})`,
         date: selectedDate,
         paperType: 1
       });
@@ -95,18 +95,18 @@ export default function ThreeSetGamePage() {
           <section className="game-panel reveal-on-scroll" id="game-strip-section">
             <div>
               <p className="eyebrow">VIP ACCESS</p>
-              <h2>Game</h2>
+              <h2>3 Up Game</h2>
               <p>
                 <strong className="clarity-digit">100%</strong> নিশ্চিত অফিসিয়াল ৩-আপ গেম পেপার ও ভিআইপি ড্র রেজাল্ট দেখতে তারিখ নির্বাচন করুন।
               </p>
             </div>
 
-            <div className="game-panel-buttons-stack" aria-label="Game Draw Dates">
+            <div className="game-panel-buttons-stack" aria-label="3 Up Game Draw Dates">
               <button
                 type="button"
                 className="button primary vip-agency-date-btn"
                 onClick={() => openPaper(1, date1)}
-                aria-label={`Game Draw Date ${date1}`}
+                aria-label={`3 Up Game Draw Date ${date1}`}
               >
                 <span>{date1}</span>
                 <span className="vip-btn-arrow" aria-hidden="true">↗</span>
@@ -116,7 +116,7 @@ export default function ThreeSetGamePage() {
                 type="button"
                 className="button primary vip-agency-date-btn"
                 onClick={() => openPaper(1, date2)}
-                aria-label={`Game Special Draw Date ${date2}`}
+                aria-label={`3 Up Game Special Draw Date ${date2}`}
               >
                 <span>{date2}</span>
                 <span className="vip-btn-arrow" aria-hidden="true">↗</span>
@@ -207,7 +207,7 @@ export default function ThreeSetGamePage() {
                   </svg>
                 </div>
                 <span className="three-up-brand-sub">
-                  สำนักงานสลากกินแบ่งรัฐบาล • {fullscreenImage.paperType === 1 ? 'OFFICIAL 3D GAME' : '1 YEAR 24 SET CALCULATION'} ({fullscreenImage.date})
+                  สำนักงานสลากกินแบ่งรัฐบาล • {fullscreenImage.paperType === 1 ? 'OFFICIAL 3 UP GAME' : '1 YEAR 24 SET CALCULATION'} ({fullscreenImage.date})
                 </span>
               </div>
             </div>
