@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
 import { getSupabaseClient, isSupabaseConfigured } from '../lib/supabase';
 import { loadVipCodeSettings, readVipCodeSettings, saveVipCodeSettings, formatVipDate } from '../lib/vipCodeSettings';
+import { resolveEmbedUrl } from '../components/FacebookLiveStream';
 import '../styles/admin.css';
 
 const DEMO_SESSION_KEY = 'vip-code-demo-session';
@@ -929,16 +930,39 @@ export default function AdminVipCodePage() {
                       <small>হোমপেজের রেজাল্ট ও উইনার্স সেকশনে হাইলাইট হিসেবে দৃশ্যমান হবে।</small>
                     </label>
 
-                    <label className="admin-field">
-                      <span><b>02</b> অফিসিয়াল ফেসবুক / ইউটিউব লাইভ ভিডিও URL</span>
-                      <input
-                        type="url"
+                    <label className="admin-field admin-grid-full">
+                      <span><b>02</b> অফিসিয়াল লাইভ ভিডিও Embed Code অথবা Video URL</span>
+                      <textarea
                         value={settings.liveStreamUrl || ''}
                         onChange={updateField('liveStreamUrl')}
-                        placeholder="https://facebook.com/..."
+                        placeholder='সরাসরি <iframe> এম্বেড কোড পেস্ট করুন, অথবা YouTube / Facebook লাইভ ভিডিও লিংক দিন...&#10;উদাহরণ:&#10;<iframe width="560" height="315" src="https://www.youtube.com/embed/..." ...></iframe>&#10;অথবা https://www.youtube.com/watch?v=...'
+                        rows={4}
                       />
-                      <small>লাইভ ড্র সম্প্রচারের ফেসবুক পেজ বা ভিডিও লিংক।</small>
+                      <small>
+                        💡 টিপস: আপনি সরাসরি সম্পূর্ণ <code>&lt;iframe&gt;</code> এম্বেড কোড পেস্ট করতে পারেন, অথবা সাধারণ YouTube / Facebook ভিডিও লিংক পেস্ট করলেও সিস্টেম স্বয়ংক্রিয়ভাবে লাইভ প্লেয়ারে রূপান্তর করে নিবে।
+                      </small>
                     </label>
+
+                    {/* Live Stream Preview Box */}
+                    {Boolean(settings.liveStreamUrl) && (
+                      <div className="admin-field admin-grid-full" style={{ marginTop: '0.5rem' }}>
+                        <span><b>03</b> লাইভ ভিডিও প্রিভিউ (Live Preview)</span>
+                        <div style={{ maxWidth: '480px', borderRadius: '10px', overflow: 'hidden', border: '1.5px solid rgba(255, 215, 0, 0.4)', background: '#000' }}>
+                          <iframe
+                            src={resolveEmbedUrl(settings.liveStreamUrl) || 'https://www.youtube.com/embed/Emnh_bS2PIo'}
+                            width="100%"
+                            height="240"
+                            title="Admin Live Stream Preview"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            style={{ display: 'block', border: 'none' }}
+                          />
+                        </div>
+                        <small style={{ color: '#74e6b2', marginTop: '0.4rem' }}>
+                          ✓ প্লেয়ার সফলভাবে প্রস্তুত হয়েছে: {resolveEmbedUrl(settings.liveStreamUrl)}
+                        </small>
+                      </div>
+                    )}
                   </div>
                 )}
 
