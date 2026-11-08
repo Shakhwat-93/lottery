@@ -8,6 +8,7 @@ export default function TrustHero() {
   const agentName = settings.agentName || 'মোঃ ফাহিম চৌধুরী';
   const licenseNumber = settings.licenseNumber || 'TGL-2025-001784';
   const headerTitle = settings.headerTitle || 'Thailand Lottery';
+  const activeYear = settings.activeYear || '2026';
 
   return (
     <section className="hero reveal-on-scroll">
@@ -18,7 +19,7 @@ export default function TrustHero() {
         <h1 className="hero-main-title">
           <span className="hero-title-welcome">Welcome To</span>
           <span className="hero-title-main">{headerTitle}</span>
-          <span className="hero-title-year">2026</span>
+          <span className="hero-title-year">{activeYear}</span>
         </h1>
         <p className="hero-copy hero-copy-paragraph">
           থাইল্যান্ড সরকারের গভর্নমেন্ট লটারির অফিস (GLO) দ্বারা সরাসরি লাইসেন্সপ্রাপ্ত ও আন্তর্জাতিকভাবে বিশ্বস্ত প্ল্যাটফর্ম। <span className="no-break-wrap"><strong className="clarity-digit">100%</strong> নিরাপদ লেনদেন,</span> ভেরিফাইড রেজাল্ট ও অফিসিয়াল মেম্বারশিপ সেবা।
@@ -26,7 +27,7 @@ export default function TrustHero() {
 
         <div className="trust-list" aria-label="Trust signals">
           <span>লাইসেন্স নং {licenseNumber}</span>
-          <span>সেরা এজেন্ট 2026 (Best Agent)</span>
+          <span>সেরা এজেন্ট {activeYear} (Best Agent)</span>
         </div>
 
         <div className="hero-actions">
@@ -58,7 +59,7 @@ export default function TrustHero() {
             </div>
             <div className="agent-verified-pill">
               <span className="pulse-dot" aria-hidden="true"></span>
-              <span>VERIFIED 2026</span>
+              <span>VERIFIED {activeYear}</span>
             </div>
           </div>
 
@@ -67,7 +68,7 @@ export default function TrustHero() {
             <div className="agent-seal-container" aria-hidden="true">
               <div className="agent-gold-medal">
                 <span className="medal-crown">🏆</span>
-                <span className="medal-year">2026</span>
+                <span className="medal-year">{activeYear}</span>
               </div>
             </div>
 
@@ -95,7 +96,7 @@ export default function TrustHero() {
           <div className="agent-credentials-bar">
             <div className="agent-data-item">
               <span className="data-label">LICENSE NO:</span>
-              <strong className="data-value highlight">GLO-BD-2026-001784</strong>
+              <strong className="data-value highlight">{licenseNumber}</strong>
             </div>
             <div className="agent-data-item">
               <span className="data-label">HEAD OFFICE:</span>
@@ -113,7 +114,7 @@ export default function TrustHero() {
           <div className="certificate-seal" aria-hidden="true">
             <span>🏆</span>
             <strong>BEST AGENT</strong>
-            <small>GLO 2026</small>
+            <small>GLO {activeYear}</small>
           </div>
           <img
             src="/assets/site/best-agent-certificate.jpg"

@@ -224,6 +224,118 @@
 }
 .admin-user-bar span strong { color: #ffd866; }
 
+/* Toggle Switch Styling */
+.admin-toggle-switch-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.admin-toggle-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 9999px;
+  font: 700 0.92rem/1 'Hind Siliguri', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1.5px solid transparent;
+}
+.admin-toggle-pill.is-on {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(52, 211, 153, 0.45);
+  color: #6ee7b7;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.2);
+}
+.admin-toggle-pill.is-off {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(248, 113, 113, 0.4);
+  color: #fca5a5;
+}
+.admin-toggle-pill .toggle-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+.admin-toggle-pill.is-on .toggle-indicator {
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+}
+.admin-toggle-pill.is-off .toggle-indicator {
+  background: #f87171;
+  box-shadow: 0 0 6px #f87171;
+}
+
+/* Image Upload & Paper Management */
+.admin-paper-upload-box {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed rgba(220, 229, 245, 0.2);
+  border-radius: 12px;
+}
+.admin-paper-upload-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.admin-file-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  background: rgba(233, 188, 56, 0.15);
+  border: 1px solid rgba(233, 188, 56, 0.4);
+  color: #ffd866;
+  font: 700 0.88rem/1 'Hind Siliguri', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.admin-file-btn:hover {
+  background: rgba(233, 188, 56, 0.25);
+  transform: translateY(-1px);
+}
+.admin-paper-preview-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+.admin-paper-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1.5px solid rgba(255, 215, 0, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.admin-paper-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.82rem;
+  color: #a7bad3;
+}
+.admin-paper-clear-btn {
+  background: transparent;
+  border: none;
+  color: #f87171;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+.admin-paper-clear-btn:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 680px) {
   .admin-header { align-items: flex-start; flex-direction: column; }
   .admin-card { border-radius: 18px; padding: 1.25rem; }

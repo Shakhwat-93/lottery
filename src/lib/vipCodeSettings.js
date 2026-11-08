@@ -10,6 +10,8 @@ export const DEFAULT_VIP_CODE_SETTINGS = Object.freeze({
   headerTitle: 'Thailand Lottery',
   headerSubtitle: 'สำนักงานสลากกินแบ่งรัฐบาล • সরকারি অনুমোদিত',
   topNotice: '🎉 থাইল্যান্ড লটারি অফিসিয়াল রেজাল্ট ও নিশ্চিত ৩-সেট পেপার আপডেট সম্পন্ন! এখনই মেম্বারশিপ নিশ্চিত করুন।',
+  showTopNotice: true,
+  activeYear: '2026',
   phoneNumber: '+8801309802224',
   whatsappNumber: '+8801309802224',
   imoNumber: '+8801309802224',
@@ -23,8 +25,10 @@ export const DEFAULT_VIP_CODE_SETTINGS = Object.freeze({
   threeUpSubtitle: 'অফিসিয়াল 3 সেট / 3 আপ গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:',
   threeUpButtonText: '3 UP GAME',
   gamePaperImage: '/assets/site/3-up-game-paper-1.jpg',
+  gamePaperImageDate2: '',
   gamePaperBadge: 'OFFICIAL VIP GAME PAPER',
   calculationPaperImage: '/assets/site/3-up-game-paper-2.jpg',
+  calculationPaperImageDate2: '',
   calculationPaperBadge: 'OFFICIAL VIP CALCULATION PAPER',
 
   // Payment & Messaging
@@ -107,12 +111,16 @@ export function mapDatabaseSettings(row) {
     urgentNotice: row.urgent_notice || DEFAULT_VIP_CODE_SETTINGS.urgentNotice,
 
     // Dynamic Extra Data
+    showTopNotice: extra.showTopNotice !== undefined ? Boolean(extra.showTopNotice) : DEFAULT_VIP_CODE_SETTINGS.showTopNotice,
+    activeYear: extra.activeYear || DEFAULT_VIP_CODE_SETTINGS.activeYear,
     threeUpTitle: extra.threeUpTitle || DEFAULT_VIP_CODE_SETTINGS.threeUpTitle,
     threeUpSubtitle: extra.threeUpSubtitle || DEFAULT_VIP_CODE_SETTINGS.threeUpSubtitle,
     threeUpButtonText: extra.threeUpButtonText || DEFAULT_VIP_CODE_SETTINGS.threeUpButtonText,
     gamePaperImage: extra.gamePaperImage || DEFAULT_VIP_CODE_SETTINGS.gamePaperImage,
+    gamePaperImageDate2: extra.gamePaperImageDate2 || '',
     gamePaperBadge: extra.gamePaperBadge || DEFAULT_VIP_CODE_SETTINGS.gamePaperBadge,
     calculationPaperImage: extra.calculationPaperImage || DEFAULT_VIP_CODE_SETTINGS.calculationPaperImage,
+    calculationPaperImageDate2: extra.calculationPaperImageDate2 || '',
     calculationPaperBadge: extra.calculationPaperBadge || DEFAULT_VIP_CODE_SETTINGS.calculationPaperBadge,
     bkashNumber: extra.bkashNumber || DEFAULT_VIP_CODE_SETTINGS.bkashNumber,
     nagadNumber: extra.nagadNumber || DEFAULT_VIP_CODE_SETTINGS.nagadNumber,
@@ -164,12 +172,16 @@ export async function saveVipCodeSettings(settings, { localOnly = false, client 
   }
 
   const extraData = {
+    showTopNotice: normalized.showTopNotice !== undefined ? Boolean(normalized.showTopNotice) : DEFAULT_VIP_CODE_SETTINGS.showTopNotice,
+    activeYear: normalized.activeYear ?? DEFAULT_VIP_CODE_SETTINGS.activeYear,
     threeUpTitle: normalized.threeUpTitle ?? DEFAULT_VIP_CODE_SETTINGS.threeUpTitle,
     threeUpSubtitle: normalized.threeUpSubtitle ?? DEFAULT_VIP_CODE_SETTINGS.threeUpSubtitle,
     threeUpButtonText: normalized.threeUpButtonText ?? DEFAULT_VIP_CODE_SETTINGS.threeUpButtonText,
     gamePaperImage: normalized.gamePaperImage ?? DEFAULT_VIP_CODE_SETTINGS.gamePaperImage,
+    gamePaperImageDate2: normalized.gamePaperImageDate2 || '',
     gamePaperBadge: normalized.gamePaperBadge ?? DEFAULT_VIP_CODE_SETTINGS.gamePaperBadge,
     calculationPaperImage: normalized.calculationPaperImage ?? DEFAULT_VIP_CODE_SETTINGS.calculationPaperImage,
+    calculationPaperImageDate2: normalized.calculationPaperImageDate2 || '',
     calculationPaperBadge: normalized.calculationPaperBadge ?? DEFAULT_VIP_CODE_SETTINGS.calculationPaperBadge,
     bkashNumber: normalized.bkashNumber ?? DEFAULT_VIP_CODE_SETTINGS.bkashNumber,
     nagadNumber: normalized.nagadNumber ?? DEFAULT_VIP_CODE_SETTINGS.nagadNumber,

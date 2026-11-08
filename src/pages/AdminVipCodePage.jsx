@@ -22,6 +22,7 @@ export default function AdminVipCodePage() {
   const [isSaving, setIsSaving] = useState(false);
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
+  const [uploadingField, setUploadingField] = useState(null);
 
   const isAdmin = Boolean(user);
 
@@ -97,6 +98,82 @@ export default function AdminVipCodePage() {
     setSettings((current) => ({ ...current, [field]: event.target.value }));
     setMessage('');
     setError('');
+  };
+
+  const handleFileUpload = (field) => (event) => {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    setUploadingField(field);
+    setMessage('');
+    setError('');
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const dataUrl = e.target.result;
+
+      // 1. Try serverless upload endpoint
+      try {
+        const response = await fetch('/api/admin/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fileData: dataUrl, fileName: file.name })
+        });
+        if (response.ok) {
+          const result = await response.json();
+          if (result?.publicUrl) {
+            setIsDirty(true);
+            setSettings((c) => ({ ...c, [field]: result.publicUrl }));
+            setMessage('✅ ছবি সফলভাবে আপলোড ও ক্লাউডে সেভ হয়েছে!');
+            setUploadingField(null);
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('API upload fallback to data URL:', err);
+      }
+
+      // 2. Direct fallback (Canvas compressed data URL)
+      try {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          const maxDim = 1200;
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          const compressed = canvas.toDataURL('image/jpeg', 0.85);
+
+          setIsDirty(true);
+          setSettings((c) => ({ ...c, [field]: compressed }));
+          setMessage('✅ ছবি সফলভাবে লোড হয়েছে!');
+          setUploadingField(null);
+        };
+        img.onerror = () => {
+          setIsDirty(true);
+          setSettings((c) => ({ ...c, [field]: dataUrl }));
+          setUploadingField(null);
+        };
+        img.src = dataUrl;
+      } catch {
+        setIsDirty(true);
+        setSettings((c) => ({ ...c, [field]: dataUrl }));
+        setUploadingField(null);
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSignIn = async (event) => {
@@ -361,7 +438,7 @@ export default function AdminVipCodePage() {
                         onChange={updateField('firstDate')}
                         required
                       />
-                      <small>এই ড্র-এর জন্য ভিআইপি পেপার ও কোড উন্মুক্ত থাকবে ({formatVipDate(settings.firstDate)})।</small>
+                      <small>এই ড্র-এর জন্য ১ম পেপার ও কোড উন্মুক্ত থাকবে ({formatVipDate(settings.firstDate)})।</small>
                     </label>
 
                     <label className="admin-field">
@@ -375,8 +452,21 @@ export default function AdminVipCodePage() {
                       <small>পরবর্তী ড্র-এর তারিখ হিসেবে প্রদর্শিত হবে ({formatVipDate(settings.secondDate)})।</small>
                     </label>
 
-                    <label className="admin-field admin-grid-full">
-                      <span><b>03</b> VIP Agency Code (৫ ডিজিট)</span>
+                    <label className="admin-field">
+                      <span><b>03</b> লটারি সাল / বছর (Active Year)</span>
+                      <input
+                        type="text"
+                        value={settings.activeYear || ''}
+                        onChange={updateField('activeYear')}
+                        placeholder="2026"
+                        maxLength={4}
+                        required
+                      />
+                      <small>ওয়েবসাইটের সর্বত্র (শিরোনাম, ব্যানার, ফুটার, সার্টিফিকেট) এই সাল কার্যকর হবে।</small>
+                    </label>
+
+                    <label className="admin-field">
+                      <span><b>04</b> VIP Agency Code (৫ ডিজিট)</span>
                       <input
                         type="text"
                         className="is-code"
@@ -420,15 +510,33 @@ export default function AdminVipCodePage() {
                       <small>হেডারে অ্যানিমেটেড মারকুই ও ফুটারের সাবটাইটেল।</small>
                     </label>
 
+                    <div className="admin-field admin-grid-full admin-toggle-field">
+                      <span><b>03</b> শীর্ষ ঘোষণা নোটিশ বার চালু / বন্ধ (ON / OFF)</span>
+                      <div className="admin-toggle-switch-row">
+                        <button
+                          type="button"
+                          className={`admin-toggle-pill ${settings.showTopNotice !== false ? 'is-on' : 'is-off'}`}
+                          onClick={() => {
+                            setIsDirty(true);
+                            setSettings((c) => ({ ...c, showTopNotice: !(c.showTopNotice !== false) }));
+                          }}
+                        >
+                          <span className="toggle-indicator" />
+                          <span>{settings.showTopNotice !== false ? '🔔 অন (ON) — ঘোষণা বার সাইটে প্রদর্শিত হচ্ছে' : '🔕 অফ (OFF) — ঘোষণা বার সম্পূর্ণ লুকানো আছে'}</span>
+                        </button>
+                        <small>ঘোষণা বার সম্পূর্ণ বন্ধ করতে ক্লিক করুন। বন্ধ থাকলে সাইটের উপরে কোনো নোটিশ স্ক্রোল হবে না।</small>
+                      </div>
+                    </div>
+
                     <label className="admin-field admin-grid-full">
-                      <span><b>03</b> শীর্ষ ঘোষণা নোটিশ বার (Top Announcement Bar)</span>
+                      <span><b>04</b> শীর্ষ ঘোষণা নোটিশ টেক্সট (Top Notice)</span>
                       <textarea
                         value={settings.topNotice || ''}
                         onChange={updateField('topNotice')}
                         placeholder="শীর্ষে প্রদর্শনের জন্য জরুরি নোটিশ লিখুন..."
                         rows={3}
                       />
-                      <small>সাইটের সবচেয়ে উপরে লাল/সোনালী স্ট্রিপে লাইভ স্ক্রোল হবে (খালি রাখলে বারটি লুকানো থাকবে)।</small>
+                      <small>নোটিশ বার অন থাকলে সাইটের সবচেয়ে উপরে লাল/সোনালী স্ট্রিপে লাইভ স্ক্রোল হবে।</small>
                     </label>
                   </div>
                 )}
@@ -442,7 +550,7 @@ export default function AdminVipCodePage() {
                         type="text"
                         value={settings.threeUpTitle || ''}
                         onChange={updateField('threeUpTitle')}
-                        placeholder="থাইল্যান্ড লটারি 3 সেট গেম পেপার 2026"
+                        placeholder={`থাইল্যান্ড লটারি 3 সেট গেম পেপার ${settings.activeYear || '2026'}`}
                         required
                       />
                       <small>হোমপেজের ৩-আপ সেকশনের প্রধান শিরোনাম।</small>
@@ -471,20 +579,178 @@ export default function AdminVipCodePage() {
                       <small>বাটনের ঠিক উপরে নির্দেশনামূলক টেক্সট।</small>
                     </label>
 
-                    <label className="admin-field">
-                      <span><b>04</b> ১ সেট ৩ডি গেম পেপারের ছবি (URL বা পাথ)</span>
+                    {/* Paper 1 (Game Paper Date 1) */}
+                    <div className="admin-field admin-paper-upload-box">
+                      <span><b>04</b> ১ সেট ৩ডি গেম পেপার — ১ম ড্র ({formatVipDate(settings.firstDate)})</span>
+                      <div className="admin-paper-upload-row">
+                        <label className="admin-file-btn">
+                          <span>{uploadingField === 'gamePaperImage' ? '⏳ আপলোড হচ্ছে…' : '📁 ফাইল থেকে ছবি আপলোড করুন'}</span>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            onChange={handleFileUpload('gamePaperImage')}
+                            disabled={uploadingField === 'gamePaperImage'}
+                          />
+                        </label>
+                      </div>
                       <input
                         type="text"
                         value={settings.gamePaperImage || ''}
                         onChange={updateField('gamePaperImage')}
-                        placeholder="/assets/site/3-up-game-paper-1.jpg"
+                        placeholder="/assets/site/3-up-game-paper-1.jpg বা ছবির অনলাইন লিংক"
                         required
                       />
-                      <small>ফুলস্ক্রিন পেপার ১-এ প্রদর্শিত ছবির পাথ বা অনলাইন ইমেজ লিংক।</small>
-                    </label>
+                      {settings.gamePaperImage && (
+                        <div className="admin-paper-preview-wrap">
+                          <img src={settings.gamePaperImage} alt="Game Paper Preview 1" className="admin-paper-thumb" />
+                          <div className="admin-paper-meta">
+                            <span>প্রিভিউ সম্পন্ন</span>
+                            <button
+                              type="button"
+                              className="admin-paper-clear-btn"
+                              onClick={() => {
+                                setIsDirty(true);
+                                setSettings((c) => ({ ...c, gamePaperImage: '/assets/site/3-up-game-paper-1.jpg' }));
+                              }}
+                            >
+                              রিসেট (ডিফল্ট)
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                      <small>১ম ড্র-এর তারিখ ({formatVipDate(settings.firstDate)}) ক্লিক করলে এই ছবিটি প্রদর্শিত হবে।</small>
+                    </div>
+
+                    {/* Paper 2 (Game Paper Date 2) */}
+                    <div className="admin-field admin-paper-upload-box">
+                      <span><b>05</b> ১ সেট ৩ডি গেম পেপার — ২য় ড্র ({formatVipDate(settings.secondDate)}) (ঐচ্ছিক)</span>
+                      <div className="admin-paper-upload-row">
+                        <label className="admin-file-btn">
+                          <span>{uploadingField === 'gamePaperImageDate2' ? '⏳ আপলোড হচ্ছে…' : '📁 ফাইল থেকে ছবি আপলোড করুন'}</span>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            onChange={handleFileUpload('gamePaperImageDate2')}
+                            disabled={uploadingField === 'gamePaperImageDate2'}
+                          />
+                        </label>
+                      </div>
+                      <input
+                        type="text"
+                        value={settings.gamePaperImageDate2 || ''}
+                        onChange={updateField('gamePaperImageDate2')}
+                        placeholder="খালি রাখলে ১ম ড্র-এর পেপার স্বয়ংক্রিয়ভাবে ব্যবহার হবে"
+                      />
+                      {settings.gamePaperImageDate2 && (
+                        <div className="admin-paper-preview-wrap">
+                          <img src={settings.gamePaperImageDate2} alt="Game Paper Preview 2" className="admin-paper-thumb" />
+                          <div className="admin-paper-meta">
+                            <span>২য় ড্র কাস্টম পেপার</span>
+                            <button
+                              type="button"
+                              className="admin-paper-clear-btn"
+                              onClick={() => {
+                                setIsDirty(true);
+                                setSettings((c) => ({ ...c, gamePaperImageDate2: '' }));
+                              }}
+                            >
+                              মুছে ফেলুন (Remove)
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                      <small>২য় ড্র-এর তারিখ ({formatVipDate(settings.secondDate)}) ক্লিক করলে এই ছবিটি প্রদর্শিত হবে।</small>
+                    </div>
+
+                    {/* Paper 3 (Calculation Paper Date 1) */}
+                    <div className="admin-field admin-paper-upload-box">
+                      <span><b>06</b> ১ বছর ২৪ সেট ক্যালকুলেশন পেপার — ১ম ড্র ({formatVipDate(settings.firstDate)})</span>
+                      <div className="admin-paper-upload-row">
+                        <label className="admin-file-btn">
+                          <span>{uploadingField === 'calculationPaperImage' ? '⏳ আপলোড হচ্ছে…' : '📁 ফাইল থেকে ছবি আপলোড করুন'}</span>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            onChange={handleFileUpload('calculationPaperImage')}
+                            disabled={uploadingField === 'calculationPaperImage'}
+                          />
+                        </label>
+                      </div>
+                      <input
+                        type="text"
+                        value={settings.calculationPaperImage || ''}
+                        onChange={updateField('calculationPaperImage')}
+                        placeholder="/assets/site/3-up-game-paper-2.jpg বা ছবির অনলাইন লিংক"
+                        required
+                      />
+                      {settings.calculationPaperImage && (
+                        <div className="admin-paper-preview-wrap">
+                          <img src={settings.calculationPaperImage} alt="Calc Paper Preview 1" className="admin-paper-thumb" />
+                          <div className="admin-paper-meta">
+                            <span>প্রিভিউ সম্পন্ন</span>
+                            <button
+                              type="button"
+                              className="admin-paper-clear-btn"
+                              onClick={() => {
+                                setIsDirty(true);
+                                setSettings((c) => ({ ...c, calculationPaperImage: '/assets/site/3-up-game-paper-2.jpg' }));
+                              }}
+                            >
+                              রিসেট (ডিফল্ট)
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                      <small>ক্যালকুলেশন বক্সের ১ম ড্র ({formatVipDate(settings.firstDate)}) ক্লিক করলে প্রদর্শিত হবে।</small>
+                    </div>
+
+                    {/* Paper 4 (Calculation Paper Date 2) */}
+                    <div className="admin-field admin-paper-upload-box">
+                      <span><b>07</b> ১ বছর ২৪ সেট ক্যালকুলেশন পেপার — ২য় ড্র ({formatVipDate(settings.secondDate)}) (ঐচ্ছিক)</span>
+                      <div className="admin-paper-upload-row">
+                        <label className="admin-file-btn">
+                          <span>{uploadingField === 'calculationPaperImageDate2' ? '⏳ আপলোড হচ্ছে…' : '📁 ফাইল থেকে ছবি আপলোড করুন'}</span>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            onChange={handleFileUpload('calculationPaperImageDate2')}
+                            disabled={uploadingField === 'calculationPaperImageDate2'}
+                          />
+                        </label>
+                      </div>
+                      <input
+                        type="text"
+                        value={settings.calculationPaperImageDate2 || ''}
+                        onChange={updateField('calculationPaperImageDate2')}
+                        placeholder="খালি রাখলে ১ম ড্র-এর ক্যালকুলেশন পেপার ব্যবহার হবে"
+                      />
+                      {settings.calculationPaperImageDate2 && (
+                        <div className="admin-paper-preview-wrap">
+                          <img src={settings.calculationPaperImageDate2} alt="Calc Paper Preview 2" className="admin-paper-thumb" />
+                          <div className="admin-paper-meta">
+                            <span>২য় ড্র কাস্টম পেপার</span>
+                            <button
+                              type="button"
+                              className="admin-paper-clear-btn"
+                              onClick={() => {
+                                setIsDirty(true);
+                                setSettings((c) => ({ ...c, calculationPaperImageDate2: '' }));
+                              }}
+                            >
+                              মুছে ফেলুন (Remove)
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                      <small>ক্যালকুলেশন বক্সের ২য় ড্র ({formatVipDate(settings.secondDate)}) ক্লিক করলে প্রদর্শিত হবে।</small>
+                    </div>
 
                     <label className="admin-field">
-                      <span><b>05</b> গেম পেপারের হাইলাইট ব্যাজ টেক্সট</span>
+                      <span><b>08</b> গেম পেপারের হাইলাইট ব্যাজ টেক্সট</span>
                       <input
                         type="text"
                         value={settings.gamePaperBadge || ''}
@@ -492,23 +758,11 @@ export default function AdminVipCodePage() {
                         placeholder="OFFICIAL VIP GAME PAPER"
                         required
                       />
-                      <small>ছবির ওপরে গোল্ডেন ব্যাজে যা লেখা থাকবে।</small>
+                      <small>গেম পেপার ভিউয়ারের ওপরে সোনালী হাইলাইট ব্যাজ।</small>
                     </label>
 
                     <label className="admin-field">
-                      <span><b>06</b> ১ বছর ২৪ সেট ক্যালকুলেশন পেপারের ছবি (URL বা পাথ)</span>
-                      <input
-                        type="text"
-                        value={settings.calculationPaperImage || ''}
-                        onChange={updateField('calculationPaperImage')}
-                        placeholder="/assets/site/3-up-game-paper-2.jpg"
-                        required
-                      />
-                      <small>ফুলস্ক্রিন পেপার ২-এ প্রদর্শিত ছবির পাথ বা অনলাইন ইমেজ লিংক।</small>
-                    </label>
-
-                    <label className="admin-field">
-                      <span><b>07</b> ক্যালকুলেশন পেপারের হাইলাইট ব্যাজ টেক্সট</span>
+                      <span><b>09</b> ক্যালকুলেশন পেপারের হাইলাইট ব্যাজ টেক্সট</span>
                       <input
                         type="text"
                         value={settings.calculationPaperBadge || ''}
@@ -516,7 +770,7 @@ export default function AdminVipCodePage() {
                         placeholder="OFFICIAL VIP CALCULATION PAPER"
                         required
                       />
-                      <small>ক্যালকুলেশন ছবির ওপরে গোল্ডেন ব্যাজের টেক্সট।</small>
+                      <small>ক্যালকুলেশন পেপার ভিউয়ারের ওপরে সোনালী হাইলাইট ব্যাজ।</small>
                     </label>
                   </div>
                 )}

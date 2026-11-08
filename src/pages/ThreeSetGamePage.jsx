@@ -10,6 +10,7 @@ export default function ThreeSetGamePage() {
   const date1 = formatVipDate(settings.firstDate);
   const date2 = formatVipDate(settings.secondDate);
   const brandTitle = settings.headerTitle || 'Thailand Lottery';
+  const activeYear = settings.activeYear || '2026';
 
   const [fullscreenImage, setFullscreenImage] = useState(null);
 
@@ -36,19 +37,26 @@ export default function ThreeSetGamePage() {
   }, [fullscreenImage]);
 
   const openPaper = (paperType, selectedDate) => {
+    const isDate2 = selectedDate === date2;
     if (paperType === 1) {
-      // 1 Set 3D Game Paper (Image 2)
+      // 1 Set 3D Game Paper (Date 1 or Date 2)
+      const src = (isDate2 && settings.gamePaperImageDate2)
+        ? settings.gamePaperImageDate2
+        : (settings.gamePaperImage || '/assets/site/3-up-game-paper-1.jpg');
       setFullscreenImage({
-        src: settings.gamePaperImage || '/assets/site/3-up-game-paper-1.jpg',
-        title: 'Thailand Lottery Official Paper • 1 Set 3D Game',
+        src,
+        title: `Thailand Lottery Official Paper • 1 Set 3D Game (${selectedDate})`,
         date: selectedDate,
         paperType: 1
       });
     } else {
-      // 1 Year 24 Set Calculation Paper (Image 3)
+      // 1 Year 24 Set Calculation Paper (Date 1 or Date 2)
+      const src = (isDate2 && settings.calculationPaperImageDate2)
+        ? settings.calculationPaperImageDate2
+        : (settings.calculationPaperImage || '/assets/site/3-up-game-paper-2.jpg');
       setFullscreenImage({
-        src: settings.calculationPaperImage || '/assets/site/3-up-game-paper-2.jpg',
-        title: '1 Year 24 Set Calculation Paper 2026',
+        src,
+        title: `1 Year 24 Set Calculation Paper ${activeYear} (${selectedDate})`,
         date: selectedDate,
         paperType: 2
       });
@@ -71,7 +79,7 @@ export default function ThreeSetGamePage() {
               margin: '0.6rem 0 0.4rem',
               fontWeight: 900
             }}>
-              থাইল্যান্ড লটারি 3 UP ও ক্যালকুলেশন পেপার 2026
+              {settings.threeUpTitle || `থাইল্যান্ড লটারি 3 UP ও ক্যালকুলেশন পেপার ${activeYear}`}
             </h1>
             <p style={{
               color: 'var(--text-secondary, #4A5568)',

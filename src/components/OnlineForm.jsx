@@ -31,6 +31,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
   const settings = useVipCodeSettings();
   const bkashNum = settings.bkashNumber || '+8801705330881';
   const agentName = settings.agentName || 'মোঃ ফাহিম চৌধুরী';
+  const activeYear = settings.activeYear || '2026';
 
   const copyBkashNumber = () => {
     if (navigator?.clipboard?.writeText) {
@@ -270,7 +271,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                     </span>
                   </h1>
                 </div>
-                <h2 className="gform-form-name">MEMBERSHIP REGISTRATION FORM 2026</h2>
+                <h2 className="gform-form-name">MEMBERSHIP REGISTRATION FORM {activeYear}</h2>
                 <div className="gform-thai-tagline">
                   Official Member Registration Portal • Government Lottery Office (GLO)
                 </div>
@@ -627,7 +628,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                 <div className="gform-agent-crest-box">
                   <div className="gform-agent-crest-icon">🛡️</div>
                   <span className="gform-agent-crest-text">VERIFIED AGENT</span>
-                  <span className="gform-agent-crest-sub">GLO BANGKOK 2026</span>
+                  <span className="gform-agent-crest-sub">GLO BANGKOK {activeYear}</span>
                 </div>
               </div>
             </div>

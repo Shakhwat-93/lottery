@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
 
 export default function FormShowcase() {
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
+  const settings = useVipCodeSettings();
+  const activeYear = settings.activeYear || '2026';
+  const agentName = settings.agentName || 'মোঃ ফাহim চৌধুরী';
+  const urgentFormsLeft = settings.urgentFormsLeft || '5টি';
 
   return (
     <section className="section form-section reveal-on-scroll" id="online-form">
@@ -12,7 +17,7 @@ export default function FormShowcase() {
         </p>
         <h2>Thailand Lottery Official Membership Registration Form</h2>
         <p>
-          থাইল্যান্ড সরকারের গভর্নমেন্ট লটারি অফিস (GLO) মেম্বার হতে নিচের অফিসিয়াল রেজিস্ট্রেশন ফরমটি পূরণ করুন। অনুমোদিত সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (Agent ID: TL-001)</strong> এর অধীনে আর <strong>মাত্র 5টি ফর্ম বাকি রয়েছে</strong>। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার কনফার্ম করুন!
+          থাইল্যান্ড সরকারের গভর্নমেন্ট লটারি অফিস (GLO) মেম্বার হতে নিচের অফিসিয়াল রেজিস্ট্রেশন ফরমটি পূরণ করুন। অনুমোদিত সিনিয়র এজেন্ট <strong>{agentName}</strong> এর অধীনে আর <strong>মাত্র {urgentFormsLeft} বাকি রয়েছে</strong>। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার কনফার্ম করুন!
         </p>
       </div>
 
@@ -50,7 +55,7 @@ export default function FormShowcase() {
 
               <figcaption className="form-template-caption">
                 <div className="form-caption-header">
-                  <strong>MEMBERSHIP REGISTRATION FORM 2026</strong>
+                  <strong>MEMBERSHIP REGISTRATION FORM {activeYear}</strong>
                   <span>The Government Lottery Office of Thailand (GLO)</span>
                 </div>
                 <div className="form-agent-meta-box">
@@ -108,7 +113,7 @@ export default function FormShowcase() {
         >
           <div className="winner-modal-card form-lightbox-card modal-scale-in" onClick={(e) => e.stopPropagation()}>
             <div className="winner-modal-header">
-              <strong>Official Membership Registration Form 2026</strong>
+              <strong>Official Membership Registration Form {activeYear}</strong>
               <button
                 type="button"
                 className="winner-modal-close"

@@ -317,7 +317,7 @@ export default function VipAgencyCodePage() {
       {/* 1. Cinematic Logo Motion Graphic Transition */}
       {showLogoTransition && (
         <LogoPageTransition
-          badgeText={isLockedForMembership ? '🔒 VIP MEMBERSHIP REQUIRED' : '👑 VIP AGENCY CODE 2026'}
+          badgeText={isLockedForMembership ? '🔒 VIP MEMBERSHIP REQUIRED' : `👑 VIP AGENCY CODE ${settings.activeYear || '2026'}`}
           title="THAILAND OFFICIAL LOTTERY"
           subtitle={dateParam ? `VIP AGENCY ACCESS • ${dateParam}` : 'GOVERNMENT LOTTERY OFFICE • VIP ACCESS'}
           statusText={isLockedForMembership ? 'CHECKING VIP MEMBERSHIP CLEARANCE...' : 'DECRYPTING VIP 5-DIGIT AGENCY CODE...'}

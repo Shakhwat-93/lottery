@@ -33,7 +33,7 @@ export default function Header({ page = 'home' }) {
   return (
     <>
       <div className="thai-flag-top-strip" aria-hidden="true" />
-      {topNotice && (
+      {settings.showTopNotice !== false && topNotice && (
         <div className="site-top-announcement-bar" role="alert" aria-label="জরুরি ঘোষণা">
           <div className="site-top-announcement-inner">
             <span className="site-top-announcement-badge">
@@ -272,7 +272,7 @@ export default function Header({ page = 'home' }) {
 
           <div className="nav-panel-footer">
             <span className="nav-panel-footer-text">
-              {brandSubtitle} • GLO Official 2026
+              {brandSubtitle} • GLO Official {settings.activeYear || '2026'}
             </span>
           </div>
         </div>
