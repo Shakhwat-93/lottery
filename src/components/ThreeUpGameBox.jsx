@@ -1,7 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
 
 export default function ThreeUpGameBox() {
+  const settings = useVipCodeSettings();
+  const title = settings.threeUpTitle || 'থাইল্যান্ড লটারি 3 সেট গেম পেপার 2026';
+  const subtitle = settings.threeUpSubtitle || 'অফিসিয়াল 3 সেট / 3 আপ গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:';
+  const buttonText = settings.threeUpButtonText || '3 UP GAME';
+
   return (
     <section className="section three-set-home-strip reveal-on-scroll" id="three-set-game-section">
       <div className="three-set-home-card">
@@ -9,19 +15,19 @@ export default function ThreeUpGameBox() {
         
         <div className="three-set-home-text">
           <span className="three-set-badge-tag">✦ VIP OFFICIAL DOCUMENT ✦</span>
-          <h3>থাইল্যান্ড লটারি 3 সেট গেম পেপার 2026</h3>
-          <p>অফিসিয়াল 3 সেট / 3 আপ গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:</p>
+          <h3>{title}</h3>
+          <p>{subtitle}</p>
         </div>
 
         <div className="three-up-interactive-action-area">
           <Link
             to="/3-up-game"
             className="three-set-glowing-btn"
-            aria-label="Open 3 Up Game Page"
+            aria-label={`Open ${buttonText} Page`}
           >
             <span className="three-set-shimmer" aria-hidden="true" />
             <span className="three-set-icon" aria-hidden="true">👑</span>
-            <span className="three-set-text">3 UP GAME</span>
+            <span className="three-set-text">{buttonText}</span>
             <span className="three-set-arrow" aria-hidden="true">➔</span>
           </Link>
         </div>

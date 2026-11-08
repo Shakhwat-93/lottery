@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { verifyAdminSession } from '../../server/adminAuth.js';
 
-const columns = 'id, first_date, second_date, vip_code, header_title, header_subtitle, top_notice, phone_number, whatsapp_number, imo_number, agent_name, license_number, urgent_forms_left, urgent_notice, updated_at';
+const columns = 'id, first_date, second_date, vip_code, header_title, header_subtitle, top_notice, phone_number, whatsapp_number, imo_number, agent_name, license_number, urgent_forms_left, urgent_notice, extra_data, updated_at';
 let supabase;
 
 function getAdminClient() {
@@ -73,6 +73,22 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'দুটি আলাদা তারিখ এবং ৫ সংখ্যার code দিন।' });
   }
 
+  const extraData = raw.extraData || {
+    threeUpTitle: raw.threeUpTitle || 'থাইল্যান্ড লটারি 3 সেট গেম পেপার 2026',
+    threeUpSubtitle: raw.threeUpSubtitle || 'অফিসিয়াল 3 সেট / 3 আপ গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:',
+    threeUpButtonText: raw.threeUpButtonText || '3 UP GAME',
+    gamePaperImage: raw.gamePaperImage || '/assets/site/3-up-game-paper-1.jpg',
+    gamePaperBadge: raw.gamePaperBadge || 'OFFICIAL VIP GAME PAPER',
+    calculationPaperImage: raw.calculationPaperImage || '/assets/site/3-up-game-paper-2.jpg',
+    calculationPaperBadge: raw.calculationPaperBadge || 'OFFICIAL VIP CALCULATION PAPER',
+    bkashNumber: raw.bkashNumber || '+8801705330881',
+    nagadNumber: raw.nagadNumber || '+8801705330881',
+    rocketNumber: raw.rocketNumber || '+8801705330881',
+    whatsappMessage: raw.whatsappMessage || 'Hello, I want VIP 3 Up Game & Calculation Paper',
+    latestResult3d: raw.latestResult3d || '781',
+    liveStreamUrl: raw.liveStreamUrl || ''
+  };
+
   try {
     const { data, error } = await getAdminClient()
       .from('vip_code_settings')
@@ -90,6 +106,7 @@ export default async function handler(req, res) {
         license_number: settings.licenseNumber || 'TGL-2025-001784',
         urgent_forms_left: settings.urgentFormsLeft || '5টি',
         urgent_notice: settings.urgentNotice || 'আর মাত্র 5টি ফর্ম বাকি আছে শুধু!',
+        extra_data: extraData,
         updated_at: new Date().toISOString()
       })
       .eq('id', 'main')
@@ -97,6 +114,7 @@ export default async function handler(req, res) {
       .single();
 
     if (error) return res.status(502).json({ error: error.message });
+    const extra = data.extra_data || {};
     return res.status(200).json({
       firstDate: data.first_date,
       secondDate: data.second_date,
@@ -110,7 +128,20 @@ export default async function handler(req, res) {
       agentName: data.agent_name,
       licenseNumber: data.license_number,
       urgentFormsLeft: data.urgent_forms_left,
-      urgentNotice: data.urgent_notice
+      urgentNotice: data.urgent_notice,
+      threeUpTitle: extra.threeUpTitle,
+      threeUpSubtitle: extra.threeUpSubtitle,
+      threeUpButtonText: extra.threeUpButtonText,
+      gamePaperImage: extra.gamePaperImage,
+      gamePaperBadge: extra.gamePaperBadge,
+      calculationPaperImage: extra.calculationPaperImage,
+      calculationPaperBadge: extra.calculationPaperBadge,
+      bkashNumber: extra.bkashNumber,
+      nagadNumber: extra.nagadNumber,
+      rocketNumber: extra.rocketNumber,
+      whatsappMessage: extra.whatsappMessage,
+      latestResult3d: extra.latestResult3d,
+      liveStreamUrl: extra.liveStreamUrl
     });
   } catch (error) {
     return res.status(503).json({ error: error.message });

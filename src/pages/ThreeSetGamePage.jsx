@@ -39,7 +39,7 @@ export default function ThreeSetGamePage() {
     if (paperType === 1) {
       // 1 Set 3D Game Paper (Image 2)
       setFullscreenImage({
-        src: '/assets/site/3-up-game-paper-1.jpg',
+        src: settings.gamePaperImage || '/assets/site/3-up-game-paper-1.jpg',
         title: 'Thailand Lottery Official Paper • 1 Set 3D Game',
         date: selectedDate,
         paperType: 1
@@ -47,7 +47,7 @@ export default function ThreeSetGamePage() {
     } else {
       // 1 Year 24 Set Calculation Paper (Image 3)
       setFullscreenImage({
-        src: '/assets/site/3-up-game-paper-2.jpg',
+        src: settings.calculationPaperImage || '/assets/site/3-up-game-paper-2.jpg',
         title: '1 Year 24 Set Calculation Paper 2026',
         date: selectedDate,
         paperType: 2
@@ -222,7 +222,9 @@ export default function ThreeSetGamePage() {
             <div className="three-up-paper-highlight-badge">
               <span className="three-up-highlight-sparkle" aria-hidden="true">✦</span>
               <span className="three-up-highlight-text">
-                {fullscreenImage.paperType === 2 ? 'OFFICIAL VIP CALCULATION PAPER' : 'OFFICIAL VIP GAME PAPER'}
+                {fullscreenImage.paperType === 2
+                  ? (settings.calculationPaperBadge || 'OFFICIAL VIP CALCULATION PAPER')
+                  : (settings.gamePaperBadge || 'OFFICIAL VIP GAME PAPER')}
               </span>
               <span className="three-up-highlight-sparkle" aria-hidden="true">✦</span>
             </div>

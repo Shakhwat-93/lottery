@@ -14,7 +14,8 @@ export default function FloatingContactButtons() {
   const cleanWaPhone = rawWa.replace(/[^0-9]/g, '');
   const cleanImoPhone = rawImo.replace(/[^0-9]/g, '');
 
-  const whatsappUrl = `https://wa.me/${cleanWaPhone}?text=${encodeURIComponent('আসসালামু আলাইকুম, আমি থাইল্যান্ড অফিশিয়াল লটারি (GLO) সম্পর্কে জানতে চাই।')}`;
+  const defaultWaMsg = settings.whatsappMessage || 'আসসালামু আলাইকুম, আমি থাইল্যান্ড অফিশিয়াল লটারি (GLO) সম্পর্কে জানতে চাই।';
+  const whatsappUrl = `https://wa.me/${cleanWaPhone}?text=${encodeURIComponent(defaultWaMsg)}`;
   const imoAppUrl = `imo://chat?phone=${cleanImoPhone}`;
   const telUrl = `tel:${phoneNumber}`;
 

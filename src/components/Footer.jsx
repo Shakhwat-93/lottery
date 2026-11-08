@@ -1,9 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
 
 export default function Footer({ page = 'home' }) {
   const isGamePage = page === 'game';
   const isFormPage = page === 'form';
+  const settings = useVipCodeSettings();
+  const brandTitle = settings.headerTitle || 'Thailand Official Lottery';
+  const brandSub = settings.headerSubtitle || 'สำนักงานสลากกินแบ่งรัฐบาล • GLO Bangkok HQ';
+  const agentName = settings.agentName || 'মোঃ ফাহিম চৌধুরী';
+  const licenseNumber = settings.licenseNumber || 'TGL-2025-001784';
 
   const scrollToTop = (e) => {
     e.preventDefault();
@@ -24,8 +30,8 @@ export default function Footer({ page = 'home' }) {
               height="44"
             />
             <div className="footer-brand-meta">
-              <span className="footer-brand-title">Thailand Official Lottery</span>
-              <span className="footer-brand-sub">สำนักงานสลากกินแบ่งรัฐบาล • GLO Bangkok HQ</span>
+              <span className="footer-brand-title">{brandTitle}</span>
+              <span className="footer-brand-sub">{brandSub}</span>
             </div>
           </div>
 
@@ -43,12 +49,12 @@ export default function Footer({ page = 'home' }) {
           <div className="footer-disclaimer-box">
             <span className="footer-18-badge">18+</span>
             <p className="footer-warning-text">
-              <strong>AGE RESTRICTION (18+):</strong> Strictly 18+ Only. থাইল্যান্ড সরকারি লটারি বিধিমালা অনুযায়ী পরিচালিত।
+              <strong>AGE RESTRICTION (18+):</strong> Strictly 18+ Only. থাইল্যান্ড সরকারি লটারি বিধিমালা অনুযায়ী পরিচালিত। লাইসেন্স: <code>{licenseNumber}</code> (এজেন্ট: {agentName})
             </p>
           </div>
 
           <p className="footer-copyright">
-            © 2026 The Government Lottery Office of Thailand (GLO). All Rights Reserved.
+            © 2026 The Government Lottery Office of Thailand (GLO) • {brandTitle}. All Rights Reserved.
           </p>
 
           {(isGamePage || isFormPage || page === '3-set-game') && (

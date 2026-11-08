@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FormSubmitAnimation from './FormSubmitAnimation';
+import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
 
 export default function OnlineForm({ isStandalonePage = false }) {
   const isTestSuccess = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('submitted') === 'true';
@@ -27,8 +28,11 @@ export default function OnlineForm({ isStandalonePage = false }) {
   const [copiedId, setCopiedId] = useState(false);
   const [copiedBkash, setCopiedBkash] = useState(false);
 
+  const settings = useVipCodeSettings();
+  const bkashNum = settings.bkashNumber || '+8801705330881';
+  const agentName = settings.agentName || 'মোঃ ফাহিম চৌধুরী';
+
   const copyBkashNumber = () => {
-    const bkashNum = '+8801705330881';
     if (navigator?.clipboard?.writeText) {
       navigator.clipboard.writeText(bkashNum);
       setCopiedBkash(true);
@@ -787,13 +791,13 @@ export default function OnlineForm({ isStandalonePage = false }) {
                 </div>
 
                 <p className="gform-bkash-target-text">
-                  ফাহিম চৌধুরীকে মেম্বারশিপ কনফার্ম করতে বিকাশ এ পেমেন্ট করুন:
+                  {agentName}কে মেম্বারশিপ কনফার্ম করতে বিকাশ এ পেমেন্ট করুন:
                 </p>
 
                 <div className="gform-bkash-num-container">
                   <div className="gform-bkash-num-left">
                     <span className="gform-bkash-num-tag">Personal bKash No.</span>
-                    <span className="gform-bkash-digits">+8801705330881</span>
+                    <span className="gform-bkash-digits">{bkashNum}</span>
                   </div>
                   <button
                     type="button"

@@ -12,7 +12,7 @@ const DEMO_ADMIN_PASSWORD = 'armanali420@gmail.com';
 export default function AdminVipCodePage() {
   const publicSettings = useVipCodeSettings();
   const [settings, setSettings] = useState(publicSettings);
-  const [activeTab, setActiveTab] = useState('draw'); // 'draw' | 'header' | 'contact' | 'agent'
+  const [activeTab, setActiveTab] = useState('draw'); // 'draw' | 'header' | 'papers' | 'contact' | 'agent' | 'results'
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState('armanali420@gmail.com');
   const [password, setPassword] = useState('');
@@ -316,14 +316,21 @@ export default function AdminVipCodePage() {
                   className={`admin-tab-btn ${activeTab === 'header' ? 'is-active' : ''}`}
                   onClick={() => setActiveTab('header')}
                 >
-                  <span>🏷️</span> হেডার ও নোটিশ
+                  <span>🏷️</span> ব্র্যান্ডিং ও নোটিশ
+                </button>
+                <button
+                  type="button"
+                  className={`admin-tab-btn ${activeTab === 'papers' ? 'is-active' : ''}`}
+                  onClick={() => setActiveTab('papers')}
+                >
+                  <span>👑</span> ৩-আপ গেম ও পেপার
                 </button>
                 <button
                   type="button"
                   className={`admin-tab-btn ${activeTab === 'contact' ? 'is-active' : ''}`}
                   onClick={() => setActiveTab('contact')}
                 >
-                  <span>📞</span> হেল্পলাইন ও কন্টাক্ট
+                  <span>📞</span> হেল্পলাইন ও পেমেন্ট
                 </button>
                 <button
                   type="button"
@@ -331,6 +338,13 @@ export default function AdminVipCodePage() {
                   onClick={() => setActiveTab('agent')}
                 >
                   <span>🛡️</span> এজেন্ট ও কোটা নোটিশ
+                </button>
+                <button
+                  type="button"
+                  className={`admin-tab-btn ${activeTab === 'results' ? 'is-active' : ''}`}
+                  onClick={() => setActiveTab('results')}
+                >
+                  <span>🏆</span> রেজাল্ট ও লাইভ
                 </button>
               </div>
 
@@ -419,7 +433,95 @@ export default function AdminVipCodePage() {
                   </div>
                 )}
 
-                {/* TAB 3: CONTACTS & HELPLINE */}
+                {/* TAB 3: 3-UP GAME & PAPER CONTROLS */}
+                {activeTab === 'papers' && (
+                  <div className="admin-grid-2">
+                    <label className="admin-field">
+                      <span><b>01</b> ৩-আপ সেকশন টাইটেল (Home Card)</span>
+                      <input
+                        type="text"
+                        value={settings.threeUpTitle || ''}
+                        onChange={updateField('threeUpTitle')}
+                        placeholder="থাইল্যান্ড লটারি 3 সেট গেম পেপার 2026"
+                        required
+                      />
+                      <small>হোমপেজের ৩-আপ সেকশনের প্রধান শিরোনাম।</small>
+                    </label>
+
+                    <label className="admin-field">
+                      <span><b>02</b> ৩-আপ বাটন টেক্সট</span>
+                      <input
+                        type="text"
+                        value={settings.threeUpButtonText || ''}
+                        onChange={updateField('threeUpButtonText')}
+                        placeholder="3 UP GAME"
+                        required
+                      />
+                      <small>হোমপেজের গ্লোয়িং বাটনের টেক্সট (default: 3 UP GAME)।</small>
+                    </label>
+
+                    <label className="admin-field admin-grid-full">
+                      <span><b>03</b> ৩-আপ সেকশন সাবটাইটেল / বিবরণ</span>
+                      <textarea
+                        value={settings.threeUpSubtitle || ''}
+                        onChange={updateField('threeUpSubtitle')}
+                        placeholder="অফিসিয়াল 3 সেট / 3 আপ গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:"
+                        rows={2}
+                      />
+                      <small>বাটনের ঠিক উপরে নির্দেশনামূলক টেক্সট।</small>
+                    </label>
+
+                    <label className="admin-field">
+                      <span><b>04</b> ১ সেট ৩ডি গেম পেপারের ছবি (URL বা পাথ)</span>
+                      <input
+                        type="text"
+                        value={settings.gamePaperImage || ''}
+                        onChange={updateField('gamePaperImage')}
+                        placeholder="/assets/site/3-up-game-paper-1.jpg"
+                        required
+                      />
+                      <small>ফুলস্ক্রিন পেপার ১-এ প্রদর্শিত ছবির পাথ বা অনলাইন ইমেজ লিংক।</small>
+                    </label>
+
+                    <label className="admin-field">
+                      <span><b>05</b> গেম পেপারের হাইলাইট ব্যাজ টেক্সট</span>
+                      <input
+                        type="text"
+                        value={settings.gamePaperBadge || ''}
+                        onChange={updateField('gamePaperBadge')}
+                        placeholder="OFFICIAL VIP GAME PAPER"
+                        required
+                      />
+                      <small>ছবির ওপরে গোল্ডেন ব্যাজে যা লেখা থাকবে।</small>
+                    </label>
+
+                    <label className="admin-field">
+                      <span><b>06</b> ১ বছর ২৪ সেট ক্যালকুলেশন পেপারের ছবি (URL বা পাথ)</span>
+                      <input
+                        type="text"
+                        value={settings.calculationPaperImage || ''}
+                        onChange={updateField('calculationPaperImage')}
+                        placeholder="/assets/site/3-up-game-paper-2.jpg"
+                        required
+                      />
+                      <small>ফুলস্ক্রিন পেপার ২-এ প্রদর্শিত ছবির পাথ বা অনলাইন ইমেজ লিংক।</small>
+                    </label>
+
+                    <label className="admin-field">
+                      <span><b>07</b> ক্যালকুলেশন পেপারের হাইলাইট ব্যাজ টেক্সট</span>
+                      <input
+                        type="text"
+                        value={settings.calculationPaperBadge || ''}
+                        onChange={updateField('calculationPaperBadge')}
+                        placeholder="OFFICIAL VIP CALCULATION PAPER"
+                        required
+                      />
+                      <small>ক্যালকুলেশন ছবির ওপরে গোল্ডেন ব্যাজের টেক্সট।</small>
+                    </label>
+                  </div>
+                )}
+
+                {/* TAB 4: CONTACTS, HELPLINE & PAYMENT */}
                 {activeTab === 'contact' && (
                   <div className="admin-grid-2">
                     <label className="admin-field">
@@ -446,7 +548,7 @@ export default function AdminVipCodePage() {
                       <small>ফ্লোটিং হোয়াটসঅ্যাপ বাটনে ক্লিক করলে এই নম্বরে চ্যাট শুরু হবে।</small>
                     </label>
 
-                    <label className="admin-field admin-grid-full">
+                    <label className="admin-field">
                       <span><b>03</b> IMO হেল্পলাইন নম্বর</span>
                       <input
                         type="text"
@@ -457,10 +559,55 @@ export default function AdminVipCodePage() {
                       />
                       <small>ইমো বাটনে ক্লিক করলে এই নম্বরটি ব্যবহার হবে।</small>
                     </label>
+
+                    <label className="admin-field">
+                      <span><b>04</b> বিকাশ (Bkash) পেমেন্ট নম্বর</span>
+                      <input
+                        type="text"
+                        value={settings.bkashNumber || ''}
+                        onChange={updateField('bkashNumber')}
+                        placeholder="+8801705330881"
+                        required
+                      />
+                      <small>রেজিস্ট্রেশন ফর্মে কপি বাটনে গ্রাহকরা এই বিকাশ নম্বর পাবেন।</small>
+                    </label>
+
+                    <label className="admin-field">
+                      <span><b>05</b> নগদ (Nagad) নম্বর (ঐচ্ছিক)</span>
+                      <input
+                        type="text"
+                        value={settings.nagadNumber || ''}
+                        onChange={updateField('nagadNumber')}
+                        placeholder="+8801705330881"
+                      />
+                      <small>নগদ পেমেন্টের জন্য ব্যবহৃত নম্বর।</small>
+                    </label>
+
+                    <label className="admin-field">
+                      <span><b>06</b> রকেট (Rocket) নম্বর (ঐচ্ছিক)</span>
+                      <input
+                        type="text"
+                        value={settings.rocketNumber || ''}
+                        onChange={updateField('rocketNumber')}
+                        placeholder="+8801705330881"
+                      />
+                      <small>ডাচ বাংলা রকেট পেমেন্ট নম্বর।</small>
+                    </label>
+
+                    <label className="admin-field admin-grid-full">
+                      <span><b>07</b> WhatsApp প্রি-ফিল্ড ডিফল্ট মেসেজ</span>
+                      <input
+                        type="text"
+                        value={settings.whatsappMessage || ''}
+                        onChange={updateField('whatsappMessage')}
+                        placeholder="Hello, I want VIP 3 Up Game & Calculation Paper"
+                      />
+                      <small>গ্রাহকরা WhatsApp লিংকে ক্লিক করলে চ্যাটে এই মেসেজটি স্বয়ংক্রিয়ভাবে লেখা থাকবে।</small>
+                    </label>
                   </div>
                 )}
 
-                {/* TAB 4: AGENT PROFILE & URGENT QUOTA */}
+                {/* TAB 5: AGENT PROFILE & URGENT QUOTA */}
                 {activeTab === 'agent' && (
                   <div className="admin-grid-2">
                     <label className="admin-field">
@@ -513,6 +660,34 @@ export default function AdminVipCodePage() {
                   </div>
                 )}
 
+                {/* TAB 6: RESULTS & LIVE STREAM */}
+                {activeTab === 'results' && (
+                  <div className="admin-grid-2">
+                    <label className="admin-field">
+                      <span><b>01</b> সর্বশেষ ৩ডি উইনিং রেজাল্ট নম্বর</span>
+                      <input
+                        type="text"
+                        value={settings.latestResult3d || ''}
+                        onChange={updateField('latestResult3d')}
+                        placeholder="781"
+                        maxLength={6}
+                      />
+                      <small>হোমপেজের রেজাল্ট ও উইনার্স সেকশনে হাইলাইট হিসেবে দৃশ্যমান হবে।</small>
+                    </label>
+
+                    <label className="admin-field">
+                      <span><b>02</b> অফিসিয়াল ফেসবুক / ইউটিউব লাইভ ভিডিও URL</span>
+                      <input
+                        type="url"
+                        value={settings.liveStreamUrl || ''}
+                        onChange={updateField('liveStreamUrl')}
+                        placeholder="https://facebook.com/..."
+                      />
+                      <small>লাইভ ড্র সম্প্রচারের ফেসবুক পেজ বা ভিডিও লিংক।</small>
+                    </label>
+                  </div>
+                )}
+
                 {/* Real-time Preview Bar */}
                 <div className="admin-preview-box">
                   <span className="admin-preview-label">লাইভ প্রিভিউ সারাংশ (Live Preview)</span>
@@ -521,7 +696,9 @@ export default function AdminVipCodePage() {
                     <span className="admin-preview-chip">📅 ১ম ড্র: {formatVipDate(settings.firstDate)}</span>
                     <span className="admin-preview-chip">👑 কোড: {settings.code}</span>
                     <span className="admin-preview-chip">💬 WA: {settings.whatsappNumber || settings.phoneNumber}</span>
+                    <span className="admin-preview-chip">💰 বিকাশ: {settings.bkashNumber}</span>
                     <span className="admin-preview-chip">👤 এজেন্ট: {settings.agentName}</span>
+                    <span className="admin-preview-chip">🎮 ৩-আপ: {settings.threeUpButtonText}</span>
                   </div>
                 </div>
 

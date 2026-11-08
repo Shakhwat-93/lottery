@@ -1,7 +1,7 @@
 import { getSupabaseClient, isSupabaseConfigured } from './supabase';
 
 const STORAGE_KEY = 'lottery-vip-code-settings-v1';
-export const SETTINGS_COLUMNS = 'id, first_date, second_date, vip_code, header_title, header_subtitle, top_notice, phone_number, whatsapp_number, imo_number, agent_name, license_number, urgent_forms_left, urgent_notice, updated_at';
+export const SETTINGS_COLUMNS = 'id, first_date, second_date, vip_code, header_title, header_subtitle, top_notice, phone_number, whatsapp_number, imo_number, agent_name, license_number, urgent_forms_left, urgent_notice, extra_data, updated_at';
 
 export const DEFAULT_VIP_CODE_SETTINGS = Object.freeze({
   firstDate: '2026-11-01',
@@ -16,7 +16,26 @@ export const DEFAULT_VIP_CODE_SETTINGS = Object.freeze({
   agentName: 'মোঃ ফাহিম চৌধুরী',
   licenseNumber: 'TGL-2025-001784',
   urgentFormsLeft: '5টি',
-  urgentNotice: 'আর মাত্র 5টি ফর্ম বাকি আছে শুধু!'
+  urgentNotice: 'আর মাত্র 5টি ফর্ম বাকি আছে শুধু!',
+
+  // 3-Up Game & Paper Controls
+  threeUpTitle: 'থাইল্যান্ড লটারি 3 সেট গেম পেপার 2026',
+  threeUpSubtitle: 'অফিসিয়াল 3 সেট / 3 আপ গেম পেপার ও লাইসেন্সকৃত অনুমোদনপত্র দেখতে নিচে ক্লিক করুন:',
+  threeUpButtonText: '3 UP GAME',
+  gamePaperImage: '/assets/site/3-up-game-paper-1.jpg',
+  gamePaperBadge: 'OFFICIAL VIP GAME PAPER',
+  calculationPaperImage: '/assets/site/3-up-game-paper-2.jpg',
+  calculationPaperBadge: 'OFFICIAL VIP CALCULATION PAPER',
+
+  // Payment & Messaging
+  bkashNumber: '+8801705330881',
+  nagadNumber: '+8801705330881',
+  rocketNumber: '+8801705330881',
+  whatsappMessage: 'Hello, I want VIP 3 Up Game & Calculation Paper',
+
+  // Results & Live Stream
+  latestResult3d: '781',
+  liveStreamUrl: ''
 });
 
 export function normalizeDateString(val) {
@@ -71,6 +90,7 @@ export function readVipCodeSettings() {
 
 export function mapDatabaseSettings(row) {
   if (!row) return DEFAULT_VIP_CODE_SETTINGS;
+  const extra = row.extra_data || {};
   return {
     firstDate: row.first_date || DEFAULT_VIP_CODE_SETTINGS.firstDate,
     secondDate: row.second_date || DEFAULT_VIP_CODE_SETTINGS.secondDate,
@@ -84,7 +104,22 @@ export function mapDatabaseSettings(row) {
     agentName: row.agent_name || DEFAULT_VIP_CODE_SETTINGS.agentName,
     licenseNumber: row.license_number || DEFAULT_VIP_CODE_SETTINGS.licenseNumber,
     urgentFormsLeft: row.urgent_forms_left || DEFAULT_VIP_CODE_SETTINGS.urgentFormsLeft,
-    urgentNotice: row.urgent_notice || DEFAULT_VIP_CODE_SETTINGS.urgentNotice
+    urgentNotice: row.urgent_notice || DEFAULT_VIP_CODE_SETTINGS.urgentNotice,
+
+    // Dynamic Extra Data
+    threeUpTitle: extra.threeUpTitle || DEFAULT_VIP_CODE_SETTINGS.threeUpTitle,
+    threeUpSubtitle: extra.threeUpSubtitle || DEFAULT_VIP_CODE_SETTINGS.threeUpSubtitle,
+    threeUpButtonText: extra.threeUpButtonText || DEFAULT_VIP_CODE_SETTINGS.threeUpButtonText,
+    gamePaperImage: extra.gamePaperImage || DEFAULT_VIP_CODE_SETTINGS.gamePaperImage,
+    gamePaperBadge: extra.gamePaperBadge || DEFAULT_VIP_CODE_SETTINGS.gamePaperBadge,
+    calculationPaperImage: extra.calculationPaperImage || DEFAULT_VIP_CODE_SETTINGS.calculationPaperImage,
+    calculationPaperBadge: extra.calculationPaperBadge || DEFAULT_VIP_CODE_SETTINGS.calculationPaperBadge,
+    bkashNumber: extra.bkashNumber || DEFAULT_VIP_CODE_SETTINGS.bkashNumber,
+    nagadNumber: extra.nagadNumber || DEFAULT_VIP_CODE_SETTINGS.nagadNumber,
+    rocketNumber: extra.rocketNumber || DEFAULT_VIP_CODE_SETTINGS.rocketNumber,
+    whatsappMessage: extra.whatsappMessage || DEFAULT_VIP_CODE_SETTINGS.whatsappMessage,
+    latestResult3d: extra.latestResult3d || DEFAULT_VIP_CODE_SETTINGS.latestResult3d,
+    liveStreamUrl: extra.liveStreamUrl || DEFAULT_VIP_CODE_SETTINGS.liveStreamUrl
   };
 }
 
@@ -128,6 +163,22 @@ export async function saveVipCodeSettings(settings, { localOnly = false, client 
     throw new Error('তারিখ এবং ৫ ডিজিটের কোডটি সঠিক কিনা যাচাই করুন।');
   }
 
+  const extraData = {
+    threeUpTitle: normalized.threeUpTitle ?? DEFAULT_VIP_CODE_SETTINGS.threeUpTitle,
+    threeUpSubtitle: normalized.threeUpSubtitle ?? DEFAULT_VIP_CODE_SETTINGS.threeUpSubtitle,
+    threeUpButtonText: normalized.threeUpButtonText ?? DEFAULT_VIP_CODE_SETTINGS.threeUpButtonText,
+    gamePaperImage: normalized.gamePaperImage ?? DEFAULT_VIP_CODE_SETTINGS.gamePaperImage,
+    gamePaperBadge: normalized.gamePaperBadge ?? DEFAULT_VIP_CODE_SETTINGS.gamePaperBadge,
+    calculationPaperImage: normalized.calculationPaperImage ?? DEFAULT_VIP_CODE_SETTINGS.calculationPaperImage,
+    calculationPaperBadge: normalized.calculationPaperBadge ?? DEFAULT_VIP_CODE_SETTINGS.calculationPaperBadge,
+    bkashNumber: normalized.bkashNumber ?? DEFAULT_VIP_CODE_SETTINGS.bkashNumber,
+    nagadNumber: normalized.nagadNumber ?? DEFAULT_VIP_CODE_SETTINGS.nagadNumber,
+    rocketNumber: normalized.rocketNumber ?? DEFAULT_VIP_CODE_SETTINGS.rocketNumber,
+    whatsappMessage: normalized.whatsappMessage ?? DEFAULT_VIP_CODE_SETTINGS.whatsappMessage,
+    latestResult3d: normalized.latestResult3d ?? DEFAULT_VIP_CODE_SETTINGS.latestResult3d,
+    liveStreamUrl: normalized.liveStreamUrl ?? DEFAULT_VIP_CODE_SETTINGS.liveStreamUrl
+  };
+
   // 1. If Supabase configured and not localOnly, try direct Supabase update
   if (isSupabaseConfigured && !localOnly) {
     const sbClient = client || (await getSupabaseClient());
@@ -150,6 +201,7 @@ export async function saveVipCodeSettings(settings, { localOnly = false, client 
             license_number: normalized.licenseNumber ?? DEFAULT_VIP_CODE_SETTINGS.licenseNumber,
             urgent_forms_left: normalized.urgentFormsLeft ?? DEFAULT_VIP_CODE_SETTINGS.urgentFormsLeft,
             urgent_notice: normalized.urgentNotice ?? DEFAULT_VIP_CODE_SETTINGS.urgentNotice,
+            extra_data: extraData,
             updated_at: new Date().toISOString()
           })
           .eq('id', 'main')
@@ -175,7 +227,7 @@ export async function saveVipCodeSettings(settings, { localOnly = false, client 
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(normalized)
+        body: JSON.stringify({ ...normalized, extraData })
       });
       if (response.ok) {
         const result = await response.json();
