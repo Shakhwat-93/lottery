@@ -2,31 +2,65 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
 
-const STORAGE_KEY = 'thai_lottery_vip_deadline_12h_v3';
-const DEFAULT_DURATION = (11 * 3600 + 59 * 60 + 59) * 1000; // 12 Hours Duration
-const RESET_DURATION = 12 * 3600 * 1000;
-
 export default function VipOfferTimer() {
   const settings = useVipCodeSettings();
+
+  // If admin turns off timer/offer section, hide it cleanly
+  if (settings.timerShow === false) {
+    return null;
+  }
+
   const formsLeft = settings.urgentFormsLeft || '5টি';
   const urgentNotice = settings.urgentNotice || `আর মাত্র ${formsLeft} ফর্ম বাকি আছে শুধু!`;
+  const agentName = settings.agentName || 'মোঃ ফাহিম চৌধুরী';
+  const agentBadge = settings.licenseNumber ? settings.licenseNumber : 'TL-001';
+
+  const timerMode = settings.timerMode || 'duration';
+  const timerHours = Math.max(0, parseInt(settings.timerHours, 10) || 12);
+  const timerMinutes = Math.max(0, Math.min(59, parseInt(settings.timerMinutes, 10) || 0));
+  const timerTargetDate = settings.timerTargetDate || '';
+  const timerUpdatedAt = settings.timerUpdatedAt || 'default';
+
   const [timeLeft, setTimeLeft] = useState({
-    hours: '12',
-    minutes: '00',
+    hours: String(timerHours).padStart(2, '0'),
+    minutes: String(timerMinutes).padStart(2, '0'),
     seconds: '00'
   });
 
   useEffect(() => {
-    // Clear old short-duration deadline from storage
-    localStorage.removeItem('thai_lottery_vip_deadline');
-    localStorage.removeItem('thai_lottery_vip_deadline_12h');
+    // 1. Target Date Mode (Countdown to a specific future date and time)
+    if (timerMode === 'target_date' && timerTargetDate) {
+      const targetTime = new Date(timerTargetDate).getTime();
 
-    let deadline = localStorage.getItem(STORAGE_KEY);
+      const calculateTargetTime = () => {
+        const now = Date.now();
+        const diff = Math.max(0, Math.floor((targetTime - now) / 1000));
+        const h = Math.floor(diff / 3600);
+        const m = Math.floor((diff % 3600) / 60);
+        const s = diff % 60;
+
+        setTimeLeft({
+          hours: String(h).padStart(2, '0'),
+          minutes: String(m).padStart(2, '0'),
+          seconds: String(s).padStart(2, '0')
+        });
+      };
+
+      calculateTargetTime();
+      const interval = setInterval(calculateTargetTime, 1000);
+      return () => clearInterval(interval);
+    }
+
+    // 2. Duration Cycle Mode (Default: e.g. 12 Hours, 24 Hours, or custom hours/minutes)
+    const totalDurationMs = Math.max(60000, (timerHours * 3600 + timerMinutes * 60) * 1000);
+    const storageKey = `thai_lottery_vip_timer_${timerHours}h_${timerMinutes}m_${timerUpdatedAt}`;
+
+    let deadline = localStorage.getItem(storageKey);
     const now = Date.now();
 
     if (!deadline || parseInt(deadline, 10) <= now) {
-      deadline = now + DEFAULT_DURATION;
-      localStorage.setItem(STORAGE_KEY, deadline.toString());
+      deadline = now + totalDurationMs;
+      localStorage.setItem(storageKey, deadline.toString());
     } else {
       deadline = parseInt(deadline, 10);
     }
@@ -36,8 +70,8 @@ export default function VipOfferTimer() {
       let diff = Math.max(0, Math.floor((deadline - currentTime) / 1000));
 
       if (diff <= 0) {
-        deadline = Date.now() + RESET_DURATION;
-        localStorage.setItem(STORAGE_KEY, deadline.toString());
+        deadline = Date.now() + totalDurationMs;
+        localStorage.setItem(storageKey, deadline.toString());
         diff = Math.floor((deadline - Date.now()) / 1000);
       }
 
@@ -56,7 +90,7 @@ export default function VipOfferTimer() {
     const timerInterval = setInterval(calculateTime, 1000);
 
     return () => clearInterval(timerInterval);
-  }, []);
+  }, [timerMode, timerHours, timerMinutes, timerTargetDate, timerUpdatedAt]);
 
   return (
     <section className="section offer-timer-section reveal-on-scroll" id="vip-offer" aria-label="Limited time VIP discount offer">
@@ -87,7 +121,7 @@ export default function VipOfferTimer() {
               আর মাত্র <span className="title-count-highlight">{formsLeft}</span> ফর্ম বাকি আছে — দ্রুত আপনার ফর্মটি বুক করুন!
             </h2>
             <p className="offer-desc">
-              থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) অনুমোদিত মেম্বারশিপ কোটায় সিনিয়র এজেন্ট <strong>মোঃ ফাহিম চৌধুরী (TL-001)</strong> এর অধীনে আর <strong>মাত্র 5টি অফিসিয়াল মেম্বারশিপ ফর্ম</strong> খালি রয়েছে। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার কনফার্ম করুন!
+              থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) অনুমোদিত মেম্বারশিপ কোটায় সিনিয়র এজেন্ট <strong>{agentName} ({agentBadge})</strong> এর অধীনে আর <strong>মাত্র {formsLeft} অফিসিয়াল মেম্বারশিপ ফর্ম</strong> খালি রয়েছে। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার কনফার্ম করুন!
             </p>
           </div>
 
@@ -128,7 +162,7 @@ export default function VipOfferTimer() {
                 🔥 ফর্ম পূরণ চলছে: <strong>95টি ফরম সম্পন্ন (95%)</strong>
               </span>
               <span>
-                অবশিষ্ট কোটা: <strong className="seat-highlight-gold">মাত্র 5টি ফর্ম বাকি শুধু!</strong>
+                অবশিষ্ট কোটা: <strong className="seat-highlight-gold">মাত্র {formsLeft} ফর্ম বাকি শুধু!</strong>
               </span>
             </div>
             <div className="progress-track" role="progressbar" aria-valuenow={95} aria-valuemin={0} aria-valuemax={100}>
@@ -140,7 +174,7 @@ export default function VipOfferTimer() {
 
           <div className="offer-cta-group">
             <Link className="button primary offer-cta-btn golden-cta-btn" to="/form">
-              <span>বাকি 5টি ফর্মের 1টি পূরণ করুন ✍️</span>
+              <span>বাকি {formsLeft} ফর্মের 1টি পূরণ করুন ✍️</span>
               <span className="btn-arrow" aria-hidden="true">
                 →
               </span>

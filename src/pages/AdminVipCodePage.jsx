@@ -10,6 +10,83 @@ const DEMO_SESSION_KEY = 'vip-code-demo-session';
 const DEMO_ADMIN_EMAIL = 'armanali420@gmail.com';
 const DEMO_ADMIN_PASSWORD = 'armanali420@gmail.com';
 
+function AdminTimerPreview({ timerMode, timerHours, timerMinutes, timerTargetDate, timerUpdatedAt }) {
+  const [timeLeft, setTimeLeft] = useState({ hours: '12', minutes: '00', seconds: '00' });
+
+  useEffect(() => {
+    const hNum = Math.max(0, parseInt(timerHours, 10) || 12);
+    const mNum = Math.max(0, Math.min(59, parseInt(timerMinutes, 10) || 0));
+
+    if (timerMode === 'target_date' && timerTargetDate) {
+      const targetTime = new Date(timerTargetDate).getTime();
+      const tick = () => {
+        const diff = Math.max(0, Math.floor((targetTime - Date.now()) / 1000));
+        const h = Math.floor(diff / 3600);
+        const m = Math.floor((diff % 3600) / 60);
+        const s = diff % 60;
+        setTimeLeft({
+          hours: String(h).padStart(2, '0'),
+          minutes: String(m).padStart(2, '0'),
+          seconds: String(s).padStart(2, '0')
+        });
+      };
+      tick();
+      const id = setInterval(tick, 1000);
+      return () => clearInterval(id);
+    }
+
+    const totalDurationMs = Math.max(60000, (hNum * 3600 + mNum * 60) * 1000);
+    const storageKey = `thai_lottery_admin_preview_${hNum}h_${mNum}m_${timerUpdatedAt}`;
+    let deadline = localStorage.getItem(storageKey);
+    const now = Date.now();
+    if (!deadline || parseInt(deadline, 10) <= now) {
+      deadline = now + totalDurationMs;
+      localStorage.setItem(storageKey, deadline.toString());
+    } else {
+      deadline = parseInt(deadline, 10);
+    }
+
+    const tick = () => {
+      let diff = Math.max(0, Math.floor((deadline - Date.now()) / 1000));
+      if (diff <= 0) {
+        deadline = Date.now() + totalDurationMs;
+        localStorage.setItem(storageKey, deadline.toString());
+        diff = Math.floor((deadline - Date.now()) / 1000);
+      }
+      const h = Math.floor(diff / 3600);
+      const m = Math.floor((diff % 3600) / 60);
+      const s = diff % 60;
+      setTimeLeft({
+        hours: String(h).padStart(2, '0'),
+        minutes: String(m).padStart(2, '0'),
+        seconds: String(s).padStart(2, '0')
+      });
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [timerMode, timerHours, timerMinutes, timerTargetDate, timerUpdatedAt]);
+
+  return (
+    <div className="countdown-wrapper golden-countdown-wrapper" style={{ margin: 0 }}>
+      <div className="countdown-box golden-countdown-box">
+        <span className="count-val golden-val">{timeLeft.hours}</span>
+        <span className="count-label golden-label">ঘণ্টা (Hours)</span>
+      </div>
+      <span className="count-sep golden-sep" aria-hidden="true">:</span>
+      <div className="countdown-box golden-countdown-box">
+        <span className="count-val golden-val">{timeLeft.minutes}</span>
+        <span className="count-label golden-label">মিনিট (Mins)</span>
+      </div>
+      <span className="count-sep golden-sep" aria-hidden="true">:</span>
+      <div className="countdown-box golden-countdown-box countdown-box-seconds">
+        <span className="count-val golden-val count-val-seconds">{timeLeft.seconds}</span>
+        <span className="count-label golden-label">সেকেন্ড (Secs)</span>
+      </div>
+    </div>
+  );
+}
+
 export default function AdminVipCodePage() {
   const publicSettings = useVipCodeSettings();
   const [settings, setSettings] = useState(publicSettings);
@@ -415,7 +492,7 @@ export default function AdminVipCodePage() {
                   className={`admin-tab-btn ${activeTab === 'agent' ? 'is-active' : ''}`}
                   onClick={() => setActiveTab('agent')}
                 >
-                  <span>🛡️</span> এজেন্ট ও কোটা নোটিশ
+                  <span>⏱️</span> এজেন্ট ও কাউন্টডাউন টাইমার
                 </button>
                 <button
                   type="button"
@@ -862,7 +939,7 @@ export default function AdminVipCodePage() {
                   </div>
                 )}
 
-                {/* TAB 5: AGENT PROFILE & URGENT QUOTA */}
+                {/* TAB 5: AGENT PROFILE & COUNTDOWN TIMER CONTROLS */}
                 {activeTab === 'agent' && (
                   <div className="admin-grid-2">
                     <label className="admin-field">
@@ -889,8 +966,125 @@ export default function AdminVipCodePage() {
                       <small>বিশ্বাসযোগ্যতা বৃদ্ধিতে ব্যবহৃত লাইসেন্স কোড।</small>
                     </label>
 
+                    {/* Toggle ON/OFF Timer */}
+                    <div className="admin-field admin-grid-full admin-toggle-field">
+                      <span><b>03</b> অফার ও কাউন্টডাউন টাইমার সেকশন চালু / বন্ধ (ON / OFF)</span>
+                      <div className="admin-toggle-switch-row">
+                        <button
+                          type="button"
+                          className={`admin-toggle-pill ${settings.timerShow !== false ? 'is-on' : 'is-off'}`}
+                          onClick={() => {
+                            setIsDirty(true);
+                            setSettings((c) => ({ ...c, timerShow: c.timerShow === false ? true : false }));
+                          }}
+                        >
+                          <span className="toggle-indicator" />
+                          <span>{settings.timerShow !== false ? 'টাইমার সেকশন চালু (ON)' : 'টাইমার সেকশন বন্ধ (OFF)'}</span>
+                        </button>
+                        <small style={{ margin: 0 }}>
+                          {settings.timerShow !== false
+                            ? '✓ হোমপেজে রয়্যাল গোল্ডেন কাউন্টডাউন টাইমার ও ফর্ম বাকি থাকার অফার কার্ড প্রদর্শিত হচ্ছে।'
+                            : '✕ হোমপেজ থেকে টাইমার ও অফার কার্ডটি সাময়িকভাবে লুকানো রয়েছে।'}
+                        </small>
+                      </div>
+                    </div>
+
+                    {/* Timer Mode Selection */}
+                    <label className="admin-field admin-grid-full">
+                      <span><b>04</b> কাউন্টডাউন টাইমার মোড (Timer Mode)</span>
+                      <select
+                        value={settings.timerMode || 'duration'}
+                        onChange={(e) => {
+                          setIsDirty(true);
+                          setSettings((c) => ({
+                            ...c,
+                            timerMode: e.target.value,
+                            timerUpdatedAt: String(Date.now())
+                          }));
+                        }}
+                        style={{
+                          background: 'rgba(10, 20, 40, 0.85)',
+                          color: '#ffd866',
+                          border: '1.5px solid rgba(255, 215, 0, 0.4)',
+                          borderRadius: '10px',
+                          padding: '0.75rem',
+                          fontSize: '0.95rem',
+                          fontWeight: 600
+                        }}
+                      >
+                        <option value="duration">⏱️ ঘণ্টা অনুযায়ী অটো সাইক্লিক্যাল কাউন্টডাউন (যেমন ১২ ঘণ্টা / ২৪ ঘণ্টা)</option>
+                        <option value="target_date">📅 নির্দিষ্ট ড্র তারিখ ও সময় অনুযায়ী কাউন্টডাউন (Target Date & Time)</option>
+                      </select>
+                      <small>
+                        সাইক্লিক্যাল মোডে প্রতি ইউজার নির্দিষ্ট ঘণ্টা থেকে কাউন্টডাউন দেখতে পাবে। ড্র তারিখ মোডে নির্দিষ্ট মুহূর্ত পর্যন্ত কাউন্টডাউন চলবে।
+                      </small>
+                    </label>
+
+                    {/* Duration Mode Controls */}
+                    {settings.timerMode !== 'target_date' ? (
+                      <>
+                        <label className="admin-field">
+                          <span><b>05</b> টাইমার সময়কাল — ঘণ্টা (Hours)</span>
+                          <input
+                            type="number"
+                            min="1"
+                            max="168"
+                            value={settings.timerHours || '12'}
+                            onChange={updateField('timerHours')}
+                            placeholder="12"
+                            required
+                          />
+                          <div className="admin-chips-row">
+                            <span style={{ fontSize: '0.78rem', color: '#a7bad3' }}>কুইক সিলেক্ট:</span>
+                            {['6', '12', '24', '48'].map((hr) => (
+                              <button
+                                key={hr}
+                                type="button"
+                                className={`admin-chip-btn ${String(settings.timerHours) === hr ? 'is-selected' : ''}`}
+                                onClick={() => {
+                                  setIsDirty(true);
+                                  setSettings((c) => ({
+                                    ...c,
+                                    timerHours: hr,
+                                    timerUpdatedAt: String(Date.now())
+                                  }));
+                                }}
+                              >
+                                {hr} ঘণ্টা {hr === '12' ? '(ডিফল্ট)' : ''}
+                              </button>
+                            ))}
+                          </div>
+                          <small>কত ঘণ্টা থেকে কাউন্টডাউন শুরু হবে (যেমন: ১২ ঘণ্টা বা ২৪ ঘণ্টা)।</small>
+                        </label>
+
+                        <label className="admin-field">
+                          <span><b>06</b> অতিরিক্ত মিনিট — (Minutes - ঐচ্ছিক)</span>
+                          <input
+                            type="number"
+                            min="0"
+                            max="59"
+                            value={settings.timerMinutes || '00'}
+                            onChange={updateField('timerMinutes')}
+                            placeholder="00"
+                          />
+                          <small>ঘণ্টার সাথে অতিরিক্ত মিনিট যোগ করতে চাইলে লিখুন (ডিফল্ট: 00)।</small>
+                        </label>
+                      </>
+                    ) : (
+                      <label className="admin-field admin-grid-full">
+                        <span><b>05</b> নির্দিষ্ট ড্র সমাপ্তির তারিখ ও সময় (Target Date & Time)</span>
+                        <input
+                          type="datetime-local"
+                          value={settings.timerTargetDate || ''}
+                          onChange={updateField('timerTargetDate')}
+                          required
+                        />
+                        <small>এই নির্দিষ্ট তারিখ ও সময়ে পৌঁছানো পর্যন্ত টাইমার লাইভ কাউন্টডাউন করবে।</small>
+                      </label>
+                    )}
+
                     <label className="admin-field">
-                      <span><b>03</b> অবশিষ্ট কোটা / ফর্ম সংখ্যা</span>
+                      <span><b>07</b> অবশিষ্ট কোটা / ফর্ম সংখ্যা</span>
                       <input
                         type="text"
                         value={settings.urgentFormsLeft || ''}
@@ -902,7 +1096,7 @@ export default function AdminVipCodePage() {
                     </label>
 
                     <label className="admin-field">
-                      <span><b>04</b> জরুরি অফার নোটিশ হেডলাইন</span>
+                      <span><b>08</b> জরুরি অফার নোটিশ হেডলাইন</span>
                       <input
                         type="text"
                         value={settings.urgentNotice || ''}
@@ -912,6 +1106,43 @@ export default function AdminVipCodePage() {
                       />
                       <small>টাইমার কাউন্টডাউনের উপরে জরুরি এলার্ট হেডলাইন।</small>
                     </label>
+
+                    {/* Live Timer Preview & Instant Reset Card */}
+                    <div className="admin-field admin-grid-full">
+                      <span><b>09</b> রয়্যাল গোল্ডেন টাইমার লাইভ প্রিভিউ (Live Preview)</span>
+                      <div className="admin-timer-preview-card">
+                        <AdminTimerPreview
+                          timerMode={settings.timerMode || 'duration'}
+                          timerHours={settings.timerHours || '12'}
+                          timerMinutes={settings.timerMinutes || '00'}
+                          timerTargetDate={settings.timerTargetDate || ''}
+                          timerUpdatedAt={settings.timerUpdatedAt || ''}
+                        />
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flexWrap: 'wrap' }}>
+                          <button
+                            type="button"
+                            className="admin-timer-reset-btn"
+                            onClick={() => {
+                              setIsDirty(true);
+                              const newTime = String(Date.now());
+                              setSettings((c) => ({ ...c, timerUpdatedAt: newTime }));
+                              alert('টাইমার কাউন্টডাউন অবিলম্বে রিসেট করা হয়েছে! সেভ করতে নিচের বাটনে চাপ দিন।');
+                            }}
+                          >
+                            🔄 টাইমার নতুন করে শুরু করুন (Reset Countdown)
+                          </button>
+                          <small style={{ color: '#ffd866', margin: 0 }}>
+                            {settings.timerMode === 'target_date'
+                              ? `টার্গেট ড্র সময়: ${settings.timerTargetDate || 'তারিখ সেট করুন'}`
+                              : `কাউন্টডাউন চক্র: ${settings.timerHours || 12} ঘণ্টা ${settings.timerMinutes || 0} মিনিট`}
+                          </small>
+                        </div>
+                      </div>
+                      <small>
+                        💡 টিপস: আপনি যখনই ঘণ্টা বা মোড পরিবর্তন করবেন, লাইভ প্রিভিউতে সাথে সাথে তা কার্যকর দেখা যাবে। "সমস্ত পরিবর্তন সেভ করুন" বাটনে ক্লিক করলে তা ওয়েবসাইটে সকলের জন্য কার্যকর হবে।
+                      </small>
+                    </div>
                   </div>
                 )}
 

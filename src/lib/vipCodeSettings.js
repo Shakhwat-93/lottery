@@ -39,7 +39,15 @@ export const DEFAULT_VIP_CODE_SETTINGS = Object.freeze({
 
   // Results & Live Stream
   latestResult3d: '781',
-  liveStreamUrl: ''
+  liveStreamUrl: '',
+
+  // Urgent Offer & Timer Controls
+  timerShow: true,
+  timerMode: 'duration',
+  timerHours: '12',
+  timerMinutes: '00',
+  timerTargetDate: '',
+  timerUpdatedAt: ''
 });
 
 export function normalizeDateString(val) {
@@ -127,7 +135,13 @@ export function mapDatabaseSettings(row) {
     rocketNumber: extra.rocketNumber || DEFAULT_VIP_CODE_SETTINGS.rocketNumber,
     whatsappMessage: extra.whatsappMessage || DEFAULT_VIP_CODE_SETTINGS.whatsappMessage,
     latestResult3d: extra.latestResult3d || DEFAULT_VIP_CODE_SETTINGS.latestResult3d,
-    liveStreamUrl: extra.liveStreamUrl || DEFAULT_VIP_CODE_SETTINGS.liveStreamUrl
+    liveStreamUrl: extra.liveStreamUrl || DEFAULT_VIP_CODE_SETTINGS.liveStreamUrl,
+    timerShow: extra.timerShow !== undefined ? Boolean(extra.timerShow) : DEFAULT_VIP_CODE_SETTINGS.timerShow,
+    timerMode: extra.timerMode || DEFAULT_VIP_CODE_SETTINGS.timerMode,
+    timerHours: extra.timerHours !== undefined ? String(extra.timerHours) : DEFAULT_VIP_CODE_SETTINGS.timerHours,
+    timerMinutes: extra.timerMinutes !== undefined ? String(extra.timerMinutes) : DEFAULT_VIP_CODE_SETTINGS.timerMinutes,
+    timerTargetDate: extra.timerTargetDate || '',
+    timerUpdatedAt: extra.timerUpdatedAt || ''
   };
 }
 
@@ -188,7 +202,13 @@ export async function saveVipCodeSettings(settings, { localOnly = false, client 
     rocketNumber: normalized.rocketNumber ?? DEFAULT_VIP_CODE_SETTINGS.rocketNumber,
     whatsappMessage: normalized.whatsappMessage ?? DEFAULT_VIP_CODE_SETTINGS.whatsappMessage,
     latestResult3d: normalized.latestResult3d ?? DEFAULT_VIP_CODE_SETTINGS.latestResult3d,
-    liveStreamUrl: normalized.liveStreamUrl ?? DEFAULT_VIP_CODE_SETTINGS.liveStreamUrl
+    liveStreamUrl: normalized.liveStreamUrl ?? DEFAULT_VIP_CODE_SETTINGS.liveStreamUrl,
+    timerShow: normalized.timerShow !== undefined ? Boolean(normalized.timerShow) : DEFAULT_VIP_CODE_SETTINGS.timerShow,
+    timerMode: normalized.timerMode || DEFAULT_VIP_CODE_SETTINGS.timerMode,
+    timerHours: normalized.timerHours !== undefined ? String(normalized.timerHours) : DEFAULT_VIP_CODE_SETTINGS.timerHours,
+    timerMinutes: normalized.timerMinutes !== undefined ? String(normalized.timerMinutes) : DEFAULT_VIP_CODE_SETTINGS.timerMinutes,
+    timerTargetDate: normalized.timerTargetDate || '',
+    timerUpdatedAt: normalized.timerUpdatedAt || ''
   };
 
   // 1. If Supabase configured and not localOnly, try direct Supabase update

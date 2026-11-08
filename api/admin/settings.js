@@ -90,7 +90,13 @@ export default async function handler(req, res) {
     rocketNumber: raw.rocketNumber || '+8801705330881',
     whatsappMessage: raw.whatsappMessage || 'Hello, I want VIP 3 Up Game & Calculation Paper',
     latestResult3d: raw.latestResult3d || '781',
-    liveStreamUrl: raw.liveStreamUrl || ''
+    liveStreamUrl: raw.liveStreamUrl || '',
+    timerShow: raw.timerShow !== undefined ? Boolean(raw.timerShow) : true,
+    timerMode: raw.timerMode || 'duration',
+    timerHours: raw.timerHours !== undefined ? String(raw.timerHours) : '12',
+    timerMinutes: raw.timerMinutes !== undefined ? String(raw.timerMinutes) : '00',
+    timerTargetDate: raw.timerTargetDate || '',
+    timerUpdatedAt: raw.timerUpdatedAt || ''
   };
 
   try {
