@@ -8,45 +8,86 @@ import { formatVipDate } from '../lib/vipCodeSettings';
 class JackpotAudioController {
   constructor() {
     this.ctx = null;
+    this.masterGain = null;
+    this.compressor = null;
     this.muted = false;
+    this.lastTickTime = 0;
   }
 
   init() {
-    if (!this.ctx && typeof window !== 'undefined') {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (AudioCtx) {
-        this.ctx = new AudioCtx();
+    if (this.ctx) {
+      if (this.ctx.state === 'suspended') {
+        this.ctx.resume().catch(() => {});
       }
+      return;
     }
-    if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume().catch(() => {});
-    }
+    if (typeof window === 'undefined') return;
+
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+
+      this.ctx = new AudioCtx();
+
+      // Master Compressor for silky acoustic balance, zero clipping & distortion
+      this.compressor = this.ctx.createDynamicsCompressor();
+      this.compressor.threshold.setValueAtTime(-16, this.ctx.currentTime);
+      this.compressor.knee.setValueAtTime(10, this.ctx.currentTime);
+      this.compressor.ratio.setValueAtTime(4, this.ctx.currentTime);
+      this.compressor.attack.setValueAtTime(0.003, this.ctx.currentTime);
+      this.compressor.release.setValueAtTime(0.12, this.ctx.currentTime);
+
+      // Master Gain for smooth output
+      this.masterGain = this.ctx.createGain();
+      this.masterGain.gain.setValueAtTime(0.32, this.ctx.currentTime);
+
+      this.masterGain.connect(this.compressor);
+      this.compressor.connect(this.ctx.destination);
+    } catch (_) {}
   }
 
   playTick() {
     if (this.muted) return;
     this.init();
-    if (!this.ctx) return;
+    if (!this.ctx || !this.masterGain) return;
+
+    const now = this.ctx.currentTime;
+    // Throttle ticks to avoid audio buffer saturation (min 65ms between ticks)
+    if (now - this.lastTickTime < 0.065) return;
+    this.lastTickTime = now;
+
     try {
-      const now = this.ctx.currentTime;
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(650, now);
-      osc.frequency.exponentialRampToValueAtTime(180, now + 0.025);
-      gain.gain.setValueAtTime(0.04, now);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.025);
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
+      const filter = this.ctx.createBiquadFilter();
+
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(1100, now);
+      filter.Q.setValueAtTime(2.5, now);
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(680, now);
+      osc.frequency.exponentialRampToValueAtTime(220, now + 0.024);
+
+      // Attack (2ms) & decay (22ms) -> 100% click-free & pop-free
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime(0.14, now + 0.002);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.024);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(this.masterGain);
+
       osc.start(now);
-      osc.stop(now + 0.025);
+      osc.stop(now + 0.026);
     } catch (_) {}
   }
 
   playLock(index = 0) {
     if (this.muted) return;
     this.init();
-    if (!this.ctx) return;
+    if (!this.ctx || !this.masterGain) return;
+
     try {
       const now = this.ctx.currentTime;
       const freqs = [523.25, 659.25, 783.99, 1046.50, 1318.51]; // C5, E5, G5, C6, E6
@@ -57,53 +98,84 @@ class JackpotAudioController {
       const gain = this.ctx.createGain();
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, now);
-      gain.gain.setValueAtTime(0.18, now);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime(0.24, now + 0.004);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.30);
+
       osc.connect(gain);
-      gain.connect(this.ctx.destination);
+      gain.connect(this.masterGain);
+
       osc.start(now);
-      osc.stop(now + 0.35);
+      osc.stop(now + 0.32);
 
       // Shimmering overtone
       const osc2 = this.ctx.createOscillator();
       const gain2 = this.ctx.createGain();
       osc2.type = 'triangle';
       osc2.frequency.setValueAtTime(freq * 2, now);
-      gain2.gain.setValueAtTime(0.06, now);
+
+      gain2.gain.setValueAtTime(0.0001, now);
+      gain2.gain.linearRampToValueAtTime(0.07, now + 0.003);
       gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.16);
+
       osc2.connect(gain2);
-      gain2.connect(this.ctx.destination);
+      gain2.connect(this.masterGain);
+
       osc2.start(now);
-      osc2.stop(now + 0.16);
+      osc2.stop(now + 0.18);
     } catch (_) {}
   }
 
   playJackpotWin() {
     if (this.muted) return;
     this.init();
-    if (!this.ctx) return;
+    if (!this.ctx || !this.masterGain) return;
+
     try {
+      const start = this.ctx.currentTime + 0.01;
       const notes = [
-        { f: 523.25, t: 0.00, d: 0.4 }, // C5
-        { f: 659.25, t: 0.09, d: 0.4 }, // E5
-        { f: 783.99, t: 0.18, d: 0.4 }, // G5
-        { f: 1046.50, t: 0.28, d: 0.6 }, // C6
-        { f: 1318.51, t: 0.40, d: 0.8 }, // E6
-        { f: 1567.98, t: 0.54, d: 1.4 }  // G6
+        { f: 523.25, t: 0.00, d: 0.32 }, // C5
+        { f: 659.25, t: 0.07, d: 0.32 }, // E5
+        { f: 783.99, t: 0.14, d: 0.32 }, // G5
+        { f: 1046.50, t: 0.22, d: 0.45 }, // C6
+        { f: 1318.51, t: 0.32, d: 0.60 }, // E6
+        { f: 1567.98, t: 0.44, d: 1.10 }  // G6
       ];
 
-      const start = this.ctx.currentTime;
       notes.forEach(({ f, t, d }) => {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
         osc.type = 'sine';
         osc.frequency.setValueAtTime(f, start + t);
-        gain.gain.setValueAtTime(0.2, start + t);
+
+        gain.gain.setValueAtTime(0.0001, start + t);
+        gain.gain.linearRampToValueAtTime(0.20, start + t + 0.005);
         gain.gain.exponentialRampToValueAtTime(0.0001, start + t + d);
+
         osc.connect(gain);
-        gain.connect(this.ctx.destination);
+        gain.connect(this.masterGain);
+
         osc.start(start + t);
-        osc.stop(start + t + d);
+        osc.stop(start + t + d + 0.02);
+      });
+
+      // Warm shimmering victory chord sustained in background
+      [523.25, 783.99, 1046.50].forEach((chordFreq) => {
+        const chordOsc = this.ctx.createOscillator();
+        const chordGain = this.ctx.createGain();
+        chordOsc.type = 'triangle';
+        chordOsc.frequency.setValueAtTime(chordFreq, start + 0.44);
+
+        chordGain.gain.setValueAtTime(0.0001, start + 0.44);
+        chordGain.gain.linearRampToValueAtTime(0.08, start + 0.46);
+        chordGain.gain.exponentialRampToValueAtTime(0.0001, start + 1.4);
+
+        chordOsc.connect(chordGain);
+        chordGain.connect(this.masterGain);
+
+        chordOsc.start(start + 0.44);
+        chordOsc.stop(start + 1.45);
       });
     } catch (_) {}
   }
@@ -127,12 +199,24 @@ export default function VipAgencyCodePage() {
 
   const canvasRef = useRef(null);
   const animationFrameRef = useRef(null);
-  const spinIntervalsRef = useRef([]);
+  const spinTimerRef = useRef(null);
+  const timeoutsRef = useRef([]);
+  const lockedStatesRef = useRef([false, false, false, false, false]);
 
-  // Fullscreen body lock
+  // Fullscreen body lock & audio warm-up
   useEffect(() => {
     document.body.classList.add('jackpot-page-active');
     window.scrollTo(0, 0);
+
+    // Warm up Web Audio API on first touch/click
+    const warmAudio = () => {
+      audioCtrl.init();
+      window.removeEventListener('pointerdown', warmAudio);
+      window.removeEventListener('keydown', warmAudio);
+    };
+    window.addEventListener('pointerdown', warmAudio, { once: true });
+    window.addEventListener('keydown', warmAudio, { once: true });
+    audioCtrl.init();
 
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
@@ -144,7 +228,9 @@ export default function VipAgencyCodePage() {
     return () => {
       document.body.classList.remove('jackpot-page-active');
       window.removeEventListener('keydown', handleKeyDown);
-      spinIntervalsRef.current.forEach((id) => clearInterval(id));
+      window.removeEventListener('pointerdown', warmAudio);
+      if (spinTimerRef.current) clearInterval(spinTimerRef.current);
+      timeoutsRef.current.forEach((t) => clearTimeout(t));
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
@@ -158,58 +244,67 @@ export default function VipAgencyCodePage() {
     audioCtrl.muted = nextState;
   };
 
-  // Launch the Slot Reel Jackpot Spin Animation
+  // Launch the Slot Reel Jackpot Spin Animation (Smooth & lightweight)
   const startJackpotSpin = useCallback(() => {
     setIsJackpotWon(false);
+    lockedStatesRef.current = [false, false, false, false, false];
     setLockedStates([false, false, false, false, false]);
     setDisplayedDigits(['0', '0', '0', '0', '0']);
 
-    // Clear any previous intervals
-    spinIntervalsRef.current.forEach((id) => clearInterval(id));
-    spinIntervalsRef.current = [];
+    // Clear any previous intervals and timeouts
+    if (spinTimerRef.current) clearInterval(spinTimerRef.current);
+    timeoutsRef.current.forEach((t) => clearTimeout(t));
+    timeoutsRef.current = [];
 
-    // Spinning random numbers interval for each reel
-    targetDigits.forEach((_, i) => {
-      const intervalId = setInterval(() => {
-        setDisplayedDigits((prev) => {
-          const next = [...prev];
-          next[i] = Math.floor(Math.random() * 10).toString();
-          return next;
-        });
-        if (i === 0) {
-          audioCtrl.playTick();
+    // Single unified ticker timer for all 5 reels (75ms smooth cadence, zero render thrashing)
+    spinTimerRef.current = setInterval(() => {
+      setDisplayedDigits((prev) => {
+        let changed = false;
+        const next = [...prev];
+        for (let i = 0; i < 5; i++) {
+          if (!lockedStatesRef.current[i]) {
+            next[i] = Math.floor(Math.random() * 10).toString();
+            changed = true;
+          }
         }
-      }, 55);
-      spinIntervalsRef.current[i] = intervalId;
-    });
+        return changed ? next : prev;
+      });
+      audioCtrl.playTick();
+    }, 75);
 
     // Sequential locks (Reels 0 -> 4)
-    const lockDelays = [450, 850, 1250, 1650, 2050];
+    const lockDelays = [400, 780, 1160, 1540, 1920];
 
     lockDelays.forEach((delay, idx) => {
-      setTimeout(() => {
-        clearInterval(spinIntervalsRef.current[idx]);
-        setDisplayedDigits((prev) => {
-          const next = [...prev];
-          next[idx] = targetDigits[idx];
-          return next;
-        });
+      const timeoutId = setTimeout(() => {
+        lockedStatesRef.current[idx] = true;
         setLockedStates((prev) => {
           const next = [...prev];
           next[idx] = true;
+          return next;
+        });
+        setDisplayedDigits((prev) => {
+          const next = [...prev];
+          next[idx] = targetDigits[idx];
           return next;
         });
         audioCtrl.playLock(idx);
 
         // When the final digit locks in
         if (idx === targetDigits.length - 1) {
-          setTimeout(() => {
+          if (spinTimerRef.current) {
+            clearInterval(spinTimerRef.current);
+            spinTimerRef.current = null;
+          }
+          const winTimeout = setTimeout(() => {
             setIsJackpotWon(true);
             audioCtrl.playJackpotWin();
             launchConfetti();
-          }, 120);
+          }, 90);
+          timeoutsRef.current.push(winTimeout);
         }
       }, delay);
+      timeoutsRef.current.push(timeoutId);
     });
   }, [targetDigits]);
 
