@@ -3,6 +3,69 @@ import { getSupabaseClient, isSupabaseConfigured } from './supabase';
 const STORAGE_KEY = 'lottery-vip-code-settings-v1';
 export const SETTINGS_COLUMNS = 'id, first_date, second_date, vip_code, header_title, header_subtitle, top_notice, phone_number, whatsapp_number, imo_number, agent_name, license_number, urgent_forms_left, urgent_notice, extra_data, updated_at';
 
+export const DEFAULT_WINNER_FORMS = [
+  {
+    id: 'winner-1',
+    nameBn: 'মুহাম্মদ জহুরুল ইসলাম',
+    nameEn: 'MOHAMMAD ZOHURUL ISLAM',
+    formImg: '/assets/site/winners/winner-form-zohurul.jpg',
+    badge: '🏆 1st ক্যাটাগরি বিজয়ী ফরম',
+    country: 'সৌদি আরব (Saudi Arabia)',
+    agent: 'Md Fahim Chowdhury (TL-001)',
+    price: '250 SAR'
+  },
+  {
+    id: 'winner-2',
+    nameBn: 'মোঃ বাহার',
+    nameEn: 'MD BAHAR',
+    formImg: '/assets/site/winners/winner-form-bahar.jpg',
+    badge: '👑 মেগা ক্যাটাগরি বিজয়ী ফরম',
+    country: 'সৌদি আরব (Saudi Arabia)',
+    agent: 'Md Fahim Chowdhury (TL-001)',
+    price: '250 SAR'
+  },
+  {
+    id: 'winner-anowar-ayub-ali',
+    nameBn: 'আনোয়ার আয়ুব আলী',
+    nameEn: 'ANOWAR AYUB ALI',
+    formImg: '/assets/site/winners/winner-form-anowar-ayub-ali.jpeg',
+    badge: 'সদস্যপদ ফরম',
+    country: 'সৌদি আরব (Saudi Arabia)',
+    agent: 'Md Fahim Chowdhury (TL-001)',
+    price: '250 SAR'
+  },
+  {
+    id: 'winner-md-jalal-miyah',
+    nameBn: 'মোঃ জালাল মিয়া',
+    nameEn: 'MD JALAL MIYAH',
+    formImg: '/assets/site/winners/winner-form-md-jalal-miyah.jpeg',
+    badge: 'সদস্যপদ ফরম',
+    country: 'সৌদি আরব (Saudi Arabia)',
+    agent: 'Md Fahim Chowdhury (TL-001)',
+    price: '250 SAR'
+  },
+  {
+    id: 'winner-md-nazim-mia',
+    nameBn: 'মোঃ নাজিম মিয়া',
+    nameEn: 'MD NAZIM MIA',
+    formImg: '/assets/site/winners/winner-form-md-nazim-mia.jpeg',
+    badge: 'সদস্যপদ ফরম',
+    country: 'সৌদি আরব (Saudi Arabia)',
+    agent: 'Md Fahim Chowdhury (TL-001)',
+    price: '250 SAR'
+  },
+  {
+    id: 'winner-akhter-hossain',
+    nameBn: 'আখতার হোসেন',
+    nameEn: 'AKHTER HOSSAIN',
+    formImg: '/assets/site/winners/winner-form-akhter-hossain.jpeg',
+    badge: 'সদস্যপদ ফরম',
+    country: 'সৌদি আরব (Saudi Arabia)',
+    agent: 'Md Fahim Chowdhury (TL-001)',
+    price: '250 SAR'
+  }
+];
+
 export const DEFAULT_VIP_CODE_SETTINGS = Object.freeze({
   firstDate: '2026-11-01',
   secondDate: '2026-11-16',
@@ -47,7 +110,10 @@ export const DEFAULT_VIP_CODE_SETTINGS = Object.freeze({
   timerHours: '12',
   timerMinutes: '00',
   timerTargetDate: '',
-  timerUpdatedAt: ''
+  timerUpdatedAt: '',
+
+  // Previous Game Form Winners
+  winnerForms: DEFAULT_WINNER_FORMS
 });
 
 export function normalizeDateString(val) {
@@ -141,7 +207,10 @@ export function mapDatabaseSettings(row) {
     timerHours: extra.timerHours !== undefined ? String(extra.timerHours) : DEFAULT_VIP_CODE_SETTINGS.timerHours,
     timerMinutes: extra.timerMinutes !== undefined ? String(extra.timerMinutes) : DEFAULT_VIP_CODE_SETTINGS.timerMinutes,
     timerTargetDate: extra.timerTargetDate || '',
-    timerUpdatedAt: extra.timerUpdatedAt || ''
+    timerUpdatedAt: extra.timerUpdatedAt || '',
+    winnerForms: Array.isArray(extra.winnerForms) && extra.winnerForms.length > 0
+      ? extra.winnerForms
+      : DEFAULT_WINNER_FORMS
   };
 }
 
@@ -208,7 +277,10 @@ export async function saveVipCodeSettings(settings, { localOnly = false, client 
     timerHours: normalized.timerHours !== undefined ? String(normalized.timerHours) : DEFAULT_VIP_CODE_SETTINGS.timerHours,
     timerMinutes: normalized.timerMinutes !== undefined ? String(normalized.timerMinutes) : DEFAULT_VIP_CODE_SETTINGS.timerMinutes,
     timerTargetDate: normalized.timerTargetDate || '',
-    timerUpdatedAt: normalized.timerUpdatedAt || ''
+    timerUpdatedAt: normalized.timerUpdatedAt || '',
+    winnerForms: Array.isArray(normalized.winnerForms) && normalized.winnerForms.length > 0
+      ? normalized.winnerForms
+      : DEFAULT_WINNER_FORMS
   };
 
   // 1. If Supabase configured and not localOnly, try direct Supabase update

@@ -96,7 +96,8 @@ export default async function handler(req, res) {
     timerHours: raw.timerHours !== undefined ? String(raw.timerHours) : '12',
     timerMinutes: raw.timerMinutes !== undefined ? String(raw.timerMinutes) : '00',
     timerTargetDate: raw.timerTargetDate || '',
-    timerUpdatedAt: raw.timerUpdatedAt || ''
+    timerUpdatedAt: raw.timerUpdatedAt || '',
+    ...(Array.isArray(raw.winnerForms) && raw.winnerForms.length > 0 ? { winnerForms: raw.winnerForms } : {})
   };
 
   try {

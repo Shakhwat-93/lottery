@@ -1,69 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-
-const WINNER_FORMS = [
-  {
-    id: 'winner-1',
-    nameBn: 'মুহাম্মদ জহুরুল ইসলাম',
-    nameEn: 'MOHAMMAD ZOHURUL ISLAM',
-    formImg: '/assets/site/winners/winner-form-zohurul.jpg',
-    badge: '🏆 1st ক্যাটাগরি বিজয়ী ফরম',
-    country: 'সৌদি আরব (Saudi Arabia)',
-    agent: 'Md Fahim Chowdhury (TL-001)',
-    price: '250 SAR'
-  },
-  {
-    id: 'winner-2',
-    nameBn: 'মোঃ বাহার',
-    nameEn: 'MD BAHAR',
-    formImg: '/assets/site/winners/winner-form-bahar.jpg',
-    badge: '👑 মেগা ক্যাটাগরি বিজয়ী ফরম',
-    country: 'সৌদি আরব (Saudi Arabia)',
-    agent: 'Md Fahim Chowdhury (TL-001)',
-    price: '250 SAR'
-  },
-  {
-    id: 'winner-anowar-ayub-ali',
-    nameBn: 'আনোয়ার আয়ুব আলী',
-    nameEn: 'ANOWAR AYUB ALI',
-    formImg: '/assets/site/winners/winner-form-anowar-ayub-ali.jpeg',
-    badge: 'সদস্যপদ ফরম',
-    country: 'সৌদি আরব (Saudi Arabia)',
-    agent: 'Md Fahim Chowdhury (TL-001)',
-    price: '250 SAR'
-  },
-  {
-    id: 'winner-md-jalal-miyah',
-    nameBn: 'মোঃ জালাল মিয়া',
-    nameEn: 'MD JALAL MIYAH',
-    formImg: '/assets/site/winners/winner-form-md-jalal-miyah.jpeg',
-    badge: 'সদস্যপদ ফরম',
-    country: 'সৌদি আরব (Saudi Arabia)',
-    agent: 'Md Fahim Chowdhury (TL-001)',
-    price: '250 SAR'
-  },
-  {
-    id: 'winner-md-nazim-mia',
-    nameBn: 'মোঃ নাজিম মিয়া',
-    nameEn: 'MD NAZIM MIA',
-    formImg: '/assets/site/winners/winner-form-md-nazim-mia.jpeg',
-    badge: 'সদস্যপদ ফরম',
-    country: 'সৌদি আরব (Saudi Arabia)',
-    agent: 'Md Fahim Chowdhury (TL-001)',
-    price: '250 SAR'
-  },
-  {
-    id: 'winner-akhter-hossain',
-    nameBn: 'আখতার হোসেন',
-    nameEn: 'AKHTER HOSSAIN',
-    formImg: '/assets/site/winners/winner-form-akhter-hossain.jpeg',
-    badge: 'সদস্যপদ ফরম',
-    country: 'সৌদি আরব (Saudi Arabia)',
-    agent: 'Md Fahim Chowdhury (TL-001)',
-    price: '250 SAR'
-  }
-];
+import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
+import { DEFAULT_WINNER_FORMS } from '../lib/vipCodeSettings';
 
 export default function PreviousWinners() {
+  const settings = useVipCodeSettings();
+  const winnerForms = Array.isArray(settings.winnerForms) && settings.winnerForms.length > 0
+    ? settings.winnerForms
+    : DEFAULT_WINNER_FORMS;
+
   const [modalImage, setModalImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -71,7 +15,13 @@ export default function PreviousWinners() {
   const touchEndX = useRef(0);
   const hasDragged = useRef(false);
 
-  const totalWinners = WINNER_FORMS.length;
+  const totalWinners = winnerForms.length;
+
+  useEffect(() => {
+    if (currentIndex >= totalWinners) {
+      setCurrentIndex(0);
+    }
+  }, [currentIndex, totalWinners]);
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % totalWinners);
@@ -140,7 +90,7 @@ export default function PreviousWinners() {
 
       {/* Mobile Quick Switcher Tabs */}
       <div className="winner-form-switcher-tabs" role="tablist" aria-label="Winner Select Tabs">
-        {WINNER_FORMS.map((winner, idx) => (
+        {winnerForms.map((winner, idx) => (
           <button
             key={winner.id}
             type="button"
@@ -179,7 +129,7 @@ export default function PreviousWinners() {
             className="winner-forms-track winner-forms-grid"
             style={{ '--slide-index': currentIndex }}
           >
-            {WINNER_FORMS.map((winner, idx) => (
+            {winnerForms.map((winner, idx) => (
               <article
                 key={winner.id}
                 className={`winner-form-card card-enter-anim ${idx === currentIndex ? 'active-winner-slide' : ''}`}
@@ -251,7 +201,7 @@ export default function PreviousWinners() {
       {/* Mobile Slider Pagination Dots & Hint */}
       <div className="winner-slider-footer-controls">
         <div className="winner-slider-dots" role="tablist" aria-label="Slider Dots">
-          {WINNER_FORMS.map((winner, idx) => (
+          {winnerForms.map((winner, idx) => (
             <button
               key={winner.id}
               type="button"

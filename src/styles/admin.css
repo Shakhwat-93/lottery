@@ -406,6 +406,118 @@
   color: #ffffff;
 }
 
+/* Previous Winner Forms Manager */
+.admin-winners-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.admin-winners-toolbar-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.admin-winners-toolbar-title strong {
+  font-size: 1rem;
+  color: #ffd866;
+}
+.admin-winners-toolbar-title small {
+  color: #a7bad3;
+  font-size: 0.82rem;
+}
+.admin-winners-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+.admin-add-winner-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #e9bc38, #b8860b);
+  border: 1px solid #ffd866;
+  color: #050b18;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.admin-add-winner-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(233, 188, 56, 0.35);
+}
+.admin-winners-list {
+  display: grid;
+  gap: 1.25rem;
+}
+.admin-winner-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 14px;
+  padding: 1.15rem;
+  display: grid;
+  gap: 1rem;
+}
+.admin-winner-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+}
+.admin-winner-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: #ffd866;
+  font-size: 0.95rem;
+}
+.admin-winner-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.admin-icon-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #dce5f5;
+  padding: 0.35rem 0.65rem;
+  border-radius: 7px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.admin-icon-btn:hover:not(:disabled) {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: rgba(255, 215, 0, 0.45);
+  color: #ffd866;
+}
+.admin-icon-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.admin-icon-btn.is-danger {
+  color: #fca5a5;
+  border-color: rgba(248, 113, 113, 0.3);
+  background: rgba(239, 68, 68, 0.1);
+}
+.admin-icon-btn.is-danger:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(248, 113, 113, 0.65);
+  color: #ffffff;
+}
+
 @media (max-width: 680px) {
   .admin-header { align-items: flex-start; flex-direction: column; }
   .admin-card { border-radius: 18px; padding: 1.25rem; }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
 import { getSupabaseClient, isSupabaseConfigured } from '../lib/supabase';
-import { loadVipCodeSettings, readVipCodeSettings, saveVipCodeSettings, formatVipDate } from '../lib/vipCodeSettings';
+import { loadVipCodeSettings, readVipCodeSettings, saveVipCodeSettings, formatVipDate, DEFAULT_WINNER_FORMS } from '../lib/vipCodeSettings';
 import { resolveEmbedUrl } from '../components/FacebookLiveStream';
 import '../styles/admin.css';
 
@@ -178,11 +178,10 @@ export default function AdminVipCodePage() {
     setError('');
   };
 
-  const handleFileUpload = (field) => (event) => {
-    const file = event.target.files && event.target.files[0];
+  const uploadImageWithFallback = (file, fieldKey, onSuccess) => {
     if (!file) return;
 
-    setUploadingField(field);
+    setUploadingField(fieldKey);
     setMessage('');
     setError('');
 
@@ -190,18 +189,30 @@ export default function AdminVipCodePage() {
     reader.onload = async (e) => {
       const dataUrl = e.target.result;
 
-      // 1. Try serverless upload endpoint
+      // 1. Try serverless upload endpoint (with optional Supabase auth token)
       try {
+        const headers = { 'Content-Type': 'application/json' };
+        if (isSupabaseConfigured) {
+          try {
+            const client = await getSupabaseClient();
+            const { data } = client ? await client.auth.getSession() : { data: null };
+            if (data?.session?.access_token) {
+              headers.Authorization = `Bearer ${data.session.access_token}`;
+            }
+          } catch (_) {}
+        }
+
         const response = await fetch('/api/admin/upload', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          headers,
           body: JSON.stringify({ fileData: dataUrl, fileName: file.name })
         });
         if (response.ok) {
           const result = await response.json();
           if (result?.publicUrl) {
             setIsDirty(true);
-            setSettings((c) => ({ ...c, [field]: result.publicUrl }));
+            onSuccess(result.publicUrl);
             setMessage('✅ ছবি সফলভাবে আপলোড ও ক্লাউডে সেভ হয়েছে!');
             setUploadingField(null);
             return;
@@ -211,14 +222,14 @@ export default function AdminVipCodePage() {
         console.warn('API upload fallback to data URL:', err);
       }
 
-      // 2. Direct fallback (Canvas compressed data URL)
+      // 2. Direct fallback (Canvas compressed JPEG data URL)
       try {
         const img = new Image();
         img.onload = () => {
           const canvas = document.createElement('canvas');
           let width = img.width;
           let height = img.height;
-          const maxDim = 1200;
+          const maxDim = 1000;
           if (width > maxDim || height > maxDim) {
             if (width > height) {
               height = Math.round((height * maxDim) / width);
@@ -232,26 +243,116 @@ export default function AdminVipCodePage() {
           canvas.height = height;
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, width, height);
-          const compressed = canvas.toDataURL('image/jpeg', 0.85);
+          const compressed = canvas.toDataURL('image/jpeg', 0.82);
 
           setIsDirty(true);
-          setSettings((c) => ({ ...c, [field]: compressed }));
+          onSuccess(compressed);
           setMessage('✅ ছবি সফলভাবে লোড হয়েছে!');
           setUploadingField(null);
         };
         img.onerror = () => {
           setIsDirty(true);
-          setSettings((c) => ({ ...c, [field]: dataUrl }));
+          onSuccess(dataUrl);
           setUploadingField(null);
         };
         img.src = dataUrl;
       } catch {
         setIsDirty(true);
-        setSettings((c) => ({ ...c, [field]: dataUrl }));
+        onSuccess(dataUrl);
         setUploadingField(null);
       }
     };
     reader.readAsDataURL(file);
+  };
+
+  const handleFileUpload = (field) => (event) => {
+    const file = event.target.files && event.target.files[0];
+    uploadImageWithFallback(file, field, (url) => {
+      setSettings((c) => ({ ...c, [field]: url }));
+    });
+  };
+
+  const getWinnerList = () => {
+    return Array.isArray(settings.winnerForms) && settings.winnerForms.length > 0
+      ? settings.winnerForms
+      : DEFAULT_WINNER_FORMS;
+  };
+
+  const updateWinnerField = (index, key) => (eventOrVal) => {
+    const val = typeof eventOrVal === 'string' ? eventOrVal : eventOrVal.target.value;
+    setIsDirty(true);
+    setMessage('');
+    setError('');
+    setSettings((current) => {
+      const base = Array.isArray(current.winnerForms) && current.winnerForms.length > 0
+        ? [...current.winnerForms]
+        : [...DEFAULT_WINNER_FORMS];
+      base[index] = { ...base[index], [key]: val };
+      return { ...current, winnerForms: base };
+    });
+  };
+
+  const handleWinnerFileUpload = (index) => (event) => {
+    const file = event.target.files && event.target.files[0];
+    uploadImageWithFallback(file, `winner-${index}`, (url) => {
+      updateWinnerField(index, 'formImg')(url);
+    });
+  };
+
+  const addNewWinner = () => {
+    setIsDirty(true);
+    setMessage('');
+    setSettings((current) => {
+      const base = Array.isArray(current.winnerForms) && current.winnerForms.length > 0
+        ? [...current.winnerForms]
+        : [...DEFAULT_WINNER_FORMS];
+      const newWinner = {
+        id: `winner-${Date.now()}`,
+        nameBn: 'নতুন বিজয়ী',
+        nameEn: 'NEW WINNER',
+        formImg: '/assets/site/winners/winner-form-zohurul.jpg',
+        badge: '👑 ক্যাটাগরি বিজয়ী ফরম',
+        country: 'সৌদি আরব (Saudi Arabia)',
+        agent: `${current.agentName || 'Md Fahim Chowdhury'} (TL-001)`,
+        price: '250 SAR'
+      };
+      return { ...current, winnerForms: [newWinner, ...base] };
+    });
+  };
+
+  const removeWinner = (index) => {
+    const base = getWinnerList();
+    if (base.length <= 1) return;
+    setIsDirty(true);
+    setSettings((current) => {
+      const currentList = Array.isArray(current.winnerForms) && current.winnerForms.length > 0
+        ? [...current.winnerForms]
+        : [...DEFAULT_WINNER_FORMS];
+      currentList.splice(index, 1);
+      return { ...current, winnerForms: currentList };
+    });
+  };
+
+  const moveWinner = (index, direction) => {
+    const base = getWinnerList();
+    const target = index + direction;
+    if (target < 0 || target >= base.length) return;
+    setIsDirty(true);
+    setSettings((current) => {
+      const list = Array.isArray(current.winnerForms) && current.winnerForms.length > 0
+        ? [...current.winnerForms]
+        : [...DEFAULT_WINNER_FORMS];
+      const temp = list[index];
+      list[index] = list[target];
+      list[target] = temp;
+      return { ...current, winnerForms: list };
+    });
+  };
+
+  const resetWinnersToDefault = () => {
+    setIsDirty(true);
+    setSettings((current) => ({ ...current, winnerForms: [...DEFAULT_WINNER_FORMS] }));
+    setMessage('বিজয়ী ফরম সমূহ ডিফল্ট অবস্থায় ফিরিয়ে আনা হয়েছে। সেভ করতে "সমস্ত পরিবর্তন সেভ করুন" চাপুন।');
   };
 
   const handleSignIn = async (event) => {
@@ -500,6 +601,13 @@ export default function AdminVipCodePage() {
                   onClick={() => setActiveTab('results')}
                 >
                   <span>🏆</span> রেজাল্ট ও লাইভ
+                </button>
+                <button
+                  type="button"
+                  className={`admin-tab-btn ${activeTab === 'winners' ? 'is-active' : ''}`}
+                  onClick={() => setActiveTab('winners')}
+                >
+                  <span>📜</span> বিজয়ী ফরম (Winners)
                 </button>
               </div>
 
@@ -1197,6 +1305,172 @@ export default function AdminVipCodePage() {
                   </div>
                 )}
 
+                {/* TAB 7: PREVIOUS WINNER MEMBERSHIP FORMS */}
+                {activeTab === 'winners' && (
+                  <div className="admin-grid-2" style={{ display: 'grid', gap: '1.25rem' }}>
+                    <div className="admin-winners-toolbar admin-grid-full">
+                      <div className="admin-winners-toolbar-title">
+                        <strong>পূর্ববর্তী গেমের বিজয়ী মেম্বারশিপ ফরম সমূহ ({getWinnerList().length}টি)</strong>
+                        <small>হোমপেজের &quot;Previous Game Form Winners&quot; সেকশনে দৃশ্যমান প্রতিটি ফরম এখান থেকে আপলোড, পরিবর্তন ও যোগ/বিয়োগ করা যাবে।</small>
+                      </div>
+                      <div className="admin-winners-toolbar-actions">
+                        <button
+                          type="button"
+                          className="admin-add-winner-btn"
+                          onClick={addNewWinner}
+                        >
+                          <span>➕</span> নতুন বিজয়ী ফরম যোগ করুন
+                        </button>
+                        <button
+                          type="button"
+                          className="admin-icon-btn"
+                          onClick={resetWinnersToDefault}
+                          title="ডিফল্ট ৬টি ফরমে রিসেট করুন"
+                        >
+                          🔄 রিসেট (ডিফল্ট)
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="admin-winners-list admin-grid-full">
+                      {getWinnerList().map((winner, idx) => (
+                        <div key={winner.id || idx} className="admin-winner-card">
+                          <div className="admin-winner-card-head">
+                            <span className="admin-winner-card-badge">
+                              <span>🏆</span>
+                              <span>বিজয়ী #{idx + 1}: {winner.nameBn || 'নামহীন'}</span>
+                            </span>
+                            <div className="admin-winner-card-actions">
+                              <button
+                                type="button"
+                                className="admin-icon-btn"
+                                disabled={idx === 0}
+                                onClick={() => moveWinner(idx, -1)}
+                                title="উপরে নিন"
+                              >
+                                ↑ উপরে
+                              </button>
+                              <button
+                                type="button"
+                                className="admin-icon-btn"
+                                disabled={idx === getWinnerList().length - 1}
+                                onClick={() => moveWinner(idx, 1)}
+                                title="নিচে নিন"
+                              >
+                                ↓ নিচে
+                              </button>
+                              {getWinnerList().length > 1 && (
+                                <button
+                                  type="button"
+                                  className="admin-icon-btn is-danger"
+                                  onClick={() => removeWinner(idx)}
+                                  title="এই ফরমটি মুছুন"
+                                >
+                                  🗑️ মুছুন
+                                </button>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="admin-grid-2">
+                            <label className="admin-field">
+                              <span><b>01</b> বিজয়ীর নাম (বাংলা)</span>
+                              <input
+                                type="text"
+                                value={winner.nameBn || ''}
+                                onChange={updateWinnerField(idx, 'nameBn')}
+                                placeholder="মোঃ বাহার"
+                                required
+                              />
+                            </label>
+
+                            <label className="admin-field">
+                              <span><b>02</b> বিজয়ীর নাম (ইংরেজি)</span>
+                              <input
+                                type="text"
+                                value={winner.nameEn || ''}
+                                onChange={updateWinnerField(idx, 'nameEn')}
+                                placeholder="MD BAHAR"
+                                required
+                              />
+                            </label>
+
+                            <label className="admin-field">
+                              <span><b>03</b> ক্যাটাগরি / ব্যাজ টেক্সট</span>
+                              <input
+                                type="text"
+                                value={winner.badge || ''}
+                                onChange={updateWinnerField(idx, 'badge')}
+                                placeholder="👑 মেগা ক্যাটাগরি বিজয়ী ফরম"
+                              />
+                            </label>
+
+                            <div className="admin-field">
+                              <span><b>04</b> দেশ ও এজেন্ট</span>
+                              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.5rem' }}>
+                                <input
+                                  type="text"
+                                  value={winner.country || ''}
+                                  onChange={updateWinnerField(idx, 'country')}
+                                  placeholder="সৌদি আরব"
+                                />
+                                <input
+                                  type="text"
+                                  value={winner.agent || ''}
+                                  onChange={updateWinnerField(idx, 'agent')}
+                                  placeholder="Md Fahim Chowdhury (TL-001)"
+                                />
+                              </div>
+                            </div>
+
+                            <div className="admin-field admin-grid-full admin-paper-upload-box">
+                              <span><b>05</b> মেম্বারশিপ ফরম ছবি (Upload বা URL দিন)</span>
+                              <div className="admin-paper-upload-row">
+                                <label className="admin-file-btn">
+                                  <span>
+                                    {uploadingField === `winner-${idx}`
+                                      ? '⏳ আপলোড হচ্ছে…'
+                                      : '📁 গ্যালারি / ফাইল থেকে ফরম আপলোড করুন'}
+                                  </span>
+                                  <input
+                                    type="file"
+                                    accept="image/*"
+                                    style={{ display: 'none' }}
+                                    onChange={handleWinnerFileUpload(idx)}
+                                    disabled={uploadingField === `winner-${idx}`}
+                                  />
+                                </label>
+                              </div>
+                              <input
+                                type="text"
+                                value={winner.formImg || ''}
+                                onChange={updateWinnerField(idx, 'formImg')}
+                                placeholder="/assets/site/winners/winner-form-bahar.jpg বা ইমেজের URL"
+                                required
+                              />
+                              {winner.formImg && (
+                                <div className="admin-paper-preview-wrap">
+                                  <img
+                                    src={winner.formImg}
+                                    alt={winner.nameEn || 'Winner Form Preview'}
+                                    className="admin-paper-thumb"
+                                  />
+                                  <div className="admin-paper-meta">
+                                    <span>✓ ফরম প্রিভিউ সম্পন্ন</span>
+                                    <span style={{ fontSize: '0.75rem', opacity: 0.75 }}>
+                                      হোমপেজে "{winner.nameBn}" কার্ডে দেখা যাবে
+                                    </span>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* Real-time Preview Bar */}
                 <div className="admin-preview-box">
                   <span className="admin-preview-label">লাইভ প্রিভিউ সারাংশ (Live Preview)</span>
@@ -1208,6 +1482,7 @@ export default function AdminVipCodePage() {
                     <span className="admin-preview-chip">💰 বিকাশ: {settings.bkashNumber}</span>
                     <span className="admin-preview-chip">👤 এজেন্ট: {settings.agentName}</span>
                     <span className="admin-preview-chip">🎮 ৩-আপ: {settings.threeUpButtonText}</span>
+                    <span className="admin-preview-chip">📜 বিজয়ী ফরম: {getWinnerList().length}টি</span>
                   </div>
                 </div>
 
