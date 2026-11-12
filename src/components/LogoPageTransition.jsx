@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export default function LogoPageTransition({
   onComplete,
@@ -12,36 +12,50 @@ export default function LogoPageTransition({
   const [isExiting, setIsExiting] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+  const hasCompletedRef = useRef(false);
+  const animIdRef = useRef(null);
+  const exitTimeoutRef = useRef(null);
+
   useEffect(() => {
+    hasCompletedRef.current = false;
     const startTime = performance.now();
 
     const updateProgress = (now) => {
+      if (hasCompletedRef.current) return;
       const elapsed = now - startTime;
       const pct = Math.min(100, Math.round((elapsed / duration) * 100));
       setProgress(pct);
 
       if (elapsed < duration) {
-        requestAnimationFrame(updateProgress);
-      } else {
-        // Trigger exit animation
+        animIdRef.current = requestAnimationFrame(updateProgress);
+      } else if (!hasCompletedRef.current) {
+        hasCompletedRef.current = true;
         setIsExiting(true);
-        setTimeout(() => {
+        exitTimeoutRef.current = setTimeout(() => {
           setIsVisible(false);
-          if (onComplete) onComplete();
+          if (onCompleteRef.current) onCompleteRef.current();
         }, 340);
       }
     };
 
-    const animId = requestAnimationFrame(updateProgress);
-    return () => cancelAnimationFrame(animId);
-  }, [duration, onComplete]);
+    animIdRef.current = requestAnimationFrame(updateProgress);
+    return () => {
+      if (animIdRef.current) cancelAnimationFrame(animIdRef.current);
+      if (exitTimeoutRef.current) clearTimeout(exitTimeoutRef.current);
+    };
+  }, [duration]);
 
   const handleSkip = () => {
-    if (isExiting) return;
+    if (isExiting || hasCompletedRef.current) return;
+    hasCompletedRef.current = true;
+    if (animIdRef.current) cancelAnimationFrame(animIdRef.current);
+    if (exitTimeoutRef.current) clearTimeout(exitTimeoutRef.current);
     setIsExiting(true);
-    setTimeout(() => {
+    exitTimeoutRef.current = setTimeout(() => {
       setIsVisible(false);
-      if (onComplete) onComplete();
+      if (onCompleteRef.current) onCompleteRef.current();
     }, 200);
   };
 

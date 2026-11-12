@@ -14,13 +14,17 @@ import AdminVipCodePage from './pages/AdminVipCodePage';
 export default function App() {
   const [showIntro, setShowIntro] = useState(() => {
     try {
-      // Never show intro splash on admin routes
-      if (typeof window !== 'undefined' && window.location.pathname.startsWith('/admin')) {
+      if (typeof window === 'undefined') return false;
+      const path = window.location.pathname;
+      const search = window.location.search;
+      if (search.includes('nointro=1')) return false;
+      if (search.includes('intro=1')) return true;
+      // Play premium webapp entry splash on initial launch of home/main entry (skip /admin and routes with dedicated transition)
+      const routesWithOwnTransition = ['/admin', '/form', '/registration', '/vip-agency-code', '/agency-code', '/vip-code', '/game-paper', '/official-paper', '/calculation-paper', '/calc-paper'];
+      if (routesWithOwnTransition.some((prefix) => path.startsWith(prefix))) {
         return false;
       }
-      if (window.location.search.includes('intro=1')) return true;
-      const seen = sessionStorage.getItem('thai_lottery_intro_seen');
-      return !seen;
+      return true;
     } catch {
       return false;
     }

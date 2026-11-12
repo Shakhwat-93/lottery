@@ -12,6 +12,8 @@ class JackpotAudioController {
     this.compressor = null;
     this.muted = false;
     this.lastTickTime = 0;
+    this.lastLockTime = 0;
+    this.lastWinTime = 0;
   }
 
   init() {
@@ -49,7 +51,7 @@ class JackpotAudioController {
   playTick() {
     if (this.muted) return;
     this.init();
-    if (!this.ctx || !this.masterGain) return;
+    if (!this.ctx || !this.masterGain || this.ctx.state !== 'running') return;
 
     const now = this.ctx.currentTime;
     // Throttle ticks to avoid audio buffer saturation (min 65ms between ticks)
@@ -86,61 +88,52 @@ class JackpotAudioController {
   playLock(index = 0) {
     if (this.muted) return;
     this.init();
-    if (!this.ctx || !this.masterGain) return;
+    if (!this.ctx || !this.masterGain || this.ctx.state !== 'running') return;
 
     try {
       const now = this.ctx.currentTime;
+      // Prevent duplicate/double lock chimes within 120ms
+      if (now - this.lastLockTime < 0.12) return;
+      this.lastLockTime = now;
+
       const freqs = [523.25, 659.25, 783.99, 1046.50, 1318.51]; // C5, E5, G5, C6, E6
       const freq = freqs[index % freqs.length];
 
-      // Bell chime fundamental
+      // Crisp single bell chime (zero doubling overtone clash)
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, now);
 
       gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.linearRampToValueAtTime(0.24, now + 0.004);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.30);
+      gain.gain.linearRampToValueAtTime(0.22, now + 0.004);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.24);
 
       osc.connect(gain);
       gain.connect(this.masterGain);
 
       osc.start(now);
-      osc.stop(now + 0.32);
-
-      // Shimmering overtone
-      const osc2 = this.ctx.createOscillator();
-      const gain2 = this.ctx.createGain();
-      osc2.type = 'triangle';
-      osc2.frequency.setValueAtTime(freq * 2, now);
-
-      gain2.gain.setValueAtTime(0.0001, now);
-      gain2.gain.linearRampToValueAtTime(0.07, now + 0.003);
-      gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.16);
-
-      osc2.connect(gain2);
-      gain2.connect(this.masterGain);
-
-      osc2.start(now);
-      osc2.stop(now + 0.18);
+      osc.stop(now + 0.26);
     } catch (_) {}
   }
 
   playJackpotWin() {
     if (this.muted) return;
     this.init();
-    if (!this.ctx || !this.masterGain) return;
+    if (!this.ctx || !this.masterGain || this.ctx.state !== 'running') return;
 
     try {
-      const start = this.ctx.currentTime + 0.01;
+      const now = this.ctx.currentTime;
+      // Strict cooldown guard: prevent double-triggering victory fanfare
+      if (now - this.lastWinTime < 0.8) return;
+      this.lastWinTime = now;
+
+      const start = now + 0.01;
       const notes = [
-        { f: 523.25, t: 0.00, d: 0.32 }, // C5
-        { f: 659.25, t: 0.07, d: 0.32 }, // E5
-        { f: 783.99, t: 0.14, d: 0.32 }, // G5
-        { f: 1046.50, t: 0.22, d: 0.45 }, // C6
-        { f: 1318.51, t: 0.32, d: 0.60 }, // E6
-        { f: 1567.98, t: 0.44, d: 1.10 }  // G6
+        { f: 523.25, t: 0.00, d: 0.28 }, // C5
+        { f: 659.25, t: 0.08, d: 0.28 }, // E5
+        { f: 783.99, t: 0.16, d: 0.32 }, // G5
+        { f: 1046.50, t: 0.25, d: 0.72 } // C6 clean resolve
       ];
 
       notes.forEach(({ f, t, d }) => {
@@ -158,24 +151,6 @@ class JackpotAudioController {
 
         osc.start(start + t);
         osc.stop(start + t + d + 0.02);
-      });
-
-      // Warm shimmering victory chord sustained in background
-      [523.25, 783.99, 1046.50].forEach((chordFreq) => {
-        const chordOsc = this.ctx.createOscillator();
-        const chordGain = this.ctx.createGain();
-        chordOsc.type = 'triangle';
-        chordOsc.frequency.setValueAtTime(chordFreq, start + 0.44);
-
-        chordGain.gain.setValueAtTime(0.0001, start + 0.44);
-        chordGain.gain.linearRampToValueAtTime(0.08, start + 0.46);
-        chordGain.gain.exponentialRampToValueAtTime(0.0001, start + 1.4);
-
-        chordOsc.connect(chordGain);
-        chordGain.connect(this.masterGain);
-
-        chordOsc.start(start + 0.44);
-        chordOsc.stop(start + 1.45);
       });
     } catch (_) {}
   }
@@ -200,6 +175,9 @@ export default function VipAgencyCodePage() {
   const canvasRef = useRef(null);
   const animationFrameRef = useRef(null);
   const spinTimerRef = useRef(null);
+  const spinStartTimerRef = useRef(null);
+  const spinRunIdRef = useRef(0);
+  const hasStartedInitialSpinRef = useRef(false);
   const timeoutsRef = useRef([]);
   const lockedStatesRef = useRef([false, false, false, false, false]);
 
@@ -230,6 +208,8 @@ export default function VipAgencyCodePage() {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('pointerdown', warmAudio);
       if (spinTimerRef.current) clearInterval(spinTimerRef.current);
+      if (spinStartTimerRef.current) clearTimeout(spinStartTimerRef.current);
+      spinRunIdRef.current += 1;
       timeoutsRef.current.forEach((t) => clearTimeout(t));
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
@@ -244,8 +224,10 @@ export default function VipAgencyCodePage() {
     audioCtrl.muted = nextState;
   };
 
-  // Launch the Slot Reel Jackpot Spin Animation (Smooth & lightweight)
+  // Launch the Slot Reel Jackpot Spin Animation (Smooth & single-instance guarded)
   const startJackpotSpin = useCallback(() => {
+    const runId = ++spinRunIdRef.current;
+
     setIsJackpotWon(false);
     lockedStatesRef.current = [false, false, false, false, false];
     setLockedStates([false, false, false, false, false]);
@@ -253,11 +235,13 @@ export default function VipAgencyCodePage() {
 
     // Clear any previous intervals and timeouts
     if (spinTimerRef.current) clearInterval(spinTimerRef.current);
+    if (spinStartTimerRef.current) clearTimeout(spinStartTimerRef.current);
     timeoutsRef.current.forEach((t) => clearTimeout(t));
     timeoutsRef.current = [];
 
-    // Single unified ticker timer for all 5 reels (75ms smooth cadence, zero render thrashing)
+    // Single unified ticker timer for all 5 reels (80ms smooth cadence)
     spinTimerRef.current = setInterval(() => {
+      if (runId !== spinRunIdRef.current) return;
       setDisplayedDigits((prev) => {
         let changed = false;
         const next = [...prev];
@@ -270,13 +254,14 @@ export default function VipAgencyCodePage() {
         return changed ? next : prev;
       });
       audioCtrl.playTick();
-    }, 75);
+    }, 80);
 
     // Sequential locks (Reels 0 -> 4)
     const lockDelays = [400, 780, 1160, 1540, 1920];
 
     lockDelays.forEach((delay, idx) => {
       const timeoutId = setTimeout(() => {
+        if (runId !== spinRunIdRef.current) return;
         lockedStatesRef.current[idx] = true;
         setLockedStates((prev) => {
           const next = [...prev];
@@ -288,7 +273,11 @@ export default function VipAgencyCodePage() {
           next[idx] = targetDigits[idx];
           return next;
         });
-        audioCtrl.playLock(idx);
+
+        // Play lock chime only on digits 1..4 so final reveal plays a single clean fanfare (zero double-sound)
+        if (idx < targetDigits.length - 1) {
+          audioCtrl.playLock(idx);
+        }
 
         // When the final digit locks in
         if (idx === targetDigits.length - 1) {
@@ -297,10 +286,11 @@ export default function VipAgencyCodePage() {
             spinTimerRef.current = null;
           }
           const winTimeout = setTimeout(() => {
+            if (runId !== spinRunIdRef.current) return;
             setIsJackpotWon(true);
             audioCtrl.playJackpotWin();
             launchConfetti();
-          }, 90);
+          }, 70);
           timeoutsRef.current.push(winTimeout);
         }
       }, delay);
@@ -308,15 +298,16 @@ export default function VipAgencyCodePage() {
     });
   }, [targetDigits]);
 
-  // When Logo transition finishes, immediately trigger the jackpot sequence
-  const handleLogoComplete = () => {
+  // When Logo transition finishes, trigger the jackpot sequence ONCE
+  const handleLogoComplete = useCallback(() => {
     setShowLogoTransition(false);
-    if (!isLockedForMembership) {
-      setTimeout(() => {
+    if (!isLockedForMembership && !hasStartedInitialSpinRef.current) {
+      hasStartedInitialSpinRef.current = true;
+      spinStartTimerRef.current = setTimeout(() => {
         startJackpotSpin();
       }, 150);
     }
-  };
+  }, [isLockedForMembership, startJackpotSpin]);
 
   // Copy code to clipboard
   const handleCopyCode = () => {
