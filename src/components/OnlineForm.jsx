@@ -767,7 +767,9 @@ export default function OnlineForm({ isStandalonePage = false }) {
                           >
                             <span className="old-cur">SAR</span>
                             <span className="old-num">1,250</span>
-                            <span className="old-slash-bar" aria-hidden="true" />
+                            <span className="old-slash-track" aria-hidden="true">
+                              <span className="old-slash-fill" />
+                            </span>
                           </span>
                         </div>
 

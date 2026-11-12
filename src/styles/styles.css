@@ -7867,10 +7867,10 @@ h3 {
   animation: spotlightShimmerCycle 5.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-/* Bold Highlighted 1,250 Regular Price Row (Always Crystal Clear & Readable) */
+/* Bold Highlighted 1,250 Regular Price Row -> Centered First, Then Slashed, Then Shifts Up */
 .gform-sub-old-price-row {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -7885,14 +7885,18 @@ h3 {
   font-size: 0.72rem;
   font-weight: 800;
   color: #451A03;
+  will-change: opacity, transform;
+  animation: oldLabelRevealCycle 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
 .gform-sub-old-price-highlight {
   position: relative;
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
+  justify-content: center;
   gap: 4px;
-  padding: 3px 11px;
+  padding: 5px 12px;
+  line-height: 1.05;
   border-radius: 9px;
   background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%);
   border: 1.5px solid #FB7185;
@@ -7901,30 +7905,38 @@ h3 {
   font-weight: 900;
   font-size: 1.15rem;
   font-variant-numeric: tabular-nums;
-  box-shadow: 0 3px 10px rgba(225, 29, 72, 0.18);
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.18);
   will-change: transform, opacity;
-  animation: oldPriceCycle 5.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation: oldPriceStageCycle 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-/* Crisp High-Visibility Crimson Slash Across 1,250 */
-.gform-sub-old-price-highlight .old-slash-bar {
+/* Center-Locked Diagonal Track + Left-to-Right Wipe Fill (Zero Upward Drift) */
+.gform-sub-old-price-highlight .old-slash-track {
   position: absolute;
   left: -5px;
   right: -5px;
   top: 50%;
-  height: 3.2px;
-  background: linear-gradient(90deg, #E11D48 0%, #DC2626 65%, #F59E0B 100%);
-  border-radius: 999px;
-  box-shadow: 0 0 6px rgba(225, 29, 72, 0.55);
+  height: 3.5px;
+  transform: translateY(-50%) rotate(-8deg);
   pointer-events: none;
+  z-index: 2;
+}
+
+.gform-sub-old-price-highlight .old-slash-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #E11D48 0%, #DC2626 65%, #F59E0B 100%);
+  box-shadow: 0 0 8px rgba(225, 29, 72, 0.65);
   transform-origin: left center;
-  transform: translateY(-50%) rotate(-9deg) scaleX(0);
+  transform: scaleX(0);
   will-change: transform, opacity;
-  animation: slashStrikeCycle 5.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation: slashWipeCycle 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
 .gform-sub-old-price-highlight .old-cur {
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   letter-spacing: 0.04em;
   color: #BE123C;
   font-weight: 800;
@@ -7950,10 +7962,10 @@ h3 {
   letter-spacing: 0.03em;
   box-shadow: 0 2px 8px rgba(225, 29, 72, 0.35);
   will-change: transform;
-  animation: discountPillPulse 5.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation: discountPillPulse 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-/* Deep Royal Espresso-Gold Spotlight Jewel Capsule for 250 SAR */
+/* Deep Royal Espresso-Gold Spotlight Jewel Capsule for 250 SAR (Reveals After 1,250 Cross) */
 .gform-sub-spotlight-wrap {
   position: relative;
   z-index: 1;
@@ -7965,15 +7977,15 @@ h3 {
 
 .gform-sub-spotlight-wrap .spotlight-aura {
   position: absolute;
-  inset: -6px -10px;
+  inset: -7px -12px;
   border-radius: 18px;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.65) 0%, rgba(250, 204, 21, 0.32) 56%, transparent 78%);
-  filter: blur(8px);
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.72) 0%, rgba(250, 204, 21, 0.38) 56%, transparent 78%);
+  filter: blur(9px);
   pointer-events: none;
   z-index: 0;
   opacity: 0;
   will-change: opacity, transform;
-  animation: spotlightAuraCycle 5.2s ease-out infinite;
+  animation: spotlightAuraCycle 6s ease-out infinite;
 }
 
 .gform-sub-new-price-spotlight {
@@ -7987,10 +7999,11 @@ h3 {
   background: linear-gradient(135deg, #1E1102 0%, #3F2205 56%, #1C0F02 100%);
   border: 1.5px solid #FACC15;
   box-shadow:
-    0 8px 18px rgba(69, 26, 3, 0.28),
-    inset 0 1px 0 rgba(254, 240, 138, 0.3);
+    0 8px 20px rgba(69, 26, 3, 0.3),
+    inset 0 1px 0 rgba(254, 240, 138, 0.32);
+  opacity: 0;
   will-change: transform, opacity;
-  animation: newPriceSpotlightCycle 5.2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+  animation: newPriceRevealCycle 6s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
 }
 
 .gform-sub-new-price-spotlight .gform-sub-price-wrapper {
@@ -8019,7 +8032,7 @@ h3 {
   filter: drop-shadow(0 2px 8px rgba(250, 204, 21, 0.35));
 }
 
-/* Single-Line Emerald Savings Footer */
+/* Single-Line Emerald Savings Footer (Appeals After 250 Reveal) */
 .gform-sub-savings-row {
   position: relative;
   z-index: 1;
@@ -8041,11 +8054,19 @@ h3 {
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.01em;
+  opacity: 0;
   will-change: transform, opacity;
-  animation: savingsPopCycle 5.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation: savingsRevealCycle 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-/* Choreographed GPU-Only Keyframes (5.2s Luxury Cycle + Card Golden Aura Glow) */
+/* ==========================================================================
+   6.0s SEQUENTIAL STORY CHOREOGRAPHY (GPU-Only Transform & Opacity)
+   Act 1 (0-20%): 1,250 sits centered & solo
+   Act 2 (20-34%): Crimson slash slices cleanly across center of 1,250
+   Act 3 (34-52%): 1,250 glides up as "আগে ছিল" appears -> 250 (-80%) springs in!
+   Act 4 (52-88%): Calm golden showcase hold
+   Act 5 (88-100%): Graceful crossfade reset to Act 1
+   ========================================================================== */
 @keyframes cardGoldenAuraPulse {
   0%, 100% {
     opacity: 0.52;
@@ -8058,157 +8079,173 @@ h3 {
 }
 
 @keyframes cardLuxurySheen {
-  0%, 58% {
+  0%, 54% {
     transform: translateX(-190%) skewX(-20deg);
     opacity: 0;
   }
-  62% {
+  58% {
     opacity: 1;
   }
-  82% {
+  78% {
     transform: translateX(270%) skewX(-20deg);
     opacity: 1;
   }
-  86%, 100% {
+  82%, 100% {
     transform: translateX(270%) skewX(-20deg);
     opacity: 0;
   }
 }
 
-@keyframes oldPriceCycle {
-  0%, 4% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  10%, 19% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-  29%, 88% {
-    transform: scale(0.96);
-    opacity: 0.9;
-  }
-  95%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes slashStrikeCycle {
-  0%, 17% {
-    transform: translateY(-50%) rotate(-9deg) scaleX(0);
+@keyframes oldLabelRevealCycle {
+  0%, 33% {
     opacity: 0;
+    transform: translateX(-10px);
   }
-  18% {
-    transform: translateY(-50%) rotate(-9deg) scaleX(0.06);
+  44%, 87% {
     opacity: 1;
-  }
-  28% {
-    transform: translateY(-50%) rotate(-9deg) scaleX(1.05);
-    opacity: 1;
-  }
-  32%, 86% {
-    transform: translateY(-50%) rotate(-9deg) scaleX(1);
-    opacity: 0.98;
+    transform: translateX(0);
   }
   94%, 100% {
-    transform: translateY(-50%) rotate(-9deg) scaleX(1);
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes oldPriceStageCycle {
+  0%, 22% {
+    transform: translate(-24px, 34px) scale(1.24);
+    opacity: 1;
+  }
+  33% {
+    transform: translate(-24px, 34px) scale(1.16);
+    opacity: 1;
+  }
+  44%, 87% {
+    transform: translate(0, 0) scale(0.96);
+    opacity: 0.92;
+  }
+  94% {
+    transform: translate(-24px, 34px) scale(1.2);
+    opacity: 0.92;
+  }
+  100% {
+    transform: translate(-24px, 34px) scale(1.24);
+    opacity: 1;
+  }
+}
+
+@keyframes slashWipeCycle {
+  0%, 19% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  20% {
+    transform: scaleX(0.06);
+    opacity: 1;
+  }
+  31% {
+    transform: scaleX(1.04);
+    opacity: 1;
+  }
+  34%, 87% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  93%, 100% {
+    transform: scaleX(0);
     opacity: 0;
   }
 }
 
 @keyframes discountPillPulse {
-  0%, 27% {
-    transform: scale(1);
+  0%, 40% {
+    transform: scale(0.85);
   }
-  36% {
-    transform: scale(1.12);
+  49% {
+    transform: scale(1.14);
   }
-  45%, 100% {
+  56%, 100% {
     transform: scale(1);
   }
 }
 
-@keyframes newPriceSpotlightCycle {
-  0%, 26% {
-    transform: scale(0.96);
-    opacity: 0.97;
+@keyframes newPriceRevealCycle {
+  0%, 35% {
+    transform: translateY(14px) scale(0.68);
+    opacity: 0;
   }
-  36% {
-    transform: scale(1.1);
+  46% {
+    transform: translateY(-2px) scale(1.1);
     opacity: 1;
   }
-  46%, 88% {
-    transform: scale(1.02);
+  54%, 87% {
+    transform: translateY(0) scale(1);
     opacity: 1;
   }
-  96%, 100% {
-    transform: scale(0.96);
-    opacity: 0.97;
+  93%, 100% {
+    transform: translateY(10px) scale(0.76);
+    opacity: 0;
   }
 }
 
 @keyframes spotlightAuraCycle {
-  0%, 27% {
-    opacity: 0.15;
-    transform: scale(0.92);
+  0%, 36% {
+    opacity: 0;
+    transform: scale(0.8);
   }
-  37% {
+  47% {
     opacity: 1;
-    transform: scale(1.08);
+    transform: scale(1.1);
   }
-  52%, 86% {
-    opacity: 0.58;
+  58%, 86% {
+    opacity: 0.62;
     transform: scale(1);
   }
-  96%, 100% {
-    opacity: 0.15;
-    transform: scale(0.92);
+  93%, 100% {
+    opacity: 0;
+    transform: scale(0.85);
   }
 }
 
 @keyframes spotlightShimmerCycle {
-  0%, 30% {
+  0%, 42% {
     transform: translateX(-180%) skewX(-18deg);
     opacity: 0;
   }
-  33% {
+  45% {
     opacity: 1;
   }
-  48% {
+  60% {
     transform: translateX(270%) skewX(-18deg);
     opacity: 1;
   }
-  50%, 100% {
+  62%, 100% {
     transform: translateX(270%) skewX(-18deg);
     opacity: 0;
   }
 }
 
-@keyframes savingsPopCycle {
-  0%, 31% {
-    transform: scale(0.97);
-    opacity: 0.88;
+@keyframes savingsRevealCycle {
+  0%, 42% {
+    transform: translateY(8px) scale(0.92);
+    opacity: 0;
   }
-  40% {
-    transform: scale(1.04);
+  52%, 87% {
+    transform: translateY(0) scale(1);
     opacity: 1;
   }
-  48%, 88% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  96%, 100% {
-    transform: scale(0.97);
-    opacity: 0.88;
+  93%, 100% {
+    transform: translateY(6px) scale(0.94);
+    opacity: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .gform-sub-plan-card.plan-card-12m .plan-card-gold-aura,
   .gform-sub-plan-card.plan-card-12m .plan-card-surface-sheen,
+  .gform-sub-old-label,
   .gform-sub-old-price-highlight,
-  .gform-sub-old-price-highlight .old-slash-bar,
+  .gform-sub-old-price-highlight .old-slash-fill,
   .gform-sub-discount-pill,
   .gform-sub-spotlight-wrap .spotlight-aura,
   .gform-sub-new-price-spotlight,
@@ -8220,15 +8257,20 @@ h3 {
     opacity: 0.65 !important;
     transform: none !important;
   }
+  .gform-sub-old-label {
+    opacity: 1 !important;
+    transform: none !important;
+  }
   .gform-sub-old-price-highlight {
     transform: none !important;
     opacity: 0.94 !important;
   }
-  .gform-sub-old-price-highlight .old-slash-bar {
-    transform: translateY(-50%) rotate(-9deg) scaleX(1) !important;
+  .gform-sub-old-price-highlight .old-slash-fill {
+    transform: scaleX(1) !important;
     opacity: 1 !important;
   }
-  .gform-sub-new-price-spotlight {
+  .gform-sub-new-price-spotlight,
+  .gform-sub-savings-pill {
     transform: none !important;
     opacity: 1 !important;
   }
