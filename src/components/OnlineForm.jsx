@@ -171,11 +171,11 @@ export default function OnlineForm({ isStandalonePage = false }) {
     const id = registrationId || 'GLO-TL-784291';
     const country = formData.country === 'Other Country' ? formData.customCountry : formData.country || 'Bangladesh';
     const planFeeMap = {
-      '3 Month': '250 SAR',
+      '3 Month': '350 SAR',
       '6 Month': '750 SAR',
-      '12 Month': '1,250 SAR'
+      '12 Month': '250 SAR (Discounted from 1,250 SAR)'
     };
-    const feeText = planFeeMap[formData.subscriptionPlan] || '250 SAR';
+    const feeText = planFeeMap[formData.subscriptionPlan] || '350 SAR';
     const bkashInfo = formData.bkashLast4 ? `\n💳 bKash Sender (Last 4 Digits): ${formData.bkashLast4}` : '';
     const text = encodeURIComponent(
       `Hello Senior Agent Md Fahim Chowdhury,\n\nI have submitted my Official Thailand Lottery Membership Registration Form.\n\n📄 Registration ID: ${id}\n👤 Full Name: ${formData.name || 'Arman'}\n📞 Contact Phone: ${formData.phone || ''}${bkashInfo}\n👑 Plan: ${formData.subscriptionPlan || '3 Month'} Subscription (${feeText})\n💰 Fee: ${feeText}\n📍 Country: ${country}\n\nPlease verify and activate my official VIP membership.`
@@ -658,7 +658,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
               </p>
 
               <div className="gform-subscription-cards-grid">
-                {/* 3 Month Option (250 SAR) */}
+                {/* 3 Month Option (350 SAR) */}
                 <label
                   className={`gform-sub-plan-card plan-card-3m ${formData.subscriptionPlan === '3 Month' ? 'is-selected-plan' : ''}`}
                 >
@@ -682,7 +682,7 @@ export default function OnlineForm({ isStandalonePage = false }) {
                     <div className="gform-sub-pricing-block">
                       <div className="gform-sub-price-wrapper">
                         <span className="gform-sub-price-currency">SAR</span>
-                        <span className="gform-sub-price-number">250</span>
+                        <span className="gform-sub-price-number">350</span>
                       </div>
                       <span className="gform-sub-price-label">সৌদি রিয়াল (SAR)</span>
                     </div>
@@ -731,11 +731,11 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   </div>
                 </label>
 
-                {/* 12 Month Option (1250 SAR - VIP Full Year) */}
+                {/* 12 Month Option (250 SAR Offer - Obsidian & Gold Luxury Discount Stage) */}
                 <label
                   className={`gform-sub-plan-card plan-card-12m is-best-value ${formData.subscriptionPlan === '12 Month' ? 'is-selected-plan' : ''}`}
                 >
-                  <div className="gform-sub-value-ribbon">💎 VIP Year</div>
+                  <div className="gform-sub-value-ribbon">💎 VIP YEAR • ৮০% মেগা ছাড়</div>
                   <input
                     type="radio"
                     name="subscriptionPlan"
@@ -747,18 +747,41 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   <div className="gform-sub-card-inner">
                     <div className="gform-sub-header">
                       <span className="gform-sub-icon">👑</span>
-                      <span className="gform-sub-badge badge-gold">Best Value</span>
+                      <span className="gform-sub-badge badge-gold">Best Value • VIP</span>
                     </div>
                     <div className="gform-sub-duration">12 Month</div>
                     <div className="gform-sub-duration-bn">12 মাস (1 বছর VIP)</div>
 
-                    {/* Pricing Highlight Box */}
-                    <div className="gform-sub-pricing-block">
-                      <div className="gform-sub-price-wrapper">
-                        <span className="gform-sub-price-currency">SAR</span>
-                        <span className="gform-sub-price-number">1,250</span>
+                    {/* Obsidian-Gold Luxury Discount Chamber: 1,250 -> Slash -> 250 Highlight */}
+                    <div className="gform-sub-pricing-block is-discount-pricing">
+                      <span className="spotlight-shimmer" aria-hidden="true" />
+
+                      <div className="gform-sub-old-price-row">
+                        <span className="gform-sub-old-label">আগে ছিল</span>
+                        <span
+                          className="gform-sub-old-price-highlight"
+                          aria-label="Regular price 1,250 SAR"
+                        >
+                          <span className="old-cur">SAR</span>
+                          <span className="old-num">1,250</span>
+                          <span className="old-slash-bar" aria-hidden="true" />
+                        </span>
+                        <span className="gform-sub-discount-pill">-৮০%</span>
                       </div>
-                      <span className="gform-sub-price-label">সৌদি রিয়াল (SAR)</span>
+
+                      <div className="gform-sub-spotlight-wrap">
+                        <span className="spotlight-aura" aria-hidden="true" />
+                        <div className="gform-sub-new-price-spotlight">
+                          <div className="gform-sub-price-wrapper">
+                            <span className="gform-sub-price-currency">SAR</span>
+                            <span className="gform-sub-price-number">250</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="gform-sub-savings-row">
+                        <span className="gform-sub-savings-pill">✨ সাশ্রয় 1,000 SAR • ডিসকাউন্ট</span>
+                      </div>
                     </div>
 
                     <div className="gform-sub-desc">সম্পূর্ণ 1 বছর আনলিমিটেড প্রিমিয়াম মেম্বারশিপ ও সর্বোচ্চ সুবিধা</div>
@@ -1023,10 +1046,10 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   </span>
                   <strong className="receipt-value">
                     <span className={`plan-badge-colorful plan-${(formData.subscriptionPlan || '3 Month').toLowerCase().replace(' ', '-')}`}>
-                      {formData.subscriptionPlan === '3 Month' && '⚡ 3 Month VIP Membership (250 SAR)'}
+                      {formData.subscriptionPlan === '3 Month' && '⚡ 3 Month VIP Membership (350 SAR)'}
                       {formData.subscriptionPlan === '6 Month' && '⭐ 6 Month VIP Membership (750 SAR - Popular)'}
-                      {formData.subscriptionPlan === '12 Month' && '👑 12 Month MEGA VIP Membership (1,250 SAR - Best Value)'}
-                      {!formData.subscriptionPlan && '⚡ 3 Month VIP Membership (250 SAR)'}
+                      {formData.subscriptionPlan === '12 Month' && '👑 12 Month MEGA VIP Membership (250 SAR • পূর্বমূল্য 1,250 SAR)'}
+                      {!formData.subscriptionPlan && '⚡ 3 Month VIP Membership (350 SAR)'}
                     </span>
                   </strong>
                 </div>
@@ -1038,10 +1061,10 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   </span>
                   <strong className="receipt-value">
                     <span className="receipt-fee-badge-gold">
-                      {formData.subscriptionPlan === '3 Month' && '250 SAR (সৌদি রিয়াল)'}
+                      {formData.subscriptionPlan === '3 Month' && '350 SAR (সৌদি রিয়াল)'}
                       {formData.subscriptionPlan === '6 Month' && '750 SAR (সৌদি রিয়াল)'}
-                      {formData.subscriptionPlan === '12 Month' && '1,250 SAR (সৌদি রিয়াল)'}
-                      {!formData.subscriptionPlan && '250 SAR (সৌদি রিয়াল)'}
+                      {formData.subscriptionPlan === '12 Month' && '250 SAR (ডিসকাউন্ট অফার • আগে 1,250 SAR)'}
+                      {!formData.subscriptionPlan && '350 SAR (সৌদি রিয়াল)'}
                     </span>
                   </strong>
                 </div>

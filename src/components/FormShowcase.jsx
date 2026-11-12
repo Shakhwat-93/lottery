@@ -6,7 +6,7 @@ export default function FormShowcase() {
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
   const settings = useVipCodeSettings();
   const activeYear = settings.activeYear || '2026';
-  const agentName = settings.agentName || 'মোঃ ফাহim চৌধুরী';
+  const agentName = settings.agentName || 'মোঃ ফাহিম চৌধুরী';
   const urgentFormsLeft = settings.urgentFormsLeft || '5টি';
 
   return (
