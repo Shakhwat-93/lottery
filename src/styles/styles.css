@@ -7679,122 +7679,184 @@ h3 {
   box-shadow: 0 4px 16px rgba(245, 158, 11, 0.32);
 }
 
-/* 3. 12 Month VIP (Obsidian & Champagne Gold Flagship Card) */
+/* 3. 12 Month VIP (Glowing 24K Brushed Golden Flagship Card) */
 .gform-sub-plan-card.plan-card-12m {
-  border-color: rgba(212, 175, 55, 0.52);
-  background:
-    radial-gradient(120% 75% at 50% 0%, rgba(250, 204, 21, 0.14) 0%, transparent 62%),
-    linear-gradient(168deg, #06122B 0%, #0C2150 56%, #061330 100%);
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+  border: 2px solid #F59E0B;
+  background: linear-gradient(150deg, #FFFDF0 0%, #FEF08A 26%, #FCD34D 56%, #F59E0B 92%, #D97706 100%);
   box-shadow:
-    0 12px 30px rgba(7, 23, 57, 0.24),
-    inset 0 1px 0 rgba(253, 230, 138, 0.25);
+    0 12px 32px rgba(217, 119, 6, 0.34),
+    0 0 24px rgba(250, 204, 21, 0.42),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.85);
+}
+
+.gform-sub-plan-card.plan-card-12m .plan-card-gold-aura {
+  position: absolute;
+  inset: -8px;
+  border-radius: 20px;
+  background: radial-gradient(
+    ellipse at 50% 45%,
+    rgba(253, 224, 71, 0.72) 0%,
+    rgba(245, 158, 11, 0.45) 55%,
+    transparent 78%
+  );
+  filter: blur(11px);
+  pointer-events: none;
+  z-index: -1;
+  will-change: opacity, transform;
+  animation: cardGoldenAuraPulse 3.6s ease-in-out infinite;
+}
+
+.gform-sub-plan-card.plan-card-12m .gform-sub-card-surface {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(255, 255, 255, 0.55) 0%, transparent 58%),
+    linear-gradient(152deg, #FFFDF2 0%, #FEF08A 28%, #FCD34D 60%, #F59E0B 96%);
+}
+
+.gform-sub-plan-card.plan-card-12m .plan-card-surface-sheen {
+  position: absolute;
+  top: -15%;
+  bottom: -15%;
+  left: 0;
+  width: 55%;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.14) 36%,
+    rgba(255, 255, 255, 0.56) 50%,
+    rgba(255, 255, 255, 0.14) 64%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+  transform: translateX(-190%) skewX(-20deg);
+  will-change: transform, opacity;
+  animation: cardLuxurySheen 5.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.gform-sub-plan-card.plan-card-12m .gform-sub-card-inner {
+  position: relative;
+  z-index: 2;
 }
 
 .gform-sub-plan-card.plan-card-12m:hover {
   transform: translateY(-3px);
-  border-color: rgba(250, 204, 21, 0.85);
+  border-color: #D97706;
   box-shadow:
-    0 16px 36px rgba(7, 23, 57, 0.34),
-    0 0 22px rgba(250, 204, 21, 0.18),
-    inset 0 1px 0 rgba(253, 230, 138, 0.35);
+    0 18px 42px rgba(217, 119, 6, 0.44),
+    0 0 32px rgba(250, 204, 21, 0.62),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.95);
 }
 
 .gform-sub-plan-card.plan-card-12m .gform-sub-value-ribbon {
-  background: linear-gradient(90deg, #B45309 0%, #FDE68A 48%, #D97706 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-  color: #07122B;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  background: linear-gradient(90deg, #1E1102 0%, #451A03 50%, #1E1102 100%);
+  border-bottom: 1.5px solid rgba(254, 240, 138, 0.65);
+  color: #FDE68A;
   font-weight: 900;
   letter-spacing: 0.06em;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .gform-sub-plan-card.plan-card-12m .gform-sub-badge.badge-gold {
-  background: rgba(250, 204, 21, 0.14);
-  color: #FDE68A;
-  border: 1px solid rgba(250, 204, 21, 0.42);
+  background: rgba(69, 26, 3, 0.12);
+  color: #451A03;
+  border: 1px solid rgba(120, 53, 15, 0.38);
+  font-weight: 800;
 }
 
 .gform-sub-plan-card.plan-card-12m .gform-sub-duration {
-  color: #FFFFFF;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  color: #1C1003;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 
 .gform-sub-plan-card.plan-card-12m .gform-sub-duration-bn {
-  color: #FDE68A;
+  color: #78350F;
+  font-weight: 800;
 }
 
 .gform-sub-plan-card.plan-card-12m .gform-sub-desc {
-  color: #CBD5E1;
+  color: #451A03;
+  font-weight: 600;
 }
 
 .gform-sub-plan-card.plan-card-12m .gform-sub-check-indicator {
-  border-color: rgba(250, 204, 21, 0.55);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: #78350F;
+  background: rgba(255, 253, 240, 0.88);
 }
 
 .gform-sub-plan-card.plan-card-12m.is-selected-plan,
 .gform-sub-plan-card.plan-card-12m.is-best-value.is-selected-plan {
-  border-color: #FACC15;
-  background:
-    radial-gradient(125% 80% at 50% 0%, rgba(250, 204, 21, 0.22) 0%, transparent 65%),
-    linear-gradient(168deg, #050F26 0%, #0F2963 54%, #061330 100%);
+  border-color: #B45309;
   box-shadow:
-    0 16px 38px rgba(7, 23, 57, 0.36),
-    0 0 0 1.5px #FACC15,
-    0 0 26px rgba(250, 204, 21, 0.26);
+    0 18px 44px rgba(180, 83, 9, 0.45),
+    0 0 0 2px #FFFBEB,
+    0 0 36px rgba(250, 204, 21, 0.72);
   transform: translateY(-3px);
 }
 
 .gform-sub-plan-card.plan-card-12m.is-best-value.is-selected-plan .gform-sub-check-indicator {
-  border-color: #FDE68A;
-  background: linear-gradient(135deg, #FDE68A 0%, #D97706 100%);
-  box-shadow: 0 2px 10px rgba(250, 204, 21, 0.45);
+  border-color: #1E1102;
+  background: linear-gradient(135deg, #1E1102 0%, #451A03 100%);
+  box-shadow: 0 3px 12px rgba(69, 26, 3, 0.4);
 }
 
 .gform-sub-plan-card.plan-card-12m.is-best-value.is-selected-plan .gform-sub-checkmark {
-  color: #06122B;
+  color: #FDE68A;
 }
 
-/* Unified Dark-Glass Discount Chamber (Zero Clutter) */
+/* Luminous Champagne-Ivory Pricing Stage Inside Golden Card */
 .gform-sub-plan-card.plan-card-12m .gform-sub-pricing-block.is-discount-pricing {
   position: relative;
   overflow: hidden;
   gap: 8px;
   padding: 12px 10px;
   border-radius: 13px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(7, 18, 43, 0.62) 100%);
-  border: 1px solid rgba(250, 204, 21, 0.34);
+  background: linear-gradient(180deg, rgba(255, 254, 247, 0.94) 0%, rgba(254, 249, 219, 0.88) 100%);
+  border: 1.5px solid rgba(217, 119, 6, 0.45);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 8px 20px rgba(3, 9, 24, 0.35);
+    inset 0 1px 0 #FFFFFF,
+    0 8px 20px rgba(146, 64, 14, 0.14);
 }
 
 .gform-sub-plan-card.plan-card-12m:hover .gform-sub-pricing-block.is-discount-pricing {
-  border-color: rgba(250, 204, 21, 0.62);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09) 0%, rgba(7, 18, 43, 0.66) 100%);
+  border-color: rgba(180, 83, 9, 0.65);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(254, 243, 199, 0.92) 100%);
 }
 
 .gform-sub-plan-card.plan-card-12m.is-selected-plan .gform-sub-pricing-block.is-discount-pricing {
-  border-color: rgba(253, 230, 138, 0.72);
-  background: linear-gradient(180deg, rgba(250, 204, 21, 0.1) 0%, rgba(7, 18, 43, 0.68) 100%);
+  border-color: #B45309;
   box-shadow:
-    inset 0 1px 0 rgba(253, 230, 138, 0.25),
-    0 10px 24px rgba(3, 9, 24, 0.42);
+    inset 0 1px 0 #FFFFFF,
+    0 10px 24px rgba(180, 83, 9, 0.22);
 }
 
-/* Specular Champagne Sweep Across Entire Discount Chamber */
+/* Specular Sweep Inside Pricing Chamber */
 .gform-sub-pricing-block.is-discount-pricing .spotlight-shimmer {
   position: absolute;
   top: -20%;
   bottom: -20%;
   left: 0;
-  width: 52%;
+  width: 50%;
   background: linear-gradient(
     108deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.05) 32%,
-    rgba(253, 230, 138, 0.24) 50%,
-    rgba(255, 255, 255, 0.05) 68%,
+    rgba(255, 255, 255, 0.2) 34%,
+    rgba(250, 204, 21, 0.42) 50%,
+    rgba(255, 255, 255, 0.2) 66%,
     transparent 100%
   );
   pointer-events: none;
@@ -7805,14 +7867,14 @@ h3 {
   animation: spotlightShimmerCycle 5.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-/* Single-Line Regular Price Row */
+/* Bold Highlighted 1,250 Regular Price Row (Always Crystal Clear & Readable) */
 .gform-sub-old-price-row {
   position: relative;
   z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 7px;
   flex-wrap: nowrap;
   white-space: nowrap;
   width: 100%;
@@ -7820,85 +7882,92 @@ h3 {
 
 .gform-sub-old-label {
   font-family: var(--font-bengali, sans-serif);
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: #94A3B8;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #451A03;
 }
 
 .gform-sub-old-price-highlight {
   position: relative;
   display: inline-flex;
   align-items: baseline;
-  gap: 3px;
-  padding: 2px 5px;
-  color: #F8FAFC;
+  gap: 4px;
+  padding: 3px 11px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%);
+  border: 1.5px solid #FB7185;
+  color: #9F1239;
   font-family: var(--font-royal, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-weight: 800;
-  font-size: 0.94rem;
+  font-weight: 900;
+  font-size: 1.15rem;
   font-variant-numeric: tabular-nums;
+  box-shadow: 0 3px 10px rgba(225, 29, 72, 0.18);
   will-change: transform, opacity;
   animation: oldPriceCycle 5.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-/* Gleaming Ruby-Gold Diagonal Cut Slash */
+/* Crisp High-Visibility Crimson Slash Across 1,250 */
 .gform-sub-old-price-highlight .old-slash-bar {
   position: absolute;
-  left: -4px;
-  right: -4px;
+  left: -5px;
+  right: -5px;
   top: 50%;
-  height: 2.6px;
-  background: linear-gradient(90deg, #FB7185 0%, #EF4444 65%, #FDE68A 100%);
+  height: 3.2px;
+  background: linear-gradient(90deg, #E11D48 0%, #DC2626 65%, #F59E0B 100%);
   border-radius: 999px;
-  box-shadow: 0 0 8px rgba(251, 113, 133, 0.78);
+  box-shadow: 0 0 6px rgba(225, 29, 72, 0.55);
   pointer-events: none;
   transform-origin: left center;
-  transform: translateY(-50%) rotate(-10deg) scaleX(0);
+  transform: translateY(-50%) rotate(-9deg) scaleX(0);
   will-change: transform, opacity;
   animation: slashStrikeCycle 5.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
 .gform-sub-old-price-highlight .old-cur {
-  font-size: 0.66rem;
+  font-size: 0.74rem;
   letter-spacing: 0.04em;
-  color: #CBD5E1;
+  color: #BE123C;
+  font-weight: 800;
 }
 
 .gform-sub-old-price-highlight .old-num {
-  font-size: 1rem;
+  font-size: 1.24rem;
   font-weight: 900;
+  color: #881337;
 }
 
 .gform-sub-discount-pill {
   display: inline-flex;
   align-items: center;
-  padding: 2px 7px;
+  padding: 2.5px 7px;
   border-radius: 9999px;
-  background: linear-gradient(135deg, rgba(244, 63, 94, 0.92) 0%, rgba(190, 18, 60, 0.96) 100%);
-  border: 1px solid rgba(253, 164, 175, 0.45);
-  color: #FFF1F2;
+  background: linear-gradient(135deg, #E11D48 0%, #BE123C 100%);
+  border: 1px solid rgba(255, 228, 230, 0.65);
+  color: #FFFFFF;
   font-family: var(--font-royal, sans-serif);
-  font-size: 0.62rem;
+  font-size: 0.66rem;
   font-weight: 900;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.35);
   will-change: transform;
   animation: discountPillPulse 5.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-/* Hero Metallic Gold 250 SAR Reveal */
+/* Deep Royal Espresso-Gold Spotlight Jewel Capsule for 250 SAR */
 .gform-sub-spotlight-wrap {
   position: relative;
   z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 4px 10px;
+  margin: 2px 0;
 }
 
 .gform-sub-spotlight-wrap .spotlight-aura {
   position: absolute;
-  inset: -6px -14px;
-  border-radius: 9999px;
-  background: radial-gradient(circle, rgba(250, 204, 21, 0.44) 0%, rgba(245, 158, 11, 0.16) 52%, transparent 76%);
+  inset: -6px -10px;
+  border-radius: 18px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.65) 0%, rgba(250, 204, 21, 0.32) 56%, transparent 78%);
   filter: blur(8px);
   pointer-events: none;
   z-index: 0;
@@ -7913,38 +7982,44 @@ h3 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 7px 14px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1E1102 0%, #3F2205 56%, #1C0F02 100%);
+  border: 1.5px solid #FACC15;
+  box-shadow:
+    0 8px 18px rgba(69, 26, 3, 0.28),
+    inset 0 1px 0 rgba(254, 240, 138, 0.3);
   will-change: transform, opacity;
   animation: newPriceSpotlightCycle 5.2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
 }
 
 .gform-sub-new-price-spotlight .gform-sub-price-wrapper {
   align-items: center;
-  gap: 8px;
+  gap: 7px;
 }
 
 .gform-sub-plan-card.plan-card-12m .gform-sub-new-price-spotlight .gform-sub-price-currency {
-  color: #FDE68A;
-  background: rgba(250, 204, 21, 0.14);
-  border: 1px solid rgba(250, 204, 21, 0.48);
-  font-size: 0.78rem;
-  padding: 3px 8px;
-  border-radius: 7px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  color: #FEF08A;
+  background: rgba(250, 204, 21, 0.16);
+  border: 1px solid rgba(250, 204, 21, 0.5);
+  font-size: 0.74rem;
+  padding: 2.5px 7px;
+  border-radius: 6px;
 }
 
 .gform-sub-plan-card.plan-card-12m .gform-sub-new-price-spotlight .gform-sub-price-number {
-  font-size: 2.55rem;
+  font-size: 2.25rem;
   font-weight: 900;
   line-height: 0.95;
   letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
-  background: linear-gradient(180deg, #FFFFFF 0%, #FFFBEB 26%, #FDE68A 62%, #F59E0B 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFBEB 26%, #FDE68A 65%, #F59E0B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 3px 12px rgba(253, 230, 138, 0.36));
+  filter: drop-shadow(0 2px 8px rgba(250, 204, 21, 0.35));
 }
 
-/* Single-Line Emerald-Gold Savings Footer */
+/* Single-Line Emerald Savings Footer */
 .gform-sub-savings-row {
   position: relative;
   z-index: 1;
@@ -7952,7 +8027,7 @@ h3 {
   justify-content: center;
   width: 100%;
   padding-top: 6px;
-  border-top: 1px solid rgba(250, 204, 21, 0.2);
+  border-top: 1px solid rgba(217, 119, 6, 0.22);
 }
 
 .gform-sub-savings-pill {
@@ -7961,54 +8036,83 @@ h3 {
   justify-content: center;
   gap: 4px;
   white-space: nowrap;
-  color: #A7F3D0;
+  color: #065F46;
   font-family: var(--font-bengali, sans-serif);
-  font-size: 0.71rem;
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.01em;
   will-change: transform, opacity;
   animation: savingsPopCycle 5.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-/* Choreographed GPU-Only Keyframes (5.2s Luxury Cycle) */
+/* Choreographed GPU-Only Keyframes (5.2s Luxury Cycle + Card Golden Aura Glow) */
+@keyframes cardGoldenAuraPulse {
+  0%, 100% {
+    opacity: 0.52;
+    transform: scale(0.985);
+  }
+  50% {
+    opacity: 0.96;
+    transform: scale(1.025);
+  }
+}
+
+@keyframes cardLuxurySheen {
+  0%, 58% {
+    transform: translateX(-190%) skewX(-20deg);
+    opacity: 0;
+  }
+  62% {
+    opacity: 1;
+  }
+  82% {
+    transform: translateX(270%) skewX(-20deg);
+    opacity: 1;
+  }
+  86%, 100% {
+    transform: translateX(270%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
 @keyframes oldPriceCycle {
   0%, 4% {
     transform: scale(1);
-    opacity: 0.95;
+    opacity: 1;
   }
   10%, 19% {
     transform: scale(1.1);
     opacity: 1;
   }
   29%, 88% {
-    transform: scale(0.9);
-    opacity: 0.44;
+    transform: scale(0.96);
+    opacity: 0.9;
   }
   95%, 100% {
     transform: scale(1);
-    opacity: 0.95;
+    opacity: 1;
   }
 }
 
 @keyframes slashStrikeCycle {
   0%, 17% {
-    transform: translateY(-50%) rotate(-10deg) scaleX(0);
+    transform: translateY(-50%) rotate(-9deg) scaleX(0);
     opacity: 0;
   }
   18% {
-    transform: translateY(-50%) rotate(-10deg) scaleX(0.06);
+    transform: translateY(-50%) rotate(-9deg) scaleX(0.06);
     opacity: 1;
   }
   28% {
-    transform: translateY(-50%) rotate(-10deg) scaleX(1.06);
+    transform: translateY(-50%) rotate(-9deg) scaleX(1.05);
     opacity: 1;
   }
   32%, 86% {
-    transform: translateY(-50%) rotate(-10deg) scaleX(1);
-    opacity: 0.96;
+    transform: translateY(-50%) rotate(-9deg) scaleX(1);
+    opacity: 0.98;
   }
   94%, 100% {
-    transform: translateY(-50%) rotate(-10deg) scaleX(1);
+    transform: translateY(-50%) rotate(-9deg) scaleX(1);
     opacity: 0;
   }
 }
@@ -8017,49 +8121,49 @@ h3 {
   0%, 27% {
     transform: scale(1);
   }
-  35% {
+  36% {
     transform: scale(1.12);
   }
-  44%, 100% {
+  45%, 100% {
     transform: scale(1);
   }
 }
 
 @keyframes newPriceSpotlightCycle {
   0%, 26% {
-    transform: scale(0.95);
-    opacity: 0.96;
+    transform: scale(0.96);
+    opacity: 0.97;
   }
   36% {
-    transform: scale(1.13);
+    transform: scale(1.1);
     opacity: 1;
   }
   46%, 88% {
-    transform: scale(1.03);
+    transform: scale(1.02);
     opacity: 1;
   }
   96%, 100% {
-    transform: scale(0.95);
-    opacity: 0.96;
+    transform: scale(0.96);
+    opacity: 0.97;
   }
 }
 
 @keyframes spotlightAuraCycle {
   0%, 27% {
-    opacity: 0;
-    transform: scale(0.86);
+    opacity: 0.15;
+    transform: scale(0.92);
   }
   37% {
     opacity: 1;
     transform: scale(1.08);
   }
   52%, 86% {
-    opacity: 0.48;
+    opacity: 0.58;
     transform: scale(1);
   }
   96%, 100% {
-    opacity: 0;
-    transform: scale(0.86);
+    opacity: 0.15;
+    transform: scale(0.92);
   }
 }
 
@@ -8083,11 +8187,11 @@ h3 {
 
 @keyframes savingsPopCycle {
   0%, 31% {
-    transform: scale(0.96);
-    opacity: 0.72;
+    transform: scale(0.97);
+    opacity: 0.88;
   }
   40% {
-    transform: scale(1.05);
+    transform: scale(1.04);
     opacity: 1;
   }
   48%, 88% {
@@ -8095,12 +8199,14 @@ h3 {
     opacity: 1;
   }
   96%, 100% {
-    transform: scale(0.96);
-    opacity: 0.72;
+    transform: scale(0.97);
+    opacity: 0.88;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .gform-sub-plan-card.plan-card-12m .plan-card-gold-aura,
+  .gform-sub-plan-card.plan-card-12m .plan-card-surface-sheen,
   .gform-sub-old-price-highlight,
   .gform-sub-old-price-highlight .old-slash-bar,
   .gform-sub-discount-pill,
@@ -8110,12 +8216,16 @@ h3 {
   .gform-sub-savings-pill {
     animation: none !important;
   }
+  .gform-sub-plan-card.plan-card-12m .plan-card-gold-aura {
+    opacity: 0.65 !important;
+    transform: none !important;
+  }
   .gform-sub-old-price-highlight {
     transform: none !important;
-    opacity: 0.56 !important;
+    opacity: 0.94 !important;
   }
   .gform-sub-old-price-highlight .old-slash-bar {
-    transform: translateY(-50%) rotate(-10deg) scaleX(1) !important;
+    transform: translateY(-50%) rotate(-9deg) scaleX(1) !important;
     opacity: 1 !important;
   }
   .gform-sub-new-price-spotlight {
@@ -8123,7 +8233,7 @@ h3 {
     opacity: 1 !important;
   }
   .gform-sub-spotlight-wrap .spotlight-aura {
-    opacity: 0.42 !important;
+    opacity: 0.5 !important;
     transform: none !important;
   }
 }

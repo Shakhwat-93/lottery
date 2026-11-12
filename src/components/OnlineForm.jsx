@@ -731,62 +731,66 @@ export default function OnlineForm({ isStandalonePage = false }) {
                   </div>
                 </label>
 
-                {/* 12 Month Option (250 SAR Offer - Obsidian & Gold Luxury Discount Stage) */}
+                {/* 12 Month Option (250 SAR Offer - Glowing 24K Golden Card + Highlighted 1,250 -> 250) */}
                 <label
                   className={`gform-sub-plan-card plan-card-12m is-best-value ${formData.subscriptionPlan === '12 Month' ? 'is-selected-plan' : ''}`}
                 >
-                  <div className="gform-sub-value-ribbon">💎 VIP YEAR • ৮০% মেগা ছাড়</div>
-                  <input
-                    type="radio"
-                    name="subscriptionPlan"
-                    value="12 Month"
-                    checked={formData.subscriptionPlan === '12 Month'}
-                    onChange={handleChange}
-                    className="gform-sub-radio"
-                  />
-                  <div className="gform-sub-card-inner">
-                    <div className="gform-sub-header">
-                      <span className="gform-sub-icon">👑</span>
-                      <span className="gform-sub-badge badge-gold">Best Value • VIP</span>
-                    </div>
-                    <div className="gform-sub-duration">12 Month</div>
-                    <div className="gform-sub-duration-bn">12 মাস (1 বছর VIP)</div>
-
-                    {/* Obsidian-Gold Luxury Discount Chamber: 1,250 -> Slash -> 250 Highlight */}
-                    <div className="gform-sub-pricing-block is-discount-pricing">
-                      <span className="spotlight-shimmer" aria-hidden="true" />
-
-                      <div className="gform-sub-old-price-row">
-                        <span className="gform-sub-old-label">আগে ছিল</span>
-                        <span
-                          className="gform-sub-old-price-highlight"
-                          aria-label="Regular price 1,250 SAR"
-                        >
-                          <span className="old-cur">SAR</span>
-                          <span className="old-num">1,250</span>
-                          <span className="old-slash-bar" aria-hidden="true" />
-                        </span>
-                        <span className="gform-sub-discount-pill">-৮০%</span>
+                  <span className="plan-card-gold-aura" aria-hidden="true" />
+                  <div className="gform-sub-card-surface">
+                    <span className="plan-card-surface-sheen" aria-hidden="true" />
+                    <div className="gform-sub-value-ribbon">💎 VIP YEAR • ৮০% মেগা ছাড়</div>
+                    <input
+                      type="radio"
+                      name="subscriptionPlan"
+                      value="12 Month"
+                      checked={formData.subscriptionPlan === '12 Month'}
+                      onChange={handleChange}
+                      className="gform-sub-radio"
+                    />
+                    <div className="gform-sub-card-inner">
+                      <div className="gform-sub-header">
+                        <span className="gform-sub-icon">👑</span>
+                        <span className="gform-sub-badge badge-gold">Best Value • VIP</span>
                       </div>
+                      <div className="gform-sub-duration">12 Month</div>
+                      <div className="gform-sub-duration-bn">12 মাস (1 বছর VIP)</div>
 
-                      <div className="gform-sub-spotlight-wrap">
-                        <span className="spotlight-aura" aria-hidden="true" />
-                        <div className="gform-sub-new-price-spotlight">
-                          <div className="gform-sub-price-wrapper">
-                            <span className="gform-sub-price-currency">SAR</span>
-                            <span className="gform-sub-price-number">250</span>
+                      {/* Champagne-Gold Pricing Stage: Highlighted 1,250 -> Slash -> Glowing 250 */}
+                      <div className="gform-sub-pricing-block is-discount-pricing">
+                        <span className="spotlight-shimmer" aria-hidden="true" />
+
+                        <div className="gform-sub-old-price-row">
+                          <span className="gform-sub-old-label">আগে ছিল</span>
+                          <span
+                            className="gform-sub-old-price-highlight"
+                            aria-label="Regular price 1,250 SAR"
+                          >
+                            <span className="old-cur">SAR</span>
+                            <span className="old-num">1,250</span>
+                            <span className="old-slash-bar" aria-hidden="true" />
+                          </span>
+                        </div>
+
+                        <div className="gform-sub-spotlight-wrap">
+                          <span className="spotlight-aura" aria-hidden="true" />
+                          <div className="gform-sub-new-price-spotlight">
+                            <div className="gform-sub-price-wrapper">
+                              <span className="gform-sub-price-currency">SAR</span>
+                              <span className="gform-sub-price-number">250</span>
+                              <span className="gform-sub-discount-pill">-৮০%</span>
+                            </div>
                           </div>
+                        </div>
+
+                        <div className="gform-sub-savings-row">
+                          <span className="gform-sub-savings-pill">✨ সাশ্রয় 1,000 SAR • ডিসকাউন্ট</span>
                         </div>
                       </div>
 
-                      <div className="gform-sub-savings-row">
-                        <span className="gform-sub-savings-pill">✨ সাশ্রয় 1,000 SAR • ডিসকাউন্ট</span>
+                      <div className="gform-sub-desc">সম্পূর্ণ 1 বছর আনলিমিটেড প্রিমিয়াম মেম্বারশিপ ও সর্বোচ্চ সুবিধা</div>
+                      <div className="gform-sub-check-indicator">
+                        <span className="gform-sub-checkmark">✓</span>
                       </div>
-                    </div>
-
-                    <div className="gform-sub-desc">সম্পূর্ণ 1 বছর আনলিমিটেড প্রিমিয়াম মেম্বারশিপ ও সর্বোচ্চ সুবিধা</div>
-                    <div className="gform-sub-check-indicator">
-                      <span className="gform-sub-checkmark">✓</span>
                     </div>
                   </div>
                 </label>
