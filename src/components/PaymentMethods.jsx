@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useVipCodeSettings } from '../hooks/useVipCodeSettings';
 
 function ThaiFlag({ width = 20, height = 13, className = "", style = {} }) {
   return (
@@ -28,6 +29,8 @@ function ThaiFlag({ width = 20, height = 13, className = "", style = {} }) {
 export default function PaymentMethods() {
   const [isMapOpen, setIsMapOpen] = useState(false);
   const mapSectionRef = useRef(null);
+  const settings = useVipCodeSettings();
+  const agentName = settings.agentName || 'মোঃ ফাহিম চৌধুরী';
 
   const handleToggleMap = () => {
     setIsMapOpen((prev) => {
@@ -76,6 +79,54 @@ export default function PaymentMethods() {
               <p className="payee-guarantee-note">
                 🛡️ আপনার জমাকৃত প্রতিটি ডিপোজিট বা ফি সরাসরি থাইল্যান্ড সরকারের কেন্দ্রীয় ট্রেজারি গেটওয়েতে ব্যাংক-এনক্রিপ্টেড পদ্ধতিতে জমা হয়। কোনো ব্যক্তি বা মধ্যস্থতাকারীর ব্যক্তিগত অ্যাকাউন্টে টাকা নেওয়া হয় না।
               </p>
+
+              {/* 3-Set VIP Game Govt Treasury Clearance & Calculation Highlight */}
+              <div className="payee-clearance-highlight" aria-label="3-Set VIP Game Govt Treasury Clearance Notice">
+                <div className="clearance-badge-row">
+                  <span className="clearance-tag-pill">
+                    <span className="clearance-sparkle" aria-hidden="true">👑</span> ৩ সেট ভিআইপি গেম ক্লিয়ারেন্স নোটিশ
+                  </span>
+                  <span className="clearance-flag-pill">
+                    <ThaiFlag width={15} height={10} style={{ marginRight: '5px' }} />
+                    থাইল্যান্ড সেন্ট্রাল ট্রেজারি
+                  </span>
+                </div>
+
+                <div className="clearance-main-statement">
+                  <p>
+                    থাইল্যান্ড থেকে <strong className="clearance-highlight-game">৩ সেট ভিআইপি গেম</strong> সরাসরি নিয়ে আসতে সিনিয়র এজেন্ট <strong className="clearance-highlight-agent">{agentName}</strong>-কে বাংলাদেশি টাকায় <strong className="clearance-highlight-amt">৮ লাখ টাকা (৳ ৮,০০,০০০)</strong> সরাসরি থাইল্যান্ড সরকারকে সরকারি ট্রেজারি ফি প্রদান করতে হয়।
+                  </p>
+                </div>
+
+                <div className="clearance-currency-calc">
+                  <div className="curr-calc-card bdt-card">
+                    <span className="curr-flag-label">🇧🇩 বাংলাদেশি টাকায় মোট ফি</span>
+                    <strong className="curr-amount-highlight">৳ ৮,০০,০০০</strong>
+                    <span className="curr-subtext">৮ লাখ টাকা (BDT)</span>
+                  </div>
+
+                  <div className="curr-calc-card thb-card">
+                    <span className="curr-flag-label">
+                      <ThaiFlag width={14} height={9} style={{ marginRight: '4px' }} />
+                      থাইল্যান্ড কারেন্সিতে (THB)
+                    </span>
+                    <strong className="curr-amount-highlight">฿ ২,১৬,০০০</strong>
+                    <span className="curr-subtext">২ লাখ ১৬ হাজার বাথ (Thai Baht)</span>
+                  </div>
+                </div>
+
+                <div className="clearance-exchange-bar">
+                  <span className="exchange-arrow" aria-hidden="true">⇄</span>
+                  <span>অফিসিয়াল এক্সচেঞ্জ রেট ক্যালকুলেশন: <strong>১ ฿ (বাথ) ≈ ৩.৭০ ৳</strong> অনুযায়ী মোট <strong>২,১৬,০০০ থাই বাথ</strong></span>
+                </div>
+
+                <div className="clearance-notice-footer">
+                  <span className="footer-shield-icon" aria-hidden="true">🏛️</span>
+                  <span>
+                    থাইল্যান্ড সরকারের গভঃ লটারি অফিস (GLO) সেন্ট্রাল ট্রেজারি রুলস অনুযায়ী এই সম্পূর্ণ ফি সরকারি ব্যাংক অ্যাকাউন্টে জমা প্রদান সাপেক্ষে ৩ সেট মাস্টার পেপার রিলিজ করা হয়।
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
