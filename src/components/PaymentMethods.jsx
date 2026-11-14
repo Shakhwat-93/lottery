@@ -80,11 +80,11 @@ export default function PaymentMethods() {
                 🛡️ আপনার জমাকৃত প্রতিটি ডিপোজিট বা ফি সরাসরি থাইল্যান্ড সরকারের কেন্দ্রীয় ট্রেজারি গেটওয়েতে ব্যাংক-এনক্রিপ্টেড পদ্ধতিতে জমা হয়। কোনো ব্যক্তি বা মধ্যস্থতাকারীর ব্যক্তিগত অ্যাকাউন্টে টাকা নেওয়া হয় না।
               </p>
 
-              {/* 3-Set VIP Game Govt Treasury Clearance & Calculation Highlight */}
-              <div className="payee-clearance-highlight" aria-label="3-Set VIP Game Govt Treasury Clearance Notice">
+              {/* 1-Set VIP Game Govt Treasury Clearance & Calculation Highlight */}
+              <div className="payee-clearance-highlight" aria-label="1-Set VIP Game Govt Treasury Clearance Notice">
                 <div className="clearance-badge-row">
                   <span className="clearance-tag-pill">
-                    <span className="clearance-sparkle" aria-hidden="true">👑</span> ৩ সেট ভিআইপি গেম ক্লিয়ারেন্স নোটিশ
+                    <span className="clearance-sparkle" aria-hidden="true">👑</span> ১ সেট ভিআইপি গেম ক্লিয়ারেন্স নোটিশ
                   </span>
                   <span className="clearance-flag-pill">
                     <ThaiFlag width={15} height={10} style={{ marginRight: '5px' }} />
@@ -94,7 +94,7 @@ export default function PaymentMethods() {
 
                 <div className="clearance-main-statement">
                   <p>
-                    থাইল্যান্ড থেকে <strong className="clearance-highlight-game">৩ সেট ভিআইপি গেম</strong> সরাসরি নিয়ে আসতে সিনিয়র এজেন্ট <strong className="clearance-highlight-agent">{agentName}</strong>-কে বাংলাদেশি টাকায় <strong className="clearance-highlight-amt">৮ লাখ টাকা (৳ ৮,০০,০০০)</strong> সরাসরি থাইল্যান্ড সরকারকে সরকারি ট্রেজারি ফি প্রদান করতে হয়।
+                    থাইল্যান্ড থেকে <strong className="clearance-highlight-game">১ সেট ভিআইপি গেম</strong> সরাসরি নিয়ে আসতে সিনিয়র এজেন্ট <strong className="clearance-highlight-agent">{agentName}</strong>-কে বাংলাদেশি টাকায় <strong className="clearance-highlight-amt">৮ লাখ টাকা (৳ ৮,০০,০০০)</strong> সরাসরি থাইল্যান্ড সরকারকে সরকারি ট্রেজারি ফি প্রদান করতে হয়।
                   </p>
                 </div>
 
@@ -120,10 +120,69 @@ export default function PaymentMethods() {
                   <span>অফিসিয়াল এক্সচেঞ্জ রেট ক্যালকুলেশন: <strong>১ ฿ (বাথ) ≈ ৩.৭০ ৳</strong> অনুযায়ী মোট <strong>২,১৬,০০০ থাই বাথ</strong></span>
                 </div>
 
+                {/* Government Treasury Verified Payment & Account Proof Slip */}
+                <div className="clearance-treasury-account-box">
+                  <div className="treasury-account-header">
+                    <div className="treasury-account-title-wrap">
+                      <span className="treasury-bank-emblem" aria-hidden="true">🏛️</span>
+                      <div>
+                        <strong className="treasury-account-heading">থাইল্যান্ড সরকারি ট্রেজারি ডিপোজিট অ্যাকাউন্ট</strong>
+                        <span className="treasury-account-subheading">Royal Thai Govt Treasury Official Escrow Account</span>
+                      </div>
+                    </div>
+                    <span className="treasury-verified-badge">
+                      <span className="treasury-pulse-dot" aria-hidden="true" /> পেমেন্ট ডিপোজিট ভেরিফাইড
+                    </span>
+                  </div>
+
+                  <div className="treasury-details-grid">
+                    <div className="treasury-field-cell">
+                      <span className="t-label">সরকারি ডিপোজিট ব্যাংক:</span>
+                      <strong className="t-val">Krungthai Bank (KTB - ธนาคารกรุงไทย)</strong>
+                      <span className="t-sub">ব্যাংকক সেন্ট্রাল গভঃ ট্রেজারি ব্রাঞ্চ</span>
+                    </div>
+
+                    <div className="treasury-field-cell highlight-cell">
+                      <span className="t-label">ট্রেজারি অ্যাকাউন্ট নম্বর (Treasury A/C):</span>
+                      <div className="t-ac-row">
+                        <strong className="t-val ac-code">068-6-01824-3</strong>
+                        <span className="t-code-tag">KTB-GLO-GOV</span>
+                      </div>
+                      <span className="t-sub">সরাসরি থাইল্যান্ড কেন্দ্রীয় রাজস্ব ডিপোজিট অ্যাকাউন্ট</span>
+                    </div>
+
+                    <div className="treasury-field-cell">
+                      <span className="t-label">অ্যাকাউন্টের নাম (Official Payee):</span>
+                      <strong className="t-val">The Government Lottery Office (GLO) Treasury</strong>
+                      <span className="t-sub">সরাসরি থাইল্যান্ড সরকার (Royal Thai Govt)</span>
+                    </div>
+
+                    <div className="treasury-field-cell">
+                      <span className="t-label">ট্রেজারি চালান ও ট্যাক্স ভেরিফিকেশন:</span>
+                      <strong className="t-val mono-code">TAX ID: 0994000164944</strong>
+                      <span className="t-sub">চালান কোড: <strong>GLO-TR-800K-CLEARED</strong></span>
+                    </div>
+                  </div>
+
+                  <div className="treasury-status-strip">
+                    <span className="strip-item">
+                      <span className="check-mark">✓</span> ব্যাংক সুইফট: <strong>KRTHBKTH</strong>
+                    </span>
+                    <span className="strip-dot" aria-hidden="true">•</span>
+                    <span className="strip-item">
+                      <span className="check-mark">✓</span> ডিপোজিট স্টেটাস: <strong className="status-paid-text">৮ লাখ টাকা পেইড ও ক্লিয়ার্ড</strong>
+                    </span>
+                    <span className="strip-dot" aria-hidden="true">•</span>
+                    <span className="strip-item">
+                      <span className="check-mark">✓</span> পেপার রিলিজ: <strong className="status-active-text">অনুমোদিত</strong>
+                    </span>
+                  </div>
+                </div>
+
                 <div className="clearance-notice-footer">
-                  <span className="footer-shield-icon" aria-hidden="true">🏛️</span>
+                  <span className="footer-shield-icon" aria-hidden="true">🛡️</span>
                   <span>
-                    থাইল্যান্ড সরকারের গভঃ লটারি অফিস (GLO) সেন্ট্রাল ট্রেজারি রুলস অনুযায়ী এই সম্পূর্ণ ফি সরকারি ব্যাংক অ্যাকাউন্টে জমা প্রদান সাপেক্ষে ৩ সেট মাস্টার পেপার রিলিজ করা হয়।
+                    থাইল্যান্ড সরকারের গভঃ লটারি অফিস (GLO) সেন্ট্রাল ট্রেজারি রুলস অনুযায়ী এই সম্পূর্ণ ফি সরকারি ব্যাংক অ্যাকাউন্টে জমা প্রদান সাপেক্ষে ১ সেট মাস্টার পেপার রিলিজ করা হয়।
                   </span>
                 </div>
               </div>
