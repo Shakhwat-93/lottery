@@ -67,8 +67,9 @@ export const DEFAULT_WINNER_FORMS = [
 ];
 
 export const DEFAULT_VIP_CODE_SETTINGS = Object.freeze({
-  firstDate: '2026-11-01',
-  secondDate: '2026-11-16',
+  firstDate: '2026-12-01',
+  secondDate: '2026-12-16',
+  urgentDrawDate: '1-12-2026',
   code: '17248',
   headerTitle: 'Thailand Lottery',
   headerSubtitle: 'สำนักงานสลากกินแบ่งรัฐบาล • সরকারি অনুমোদিত',
@@ -81,7 +82,7 @@ export const DEFAULT_VIP_CODE_SETTINGS = Object.freeze({
   agentName: 'মোঃ ফাহিম চৌধুরী',
   licenseNumber: 'TGL-2025-001784',
   urgentFormsLeft: '5টি',
-  urgentNotice: 'আর মাত্র 5টি ফর্ম বাকি আছে শুধু!',
+  urgentNotice: '1-12-2026 এর জন্য আর মাত্র 5টি ফর্ম বাকি আছে!',
 
   // 3-Up Game & Paper Controls
   threeUpTitle: 'থাইল্যান্ড লটারি 3 Up গেম পেপার 2026',

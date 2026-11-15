@@ -10,8 +10,9 @@ export default function VipOfferTimer() {
     return null;
   }
 
+  const targetDrawDate = settings.urgentDrawDate || '1-12-2026';
   const formsLeft = settings.urgentFormsLeft || '5টি';
-  const urgentNotice = settings.urgentNotice || `আর মাত্র ${formsLeft} ফর্ম বাকি আছে শুধু!`;
+  const urgentNotice = settings.urgentNotice || `${targetDrawDate} এর জন্য আর মাত্র ${formsLeft} ফর্ম বাকি আছে!`;
   const agentName = settings.agentName || 'মোঃ ফাহিম চৌধুরী';
   const agentBadge = settings.licenseNumber ? settings.licenseNumber : 'TL-001';
 
@@ -103,10 +104,15 @@ export default function VipOfferTimer() {
           </div>
 
           <div className="urgent-main-highlight">
-            <span className="urgent-siren" aria-hidden="true">🚨</span>
-            <span className="urgent-message">
-              {urgentNotice}
-            </span>
+            <div className="urgent-red-highlight-box" role="status" aria-live="polite">
+              <span className="urgent-siren" aria-hidden="true">🚨</span>
+              <div className="urgent-red-text-wrap">
+                <span className="urgent-red-date-badge">{targetDrawDate}</span>
+                <span className="urgent-red-message">
+                  এর জন্য আর মাত্র <strong className="urgent-red-count">{formsLeft}</strong> ফর্ম বাকি আছে!
+                </span>
+              </div>
+            </div>
           </div>
 
           <div className="urgent-quota-chip">
@@ -118,10 +124,10 @@ export default function VipOfferTimer() {
         <div className="offer-main-content">
           <div className="offer-title-group">
             <h2 className="golden-timer-headline">
-              আর মাত্র <span className="title-count-highlight">{formsLeft}</span> ফর্ম বাকি আছে — দ্রুত আপনার ফর্মটি বুক করুন!
+              <span className="headline-red-badge">{targetDrawDate}</span> এর জন্য আর মাত্র <span className="title-count-highlight">{formsLeft}</span> ফর্ম বাকি আছে — দ্রুত আপনার ফর্মটি বুক করুন!
             </h2>
             <p className="offer-desc">
-              থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) অনুমোদিত মেম্বারশিপ কোটায় সিনিয়র এজেন্ট <strong>{agentName} ({agentBadge})</strong> এর অধীনে আর <strong>মাত্র {formsLeft} অফিসিয়াল মেম্বারশিপ ফর্ম</strong> খালি রয়েছে। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার কনফার্ম করুন!
+              থাইল্যান্ড গভর্নমেন্ট লটারি অফিস (GLO) অনুমোদিত মেম্বারশিপ কোটায় আগামী <strong>{targetDrawDate}</strong> ড্র-এর জন্য সিনিয়র এজেন্ট <strong>{agentName} ({agentBadge})</strong> এর অধীনে আর <strong>মাত্র {formsLeft} অফিসিয়াল মেম্বারশিপ ফর্ম</strong> খালি রয়েছে। সময় শেষ হওয়ার আগেই নিচের ফর্মটি পূরণ করে আপনার নিশ্চিত টিকিট ও সিওর পেপার কনফার্ম করুন!
             </p>
           </div>
 
@@ -162,7 +168,7 @@ export default function VipOfferTimer() {
                 🔥 ফর্ম পূরণ চলছে: <strong>95টি ফরম সম্পন্ন (95%)</strong>
               </span>
               <span>
-                অবশিষ্ট কোটা: <strong className="seat-highlight-gold">মাত্র {formsLeft} ফর্ম বাকি শুধু!</strong>
+                অবশিষ্ট কোটা: <strong className="seat-highlight-gold">{targetDrawDate} এর জন্য মাত্র {formsLeft} ফর্ম বাকি শুধু!</strong>
               </span>
             </div>
             <div className="progress-track" role="progressbar" aria-valuenow={95} aria-valuemin={0} aria-valuemax={100}>
@@ -174,7 +180,7 @@ export default function VipOfferTimer() {
 
           <div className="offer-cta-group">
             <Link className="button primary offer-cta-btn golden-cta-btn" to="/form">
-              <span>বাকি {formsLeft} ফর্মের 1টি পূরণ করুন ✍️</span>
+              <span>{targetDrawDate} এর জন্য বাকি {formsLeft} ফর্মের 1টি পূরণ করুন ✍️</span>
               <span className="btn-arrow" aria-hidden="true">
                 →
               </span>
